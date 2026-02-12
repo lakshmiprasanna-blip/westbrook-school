@@ -1,0 +1,32 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+/* Tailwind */
+@import "tailwindcss";
+
+/* Brand Colors */
+:root {
+  --color-primary: #0F4D81;
+  --color-maroon: #9B1B2F;
+  --color-dark: #2B292A;
+  --color-lightblue: #A2D5EB;
+}
+
+/* Base Styles */
+@layer base {
+  body {
+    font-family: "Montserrat", sans-serif;
+    color: var(--color-dark);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+  }
+  
+}
+@layer components {
+  .container-custom {
+    @apply max-w-6xl mx-auto px-6 lg:px-8;
+  }
+}
