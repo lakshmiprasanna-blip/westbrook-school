@@ -20,11 +20,48 @@
     color: var(--color-dark);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+p,
+.paragraph {
+  font-family: "Montserrat", serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.py-global {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading {
+    font-size: 36px;
   }
-  
+
+  .py-global {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 @layer components {
