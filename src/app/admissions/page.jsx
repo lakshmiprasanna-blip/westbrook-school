@@ -48,10 +48,61 @@ export default function Admissions() {
 </section>
 
 
+
     <VideoHero
-    videoSrc="/assets/admission.aivideo.mp4"
-    title="ADMISSIONS"
-    />
+  videoSrc="/assets/admission.aivideo.mp4"
+  title="ADMISSIONS"
+  slides={[
+  {
+    heading: "OUR ADMISSION",
+    subHeading: "PROCESS",
+    highlightText: "Simple. Personal. Child-first.",
+    description:
+      "There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention.",
+    image: "/assets/scroll-img1.webp",
+    showDiscover: true,
+  },
+  {
+    heading: "START",
+    subHeading: "A CONVERSATION",
+    highlightText: "Step One",
+    description:
+      "Reach out to us through the enquiry form or contact our admissions team. This helps us understand your interest and answer your initial questions.",
+    image: "/assets/scroll-img2.webp",
+    showDiscover: true,
+  },
+  {
+    heading: "SCHOOL",
+    subHeading: "INTERACTION",
+    highlightText: "Step Two",
+    description:
+      "Parents are invited for a conversation with our team to understand the school’s approach, daily routines, and academic framework.",
+    image: "/assets/scroll-img3.webp",
+    showDiscover: true,
+  },
+  {
+    heading: "CHILD",
+    subHeading: "INTERACTION",
+    highlightText: "Step Three",
+    description:
+      "A relaxed interaction with the child helps us understand comfort levels and readiness, without pressure or assessment.",
+    image: "/assets/scroll-img5.webp",
+    showDiscover: true,
+  },
+  {
+    heading: "ADMISSION",
+    subHeading: "CONFIRMATION",
+    highlightText:
+      "Every admission matters to us, and each family is guided through the process with clarity and care.",
+    description:
+      "Once aligned, admissions are confirmed through a simple documentation process.",
+    image: "/assets/scroll-img4.webp",
+    buttonText: "APPLY NOW",
+  },
+]}
+
+/>
+
     <FAQSection/>
     <ContactCTA/>
     </>
