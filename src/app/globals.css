@@ -1,5 +1,6 @@
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Century751+BT");
 
 /* Tailwind */
 @import "tailwindcss";
@@ -25,8 +26,17 @@
   }
   
 }
+
 @layer components {
   .container-custom {
     @apply max-w-6xl mx-auto px-6 lg:px-8;
   }
+}
+.intro-text {
+font-family: "Century751 BT", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 50px;
+  letter-spacing: 0;
 }
