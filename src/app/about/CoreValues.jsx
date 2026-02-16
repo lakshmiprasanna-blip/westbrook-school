@@ -33,8 +33,8 @@ export default function CoreValuesSection() {
   return (
     <section className="bg-[#1F4E79] overflow-hidden py-14 lg:py-18">
 
-      {/* ===== TOP CONTENT (Container Width) ===== */}
-      <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start gap-10 mb-12">
+      {/* ===== TOP CONTENT ===== */}
+      <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start gap-10 mb-8 md:mb-12">
 
         {/* LEFT STRIP */}
         <div className="bg-[var(--color-lightblue)] px-6 py-2 inline-block w-fit">
@@ -50,8 +50,8 @@ export default function CoreValuesSection() {
           </h2>
         </div>
 
-        {/* RIGHT TEXT SLIDER */}
-        <div className="text-[#F7F6F2] overflow-hidden">
+        {/* RIGHT TEXT SLIDER (DESKTOP ONLY) */}
+        <div className="hidden md:block text-[#F7F6F2] overflow-hidden">
           <div
             className="flex transition-transform duration-700"
             style={{ transform: `translateX(-${current * 100}%)` }}
@@ -83,18 +83,40 @@ export default function CoreValuesSection() {
         </div>
       </div>
 
-      {/* ===== FULL WIDTH IMAGE WITH SMALL SIDE MARGIN ===== */}
-      <div className="px-6 ">
-        <div className="relative w-full h-[320px] md:h-[450px] lg:h-[520px]">
+      {/* ===== IMAGE ===== */}
+      <div className="px-6">
+        <div className="relative w-full h-[280px] md:h-[450px] lg:h-[520px]">
           <Image
-  src={slides[current].image}
-  alt={slides[current].title}
-  fill
-  className="object-contain rounded-sm"
-  priority
-/>
-
+            src={slides[current].image}
+            alt={slides[current].title}
+            fill
+            className="object-cover rounded-sm"
+            priority
+          />
         </div>
+      </div>
+
+      {/* ===== MOBILE TEXT (BELOW IMAGE) ===== */}
+      <div className="container-custom mt-6 md:hidden text-[#F7F6F2]">
+        <h3
+          className="!text-[20px] mb-3 leading-[100%]"
+          style={{
+            fontFamily: "Playfair Display, serif",
+            fontWeight: 500,
+          }}
+        >
+          {slides[current].title}
+        </h3>
+
+        <p
+          className="!text-[14px] leading-[24px] opacity-90"
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: 400,
+          }}
+        >
+          {slides[current].desc}
+        </p>
       </div>
 
       {/* ===== ARROWS ===== */}

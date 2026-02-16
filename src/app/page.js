@@ -6,7 +6,6 @@ import MindsSection from "../components/MindsSection";
 export default function Page() {
   return (
     <>
-      {/* Welcome Section */}
       <section
         className="relative w-full bg-cover bg-center bg-no-repeat py-20 md:py-28"
         style={{ backgroundImage: "url('/assets/welcome.png')" }}
@@ -23,11 +22,9 @@ export default function Page() {
               priority
             />
           </div>
-
-          <h2 className="text-2xl md:text-5xl text-[var(--color-primary)] leading-tight mb-6">
+<h2 className="heading !text-[24px] md:!text-5xl text-[var(--color-primary)] leading-tight mb-6">
             Welcome to <br /> Westbrook International School
           </h2>
-
           <p className="max-w-[850px] mx-auto text-base md:text-lg leading-relaxed text-[var(--color-dark)]">
             At Westbrook, every child is recognised as a unique learner,
             guided with care, respect, and belief in their potential.
@@ -39,12 +36,7 @@ export default function Page() {
           </p>
         </div>
       </section>
-
-    
-
-      {/* Curriculum Section */}
       <CurriculumSection />
-        {/* WHY WESTBROOK / INFO SECTIONS */}
       <InfoSection
       topLabel="Why Westbrook"
   introText="When values guide learning, students grow with clarity and an understanding of future choices."
@@ -69,6 +61,5 @@ export default function Page() {
       <ExperienceSlider/>
       <MindsSection/>
     </>
-    
   );
 }

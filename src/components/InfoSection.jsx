@@ -35,7 +35,7 @@ export default function InfoSection({
       <div className="container-custom mx-auto px-6 pt-10 md:pt-20 pb-10 md:pb-6">
         {/* INTRO TEXT */}
         {introText && (
-          <p className="intro-text max-w-[520px] text-[var(--color-dark)] mb-6 md:mb-10">
+<p className="paragraph intro-text max-w-[520px] text-[var(--color-dark)] mb-6 md:mb-10 mt-4 md:mt-0">
             {introText}
           </p>
         )}
@@ -60,18 +60,18 @@ export default function InfoSection({
           {/* TEXT */}
           <div className="w-full md:w-1/2">
             {tag && (
-              <h3 className="inline-block mb-2 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="heading inline-block mb-2 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {tag}
               </h3>
             )}
 
             {subTag && (
-              <h3 className="inline-block mb-4 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="heading inline-block mb-4 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {subTag}
               </h3>
             )}
 
-            <p className="max-w-[447px] text-[var(--color-dark)] text-base md:text-lg leading-relaxed mb-5">
+            <p className="paragraph max-w-[447px] text-[var(--color-dark)] text-base md:text-lg leading-relaxed mb-5">
               {description}
             </p>
 

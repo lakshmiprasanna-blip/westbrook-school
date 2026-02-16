@@ -4,8 +4,27 @@ import Image from "next/image";
 import OurPhilosophySection from "./OurPhilosophySection";
 import VisionSection from "./VisionSection";
 import CoreValues from "./CoreValues";
+import LeaderShipSection from "./LeaderShipSection";
+import ContactCTA from "../../components/ContactCTA";
 
 export default function About() {
+  const leadershipData = [
+    {
+      title: "Mrs. Sanjana Reddy",
+      role:"FOUNDER & DIRECTOR ",
+      image: "/assets/leader1.png",
+    },
+    {
+      title: "Mrs. K. Padma Praveena",
+      role:"PRINCIPAL & ACADEMIC LEADER",
+      image: "/assets/leader2.png",
+    },
+    {
+      title: "Mr. K Madhusudhana",
+      role:"FOUNDER & ACADEMIC LEADER",
+      image: "/assets/leader3.png",
+    },
+  ];
   return (
     <>
       <PageBanner image="/assets/about-banner.png" />
@@ -67,12 +86,15 @@ export default function About() {
 
   </div>
 </section>
-
-
-
 <OurPhilosophySection/>
 <VisionSection/>
 <CoreValues/>
+<LeaderShipSection
+  heading="LEADERSHIP TEAM"
+  data={leadershipData}
+  sectionBg="bg-[#F3F3F3]"
+/>
+        <ContactCTA imageSrc="/assets/about-contact.png"/>
     </>
   );
 }

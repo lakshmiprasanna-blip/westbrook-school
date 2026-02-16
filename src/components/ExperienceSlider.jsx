@@ -28,18 +28,12 @@ export default function ExperienceSection() {
   return (
     <section className="bg-[var(--color-primary)] py-16 md:py-20">
       <div className="container-custom">
-
-        {/* Title */}
         <div className="flex justify-center mb-10 md:mb-12">
-          <h2 className="bg-[var(--color-lightblue)] text-[var(--color-dark)] px-6 md:px-8 py-2 text-4xl md:text-5xl uppercase">
+          <h2 className="heading bg-[var(--color-lightblue)] text-[var(--color-dark)] px-6 md:px-8 py-2 text-4xl md:text-5xl uppercase">
             EXPERIENCE
           </h2>
         </div>
-
-        {/* Images */}
         <div className="flex items-center justify-center gap-6">
-
-          {/* Left - hidden on mobile */}
           <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
             <Image
               src={images[leftIndex]}
@@ -48,8 +42,6 @@ export default function ExperienceSection() {
               className="object-cover"
             />
           </div>
-
-          {/* Center - always visible */}
           <div className="relative w-full md:w-[820px] h-[400px] md:h-[480px] overflow-hidden">
             <Image
               src={images[current]}
@@ -58,8 +50,6 @@ export default function ExperienceSection() {
               className="object-cover"
             />
           </div>
-
-          {/* Right - hidden on mobile */}
           <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
             <Image
               src={images[rightIndex]}
@@ -70,11 +60,8 @@ export default function ExperienceSection() {
           </div>
 
         </div>
-{/* Buttons */}
 <div className="flex justify-center mt-12">
   <div className="flex">
-
-    {/* Left Button */}
     <button
       onClick={prevSlide}
       className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30 hover:bg-[#7d1423] transition"
@@ -93,8 +80,6 @@ export default function ExperienceSection() {
         />
       </svg>
     </button>
-
-    {/* Right Button */}
     <button
       onClick={nextSlide}
       className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center hover:bg-[#7d1423] transition"
@@ -116,7 +101,6 @@ export default function ExperienceSection() {
 
   </div>
 </div>
-
       </div>
     </section>
   );
