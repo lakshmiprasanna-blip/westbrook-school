@@ -2,25 +2,42 @@
 
 export default function FloatingCTAs() {
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col shadow-lg">
-      
-      {/* Visit Us */}
-      <a
-        href="#"
-        className="bg-[var(--color-maroon)] text-white text-sm tracking-wider px-3 py-6 writing-mode-vertical rotate-180"
-        style={{ writingMode: "vertical-rl" }}
-      >
-        VISIT US
-      </a>
+    <div className="fixed right-0 top-[70%] -translate-y-1/2 z-50">
 
-      {/* Apply Now */}
-      <a
-        href="#"
-        className="bg-[var(--color-primary)] text-white text-sm tracking-wider px-3 py-6 writing-mode-vertical rotate-180"
-        style={{ writingMode: "vertical-rl" }}
-      >
-        APPLY NOW
-      </a>
+      {/* Outer Wrapper (single rounded shape) */}
+      <div className="flex flex-col overflow-hidden rounded-l-2xl shadow-lg">
+
+        {/* VISIT US */}
+        <a
+          href="#"
+          className="
+            bg-[var(--color-maroon)] text-white
+            text-[11px] font-semibold tracking-wide
+            w-[44px] h-[100px]
+            flex items-center justify-center
+            rotate-180
+          "
+          style={{ writingMode: "vertical-rl" }}
+        >
+          VISIT US
+        </a>
+
+        {/* APPLY NOW */}
+        <a
+          href="#"
+          className="
+            bg-[var(--color-primary)] text-white
+            text-[11px] font-semibold tracking-wide
+            w-[44px] h-[100px]
+            flex items-center justify-center
+            rotate-180
+          "
+          style={{ writingMode: "vertical-rl" }}
+        >
+          APPLY NOW
+        </a>
+
+      </div>
     </div>
   );
 }
