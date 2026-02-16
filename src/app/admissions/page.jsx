@@ -11,31 +11,42 @@ export default function Admissions() {
       <FloatingCTAs />
       
       {/* The Westbrook Way Section */}
-    <section className="bg-[#F7F6F2] py-20 md:py-22 lg:py-28">
-    <div className="container-custom text-center">
+    <section className="bg-[#F7F6F2] py-14 sm:py-16 md:py-20 lg:py-24">
+  <div className="container-custom text-center">
 
-        {/* Heading */}
-        <h1 className="text-[36px] sm:text-[42px] md:text-[48px] lg:text-[56px] 
-                    text-[var(--color-primary)] 
-                    leading-[1]">
-        The Westbrook Way
-        </h1>
+    {/* Heading */}
+    <h1
+      className="!font-[Playfair_Display] !font-bold
+                 !text-[28px] sm:!text-[34px] md:!text-[42px] lg:!text-[48px]
+                 !leading-[110%] text-[var(--color-primary)]"
+    >
+      The Westbrook Way
+    </h1>
 
-        {/* Content */}
-        <div className="mt-10 md:mt-12 max-w-4xl mx-auto space-y-5">
-        
-        <p className="text-[16px] md:text-[18px] leading-relaxed">
-            Westbrook doesn’t treat admissions as a selection process, but as the beginning of a partnership. We believe every child deserves the opportunity to learn in an environment that understands their pace, personality, and needs.
-        </p>
+    {/* Content */}
+    <div className="mt-6 sm:mt-8 md:mt-10 max-w-3xl mx-auto space-y-4">
 
-        <p className="text-[16px] md:text-[18px] leading-relaxed">
-            Our focus is on welcoming families, understanding the child, and ensuring alignment between home and school. The process is designed to feel calm, transparent, and supportive, just like the learning environment we aim to create.
-        </p>
+      <p
+        className="!font-[Montserrat] !font-normal
+                   !text-[15px] sm:!text-[16px] md:!text-[17px]
+                   !leading-[24px] sm:!leading-[26px] md:!leading-[28px]"
+      >
+        Westbrook doesn’t treat admissions as a selection process, but as the beginning of a partnership. We believe every child deserves the opportunity to learn in an environment that understands their pace, personality, and needs.
+      </p>
 
-        </div>
+      <p
+        className="!font-[Montserrat] !font-normal
+                   !text-[15px] sm:!text-[16px] md:!text-[17px]
+                   !leading-[24px] sm:!leading-[26px] md:!leading-[28px]"
+      >
+        Our focus is on welcoming families, understanding the child, and ensuring alignment between home and school. The process is designed to feel calm, transparent, and supportive, just like the learning environment we aim to create.
+      </p>
 
     </div>
-    </section>
+
+  </div>
+</section>
+
 
     <VideoHero
     videoSrc="/assets/admission.aivideo.mp4"

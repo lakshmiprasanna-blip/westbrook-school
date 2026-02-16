@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
@@ -18,7 +19,7 @@ export default function ContactCTA({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 50%)",
         }}
       />
 
@@ -51,6 +52,7 @@ export default function ContactCTA({
         <div className="flex flex-col sm:flex-row gap-4">
 
           {/* Contact Button */}
+          <Link href="/contact">
           <button
             className="px-8 py-3 text-white"
             style={{
@@ -62,8 +64,10 @@ export default function ContactCTA({
           >
             CONTACT US
           </button>
+          </Link>
 
           {/* Apply Button */}
+          <Link href="/">
           <button
             className="px-8 py-3 text-white"
             style={{
@@ -75,6 +79,7 @@ export default function ContactCTA({
           >
             APPLY NOW
           </button>
+          </Link>
 
         </div>
       </div>

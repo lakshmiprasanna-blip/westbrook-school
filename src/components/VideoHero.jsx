@@ -154,10 +154,10 @@ export default function VideoHero({ videoSrc, title }) {
 
             <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
               <h2
-                className="text-white uppercase text-[44px] sm:text-[75px] md:text-[110px] lg:text-[145px] leading-[100%]"
+                className="text-white uppercase text-[44px] sm:text-[75px] md:text-[110px] lg:text-[135px] leading-[100%]"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 600,
+                  fontWeight: 620,
                   fontVariant: "small-caps",
                 }}
               >
