@@ -32,12 +32,22 @@ export default function LearningSpacesSection() {
         {/* ===== Section Heading ===== */}
         <div className="text-center mb-10 lg:mb-12">
           <div className="inline-block bg-[var(--color-lightblue)] px-5 py-1.5 mb-4">
-            <h2 className="text-[28px] md:text-[34px] lg:text-[40px] leading-[100%]">
+            <h2
+              className="!font-[Playfair_Display] !font-bold 
+                         !text-[28px] md:!text-[34px] lg:!text-[40px] 
+                         !leading-[100%]"
+            >
               LEARNING SPACES
             </h2>
           </div>
 
-          <p className="max-w-xl mx-auto text-[16px] md:text-[17px] leading-[24px] text-[var(--color-dark)]">
+          <p
+            className="max-w-xl mx-auto 
+                       !font-[Montserrat] 
+                       !text-[16px] md:!text-[17px] 
+                       !leading-[24px] 
+                       text-[var(--color-dark)]"
+          >
             At Westbrook, early learning spaces are designed to feel familiar,
             calm, and inviting, helping young children feel comfortable as they
             begin their school journey.
@@ -46,7 +56,6 @@ export default function LearningSpacesSection() {
 
         {/* ===== Desktop Layout ===== */}
         <div className="hidden md:grid grid-cols-3 gap-6">
-
           {spaces.map((item, index) => (
             <motion.div
               key={index}
@@ -66,11 +75,20 @@ export default function LearningSpacesSection() {
               </div>
 
               <div className="p-5 space-y-2.5">
-                <h3 className="text-[22px] leading-[100%] text-[var(--color-maroon)]">
+                <h3
+                  className="!font-[Playfair_Display] !font-bold 
+                             !text-[22px] !leading-[100%] 
+                             text-[var(--color-maroon)]"
+                >
                   {item.title}
                 </h3>
 
-                <p className="text-[16px] leading-[24px] text-[var(--color-dark)]">
+                <p
+                  className="!font-[Montserrat] 
+                             !text-[16px] 
+                             !leading-[24px] 
+                             text-[var(--color-dark)]"
+                >
                   {item.description}
                 </p>
               </div>
@@ -80,7 +98,6 @@ export default function LearningSpacesSection() {
 
         {/* ===== Mobile Layout ===== */}
         <div className="md:hidden flex flex-col gap-6">
-
           {spaces.map((item, index) => (
             <motion.div
               key={index}
@@ -100,11 +117,20 @@ export default function LearningSpacesSection() {
               </div>
 
               <div className="p-4 space-y-2">
-                <h3 className="text-[20px] leading-[100%] text-[var(--color-maroon)]">
+                <h3
+                  className="!font-[Playfair_Display] !font-bold 
+                             !text-[20px] !leading-[100%] 
+                             text-[var(--color-maroon)]"
+                >
                   {item.title}
                 </h3>
 
-                <p className="text-[15px] leading-[22px] text-[var(--color-dark)]">
+                <p
+                  className="!font-[Montserrat] 
+                             !text-[15px] 
+                             !leading-[22px] 
+                             text-[var(--color-dark)]"
+                >
                   {item.description}
                 </p>
               </div>
