@@ -177,11 +177,11 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
     >
       <div className={isDesktop ? "sticky top-0 h-screen overflow-hidden" : ""}>
         <div
-          className="flex"
+          className="flex flex flex-col"
           style={{
             width: isDesktop ? `${totalSlides * 100}vw` : "100%",
             transform: isDesktop ? `translateX(${translateX}vw)` : "none",
-            transition: "transform 0.1s linear",
+            transition: isDesktop?"transform 0.1s linear" : "none",
           }}
         >
           {/* VIDEO SLIDE */}
