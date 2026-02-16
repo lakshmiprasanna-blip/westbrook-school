@@ -46,6 +46,76 @@ p,
   padding-top: 16px;
   padding-bottom: 16px;
 }
+/* ================= CONTACT PAGE CTA OVERRIDE ================= */
+
+/* ================= CONTACT PAGE CTA OVERRIDE ================= */
+
+.contact-cta-override .relative.z-10 {
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: left !important;
+  padding-left: 1% !important;
+  padding-right: 1% !important;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Heading */
+.contact-cta-override h2 {
+  text-align: left !important;
+  font-size: 44px !important;
+  line-height: 1.1 !important;
+}
+
+/* Subtext */
+.contact-cta-override p {
+  text-align: left !important;
+  font-size: 18px !important;
+}
+
+/* Buttons container */
+.contact-cta-override .flex {
+  justify-content: flex-start !important;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1024px) {
+  .contact-cta-override .relative.z-10 {
+    padding-left: 6% !important;
+  }
+
+  .contact-cta-override h2 {
+    font-size: 36px !important;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .contact-cta-override .relative.z-10 {
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .contact-cta-override h2 {
+    text-align: center !important;
+    font-size: 28px !important;
+  }
+
+  .contact-cta-override p {
+    text-align: center !important;
+    font-size: 16px !important;
+  }
+
+  .contact-cta-override .flex {
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+
 
 @media (max-width: 768px) {
   h1,

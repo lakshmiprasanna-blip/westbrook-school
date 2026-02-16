@@ -13,8 +13,6 @@ export default function Explore() {
       {/* ================= SAFETY & WELL BEING SECTION ================= */}
        <section className="w-full bg-[#F7F6F2] py-12 md:py-16 lg:py-20">
   <div className="container-custom">
-
-    {/* ===== Heading ===== */}
     {/* ===== Heading ===== */}
 <div className="text-center mb-6 md:mb-12 lg:mb-14">
 
@@ -96,7 +94,7 @@ export default function Explore() {
       ))}
     </div>
   </div>
-</section>
+        </section>
 
         <section className="w-full bg-white py-14 lg:py-20">
   <div className="container-custom">
@@ -183,7 +181,7 @@ export default function Explore() {
 
     </div>
   </div>
-</section>
+        </section>
 
 
         <ContactCTA imageSrc="/assets/groupimg-2.webp"/>

@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function VideoHero({ videoSrc, title }) {
+export default function VideoHero({ videoSrc, title, slides = [] }) {
   const scrollRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  const totalSlides = slides.length + 1; // +1 for video slide
 
   useEffect(() => {
     const checkScreen = () => {
@@ -38,21 +40,23 @@ export default function VideoHero({ videoSrc, title }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
 
-  const translateX = isDesktop ? progress * -500 : 0;
+  const translateX = isDesktop ? progress * -(100 * (totalSlides - 1)) : 0;
 
   const Heading = ({ top, bottom }) => (
     <div className="mb-6">
-      <div className="bg-[#A2D5EB] inline-block px-4 py-2 mb-2">
-        <h2
-          className="text-[32px] md:text-[44px] lg:text-[48px] leading-[100%]"
-          style={{
-            fontFamily: "Playfair Display, serif",
-            fontWeight: 700,
-          }}
-        >
-          {top}
-        </h2>
-      </div>
+      {top && (
+        <div className="bg-[#A2D5EB] inline-block px-4 py-2 mb-2">
+          <h2
+            className="text-[32px] md:text-[44px] lg:text-[48px] leading-[100%]"
+            style={{
+              fontFamily: "Playfair Display, serif",
+              fontWeight: 700,
+            }}
+          >
+            {top}
+          </h2>
+        </div>
+      )}
 
       {bottom && (
         <div className="bg-[#A2D5EB] inline-block px-4 py-2">
@@ -84,7 +88,6 @@ export default function VideoHero({ videoSrc, title }) {
 
       <div className="w-9 h-9 border-2 border-[#0F4D81] rounded-full flex items-center justify-center">
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={2}
@@ -101,17 +104,64 @@ export default function VideoHero({ videoSrc, title }) {
     </div>
   );
 
-  const SlideLayout = ({ children, img }) => (
+  const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       {/* Content */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
-        <div className="w-full max-w-xl">{children}</div>
+        <div className="w-full max-w-xl">
+
+          <Heading top={slide.heading} bottom={slide.subHeading} />
+
+          {slide.highlightText && (
+            <p
+              className="mb-4"
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontWeight: 700,
+                fontSize: "24px",
+                color: "#9B1B2F",
+              }}
+            >
+              {slide.highlightText}
+            </p>
+          )}
+
+          {slide.description && (
+            <p
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                fontWeight: 400,
+                fontSize: "18px",
+                lineHeight: "26px",
+                color: "#4B5563",
+              }}
+            >
+              {slide.description}
+            </p>
+          )}
+
+          {slide.showDiscover && <Discover />}
+
+          {slide.buttonText && (
+            <button
+              className="mt-8 px-8 py-3 text-white"
+              style={{
+                backgroundColor: "#9B1B2F",
+                fontFamily: "Montserrat, sans-serif",
+                fontWeight: 700,
+                fontSize: "16px",
+              }}
+            >
+              {slide.buttonText}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Image */}
       <div className="w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
         <img
-          src={img}
+          src={slide.image}
           alt=""
           className="w-full h-full object-cover object-center"
         />
@@ -123,22 +173,18 @@ export default function VideoHero({ videoSrc, title }) {
     <section
       ref={scrollRef}
       className="relative w-full"
-      style={{ height: isDesktop ? "600vh" : "auto" }}
+      style={{ height: isDesktop ? `${totalSlides * 100}vh` : "auto" }}
     >
-      <div
-        className={isDesktop ? "sticky top-0 h-screen overflow-hidden" : ""}
-      >
+      <div className={isDesktop ? "sticky top-0 h-screen overflow-hidden" : ""}>
         <div
-          className={`flex ${
-            isDesktop ? "h-full" : "flex-col"
-          }`}
+          className="flex flex flex-col"
           style={{
-            width: isDesktop ? "600vw" : "100%",
+            width: isDesktop ? `${totalSlides * 100}vw` : "100%",
             transform: isDesktop ? `translateX(${translateX}vw)` : "none",
-            transition: "transform 0.1s linear",
+            transition: isDesktop?"transform 0.1s linear" : "none",
           }}
         >
-          {/* SLIDE 1 */}
+          {/* VIDEO SLIDE */}
           <div className="w-screen h-screen relative">
             <video
               autoPlay
@@ -154,10 +200,10 @@ export default function VideoHero({ videoSrc, title }) {
 
             <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
               <h2
-                className="text-white uppercase text-[44px] sm:text-[75px] md:text-[110px] lg:text-[145px] leading-[100%]"
+                className="text-white uppercase text-[44px] sm:text-[75px] md:text-[110px] lg:text-[135px] leading-[100%]"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 600,
+                  fontWeight: 620,
                   fontVariant: "small-caps",
                 }}
               >
@@ -166,164 +212,10 @@ export default function VideoHero({ videoSrc, title }) {
             </div>
           </div>
 
-          {/* SLIDE 2 */}
-          <SlideLayout img="/assets/scroll-img1.webp">
-            <Heading top="OUR ADMISSION" bottom="PROCESS" />
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                lineHeight: "100%",
-                color: "#9B1B2F",
-              }}
-            >
-              Simple. Personal. Child-first.
-            </p>
-            <p
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
-                color: "#4B5563",
-              }}
-            >
-              There are{" "}
-              <span style={{ fontWeight: 600 }}>
-                no entrance exams or qualification tests
-              </span>{" "}
-              at Westbrook. Each admission is approached with care and
-              individual attention.
-            </p>
-            <Discover />
-          </SlideLayout>
-
-          {/* SLIDE 3 */}
-          <SlideLayout img="/assets/scroll-img2.webp">
-            <Heading top="START" bottom="A CONVERSATION" />
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                color: "#9B1B2F",
-              }}
-            >
-              Step One
-            </p>
-            <p
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
-              }}
-            >
-              Reach out to us through the enquiry form or contact our admissions
-              team. This helps us understand your interest and answer your
-              initial questions.
-            </p>
-            <Discover />
-          </SlideLayout>
-
-          {/* SLIDE 4 */}
-          <SlideLayout img="/assets/scroll-img3.webp">
-            <Heading top="SCHOOL" bottom="INTERACTION" />
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                color: "#9B1B2F",
-              }}
-            >
-              Step Two
-            </p>
-            <p
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
-              }}
-            >
-              Parents are invited for a conversation with our team to understand
-              the school’s approach, daily routines, and academic framework.
-            </p>
-            <Discover />
-          </SlideLayout>
-
-          {/* SLIDE 5 */}
-          <SlideLayout img="/assets/scroll-img5.webp">
-            <Heading top="CHILD" bottom="INTERACTION" />
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                color: "#9B1B2F",
-              }}
-            >
-              Step Three
-            </p>
-            <p
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
-              }}
-            >
-              A relaxed interaction with the child helps us understand comfort
-              levels and readiness, without pressure or assessment.
-            </p>
-            <Discover />
-          </SlideLayout>
-
-          {/* SLIDE 6 */}
-          <SlideLayout img="/assets/scroll-img4.webp">
-            <Heading top="ADMISSION" bottom="CONFIRMATION" />
-            <p
-              className="mb-4"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                color: "#9B1B2F",
-              }}
-            >
-              Every admission matters to us, and each family is guided through
-              the process with clarity and care.
-            </p>
-            <p
-              className="mb-6"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
-              }}
-            >
-              Once aligned, admissions are confirmed through a simple
-              documentation process.
-            </p>
-            <button
-              className="px-8 py-3 text-white"
-              style={{
-                backgroundColor: "#9B1B2F",
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 700,
-                fontSize: "16px",
-              }}
-            >
-              APPLY NOW
-            </button>
-          </SlideLayout>
+          {/* DYNAMIC SLIDES */}
+          {slides.map((slide, index) => (
+            <SlideLayout key={index} slide={slide} />
+          ))}
         </div>
       </div>
     </section>
