@@ -7,18 +7,18 @@ export default function CoreValuesSection() {
   const slides = [
     {
       title: "Learning at the Child’s Pace",
-      desc: "Every child is guided based on their pace, strengths, and learning needs through close teacher involvement and mentoring.",
-      image: "/assets/experience1.png",
+      desc: "Every child is guided based on their pace, strengths, and learning needs through close teacher involvement and mentoring. This helps learning progress steadily without pressure or comparison.",
+      image: "/assets/corevalues1.png",
     },
     {
       title: "Holistic Development",
       desc: "We focus on emotional, physical, and intellectual growth through structured activities.",
-      image: "/assets/experience2.png",
+      image: "/assets/corevalues2.png",
     },
     {
       title: "Safe & Nurturing Environment",
       desc: "Children learn best in a secure, caring, and joyful atmosphere.",
-      image: "/assets/experience3.png",
+      image: "/assets/corevalues4.png",
     },
   ];
 
@@ -31,34 +31,50 @@ export default function CoreValuesSection() {
     setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-[#114d7a] overflow-hidden py-16 md-h-[1000px]">
+    <section className="bg-[#1F4E79] overflow-hidden py-14 lg:py-18">
 
-      {/* TOP STRIP */}
-      <div className="max-w-7xl mx-auto px-10 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+      {/* ===== TOP CONTENT (Container Width) ===== */}
+      <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start gap-10 mb-12">
 
-        {/* OUR CORE VALUES */}
-        <div
-          className="bg-[#cfefff] text-black flex items-center justify-center"
-          style={{ width: 440, height: 64 }}
-        >
-          <h2 className="text-3xl font-bold">OUR CORE VALUES</h2>
+        {/* LEFT STRIP */}
+        <div className="bg-[var(--color-lightblue)] px-6 py-2 inline-block w-fit">
+          <h2
+            className="!text-[26px] md:!text-[34px] lg:!text-[40px] leading-[100%]"
+            style={{
+              fontFamily: "Playfair Display, serif",
+              fontWeight: 700,
+              color: "#2B292A",
+            }}
+          >
+            OUR CORE VALUES
+          </h2>
         </div>
 
-        {/* Sliding Text */}
-        <div className="text-white overflow-hidden">
+        {/* RIGHT TEXT SLIDER */}
+        <div className="text-[#F7F6F2] overflow-hidden">
           <div
             className="flex transition-transform duration-700"
             style={{ transform: `translateX(-${current * 100}%)` }}
           >
             {slides.map((s, i) => (
               <div key={i} className="min-w-full">
-                <span
-                  className="block text-[32px] mb-4"
-                  style={{ fontFamily: "Playfair Display, serif" }}
+                <h3
+                  className="!text-[20px] md:!text-[24px] lg:!text-[28px] mb-3 leading-[100%]"
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontWeight: 500,
+                  }}
                 >
                   {s.title}
-                </span>
-                <p className="text-sm leading-relaxed opacity-90 max-w-xl">
+                </h3>
+
+                <p
+                  className="!text-[14px] md:!text-[16px] leading-[24px] opacity-90 max-w-lg"
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontWeight: 400,
+                  }}
+                >
                   {s.desc}
                 </p>
               </div>
@@ -67,32 +83,28 @@ export default function CoreValuesSection() {
         </div>
       </div>
 
-      {/* IMAGE (slightly reduced width) */}
-      <div className="max-w-[92%] mx-auto mt-10 relative h-[480px] overflow-hidden rounded-md">
-        <div
-          className="flex h-full transition-transform duration-700"
-          style={{ transform: `translateX(-${current * 100}%)` }}
-        >
-          {slides.map((s, i) => (
-            <div key={i} className="min-w-full h-full relative">
-              <Image
-                src={s.image}
-                alt={s.title}
-                fill
-              />
-            </div>
-          ))}
+      {/* ===== FULL WIDTH IMAGE WITH SMALL SIDE MARGIN ===== */}
+      <div className="px-6 ">
+        <div className="relative w-full h-[320px] md:h-[450px] lg:h-[520px]">
+          <Image
+  src={slides[current].image}
+  alt={slides[current].title}
+  fill
+  className="object-contain rounded-sm"
+  priority
+/>
+
         </div>
       </div>
 
-      {/* ARROWS */}
-      <div className="flex justify-center mt-10">
+      {/* ===== ARROWS ===== */}
+      <div className="flex justify-center mt-8">
         <div className="flex">
           <button
             onClick={prevSlide}
-            className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30 hover:bg-[#7d1423] transition"
+            className="w-[60px] h-[60px] bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30 hover:bg-[#7d1423] transition"
           >
-            <svg width="46" height="28" viewBox="0 0 46 28">
+            <svg width="36" height="20" viewBox="0 0 46 28">
               <path
                 d="M45 14H3M3 14L16 1M3 14L16 27"
                 stroke="white"
@@ -103,9 +115,9 @@ export default function CoreValuesSection() {
 
           <button
             onClick={nextSlide}
-            className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center hover:bg-[#7d1423] transition"
+            className="w-[60px] h-[60px] bg-[var(--color-maroon)] flex items-center justify-center hover:bg-[#7d1423] transition"
           >
-            <svg width="46" height="28" viewBox="0 0 46 28">
+            <svg width="36" height="20" viewBox="0 0 46 28">
               <path
                 d="M1 14H43M43 14L30 1M43 14L30 27"
                 stroke="white"
@@ -115,6 +127,7 @@ export default function CoreValuesSection() {
           </button>
         </div>
       </div>
+
     </section>
   );
 }
