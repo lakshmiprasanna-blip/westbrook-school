@@ -20,7 +20,7 @@ export default function VisionSection() {
 
           {/* Image */}
           <Image
-            src="/assets/Vision & Mission.webp"
+            src="/assets/Vision-Mission.webp"
             alt="Students"
             width={600}
             height={850}
