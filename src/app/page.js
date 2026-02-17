@@ -3,7 +3,6 @@ import CurriculumSection from "../components/CurriculumSection";
 import InfoSection from "../components/InfoSection";
 import ExperienceSlider from "../components/ExperienceSlider";
 import MindsSection from "../components/MindsSection";
-
 import VideoTextMask from "../components/VideoTextMask";
 export default function Page() {
   return (
