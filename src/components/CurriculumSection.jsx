@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const sections = [
@@ -32,114 +32,169 @@ export default function CurriculumSection() {
   const [active, setActive] = useState(null);
 
   const getWidth = (index) => {
-    if (active === null) return "33.333%";
+    if (active === null) return "33.3333%";
     return active === index ? "58%" : "21%";
   };
 
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white py-14">
       <div className="container-custom">
-        <div className="hidden md:flex h-[600px] overflow-hidden">
-          {sections.map((item, index) => {
-            const isActive = active === index;
 
-            return (
-              <motion.div
-                key={index}
-                onMouseEnter={() => setActive(index)}
-                onMouseLeave={() => setActive(null)}
-                animate={{ width: getWidth(index) }}
-                transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
-                className="relative h-full overflow-hidden cursor-pointer"
-              >
-                <motion.div
-                  className="absolute inset-0"
-                  animate={{ scale: isActive ? 1.05 : 1 }}
-                  transition={{ duration: 1 }}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
-                </motion.div>
-                <motion.div
-                  className="absolute inset-0"
-                  animate={{
-                    backgroundColor: isActive
-                      ? "#00213DE5"
-                      : "rgba(0,0,0,0.25)",
-                  }}
-                  transition={{ duration: 0.7 }}
-                />
-                <motion.div
-                  className="absolute top-0 z-20"
-                  animate={{
-                    left: isActive ? "20px" : "50%",
-                    x: isActive ? 0 : "-50%",
-                  }}
-                  transition={{ duration: 0.7 }}
-                >
-                  <div
-                    className={`flex items-center justify-center w-[200px] h-[64px] text-white uppercase text-[13px] tracking-[2px] font-semibold
-                    ${
-                      isActive
-                        ? "bg-[var(--color-maroon)]"
-                        : "bg-[var(--color-primary)]"
-                    }`}
-                  >
-                    {item.topLabel}
-                  </div>
-                </motion.div>
-                {!isActive && (
-                  <div className="absolute inset-y-0 right-8 flex items-center z-20">
-                    <h3 className="text-white text-[26px] tracking-[6px] rotate-180 [writing-mode:vertical-rl] uppercase">
-                      {item.title}
-                    </h3>
-                  </div>
-                )}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 60 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.9 }}
-                      className="absolute bottom-28 left-16 z-20 max-w-xl text-white"
-                    >
-                      <h2 className="text-4xl mb-6 leading-tight">
-                        {item.title}
-                      </h2>
-                      <p className="text-lg leading-relaxed mb-8 text-white/90">
-                        {item.description}
-                      </p>
-                      <a
-                        href="#"
-                        className="flex items-center gap-4 text-sm font-semibold tracking-wide group"
-                      >
-                        DISCOVER MORE
-                        <span className="w-7 h-7 rounded-full border border-white flex items-center justify-center transition-all duration-500 group-hover:translate-x-1">
-                          →
-                        </span>
-                      </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+       
+       {/* ================= DESKTOP ================= */}
+<div
+  className="hidden md:flex h-[600px] overflow-hidden"
+  onMouseLeave={() => setActive(null)}
+>
+  {sections.map((item, index) => {
+    const isActive = active === index;
+
+    return (
+      <motion.div
+        key={index}
+        onMouseEnter={() => setActive(index)}
+        animate={{ width: getWidth(index) }}
+        transition={{
+          duration: 0.9,
+          ease: [0.25, 1, 0.5, 1], // smooth figma curve
+        }}
+        className="relative h-full overflow-hidden cursor-pointer"
+      >
+        {/* IMAGE */}
+        {/* IMAGE */}
+      <div className="absolute inset-0">
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+
+        {/* OVERLAY */}
+        <motion.div
+          className="absolute inset-0 bg-[#00213D]"
+          animate={{ opacity: isActive ? 0.92 : 0.35 }}
+          transition={{
+            duration: 0.9,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* TOP LABEL */}
+        <div className="absolute top-0 left-0 right-0 flex justify-center z-20">
+          <motion.div
+            animate={{
+              backgroundColor: isActive
+                ? "var(--color-maroon)"
+                : "var(--color-primary)",
+            }}
+            transition={{ duration: 0.4 }}
+            className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[13px] tracking-[2px] font-semibold"
+          >
+            {item.topLabel}
+          </motion.div>
         </div>
-        <div className="md:hidden flex flex-col">
 
+        {/* COLLAPSED SIDE TITLE */}
+        <motion.div
+          animate={{
+            opacity: isActive ? 0 : 1,
+            x: isActive ? 80 : 0,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.4, 0, 0.2, 1],
+          }}
+          className="absolute inset-y-0 right-8 flex items-center z-20"
+        >
+          <h3 className="text-white !text-[28px] tracking-[1px] rotate-180 [writing-mode:vertical-rl] uppercase">
+            {item.title}
+          </h3>
+        </motion.div>
+
+        {/* ACTIVE CONTENT */}
+        <motion.div
+          className="absolute bottom-28 left-16 z-20 max-w-xl text-white"
+          initial={false}
+          animate={{
+            opacity: isActive ? 1 : 0,
+            x: isActive ? 0 : -80, // FROM LEFT ONLY
+          }}
+          transition={{
+            duration: 0.7,
+            delay: isActive ? 0.25 : 0,
+            ease: [0.25, 1, 0.5, 1],
+          }}
+          style={{
+            pointerEvents: isActive ? "auto" : "none",
+          }}
+        >
+          {/* TITLE */}
+          <motion.h2
+            animate={{ opacity: isActive ? 1 : 0 }}
+            transition={{ duration: 0.4, delay: isActive ? 0.3 : 0 }}
+            className="text-4xl mb-6 leading-tight"
+          >
+            {item.title}
+          </motion.h2>
+
+          {/* DESCRIPTION */}
+          <motion.p
+            animate={{ opacity: isActive ? 1 : 0 }}
+            transition={{ duration: 0.4, delay: isActive ? 0.35 : 0 }}
+            className="text-lg leading-relaxed mb-8 text-white/90"
+          >
+            {item.description}
+          </motion.p>
+
+         
+            {/* BUTTON */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={{
+              opacity: isActive ? 1 : 0,
+              x: isActive ? 25 : -60,   // 👈 strong visible right movement
+            }}
+            transition={{
+              duration: 0.6,
+              delay: isActive ? 0.4 : 0,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+            className="flex items-center gap-4 text-sm font-semibold tracking-wide"
+          >
+            DISCOVER MORE
+
+            <motion.span
+              animate={{
+                x: isActive ? 10 : 0,   // 👈 arrow moves more
+              }}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut",
+              }}
+              className="w-7 h-7 rounded-full border border-white flex items-center justify-center"
+            >
+              →
+            </motion.span>
+          </motion.div>
+
+
+
+                </motion.div>
+              </motion.div>
+    );
+  })}
+</div>
+
+
+        {/* ================= MOBILE ================= */}
+        <div className="md:hidden flex flex-col gap-6">
           {sections.map((item, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative w-full h-[280px] overflow-hidden"
+              className="relative w-full h-[300px] overflow-hidden"
             >
               <Image
                 src={item.image}
@@ -147,22 +202,27 @@ export default function CurriculumSection() {
                 fill
                 className="object-cover"
               />
+
               <div className="absolute inset-0 bg-[#00213DE5]" />
-              <div className="absolute top-6 right-8 z-20">
-                <div
-                  className="w-[200px] h-[64px] flex items-center justify-center bg-[var(--color-primary)] text-white uppercase text-[13px] tracking-[2px] font-semibold"
-                >
+
+              <div className="absolute top-6 right-6 z-20">
+                <div className="w-[180px] h-[50px] flex items-center justify-center bg-[var(--color-primary)] text-white uppercase text-[13px] tracking-[2px] font-semibold">
                   {item.topLabel}
                 </div>
               </div>
-              <div className="absolute inset-y-0 left-6 flex items-center z-20">
-                <h2 className="text-white text-[30px] leading-[38px] font-serif uppercase">
+
+              <div className="absolute bottom-6 left-6 right-6 z-20 text-white">
+                <h2 className="text-[26px] leading-[32px] uppercase mb-3">
                   {item.title}
                 </h2>
+                <p className="text-[14px] leading-[22px] text-white/90">
+                  {item.description}
+                </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   );

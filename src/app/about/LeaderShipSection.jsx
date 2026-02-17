@@ -54,16 +54,16 @@ export default function LeadershipSection({ data }) {
               <div className="bg-[#1F4E79] group-hover:bg-[var(--color-maroon)] transition-all duration-300 px-6 py-6 flex flex-col justify-between flex-1">
                 <div>
                   <h3 className="text-white !text-[26px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
-  {item.title}
-</h3>
+                    {item.title}
+                  </h3>
                 </div>
 
                 <div className="flex items-center justify-between mt-4">
-                  <p className="text-white !text-[14px] uppercase tracking-wide">
+                  <p className="text-white !text-[12px] !font-semibold uppercase tracking-wide">
                     {item.role}
                   </p>
 
-                  <div className="w-9 h-9 rounded-full bg-[#2E5C88] flex items-center justify-center transition-all duration-300 group-hover:bg-[var(--color-maroon)]">
+                  <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-[var(--color-maroon)]">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"

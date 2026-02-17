@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import ScrollButton from "../../components/ScrollButton";
 
 export default function CoreValuesSection() {
   const slides = [
@@ -121,34 +122,22 @@ export default function CoreValuesSection() {
 
       {/* ===== ARROWS ===== */}
       <div className="flex justify-center mt-8">
-        <div className="flex">
-          <button
-            onClick={prevSlide}
-            className="w-[60px] h-[60px] bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30 hover:bg-[#7d1423] transition"
-          >
-            <svg width="36" height="20" viewBox="0 0 46 28">
-              <path
-                d="M45 14H3M3 14L16 1M3 14L16 27"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </button>
+  <div className="flex">
+    <ScrollButton
+      direction="left"
+      onClick={prevSlide}
+      bgColor="var(--color-maroon)"
+      className="border-r border-white/30"
+    />
 
-          <button
-            onClick={nextSlide}
-            className="w-[60px] h-[60px] bg-[var(--color-maroon)] flex items-center justify-center hover:bg-[#7d1423] transition"
-          >
-            <svg width="36" height="20" viewBox="0 0 46 28">
-              <path
-                d="M1 14H43M43 14L30 1M43 14L30 27"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+    <ScrollButton
+      direction="right"
+      onClick={nextSlide}
+      bgColor="var(--color-maroon)"
+    />
+  </div>
+</div>
+
 
     </section>
   );

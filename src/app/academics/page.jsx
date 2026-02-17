@@ -2,34 +2,54 @@ import PageBanner from "../../components/PageBanner"
 import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
 import ContactCTA from "../../components/ContactCTA"
-import AcademicsScrollSection from "../../components/AcademicsScrollSection"
+import ScrollSlider from "../../components/AcademicsScrollSection"
 export default function Academics() {
     return (
         <>
             <PageBanner image="/assets/academic-banner.webp" />
-            <AcademicsScrollSection />
-           <VideoHero
-                videoSrc="/assets/academic-aivideo.mp4"
+             <ScrollSlider
+                slides={[
+                    {
+                    smallTitle: "Our Curriculum",
+                    title: "What we follow",
+                    description:
+                        "The IGCSE curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.",
+                    image: "/assets/academicsscroll1.webp",
+                    },
+                    {
+                    title: "How learning progresses ?",
+                    description:
+                        "Subjects are structured to build understanding gradually across grades, allowing students to connect ideas and strengthen foundations over time.",
+                    image: "/assets/info1.png",
+                    },
+                    {
+                    title: "Why this matters ?",
+                    description:
+                        "This approach helps students move beyond memorization and develop confidence in applying what they learn.",
+                    image: "/assets/explore-collage1.webp",
+                    },
+                ]}
+            />
+ 
+            <VideoHero videoSrc="/assets/academic-aivideo.mp4"
                 title="LEARNING JOURNEY"
                 slides={[
                     {
-                        heading: "EARLY YEARS",
-                        highlightText: "Empathy, Healthy,",
-                        description:
+                    headingTop: "EARLY YEARS",
+                    subTitle: "Empathy, Healthy,",
+                    description:
                         "The early years are shaped around warmth, security, and gentle exploration. Children are encouraged to observe, ask questions, and engage with the world through play, stories, movement, and conversation. Learning experiences are thoughtfully guided to help children develop language, social awareness, and early thinking skills. With consistent routines and a caring environment, children begin to feel safe, confident, and ready to learn.",
-                        image: "/assets/scroll-img1.webp",
+                    image: "/assets/scroll-img1.webp",
                     },
                     {
-                        heading: "PRIMARY YEARS",
-                        highlightText: "Simple. Personal. Child-first.",
-                        description:
+                    headingTop: "PRIMARY YEARS",
+                    subTitle: "Simple. Personal. Child-first.",
+                    description:
                         "The primary years focus on building strong academic foundations while developing independence and curiosity. Learning becomes more structured, helping children make connections, express ideas clearly, and develop confidence in their abilities. Teachers support students in understanding concepts deeply rather than memorizing outcomes. Equal importance is given to academic growth, emotional development, and responsible behaviour, allowing children to grow into thoughtful and capable learners.",
-                        image: "/assets/scroll-img5.webp",
+                    image: "/assets/scroll-img5.webp",
                     },
-                    ]}
-
-                />
-
+                ]}
+            />
 
             {/* InfoSection */}
             <div>

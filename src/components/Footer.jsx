@@ -21,7 +21,7 @@ export default function Footer() {
 
       {/* ===== TOP SECTION ===== */}
       <div className={`${topBg} text-white`}>
-        <div className="container-custom mx-auto px-6 lg:px-8 py-16 md:py-28">
+        <div className="container-custom mx-auto px-6 lg:px-1 py-16 md:py-28">
 
           {/* ===== MOBILE ===== */}
           <div className="flex flex-col items-center text-center space-y-8 md:hidden">
@@ -97,10 +97,10 @@ export default function Footer() {
                 <Link
                   key={i}
                   href="#"
-                  className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white transition"
+                  className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white transition"
                   style={{ color: "white" }}
                 >
-                  <Icon size={16} />
+                  <Icon size={24} />
                 </Link>
               ))}
             </div>

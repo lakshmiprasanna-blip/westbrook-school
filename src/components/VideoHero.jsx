@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function VideoHero({ videoSrc, title, slides = [] }) {
+export default function VideoHero({
+  videoSrc,
+  title,
+  slides = [],
+}) {
   const scrollRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const router = useRouter();
 
-  const totalSlides = slides.length + 1; // +1 for video slide
+  const totalSlides = slides.length + 1;
 
+  // Detect screen size
   useEffect(() => {
     const checkScreen = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -19,6 +26,7 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  // Scroll logic (desktop only)
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -27,7 +35,7 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
       if (!el) return;
 
       const rect = el.getBoundingClientRect();
-      const totalScroll = el.offsetHeight - window.innerHeight;
+      const totalScroll = el.scrollHeight - window.innerHeight;
 
       if (rect.top <= 0 && Math.abs(rect.top) <= totalScroll) {
         const scrollAmount = Math.abs(rect.top);
@@ -40,17 +48,20 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
 
-  const translateX = isDesktop ? progress * -(100 * (totalSlides - 1)) : 0;
+  const translateX = isDesktop
+    ? progress * (totalSlides - 1) * -100
+    : 0;
 
   const Heading = ({ top, bottom }) => (
     <div className="mb-6">
       {top && (
         <div className="bg-[#A2D5EB] inline-block px-4 py-2 mb-2">
           <h2
-            className="text-[32px] md:text-[44px] lg:text-[48px] leading-[100%]"
+            className="leading-[100%]"
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
+              fontSize: "48px",
             }}
           >
             {top}
@@ -61,10 +72,11 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
       {bottom && (
         <div className="bg-[#A2D5EB] inline-block px-4 py-2">
           <h2
-            className="text-[32px] md:text-[44px] lg:text-[48px] leading-[100%]"
+            className="leading-[100%]"
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
+              fontSize: "48px",
             }}
           >
             {bottom}
@@ -74,47 +86,54 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
     </div>
   );
 
-  const Discover = () => (
-    <div
-      className="flex items-center gap-4 mt-8 uppercase"
-      style={{
-        fontFamily: "Montserrat, sans-serif",
-        fontWeight: 700,
-        fontSize: "16px",
-        color: "#0F4D81",
-      }}
-    >
-      DISCOVER MORE
+  const Discover = ({ show }) => {
+    if (!show) return null;
 
-      <div className="w-9 h-9 border-2 border-[#0F4D81] rounded-full flex items-center justify-center">
-        <svg
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="w-4 h-4"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13.5 4.5l6 6m0 0l-6 6m6-6H3"
-          />
-        </svg>
+    return (
+      <div
+        className="flex items-center gap-4 mt-8 uppercase"
+        style={{
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 700,
+          fontSize: "16px",
+          color: "#0F4D81",
+        }}
+      >
+        DISCOVER MORE
+
+        <div className="w-8 h-8 border-2 border-[#0F4D81] rounded-full flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5l6 6m0 0l-6 6m6-6H3"
+            />
+          </svg>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       {/* Content */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
         <div className="w-full max-w-xl">
+          <Heading
+            top={slide.headingTop}
+            bottom={slide.headingBottom}
+          />
 
-          <Heading top={slide.heading} bottom={slide.subHeading} />
-
-          {slide.highlightText && (
+          {slide.subTitle && (
             <p
-              className="mb-4"
+              className="mb-4 leading-[100%]"
               style={{
                 fontFamily: "Playfair Display, serif",
                 fontWeight: 700,
@@ -122,7 +141,7 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
                 color: "#9B1B2F",
               }}
             >
-              {slide.highlightText}
+              {slide.subTitle}
             </p>
           )}
 
@@ -140,19 +159,25 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
             </p>
           )}
 
-          {slide.showDiscover && <Discover />}
+          <Discover show={slide.showDiscover} />
 
-          {slide.buttonText && (
+          {slide.button && (
             <button
-              className="mt-8 px-8 py-3 text-white"
+              onClick={() => {
+                if (slide.button.link) {
+                  router.push(slide.button.link);
+                }
+              }}
+              className="px-8 py-3 text-white mt-6"
               style={{
-                backgroundColor: "#9B1B2F",
+                backgroundColor:
+                  slide.button.bg || "#9B1B2F",
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 700,
                 fontSize: "16px",
               }}
             >
-              {slide.buttonText}
+              {slide.button.label}
             </button>
           )}
         </div>
@@ -163,7 +188,7 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
         <img
           src={slide.image}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover"
         />
       </div>
     </div>
@@ -173,15 +198,31 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
     <section
       ref={scrollRef}
       className="relative w-full"
-      style={{ height: isDesktop ? `${totalSlides * 100}vh` : "auto" }}
+      style={{
+        height: isDesktop
+          ? `${totalSlides * 100}vh`
+          : "auto",
+      }}
     >
-      <div className={isDesktop ? "sticky top-0 h-screen overflow-hidden" : ""}>
+      <div
+        className={
+          isDesktop
+            ? "sticky top-0 h-screen overflow-hidden"
+            : ""
+        }
+      >
         <div
-          className="flex flex flex-col"
+          className={`flex ${
+            isDesktop ? "h-full" : "flex-col"
+          }`}
           style={{
-            width: isDesktop ? `${totalSlides * 100}vw` : "100%",
-            transform: isDesktop ? `translateX(${translateX}vw)` : "none",
-            transition: isDesktop?"transform 0.1s linear" : "none",
+            width: isDesktop
+              ? `${totalSlides * 100}vw`
+              : "100%",
+            transform: isDesktop
+              ? `translateX(${translateX}vw)`
+              : "none",
+            transition: "transform 0.1s linear",
           }}
         >
           {/* VIDEO SLIDE */}
@@ -196,23 +237,25 @@ export default function VideoHero({ videoSrc, title, slides = [] }) {
               <source src={videoSrc} type="video/mp4" />
             </video>
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40" />
+            <div className="absolute inset-0 bg-black/40" />
 
             <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
               <h2
-                className="text-white uppercase text-[44px] sm:text-[75px] md:text-[110px] lg:text-[135px] leading-[100%]"
+                className="text-white uppercase text-center leading-[100%] whitespace-nowrap"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 620,
+                  fontWeight: 630,
                   fontVariant: "small-caps",
+                  fontSize: "clamp(48px, 8vw, 160px)",
                 }}
               >
                 {title}
               </h2>
+
             </div>
           </div>
 
-          {/* DYNAMIC SLIDES */}
+          {/* Dynamic Slides */}
           {slides.map((slide, index) => (
             <SlideLayout key={index} slide={slide} />
           ))}

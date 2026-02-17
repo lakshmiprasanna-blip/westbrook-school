@@ -32,11 +32,11 @@ export default function InfoSection({
       )}
 
       {/* CONTENT */}
-      <div className="container-custom mx-auto px-6 pt-10 md:pt-20 pb-10 md:pb-6">
+      <div className="container-custom mx-auto px-6 pt-6 md:pt-20 pb-6 md:pb-6">
         {/* INTRO TEXT */}
         {introText && (
-<p className="paragraph intro-text max-w-[520px] text-[var(--color-dark)] mb-6 md:mb-10 mt-4 md:mt-0">
-            {introText}
+          <p className="paragraph intro-text max-w-[520px] text-[var(--color-dark)] mb-6 md:mb-10 mt-11 md:mt-0">
+                      {introText}
           </p>
         )}
 
@@ -60,13 +60,13 @@ export default function InfoSection({
           {/* TEXT */}
           <div className="w-full md:w-1/2">
             {tag && (
-              <h3 className="heading inline-block mb-2 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="heading inline-block mb-2 bg-[var(--color-lightblue)] text-[#2B292A] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {tag}
               </h3>
             )}
 
             {subTag && (
-              <h3 className="heading inline-block mb-4 bg-[var(--color-lightblue)] text-[var(--color-primary)] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="heading inline-block mb-4 bg-[var(--color-lightblue)] text-[#2B292A] text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {subTag}
               </h3>
             )}
@@ -75,10 +75,21 @@ export default function InfoSection({
               {description}
             </p>
 
-            <button className="border border-[var(--color-maroon)] text-[var(--color-maroon)] px-6 py-2 rounded-full text-sm font-medium hover:bg-[var(--color-maroon)] hover:text-white transition">
+            <div className="hidden md:block">
+            <button className="border border-[var(--color-maroon)] text-[var(--color-maroon)] px-5 py-3 rounded-full text-sm font-semibold hover:bg-[var(--color-maroon)] hover:text-white transition">
               KNOW MORE
             </button>
           </div>
+          </div>
+
+          <div className="md:hidden">
+              <button className="flex items-center gap-3 text-[#0F4D81] text-md font-bold tracking-wide">
+                DISCOVER MORE
+                <span className="w-5 h-5 rounded-full border-2 border-[var(--color-primary)] flex items-center justify-center text-[12px]">
+                  →
+                </span>
+              </button>
+            </div>
         </div>
       </div>
     </section>

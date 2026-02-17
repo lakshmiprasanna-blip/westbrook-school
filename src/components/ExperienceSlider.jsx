@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import ScrollButton from "./ScrollButton"
 
 export default function ExperienceSection() {
   const images = [
@@ -59,48 +60,27 @@ export default function ExperienceSection() {
             />
           </div>
 
-        </div>
-<div className="flex justify-center mt-12">
-  <div className="flex">
-    <button
-      onClick={prevSlide}
-      className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30 hover:bg-[#7d1423] transition"
-    >
-      <svg
-        width="45.19"
-        height="27.82"
-        viewBox="0 0 46 28"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M45 14H3M3 14L16 1M3 14L16 27"
-          stroke="white"
-          strokeWidth="1.5"
-        />
-      </svg>
-    </button>
-    <button
-      onClick={nextSlide}
-      className="w-[73px] h-[73px] bg-[var(--color-maroon)] flex items-center justify-center hover:bg-[#7d1423] transition"
-    >
-      <svg
-        width="45.19"
-        height="27.82"
-        viewBox="0 0 46 28"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1 14H43M43 14L30 1M43 14L30 27"
-          stroke="white"
-          strokeWidth="1.5"
-        />
-      </svg>
-    </button>
+        </div> 
 
-  </div>
-</div>
+      <div className="flex justify-center mt-12">
+      <div className="flex">
+
+        <ScrollButton
+          direction="left"
+          onClick={prevSlide}
+          bgColor="var(--color-maroon)"
+          className="border-r border-white/30"
+        />
+
+        <ScrollButton
+          direction="right"
+          onClick={nextSlide}
+          bgColor="var(--color-maroon)"
+        />
+
+      </div>
+    </div>
+
       </div>
     </section>
   );
