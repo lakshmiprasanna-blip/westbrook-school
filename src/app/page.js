@@ -3,9 +3,12 @@ import CurriculumSection from "../components/CurriculumSection";
 import InfoSection from "../components/InfoSection";
 import ExperienceSlider from "../components/ExperienceSlider";
 import MindsSection from "../components/MindsSection";
+
+import VideoTextMask from "../components/VideoTextMask";
 export default function Page() {
   return (
     <>
+    <VideoTextMask />
       <section
         className="relative w-full bg-cover bg-center bg-no-repeat py-20 md:py-28"
         style={{ backgroundImage: "url('/assets/welcome.png')" }}

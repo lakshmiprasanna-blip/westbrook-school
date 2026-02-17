@@ -2,14 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const VIDEO_SRC =
-  "https://d2iv913krme7fe.cloudfront.net/experium-new-video.webm";
+const VIDEO_SRC = "/assets/home-aivideo.mp4";
 
 const VideoTextMask = () => {
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [zoom, setZoom] = useState(false);
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setZoom(true);
+  }, 1000); // delay before zoom starts
+
+  return () => clearTimeout(timer);
+}, []);
 
   // Observe visibility — only play when in viewport
   useEffect(() => {
@@ -55,19 +63,23 @@ const VideoTextMask = () => {
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
-        <source src={VIDEO_SRC} type="video/webm" />
+        <source src={VIDEO_SRC} type="video/mp4" />
       </video>
 
       {/* Text knockout layer */}
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center bg-white select-none"
-        style={{ mixBlendMode: "screen" }}
+        className="absolute inset-0 flex flex-col items-center justify-center bg-white select-none transition-transform duration-[1800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
+        style={{
+          mixBlendMode: "screen",
+          transform: zoom ? "scale(1)" : "scale(5)",  // zoom-out effect
+        }}
       >
-        <h2 className="text-[18vw] md:text-[14vw] font-black leading-[0.85] text-black tracking-tight">
-          VSR
+
+        <h2 className="!text-[15vw] md:text-[14vw] font-black !leading-[0.85] text-black !tracking-tight">
+          WESTBROOK
         </h2>
         <p className="text-[5vw] md:text-[3.5vw] font-bold tracking-widest text-black mt-1 md:mt-2">
-          VRIKSHA
+          
         </p>
       </div>
     </section>
