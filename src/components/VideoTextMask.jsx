@@ -14,7 +14,7 @@ const VideoTextMask = () => {
   useEffect(() => {
   const timer = setTimeout(() => {
     setZoom(true);
-  }, 1000); // delay before zoom starts
+  }, 500); // delay before zoom starts
 
   return () => clearTimeout(timer);
 }, []);
@@ -71,7 +71,7 @@ const VideoTextMask = () => {
         className="absolute inset-0 flex flex-col items-center justify-center bg-white select-none transition-transform duration-[1800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
         style={{
           mixBlendMode: "screen",
-          transform: zoom ? "scale(1)" : "scale(5)",  // zoom-out effect
+         
         }}
       >
 
