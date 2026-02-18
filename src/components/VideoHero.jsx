@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import ScrollButton from "./ScrollButton";
 
 export default function VideoHero({
@@ -13,7 +12,6 @@ export default function VideoHero({
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
-  const router = useRouter();
 
   const totalSlides = slides.length + 1;
 
@@ -64,6 +62,7 @@ export default function VideoHero({
       prev === 0 ? slides.length - 1 : prev - 1
     );
 
+  /* ---------------- HEADING ---------------- */
   const Heading = ({ top, bottom }) => (
     <div className="mb-4">
       {top && (
@@ -73,7 +72,7 @@ export default function VideoHero({
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "clamp(28px, 4vw, 48px)",
+              fontSize: "clamp(32px, 6vw, 48px)", // Increased for mobile/tablet
             }}
           >
             {top}
@@ -88,7 +87,7 @@ export default function VideoHero({
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "clamp(28px, 4vw, 48px)",
+              fontSize: "clamp(32px, 6vw, 48px)",
             }}
           >
             {bottom}
@@ -98,6 +97,7 @@ export default function VideoHero({
     </div>
   );
 
+  /* ---------------- DESKTOP SLIDE LAYOUT (UNTOUCHED) ---------------- */
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
@@ -149,7 +149,7 @@ export default function VideoHero({
 
   return (
     <>
-      {/* ================= DESKTOP VERSION (UNTOUCHED) ================= */}
+      {/* ================= DESKTOP VERSION (UNCHANGED) ================= */}
       {isDesktop && (
         <section
           ref={scrollRef}
@@ -201,7 +201,7 @@ export default function VideoHero({
         </section>
       )}
 
-      {/* ================= MOBILE VERSION (FIXED) ================= */}
+      {/* ================= MOBILE + TABLET VERSION ================= */}
       {!isDesktop && (
         <>
           {/* Video */}
@@ -229,11 +229,7 @@ export default function VideoHero({
                     fontSize: "36px",
                   }}
                 >
-                  {"OUR LEARNING JOURNEY"
-                    .split(" ")
-                    .map((word, index) => (
-                      <div key={index}>{word}</div>
-                    ))}
+                  {title}
                 </h2>
               </div>
             </div>
@@ -249,14 +245,14 @@ export default function VideoHero({
             >
               {slides.map((slide, index) => (
                 <div key={index} className="min-w-full">
-                  <div className="container-custom py-8">
+                  <div className="container-custom py-10">
 
                     {/* IMAGE */}
-                    <div className="w-full mb-5">
+                    <div className="w-full mb-6">
                       <img
                         src={slide.image}
                         alt=""
-                        className="w-full h-[240px] object-cover"
+                        className="w-full h-[280px] md:h-[340px] object-cover object-top"
                       />
                     </div>
 
@@ -269,11 +265,11 @@ export default function VideoHero({
                     {/* SUBTITLE */}
                     {slide.subTitle && (
                       <p
-                        className="mb-3"
+                        className="mb-4"
                         style={{
                           fontFamily: "Playfair Display, serif",
                           fontWeight: 700,
-                          fontSize: "18px",
+                          fontSize: "clamp(20px, 4.5vw, 24px)",
                           color: "#9B1B2F",
                         }}
                       >
@@ -287,8 +283,7 @@ export default function VideoHero({
                         style={{
                           fontFamily: "Montserrat, sans-serif",
                           fontWeight: 400,
-                          fontSize: "15px",
-                          lineHeight: "22px",
+                          fontSize: "clamp(16px, 3vw, 18px)",
                           color: "#4B5563",
                         }}
                       >
@@ -302,7 +297,7 @@ export default function VideoHero({
             </div>
 
             {/* Buttons */}
-            <div className="container-custom mb-8">
+            <div className="container-custom mt-4 mb-8">
               <div className="flex">
                 <ScrollButton
                   direction="left"

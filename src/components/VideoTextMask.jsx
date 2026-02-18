@@ -71,60 +71,73 @@ const VideoTextMask = () => {
       )}
 
       {/* Hero Content — ALWAYS visible */}
-      <div className="relative z-20 h-full flex items-end pb-12 md:pb-34 md:pl-54">
-        <div className="container-custom w-full flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:justify-start md:gap-54 gap-6">
+     <div className="relative z-20 h-full flex items-end pb-12 md:pb-20 lg:pb-34 md:pl-0 lg:pl-54">
+  <div className="container-custom w-full 
+    flex flex-col 
+    items-center text-center 
+    md:items-start md:text-left 
+    lg:flex-row lg:justify-start lg:gap-54 
+    gap-6">
 
-          {/* LEFT TEXT */}
-          <div className="max-w-[320px] sm:max-w-md md:max-w-xl">
-            <h2
-              className="text-white leading-[120%] text-[18px] sm:text-[22px] md:!text-[34px]"
-              style={{
-                fontFamily: "Playfair Display",
-                fontWeight: 600,
-              }}
-            >
-              Education that Forms Minds.
-              <br />
-              Learning that Shapes Character.
-            </h2>
-          </div>
+    {/* LEFT TEXT */}
+    <div className="max-w-[320px] sm:max-w-md md:max-w-[600px] lg:max-w-xl">
+      <h2
+        className="text-white leading-[120%] 
+        text-[18px] 
+        sm:text-[22px] 
+        md:text-[40px] 
+        lg:!text-[34px]"
+        style={{
+          fontFamily: "Playfair Display",
+          fontWeight: 600,
+        }}
+      >
+        Education that Forms Minds.
+        <br />
+        Learning that Shapes Character.
+      </h2>
+    </div>
 
-          {/* RIGHT BUTTONS */}
-          <div className="flex flex-col gap-3 w-full max-w-[240px] md:max-w-none md:w-auto">
+    {/* RIGHT BUTTONS */}
+    <div className="flex flex-col gap-3 
+      w-full max-w-[240px] 
+      md:max-w-[260px] 
+      lg:max-w-none lg:w-auto">
 
-            <button className="bg-[#9B1B2F] text-white py-2 flex items-center justify-center gap-3 text-[12px] sm:text-[14px] font-semibold tracking-wide">
-              VISIT US
-              <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-white flex items-center justify-center">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </span>
-            </button>
+      <button className="bg-[#9B1B2F] text-white py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+        VISIT US
+        <span className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
+          <svg
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
+      </button>
 
-            <button className="bg-white text-[#9B1B2F] px-2 py-2 flex items-center justify-center gap-3 text-[12px] sm:text-[14px] font-semibold tracking-wide">
-              APPLY NOW
-              <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-[#9B1B2F] flex items-center justify-center">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </span>
-            </button>
+      <button className="bg-white px-2 text-[#9B1B2F] py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+        APPLY NOW
+        <span className="w-5 h-5 rounded-full border-2 border-[#9B1B2F] flex items-center justify-center">
+          <svg
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
+      </button>
 
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+</div>
+
 
     </section>
   );

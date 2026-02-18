@@ -29,7 +29,7 @@ export default function LeadershipSection({ data }) {
         </div>
 
         {/* ================= DESKTOP GRID ================= */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6 items-stretch">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-stretch">
           {data.map((item, index) => (
             <motion.div
               key={index}
@@ -159,6 +159,90 @@ export default function LeadershipSection({ data }) {
             </div>
           </div>
         </div>
+
+        {/* ================= TABLET SLIDER (2 CARDS) ================= */}
+<div className="hidden md:block lg:hidden overflow-hidden">
+  <motion.div
+    animate={{ x: `-${current * 50}%` }}
+    transition={{ duration: 0.5 }}
+    className="flex"
+  >
+    {data.map((item, index) => (
+      <div key={index} className="w-1/2 px-3 flex-shrink-0">
+        <div className="group cursor-pointer">
+          <div
+            className="relative w-full h-[360px]"
+            onClick={() => setSelectedImage(item.image)}
+          >
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <div className="bg-[#1F4E79] px-6 py-5">
+            <h3 className="text-white !text-[22px] font-semibold leading-tight">
+              {item.title}
+            </h3>
+
+            <div className="flex items-center justify-between mt-3">
+              <p className="text-white !text-[13px] uppercase tracking-wide">
+                {item.role}
+              </p>
+
+              <div className="w-8 h-8 rounded-full bg-[#2E5C88] flex items-center justify-center">
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 12H16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 8l4 4-4 4" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </motion.div>
+
+  {/* Arrows */}
+  <div className="flex justify-center mt-6">
+    <div className="flex">
+      <button
+        onClick={prevSlide}
+        className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30"
+      >
+        <svg width="28" height="18" viewBox="0 0 46 28">
+          <path
+            d="M45 14H3M3 14L16 1M3 14L16 27"
+            stroke="white"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center"
+      >
+        <svg width="28" height="18" viewBox="0 0 46 28">
+          <path
+            d="M1 14H43M43 14L30 1M43 14L30 27"
+            stroke="white"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
       </div>
 
       {/* Image Preview Modal */}

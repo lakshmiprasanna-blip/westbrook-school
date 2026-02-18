@@ -1,17 +1,26 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
 }) {
   return (
-    <section className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden">
+    <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
 
       {/* Background Image */}
-      <img
+      <Image
         src={imageSrc}
         alt="Group"
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        priority
+        className="
+          object-cover
+          object-center
+          md:object-[center_top]
+          lg:object-center
+        "
+        sizes="100vw"
       />
 
       {/* Dark Overlay */}
@@ -28,7 +37,7 @@ export default function ContactCTA({
 
         {/* Heading */}
         <h2
-          className="text-white mb-4 text-[36px] md:text-[48px] leading-[1]"
+          className="text-white mb-4 text-[30px] md:text-[40px] lg:text-[48px] leading-[1]"
           style={{
             fontFamily: "Playfair Display, serif",
             fontWeight: 700,
@@ -39,7 +48,7 @@ export default function ContactCTA({
 
         {/* Sub Text */}
         <p
-          className="text-white/90 mb-8 text-[16px] md:text-[18px]"
+          className="text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 500,
@@ -51,34 +60,26 @@ export default function ContactCTA({
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
 
-          {/* Contact Button */}
           <Link href="/contact">
-          <button
-            className="px-8 py-3 text-white"
-            style={{
-              backgroundColor: "#9B1B2F",
-              fontFamily: "Montserrat, sans-serif",
-              fontWeight: 700,
-              fontSize: "16px",
-            }}
-          >
-            CONTACT US
-          </button>
+            <button
+              className="px-8 py-3 text-white text-sm md:text-base font-bold"
+              style={{
+                backgroundColor: "#9B1B2F",
+              }}
+            >
+              CONTACT US
+            </button>
           </Link>
 
-          {/* Apply Button */}
           <Link href="/">
-          <button
-            className="px-8 py-3 text-white"
-            style={{
-              backgroundColor: "#0F4D81",
-              fontFamily: "Montserrat, sans-serif",
-              fontWeight: 700,
-              fontSize: "16px",
-            }}
-          >
-            APPLY NOW
-          </button>
+            <button
+              className="px-8 py-3 text-white text-sm md:text-base font-bold"
+              style={{
+                backgroundColor: "#0F4D81",
+              }}
+            >
+              APPLY NOW
+            </button>
           </Link>
 
         </div>

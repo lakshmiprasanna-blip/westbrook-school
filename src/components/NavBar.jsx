@@ -13,33 +13,40 @@ const NAV_ITEMS = [
   { name: "Contact Us", href: "/contact" },
   { name: "Explore", href: "/explore" },
 ];
+
 export default function NavBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white md:bg-[#0f4c81] shadow-sm md:shadow-none">
-      <div className="container-custom mx-auto flex  items-center justify-between px-6 py-4">
-
+    <header className="w-full bg-white lg:bg-[#0f4c81] shadow-sm lg:shadow-none">
+      <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
+        
+        {/* Logo */}
         <Link href="/" className="flex items-center">
+          {/* Mobile + Tablet Logo */}
           <Image
-            src="/assets/logo-m.png"   
+            src="/assets/logo-m.png"
             alt="Westbrook International School"
             width={200}
             height={60}
-            className="object-contain md:hidden"
+            className="object-contain lg:hidden"
             priority
           />
+
+          {/* Desktop Logo */}
           <Image
             src="/assets/logoo.png"
             alt="Westbrook International School"
             width={220}
             height={60}
-            className="object-contain hidden md:block"
+            className="object-contain hidden lg:block"
             priority
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-10">
+
+        {/* Desktop Navigation (Only Large Screens) */}
+        <nav className="hidden lg:flex items-center gap-10">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
 
@@ -60,15 +67,19 @@ export default function NavBar() {
             );
           })}
         </nav>
+
+        {/* Hamburger (Mobile + Tablet) */}
         <button
-          className="md:hidden text-[#1C1B1F]"
+          className="lg:hidden text-[#1C1B1F]"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <HiOutlineX size={30} /> : <HiOutlineMenu size={30} />}
         </button>
       </div>
+
+      {/* Mobile + Tablet Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white px-6 pb-6 space-y-4 shadow-md">
+        <div className="lg:hidden bg-white px-6 pb-6 space-y-4 shadow-md">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
 
