@@ -6,21 +6,22 @@ export default function MindsSection() {
   return (
     <section className="md:h-[600px]">
       <div className="container-custom h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
-        <div className="max-w-[720px] text-center md:text-left pt-12 md:pt-0">
-          <h2 className="heading !text-[36px] mb-1 leading-[34px] md:text-[48px] md:leading-[66px] text-[var(--color-primary)]">
-            <span className="block whitespace-nowrap">
-              Education that Forms Minds.
-            </span>
+        <div className="max-w-[480px] text-center md:text-left pt-12 md:pt-0">
+         <h2 className="heading !text-[26px] mb-1 leading-[34px] md:!text-[48px] md:leading-[62px] text-[var(--color-primary)]">
+  <span className="block whitespace-nowrap">
+    Education that Forms Minds.
+  </span>
 
-            <span className="block whitespace-nowrap">
-              Learning that Shapes
-            </span>
+  <span className="block whitespace-nowrap">
+    Learning that Shapes
+  </span>
 
-            <span className="block whitespace-nowrap">
-              Character.
-            </span>
-          </h2>
-<div className="flex flex-col sm:flex-row items-center md:items-start gap-3 md:gap-6 mt-6 md:mt-10 justify-center md:justify-start">
+  <span className="block whitespace-nowrap">
+    Character.
+  </span>
+</h2>
+
+<div className="flex flex-row sm:flex-row items-center md:items-start gap-3 md:gap-6 mt-6 md:mt-10 justify-center md:justify-start">
             <button
               className="
                 bg-[var(--color-maroon)] text-white
@@ -45,7 +46,7 @@ export default function MindsSection() {
             </button>
           </div>
         </div>
-        <div className="relative w-full md:w-[1200px] h-[300px] md:h-[500px] mt-0 md:mt-25">
+        <div className="relative w-full md:w-[1300px] h-[300px] md:h-[500px] md:ml-25 mt-0 md:mt-25">
           <Image
             src="/assets/minds.png"
             alt="Students"

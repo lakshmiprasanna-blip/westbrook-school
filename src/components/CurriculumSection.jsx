@@ -37,7 +37,7 @@ export default function CurriculumSection() {
   };
 
   return (
-    <section className="w-full bg-white py-14">
+    <section className="w-full bg-white py-9">
       <div className="container-custom">
 
        
@@ -190,38 +190,56 @@ export default function CurriculumSection() {
 
 
         {/* ================= MOBILE ================= */}
-        <div className="md:hidden flex flex-col gap-6">
-          {sections.map((item, index) => (
-            <div
-              key={index}
-              className="relative w-full h-[300px] overflow-hidden"
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover"
-              />
 
-              <div className="absolute inset-0 bg-[#00213DE5]" />
+{/* ================= MOBILE ================= */}
+<div className="md:hidden flex flex-col">
+  {sections.map((item, index) => (
+    <div
+      key={index}
+      className="relative w-full h-[240px] overflow-hidden"
+    >
+      {/* IMAGE */}
+      <Image
+        src={item.image}
+        alt={item.title}
+        fill
+        className="object-cover object-[center_20%]"
+      />
 
-              <div className="absolute top-6 right-6 z-20">
-                <div className="w-[180px] h-[50px] flex items-center justify-center bg-[var(--color-primary)] text-white uppercase text-[13px] tracking-[2px] font-semibold">
-                  {item.topLabel}
-                </div>
-              </div>
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-[#00213D]/85" />
 
-              <div className="absolute bottom-6 left-6 right-6 z-20 text-white">
-                <h2 className="text-[26px] leading-[32px] uppercase mb-3">
-                  {item.title}
-                </h2>
-                <p className="text-[14px] leading-[22px] text-white/90">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
+      {/* TOP LABEL */}
+      <div className="absolute right-4 z-20">
+        <div className="px-4 h-[32px] flex items-center justify-center 
+          bg-[var(--color-primary)] 
+          text-[#F7F6F2] 
+          !text-[14px] 
+          font-medium 
+          uppercase 
+          tracking-normal">
+          {item.topLabel}
         </div>
+      </div>
+
+      {/* TITLE */}
+      <div className="absolute bottom-6 left-6 right-6 z-20 text-[#F7F6F2]">
+        <h2 className="
+          heading
+          !text-[24px] 
+          !leading-[100%] 
+          font-bold 
+          uppercase
+        ">
+          {item.title}
+        </h2>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
 
       </div>
     </section>

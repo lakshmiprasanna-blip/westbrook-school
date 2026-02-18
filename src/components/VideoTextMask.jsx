@@ -11,20 +11,17 @@ const VideoTextMask = () => {
   const [zoom, setZoom] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
 
-  // Start video immediately on mount
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.play().catch(() => {});
   }, []);
 
-  // Start zoom animation after delay
   useEffect(() => {
     const timer = setTimeout(() => setZoom(true), 800);
     return () => clearTimeout(timer);
   }, []);
 
-  // Remove overlay from DOM after animation completes
   useEffect(() => {
     if (zoom) {
       const timer = setTimeout(() => setOverlayVisible(false), 2600);
@@ -35,8 +32,9 @@ const VideoTextMask = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-black z-50"
+      className="relative h-screen overflow-hidden bg-black"
     >
+      {/* Background Video */}
       <video
         ref={videoRef}
         muted
@@ -49,7 +47,10 @@ const VideoTextMask = () => {
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
 
-      {/* Text knockout — fixed to cover full viewport including navbar */}
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40 z-10" />
+
+      {/* Knockout Animation */}
       {overlayVisible && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-white select-none pointer-events-none"
@@ -63,11 +64,68 @@ const VideoTextMask = () => {
             ease: [0.7, 0, 0.3, 1],
           }}
         >
-          <h2 className="text-[15vw] md:text-[14vw] font-black leading-[0.85] tracking-tight text-center text-black">
+          <h2 className="text-[20vw] md:text-[18vw] font-black leading-[0.85] tracking-tight text-center text-black">
             WESTBROOK
           </h2>
         </motion.div>
       )}
+
+      {/* Hero Content — ALWAYS visible */}
+      <div className="relative z-20 h-full flex items-end pb-12 md:pb-34 md:pl-54">
+        <div className="container-custom w-full flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:justify-start md:gap-54 gap-6">
+
+          {/* LEFT TEXT */}
+          <div className="max-w-[320px] sm:max-w-md md:max-w-xl">
+            <h2
+              className="text-white leading-[120%] text-[18px] sm:text-[22px] md:!text-[34px]"
+              style={{
+                fontFamily: "Playfair Display",
+                fontWeight: 600,
+              }}
+            >
+              Education that Forms Minds.
+              <br />
+              Learning that Shapes Character.
+            </h2>
+          </div>
+
+          {/* RIGHT BUTTONS */}
+          <div className="flex flex-col gap-3 w-full max-w-[240px] md:max-w-none md:w-auto">
+
+            <button className="bg-[#9B1B2F] text-white py-2 flex items-center justify-center gap-3 text-[12px] sm:text-[14px] font-semibold tracking-wide">
+              VISIT US
+              <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-white flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 sm:w-4 sm:h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </button>
+
+            <button className="bg-white text-[#9B1B2F] px-2 py-2 flex items-center justify-center gap-3 text-[12px] sm:text-[14px] font-semibold tracking-wide">
+              APPLY NOW
+              <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-[#9B1B2F] flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 sm:w-4 sm:h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 };

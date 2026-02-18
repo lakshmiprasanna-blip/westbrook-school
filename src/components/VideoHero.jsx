@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import ScrollButton from "./ScrollButton";
 
 export default function VideoHero({
   videoSrc,
@@ -11,11 +12,12 @@ export default function VideoHero({
   const scrollRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const router = useRouter();
 
   const totalSlides = slides.length + 1;
 
-  // Detect screen size
+  /* ---------------- SCREEN DETECTION ---------------- */
   useEffect(() => {
     const checkScreen = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -26,7 +28,7 @@ export default function VideoHero({
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  // Scroll logic (desktop only)
+  /* ---------------- DESKTOP SCROLL LOGIC (UNCHANGED) ---------------- */
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -52,8 +54,18 @@ export default function VideoHero({
     ? progress * (totalSlides - 1) * -100
     : 0;
 
+  const nextMobile = () =>
+    setMobileIndex((prev) =>
+      prev === slides.length - 1 ? 0 : prev + 1
+    );
+
+  const prevMobile = () =>
+    setMobileIndex((prev) =>
+      prev === 0 ? slides.length - 1 : prev - 1
+    );
+
   const Heading = ({ top, bottom }) => (
-    <div className="mb-6">
+    <div className="mb-4">
       {top && (
         <div className="bg-[#A2D5EB] inline-block px-4 py-2 mb-2">
           <h2
@@ -61,7 +73,7 @@ export default function VideoHero({
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "48px",
+              fontSize: "clamp(28px, 4vw, 48px)",
             }}
           >
             {top}
@@ -76,7 +88,7 @@ export default function VideoHero({
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "48px",
+              fontSize: "clamp(28px, 4vw, 48px)",
             }}
           >
             {bottom}
@@ -86,44 +98,8 @@ export default function VideoHero({
     </div>
   );
 
-  const Discover = ({ show }) => {
-    if (!show) return null;
-
-    return (
-      <div
-        className="flex items-center gap-4 mt-8 uppercase"
-        style={{
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 700,
-          fontSize: "16px",
-          color: "#0F4D81",
-        }}
-      >
-        DISCOVER MORE
-
-        <div className="w-8 h-8 border-2 border-[#0F4D81] rounded-full flex items-center justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-4 h-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5l6 6m0 0l-6 6m6-6H3"
-            />
-          </svg>
-        </div>
-      </div>
-    );
-  };
-
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
-      {/* Content */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
         <div className="w-full max-w-xl">
           <Heading
@@ -137,7 +113,7 @@ export default function VideoHero({
               style={{
                 fontFamily: "Playfair Display, serif",
                 fontWeight: 700,
-                fontSize: "24px",
+                fontSize: "clamp(18px, 2.5vw, 24px)",
                 color: "#9B1B2F",
               }}
             >
@@ -150,40 +126,17 @@ export default function VideoHero({
               style={{
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 400,
-                fontSize: "18px",
-                lineHeight: "26px",
+                fontSize: "clamp(17px, 2vw, 18px)",
+                lineHeight: "clamp(22px, 2.5vw, 26px)",
                 color: "#4B5563",
               }}
             >
               {slide.description}
             </p>
           )}
-
-          <Discover show={slide.showDiscover} />
-
-          {slide.button && (
-            <button
-              onClick={() => {
-                if (slide.button.link) {
-                  router.push(slide.button.link);
-                }
-              }}
-              className="px-8 py-3 text-white mt-6"
-              style={{
-                backgroundColor:
-                  slide.button.bg || "#9B1B2F",
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 700,
-                fontSize: "16px",
-              }}
-            >
-              {slide.button.label}
-            </button>
-          )}
         </div>
       </div>
 
-      {/* Image */}
       <div className="w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
         <img
           src={slide.image}
@@ -195,72 +148,178 @@ export default function VideoHero({
   );
 
   return (
-    <section
-      ref={scrollRef}
-      className="relative w-full"
-      style={{
-        height: isDesktop
-          ? `${totalSlides * 100}vh`
-          : "auto",
-      }}
-    >
-      <div
-        className={
-          isDesktop
-            ? "sticky top-0 h-screen overflow-hidden"
-            : ""
-        }
-      >
-        <div
-          className={`flex ${
-            isDesktop ? "h-full" : "flex-col"
-          }`}
-          style={{
-            width: isDesktop
-              ? `${totalSlides * 100}vw`
-              : "100%",
-            transform: isDesktop
-              ? `translateX(${translateX}vw)`
-              : "none",
-            transition: "transform 0.1s linear",
-          }}
+    <>
+      {/* ================= DESKTOP VERSION (UNTOUCHED) ================= */}
+      {isDesktop && (
+        <section
+          ref={scrollRef}
+          className="relative w-full"
+          style={{ height: `${totalSlides * 100}vh` }}
         >
-          {/* VIDEO SLIDE */}
-          <div className="w-screen h-screen relative">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <div
+              className="flex h-full"
+              style={{
+                width: `${totalSlides * 100}vw`,
+                transform: `translateX(${translateX}vw)`,
+                transition: "transform 0.1s linear",
+              }}
             >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
+              <div className="w-screen h-screen relative">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
 
-            <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/40" />
 
-            <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
-              <h2
-                className="text-white uppercase text-center leading-[100%] whitespace-nowrap"
-                style={{
-                  fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 630,
-                  fontVariant: "small-caps",
-                  fontSize: "clamp(48px, 8vw, 160px)",
-                }}
-              >
-                {title}
-              </h2>
+                <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
+                  <h2
+                    className="text-white uppercase leading-[100%]"
+                    style={{
+                      fontFamily: "Montserrat, sans-serif",
+                      fontWeight: 630,
+                      fontVariant: "small-caps",
+                      fontSize: "clamp(36px, 8vw, 160px)",
+                    }}
+                  >
+                    {title}
+                  </h2>
+                </div>
+              </div>
 
+              {slides.map((slide, index) => (
+                <SlideLayout key={index} slide={slide} />
+              ))}
             </div>
           </div>
+        </section>
+      )}
 
-          {/* Dynamic Slides */}
-          {slides.map((slide, index) => (
-            <SlideLayout key={index} slide={slide} />
-          ))}
-        </div>
-      </div>
-    </section>
+      {/* ================= MOBILE VERSION (FIXED) ================= */}
+      {!isDesktop && (
+        <>
+          {/* Video */}
+          <section className="relative w-full">
+            <div className="w-full h-[70vh] relative">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+
+              <div className="absolute inset-0 bg-black/40" />
+
+              <div className="relative z-10 flex items-center justify-center h-full text-center">
+                <h2
+                  className="text-white uppercase leading-[100%]"
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontWeight: 630,
+                    fontVariant: "small-caps",
+                    fontSize: "36px",
+                  }}
+                >
+                  {"OUR LEARNING JOURNEY"
+                    .split(" ")
+                    .map((word, index) => (
+                      <div key={index}>{word}</div>
+                    ))}
+                </h2>
+              </div>
+            </div>
+          </section>
+
+          {/* Slides */}
+          <section className="overflow-hidden relative">
+            <div
+              className="flex transition-transform duration-500"
+              style={{
+                transform: `translateX(-${mobileIndex * 100}%)`,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <div key={index} className="min-w-full">
+                  <div className="container-custom py-8">
+
+                    {/* IMAGE */}
+                    <div className="w-full mb-5">
+                      <img
+                        src={slide.image}
+                        alt=""
+                        className="w-full h-[240px] object-cover"
+                      />
+                    </div>
+
+                    {/* TITLE */}
+                    <Heading
+                      top={slide.headingTop}
+                      bottom={slide.headingBottom}
+                    />
+
+                    {/* SUBTITLE */}
+                    {slide.subTitle && (
+                      <p
+                        className="mb-3"
+                        style={{
+                          fontFamily: "Playfair Display, serif",
+                          fontWeight: 700,
+                          fontSize: "18px",
+                          color: "#9B1B2F",
+                        }}
+                      >
+                        {slide.subTitle}
+                      </p>
+                    )}
+
+                    {/* DESCRIPTION */}
+                    {slide.description && (
+                      <p
+                        style={{
+                          fontFamily: "Montserrat, sans-serif",
+                          fontWeight: 400,
+                          fontSize: "15px",
+                          lineHeight: "22px",
+                          color: "#4B5563",
+                        }}
+                      >
+                        {slide.description}
+                      </p>
+                    )}
+
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div className="container-custom mb-8">
+              <div className="flex">
+                <ScrollButton
+                  direction="left"
+                  onClick={prevMobile}
+                  bgColor="#9B1B2F"
+                  className="border-r border-white/30"
+                />
+                <ScrollButton
+                  direction="right"
+                  onClick={nextMobile}
+                  bgColor="#9B1B2F"
+                />
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+    </>
   );
 }

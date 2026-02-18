@@ -12,7 +12,7 @@ export default function InfoSection({
 }) {
   return (
     <section
-      className="relative w-full bg-[#faf7f2] overflow-hidden"
+      className="relative w-full  bg-[#faf7f2] overflow-hidden"
       style={{
         backgroundImage: "url('/assets/linesbg.png')",
         backgroundSize: "cover",
@@ -44,7 +44,7 @@ export default function InfoSection({
         <div
           className={`flex flex-col md:flex-row ${
             reverse ? "md:flex-row-reverse" : ""
-          } items-start md:items-center gap-3 md:gap-12`}
+          } items-start md:items-center gap-3 md:gap-24 `}
         >
           {/* IMAGE */}
           <div className="w-full md:w-1/2">
