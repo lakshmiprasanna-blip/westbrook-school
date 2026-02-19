@@ -11,7 +11,7 @@ export default function OurPhilosophySection() {
 
         <div
           className="
-            bg-[#F7F6F2]
+            bg-offwhite
             px-3 py-2
             md:px-6 md:py-6
             text-md
@@ -20,7 +20,7 @@ export default function OurPhilosophySection() {
             tracking-widest
             text-primary
             text-center
-            border-1 border-[#F7F6F2] 
+            border-1 border-offwhite 
           "
         >
           OUR PHILOSOPHY

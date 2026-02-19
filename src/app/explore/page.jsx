@@ -37,7 +37,7 @@ export default function Explore() {
   
        {/* ================= SAFETY & WELL BEING SECTION ================= */}
        
-        <section className="w-full bg-[#F7F6F2] py-12 md:py-16 lg:py-20">
+        <section className="w-full bg-offwhite py-12 md:py-16 lg:py-20">
           <div className="container-custom">
 
             {/* ===== Heading ===== */}
@@ -74,9 +74,9 @@ export default function Explore() {
               {cards.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-primary text-center text-[#F7F6F2] px-8 py-10"
+                  className="bg-primary text-center text-offwhite px-8 py-10"
                 >
-                  <div className="w-28 h-28 mx-auto mb-6 bg-[#F7F6F2] rounded-full" />
+                  <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full" />
 
                   <div className="mb-3 text-[21px] font-bold font-[Playfair_Display]">
                     {item.title}
@@ -105,10 +105,10 @@ export default function Explore() {
                       px-2
                     "
                   >
-                    <div className="bg-primary text-center text-[#F7F6F2] px-8 py-10 md:py-12">
+                    <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12">
 
                       {/* Bigger Circle */}
-                      <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-[#F7F6F2] rounded-full" />
+                      <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full" />
 
                       <div className="mb-4 text-[20px] md:text-[22px] font-bold font-[Playfair_Display]">
                         {item.title}

@@ -213,7 +213,7 @@ export default function CurriculumSection() {
       <div className="absolute right-4 z-20">
         <div className="px-4 h-[32px] flex items-center justify-center 
           bg-[var(--color-primary)] 
-          text-[#F7F6F2] 
+          text-offwhite 
           !text-[14px] 
           font-medium 
           uppercase 
@@ -223,7 +223,7 @@ export default function CurriculumSection() {
       </div>
 
       {/* TITLE */}
-      <div className="absolute bottom-6 left-6 right-6 z-20 text-[#F7F6F2]">
+      <div className="absolute bottom-6 left-6 right-6 z-20 text-offwhite">
         <h2 className="
           heading
           !text-[24px] 

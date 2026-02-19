@@ -55,7 +55,7 @@ export default function CoreValuesSection() {
 
 
         {/* RIGHT TEXT SLIDER (DESKTOP ONLY) */}
-        <div className="hidden md:block text-[#F7F6F2] overflow-hidden">
+        <div className="hidden md:block text-offwhite overflow-hidden">
           <div
             className="flex transition-transform duration-700"
             style={{ transform: `translateX(-${current * 100}%)` }}
@@ -101,7 +101,7 @@ export default function CoreValuesSection() {
       </div>
 
       {/* ===== MOBILE TEXT (BELOW IMAGE) ===== */}
-      <div className="container-custom mt-6 md:hidden text-[#F7F6F2] min-h-[170px]">
+      <div className="container-custom mt-6 md:hidden text-offwhite min-h-[170px]">
         <h3
           className="!text-[22px] mb-3 leading-[100%]"
           style={{

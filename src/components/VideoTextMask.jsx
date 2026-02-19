@@ -64,7 +64,7 @@ const VideoTextMask = () => {
             ease: [0.7, 0, 0.3, 1],
           }}
         >
-          <h2 className="text-[20vw] md:text-[18vw] font-black leading-[0.85] tracking-tight text-center text-black">
+          <h2 className="font-[Montserrat] text-[20vw] md:text-[8vw] font-black leading-[0.85] tracking-tight text-center text-black">
             WESTBROOK
           </h2>
         </motion.div>

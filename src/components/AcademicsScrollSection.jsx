@@ -6,10 +6,10 @@ import ScrollButton from "./ScrollButton";
 
 export default function ScrollSlider({
   slides = [],
-  sectionBg = "#F7F6F2",
-  cardBg = "#0F4D81",
-  cardTextColor = "#FFFFFF",
-  arrowBg = "#9B1B2F",
+  sectionBgClass = "bg-offwhite",
+  cardBgClass = "bg-primary",
+  cardTextClass = "text-white",
+  arrowBgClass = "bg-maroon",
   indicatorWidth = "25%",
   minHeight = 520,
 }) {
@@ -26,23 +26,19 @@ export default function ScrollSlider({
     );
 
   return (
-    <section
-      className="py-8 md:py-16 overflow-hidden"
-      style={{ backgroundColor: sectionBg }}
-    >
+    <section className={`py-8 md:py-16 overflow-hidden ${sectionBgClass}`}>
       <div className="container-custom">
 
-                {/* ===== MOBILE TITLE ===== */}
-                {/* MOBILE TITLE */}
-        <div className="md:hidden mb-5 ">
+        {/* MOBILE TITLE */}
+        <div className="md:hidden mb-5">
           <div className="bg-lightblue inline-block px-6 py-2">
             <h2
+              className="text-dark"
               style={{
                 fontFamily: "Playfair Display, serif",
                 fontWeight: 700,
-                fontSize: "24px",   // force smaller size
+                fontSize: "24px",
                 lineHeight: "100%",
-                color: "#2B292A",
               }}
             >
               OUR APPROACH
@@ -50,43 +46,35 @@ export default function ScrollSlider({
           </div>
         </div>
 
+        {/* SLIDER WRAPPER */}
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{
+              transform: `translateX(-${current * 100}%)`,
+            }}
+          >
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className="min-w-full flex flex-col md:flex-row"
+              >
 
-                {/* ===== SLIDER WRAPPER ===== */}
-                <div className="overflow-hidden">
+                {/* MOBILE */}
+                <div className="md:hidden w-full">
+                  <div className="relative w-full h-[320px]">
+                    <Image
+                      src={slide.image}
+                      alt={slide.title || "Slide image"}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+
                   <div
-                    className="flex transition-transform duration-700 ease-in-out"
-                    style={{
-                      transform: `translateX(-${current * 100}%)`,
-                    }}
-                  >
-                    {slides.map((slide, index) => (
-                      <div
-                        key={index}
-                        className="min-w-full flex flex-col md:flex-row"
-                      >
-                        {/* ===== MOBILE LAYOUT ===== */}
-                        <div className="md:hidden w-full">
-
-                          {/* IMAGE FIRST */}
-                          <div className="relative w-full h-[320px]">
-                            <Image
-                              src={slide.image}
-                              alt={slide.title || "Slide image"}
-                              fill
-                              className="object-cover"
-                              priority
-                            />
-                          </div>
-
-                          {/* CONTENT */}
-                          {/* MOBILE CONTENT */}
-                  <div
-                    className="px-5 py-5"
-                    style={{
-                      backgroundColor: cardBg,
-                      color: cardTextColor,
-                      minHeight: "240px",   // smaller fixed height
-                    }}
+                    className={`px-5 py-5 ${cardBgClass} ${cardTextClass}`}
+                    style={{ minHeight: "240px" }}
                   >
                     {slide.title && (
                       <div
@@ -94,7 +82,7 @@ export default function ScrollSlider({
                         style={{
                           fontFamily: "Playfair Display, serif",
                           fontWeight: 700,
-                          fontSize: "24px",      // force size (avoid global override)
+                          fontSize: "24px",
                           lineHeight: "120%",
                         }}
                       >
@@ -107,7 +95,7 @@ export default function ScrollSlider({
                         style={{
                           fontFamily: "Montserrat, sans-serif",
                           fontWeight: 400,
-                          fontSize: "16px",      // force smaller
+                          fontSize: "16px",
                           lineHeight: "140%",
                         }}
                       >
@@ -115,17 +103,12 @@ export default function ScrollSlider({
                       </div>
                     )}
                   </div>
-
                 </div>
 
-                {/* ===== DESKTOP LEFT CONTENT (UNCHANGED) ===== */}
+                {/* DESKTOP CONTENT */}
                 <div
-                  className="hidden md:flex w-full md:w-1/2 px-8 md:px-14 py-14 md:py-20 flex-col justify-center"
-                  style={{
-                    backgroundColor: cardBg,
-                    color: cardTextColor,
-                    minHeight: `${minHeight}px`,
-                  }}
+                  className={`hidden md:flex w-full md:w-1/2 px-8 md:px-14 py-14 md:py-20 flex-col justify-center ${cardBgClass} ${cardTextClass}`}
+                  style={{ minHeight: `${minHeight}px` }}
                 >
                   {slide.smallTitle && (
                     <div
@@ -163,7 +146,7 @@ export default function ScrollSlider({
                     </div>
                   )}
 
-                  {/* INDICATOR (DESKTOP ONLY) */}
+                  {/* INDICATOR */}
                   <div className="mt-10 w-[60%] h-[2px] bg-white/30 relative overflow-hidden">
                     <div
                       className="absolute top-0 h-[2px] bg-white transition-all duration-500"
@@ -175,7 +158,7 @@ export default function ScrollSlider({
                   </div>
                 </div>
 
-                {/* ===== DESKTOP IMAGE SIDE (UNCHANGED) ===== */}
+                {/* DESKTOP IMAGE */}
                 <div
                   className="hidden md:flex w-full md:w-1/2 bg-white items-center justify-center"
                   style={{ minHeight: `${minHeight}px` }}
@@ -196,19 +179,19 @@ export default function ScrollSlider({
           </div>
         </div>
 
-        {/* ===== ARROWS ===== */}
+        {/* ARROWS */}
         <div className="flex justify-center mt-10">
           <div className="flex">
             <ScrollButton
               direction="left"
               onClick={prevSlide}
-              bgColor={arrowBg}
+              bgColorClass={arrowBgClass}
               className="border-r border-white/30"
             />
             <ScrollButton
               direction="right"
               onClick={nextSlide}
-              bgColor={arrowBg}
+              bgColorClass={arrowBgClass}
             />
           </div>
         </div>

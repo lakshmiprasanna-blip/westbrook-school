@@ -4,7 +4,7 @@ export default function FloatingCTAs() {
   return (
     <div className="fixed right-0 top-[70%] -translate-y-1/2 z-50">
 
-      {/* Outer Wrapper (single rounded shape) */}
+      {/* Outer Wrapper */}
       <div className="flex flex-col overflow-hidden rounded-l-2xl shadow-lg">
 
         {/* VISIT US */}
@@ -16,8 +16,8 @@ export default function FloatingCTAs() {
             w-[44px] h-[100px]
             flex items-center justify-center
             rotate-180
+            [writing-mode:vertical-rl]
           "
-          style={{ writingMode: "vertical-rl" }}
         >
           VISIT US
         </a>
@@ -26,13 +26,13 @@ export default function FloatingCTAs() {
         <a
           href="#"
           className="
-            bg-[var(--color-primary)] text-white
+            bg-primary text-white
             text-[11px] font-semibold tracking-wide
             w-[44px] h-[100px]
             flex items-center justify-center
             rotate-180
+            [writing-mode:vertical-rl]
           "
-          style={{ writingMode: "vertical-rl" }}
         >
           APPLY NOW
         </a>

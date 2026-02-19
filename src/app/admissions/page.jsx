@@ -11,7 +11,7 @@ export default function Admissions() {
       <FloatingCTAs />
       
       {/* The Westbrook Way Section */}
-    <section className="bg-[#F7F6F2] py-14 sm:py-16 md:py-20 lg:py-22">
+    <section className="bg-offwhite py-14 sm:py-16 md:py-20 lg:py-22">
   <div className="container-custom text-center">
 
     {/* Heading */}

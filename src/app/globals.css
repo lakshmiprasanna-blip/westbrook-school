@@ -1,17 +1,18 @@
-/* Google Fonts */
+/* ================= GOOGLE FONTS ================= */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.cdnfonts.com/css/century-751-bt");
 
-/* Tailwind */
+/* ================= TAILWIND ================= */
 @import "tailwindcss";
 
-/* Brand Colors */
+/* ================= BRAND COLORS ================= */
 @layer theme {
   :root {
     --color-primary: #0F4D81;
     --color-maroon: #9B1B2F;
     --color-dark: #2B292A;
     --color-lightblue: #A2D5EB;
+    --color-offwhite: #F7F6F2;
   }
 
   @theme {
@@ -19,46 +20,61 @@
     --color-maroon: #9B1B2F;
     --color-dark: #2B292A;
     --color-lightblue: #A2D5EB;
+    --color-offwhite: #F7F6F2;
   }
 }
 
-
-/* Base Styles */
+/* ================= BASE STYLES ================= */
 @layer base {
   body {
     font-family: "Montserrat", sans-serif;
     color: var(--color-dark);
   }
 
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 1.2;
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading {
+    @apply font-bold leading-[1.2] text-[48px];
+    font-family: "Playfair Display", serif;
+  }
+
+  /* Paragraph */
+  p,
+  .paragraph {
+    @apply font-normal text-[18px] leading-[1.6];
+    font-family: "Montserrat", serif;
+  }
 }
 
-p,
-.paragraph {
-  font-family: "Montserrat", serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.6;
+/* ================= GLOBAL UTILITIES ================= */
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  /* Global vertical padding */
+  .py-global {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  /* Intro text */
+  .intro-text {
+    font-family: "Century751 BT", serif !important;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 50px;
+    letter-spacing: 0;
+  }
 }
 
-.py-global {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
 /* ================= CONTACT PAGE CTA OVERRIDE ================= */
-
-
 
 .contact-cta-override .relative.z-10 {
   align-items: flex-start !important;
@@ -101,6 +117,8 @@ p,
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+
+  /* Contact CTA */
   .contact-cta-override .relative.z-10 {
     align-items: center !important;
     text-align: center !important;
@@ -123,11 +141,8 @@ p,
     flex-direction: column !important;
     gap: 12px !important;
   }
-}
 
-
-
-@media (max-width: 768px) {
+  /* Global heading resize */
   h1,
   h2,
   h3,
@@ -138,22 +153,9 @@ p,
     font-size: 36px;
   }
 
+  /* Global padding resize */
   .py-global {
     padding-top: 10px;
     padding-bottom: 10px;
   }
-}
-
-@layer components {
-  .container-custom {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
-  }
-}
-.intro-text {
-  font-family: "Century751 BT", serif !important;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 36px;
-  line-height: 50px;
-  letter-spacing: 0;
 }

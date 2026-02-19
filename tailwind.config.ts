@@ -8,6 +8,7 @@ const config: Config = {
         maroon: "#9B1B2F",
         dark: "#2B292A",
         lightblue: "#A2D5EB",
+        offwhite: "#F7F6F2",
       },
     },
   },

@@ -100,7 +100,7 @@ export default function LearningSpacesSection() {
                   flex-shrink-0
                 "
               >
-                <div className="bg-[#F7F6F2] h-full">
+                <div className="bg-offwhite h-full">
                   <div className="relative w-full h-[280px]">
                     <Image
                       src={item.image}
@@ -164,7 +164,7 @@ export default function LearningSpacesSection() {
                   />
                 </div>
 
-                <div className="bg-[#F7F6F2] p-4 space-y-2">
+                <div className="bg-offwhite p-4 space-y-2">
                   <h3 className="!font-[Playfair_Display] !font-bold 
                                  !text-[20px] !leading-[100%] 
                                  text-maroon">

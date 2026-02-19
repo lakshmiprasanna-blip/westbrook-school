@@ -7,14 +7,12 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export default function Footer() {
   const pathname = usePathname();
-
   const isHome = pathname === "/";
 
   // Home: Blue top / Red bottom
   // Other pages: Red top / Blue bottom
   const topBg = isHome ? "bg-primary" : "bg-maroon";
-  const bottomBg = isHome ? "bg-[#b3202a]" : "bg-primary";
-
+  const bottomBg = isHome ? "bg-maroon" : "bg-primary";
 
   return (
     <footer className="w-full">
@@ -25,45 +23,8 @@ export default function Footer() {
 
           {/* ===== MOBILE ===== */}
           <div className="flex flex-col items-center text-center space-y-8 md:hidden">
-            {/* Logo */}
-            
-              <Image
-                src={isHome ? "/assets/logoo.png" : "/assets/logo1.svg"}
-                alt="Westbrook International School"
-                width={500}
-                height={120}
-                className="w-[360px] lg:w-[600px] h-auto"
-              />
-            
-
-
-            <div className="space-y-5 text-[15px] uppercase tracking-wide">
-              <Link href="#" className="block">ABOUT US</Link>
-              <Link href="#" className="block">ADMISSIONS</Link>
-              <Link href="#" className="block">ACADEMICS</Link>
-              <Link href="#" className="block">CONTACT US</Link>
-            </div>
-
-            <div className="flex gap-8 pt-6">
-              {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
-                <Link
-                  key={i}
-                  href="#"
-                  className="w-14 h-14 flex items-center justify-center border border-white rounded-full hover:bg-white transition"
-                  style={{ color: "white" }}
-                >
-                  <Icon size={18} />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* ===== DESKTOP ===== */}
-          <div className="hidden md:flex md:justify-between md:items-center gap-12">
 
             {/* Logo */}
-            
-          <div>
             <Image
               src={isHome ? "/assets/logoo.png" : "/assets/logo1.svg"}
               alt="Westbrook International School"
@@ -71,11 +32,47 @@ export default function Footer() {
               height={120}
               className="w-[360px] lg:w-[600px] h-auto"
             />
+
+            {/* Links */}
+            <div className="space-y-5 text-[15px] uppercase tracking-wide">
+              <Link href="#" className="block">ABOUT US</Link>
+              <Link href="#" className="block">ADMISSIONS</Link>
+              <Link href="#" className="block">ACADEMICS</Link>
+              <Link href="#" className="block">CONTACT US</Link>
+            </div>
+
+            {/* Social */}
+            <div className="flex gap-8 pt-6">
+              {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
+                <Link
+                  key={i}
+                  href="#"
+                  className="w-14 h-14 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition text-white"
+                >
+                  <Icon size={18} />
+                </Link>
+              ))}
+            </div>
+
           </div>
 
+          {/* ===== DESKTOP ===== */}
+          <div className="hidden md:flex md:justify-between md:items-center gap-12">
+
+            {/* Logo */}
+            <div>
+              <Image
+                src={isHome ? "/assets/logoo.png" : "/assets/logo1.svg"}
+                alt="Westbrook International School"
+                width={500}
+                height={120}
+                className="w-[360px] lg:w-[600px] h-auto"
+              />
+            </div>
 
             {/* Links */}
             <div className="flex gap-24 text-[14px] uppercase tracking-wide">
+
               <div className="space-y-6">
                 <Link href="#" className="block hover:opacity-80">ABOUT US</Link>
                 <Link href="#" className="block hover:opacity-80">ADMISSIONS</Link>
@@ -89,6 +86,7 @@ export default function Footer() {
                 <Link href="#" className="block hover:opacity-80">MAIL ID</Link>
                 <Link href="#" className="block hover:opacity-80">CONTACT NO.</Link>
               </div>
+
             </div>
 
             {/* Social */}
@@ -97,8 +95,7 @@ export default function Footer() {
                 <Link
                   key={i}
                   href="#"
-                  className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white transition"
-                  style={{ color: "white" }}
+                  className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition text-white"
                 >
                   <Icon size={24} />
                 </Link>
@@ -106,6 +103,7 @@ export default function Footer() {
             </div>
 
           </div>
+
         </div>
       </div>
 

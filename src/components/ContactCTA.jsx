@@ -62,10 +62,7 @@ export default function ContactCTA({
 
           <Link href="/contact">
             <button
-              className="px-8 py-3 text-white text-sm md:text-base font-bold"
-              style={{
-                backgroundColor: "#9B1B2F",
-              }}
+              className="px-8 py-3 text-white text-sm md:text-base font-bold bg-maroon"
             >
               CONTACT US
             </button>
@@ -73,10 +70,7 @@ export default function ContactCTA({
 
           <Link href="/">
             <button
-              className="px-8 py-3 text-white text-sm md:text-base font-bold"
-              style={{
-                backgroundColor: "#0F4D81",
-              }}
+              className="px-8 py-3 text-white text-sm md:text-base font-bold bg-primary"
             >
               APPLY NOW
             </button>
