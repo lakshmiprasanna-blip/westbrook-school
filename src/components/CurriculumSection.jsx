@@ -56,7 +56,7 @@ export default function CurriculumSection() {
         animate={{ width: getWidth(index) }}
         transition={{
           duration: 0.9,
-          ease: [0.25, 1, 0.5, 1], // smooth figma curve
+          ease: [0.25, 1, 0.5, 1], // smooth  curve
         }}
         className="relative h-full overflow-hidden cursor-pointer"
       >
@@ -75,7 +75,7 @@ export default function CurriculumSection() {
         {/* OVERLAY */}
         <motion.div
           className="absolute inset-0 bg-[#00213D]"
-          animate={{ opacity: isActive ? 0.92 : 0.35 }}
+          animate={{ opacity: isActive ? 0.72 : 0.35 }}
           transition={{
             duration: 0.9,
             ease: "easeInOut",
@@ -192,51 +192,115 @@ export default function CurriculumSection() {
         {/* ================= MOBILE ================= */}
 
 {/* ================= MOBILE ================= */}
+{/* ================= MOBILE ================= */}
 <div className="md:hidden flex flex-col">
-  {sections.map((item, index) => (
-    <div
-      key={index}
-      className="relative w-full h-[240px] overflow-hidden"
-    >
-      {/* IMAGE */}
-      <Image
-        src={item.image}
-        alt={item.title}
-        fill
-        className="object-cover object-[center_20%]"
-      />
+  {sections.map((item, index) => {
+    const isActive = active === index;
 
-      {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-[#00213D]/85" />
+    return (
+      <div
+        key={index}
+        onClick={() => setActive(isActive ? null : index)}
+        className="relative w-full h-[240px] overflow-hidden cursor-pointer will-change-transform"
+      >
+        {/* IMAGE */}
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          className="object-cover object-[center_20%]"
+        />
 
-      {/* TOP LABEL */}
-      <div className="absolute right-4 z-20">
-        <div className="px-4 h-[32px] flex items-center justify-center 
-          bg-[var(--color-primary)] 
-          text-offwhite 
-          !text-[14px] 
-          font-medium 
-          uppercase 
-          tracking-normal">
-          {item.topLabel}
+        {/* DARK OVERLAY */}
+        <motion.div
+          className="absolute inset-0 bg-[#00213D]"
+          animate={{
+            opacity: isActive ? 0.6 : 0.72, // reduces ONLY when clicked
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        />
+
+        {/* TOP LABEL */}
+        <div className="absolute right-4 top-4 z-20">
+          <div
+            className="px-4 h-[32px] flex items-center justify-center 
+            bg-[var(--color-primary)] 
+            text-offwhite 
+            !text-[14px] 
+            font-medium 
+            uppercase 
+            tracking-normal"
+          >
+            {item.topLabel}
+          </div>
         </div>
-      </div>
 
-      {/* TITLE */}
-      <div className="absolute bottom-6 left-6 right-6 z-20 text-offwhite">
-        <h2 className="
-          heading
-          !text-[24px] 
-          !leading-[100%] 
-          font-bold 
-          uppercase
-        ">
-          {item.title}
-        </h2>
+        {/* TITLE (hide when active) */}
+        <motion.div
+  animate={{
+    opacity: isActive ? 0 : 1,
+    y: isActive ? 18 : 0,
+    scale: isActive ? 0.96 : 1, // ⭐ smooth shrink feel
+  }}
+  transition={{
+    duration: 0.6,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="absolute bottom-6 left-6 right-6 z-20 text-offwhite"
+>
+
+          <h2
+            className="
+              heading
+              !text-[20px] sm:!text-[22px]
+              !leading-[110%]
+              font-bold 
+              uppercase
+            "
+          >
+            {item.title}
+          </h2>
+        </motion.div>
+
+        {/* DESCRIPTION PANEL (slides from bottom) */}
+        <motion.div
+  initial={false}
+  animate={{
+    y: isActive ? 0 : 180,
+    opacity: isActive ? 1 : 0,
+  }}
+  transition={{
+    duration: 0.75, // slower = smoother
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="absolute bottom-0 left-0 right-0 z-20 
+             px-6 pb-6 pt-12 text-offwhite"
+>
+
+          
+          <h3 className="text-[18px] sm:text-[20px] font-bold uppercase mb-3">
+            {item.title}
+          </h3>
+
+          <p className="text-sm leading-relaxed text-white/90">
+            {item.description}
+          </p>
+
+          <div className="mt-4 flex items-center gap-3 text-sm font-semibold">
+            DISCOVER MORE
+            <span className="w-6 h-6 rounded-full border border-white flex items-center justify-center">
+              →
+            </span>
+          </div>
+        </motion.div>
       </div>
-    </div>
-  ))}
+    );
+  })}
 </div>
+
 
 
 
