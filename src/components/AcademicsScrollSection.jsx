@@ -35,7 +35,7 @@ export default function ScrollSlider({
                 {/* ===== MOBILE TITLE ===== */}
                 {/* MOBILE TITLE */}
         <div className="md:hidden mb-5 ">
-          <div className="bg-[#A2D5EB] inline-block px-6 py-2">
+          <div className="bg-lightblue inline-block px-6 py-2">
             <h2
               style={{
                 fontFamily: "Playfair Display, serif",

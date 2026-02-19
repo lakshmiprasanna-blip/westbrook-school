@@ -21,7 +21,7 @@ export default function LeadershipSection({ data }) {
       <div className="container-custom">
         {/* Heading */}
         <div className="text-center mb-12">
-          <div className="inline-block bg-[var(--color-lightblue)] px-5 py-1.5">
+          <div className="inline-block bg-lightblue px-5 py-1.5">
             <h2 className="font-[Playfair_Display] font-bold text-5xl">
               LEADERSHIP TEAM
             </h2>
@@ -51,7 +51,7 @@ export default function LeadershipSection({ data }) {
               </div>
 
               {/* Blue Section */}
-              <div className="bg-[#1F4E79] group-hover:bg-[var(--color-maroon)] transition-all duration-300 px-6 py-6 flex flex-col justify-between flex-1">
+              <div className="bg-[#1F4E79] group-hover:bg-maroon transition-all duration-300 px-6 py-6 flex flex-col justify-between flex-1">
                 <div>
                   <h3 className="text-white !text-[26px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
                     {item.title}
@@ -63,7 +63,7 @@ export default function LeadershipSection({ data }) {
                     {item.role}
                   </p>
 
-                  <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-[var(--color-maroon)]">
+                  <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-maroon">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -133,7 +133,7 @@ export default function LeadershipSection({ data }) {
             <div className="flex">
               <button
                 onClick={prevSlide}
-                className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30"
+                className="w-14 h-14 bg-maroon flex items-center justify-center border-r border-white/30"
               >
                 <svg width="28" height="18" viewBox="0 0 46 28">
                   <path
@@ -146,7 +146,7 @@ export default function LeadershipSection({ data }) {
 
               <button
                 onClick={nextSlide}
-                className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center"
+                className="w-14 h-14 bg-maroon flex items-center justify-center"
               >
                 <svg width="28" height="18" viewBox="0 0 46 28">
                   <path
@@ -216,7 +216,7 @@ export default function LeadershipSection({ data }) {
     <div className="flex">
       <button
         onClick={prevSlide}
-        className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center border-r border-white/30"
+        className="w-14 h-14 bg-maroon flex items-center justify-center border-r border-white/30"
       >
         <svg width="28" height="18" viewBox="0 0 46 28">
           <path
@@ -229,7 +229,7 @@ export default function LeadershipSection({ data }) {
 
       <button
         onClick={nextSlide}
-        className="w-14 h-14 bg-[var(--color-maroon)] flex items-center justify-center"
+        className="w-14 h-14 bg-maroon flex items-center justify-center"
       >
         <svg width="28" height="18" viewBox="0 0 46 28">
           <path

@@ -39,7 +39,7 @@ export default function CoreValuesSection() {
 
         {/* LEFT STRIP */}
        <div className="flex justify-center md:justify-start">
-  <div className="bg-[var(--color-lightblue)] px-6 py-2 inline-block w-fit">
+  <div className="bg-lightblue px-6 py-2 inline-block w-fit">
     <h2
       className="!text-[26px] md:!text-[34px] lg:!text-[40px] leading-[100%]"
       style={{

@@ -58,7 +58,7 @@ export default function LearningSpacesSection() {
 
         {/* ===== Section Heading ===== */}
         <div className=" text-start md:text-center mb-10 lg:mb-12">
-          <div className="inline-block bg-[var(--color-lightblue)] px-5 py-1.5 mb-4">
+          <div className="inline-block bg-lightblue px-5 py-1.5 mb-4">
             <h2 className="!font-[Playfair_Display] !font-bold 
                            !text-[28px] md:!text-[34px] lg:!text-[40px] 
                            !leading-[100%]">
@@ -70,7 +70,7 @@ export default function LearningSpacesSection() {
                         !font-[Montserrat] 
                         !text-[16px] md:!text-[17px] 
                         !leading-[24px] 
-                        text-[var(--color-dark)]">
+                        text-dark">
             At Westbrook, early learning spaces are designed to feel familiar,
             calm, and inviting, helping young children feel comfortable as they
             begin their school journey.
@@ -113,14 +113,14 @@ export default function LearningSpacesSection() {
                   <div className="p-5 space-y-2.5">
                     <h3 className="!font-[Playfair_Display] !font-bold 
                                    !text-[22px] !leading-[100%] 
-                                   text-[var(--color-maroon)]">
+                                   text-maroon">
                       {item.title}
                     </h3>
 
                     <p className="!font-[Montserrat] 
                                   !text-[16px] 
                                   !leading-[24px] 
-                                  text-[var(--color-dark)]">
+                                  text-dark">
                       {item.description}
                     </p>
                   </div>
@@ -167,14 +167,14 @@ export default function LearningSpacesSection() {
                 <div className="bg-[#F7F6F2] p-4 space-y-2">
                   <h3 className="!font-[Playfair_Display] !font-bold 
                                  !text-[20px] !leading-[100%] 
-                                 text-[var(--color-maroon)]">
+                                 text-maroon">
                     {item.title}
                   </h3>
 
                   <p className="!font-[Montserrat] 
                                  !text-[15px] 
                                  !leading-[22px] 
-                                 text-[var(--color-dark)]">
+                                 text-dark">
                     {item.description}
                   </p>
                 </div>

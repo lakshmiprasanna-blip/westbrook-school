@@ -50,7 +50,7 @@ export default function GallerySection() {
           </div>
 
           <div className="flex items-center justify-center text-center p-8">
-            <p className="!font-[Playfair_Display] !font-bold !text-[24px] !leading-[110%] text-[#0F4D81]">
+            <p className="!font-[Playfair_Display] !font-bold !text-[24px] !leading-[110%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
@@ -80,7 +80,7 @@ export default function GallerySection() {
 
           {/* Full Width Text */}
           <div className="col-span-2 flex items-center justify-center text-center px-10 py-6">
-            <p className="!font-[Playfair_Display] !font-bold !text-[26px] !leading-[120%] text-[#0F4D81]">
+            <p className="!font-[Playfair_Display] !font-bold !text-[26px] !leading-[120%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
@@ -129,7 +129,7 @@ export default function GallerySection() {
 
           {/* CENTER TEXT */}
           <div className="px-4 text-center">
-            <p className="!font-[Playfair_Display] !font-bold !text-[20px] !leading-[120%] text-[#0F4D81]">
+            <p className="!font-[Playfair_Display] !font-bold !text-[20px] !leading-[120%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.

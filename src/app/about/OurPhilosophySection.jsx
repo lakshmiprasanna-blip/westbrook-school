@@ -18,7 +18,7 @@ export default function OurPhilosophySection() {
             md:text-lg
             font-semibold
             tracking-widest
-            text-[#0F4D81]
+            text-primary
             text-center
             border-1 border-[#F7F6F2] 
           "

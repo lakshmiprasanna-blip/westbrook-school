@@ -12,8 +12,8 @@ export default function Footer() {
 
   // Home: Blue top / Red bottom
   // Other pages: Red top / Blue bottom
-  const topBg = isHome ? "bg-[#0F4D81]" : "bg-[#9B1B2F]";
-  const bottomBg = isHome ? "bg-[#b3202a]" : "bg-[#0F4D81]";
+  const topBg = isHome ? "bg-primary" : "bg-maroon";
+  const bottomBg = isHome ? "bg-[#b3202a]" : "bg-primary";
 
 
   return (

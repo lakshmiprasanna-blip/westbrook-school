@@ -43,7 +43,7 @@ export default function Explore() {
             {/* ===== Heading ===== */}
             <div className="text-center mb-6 md:mb-12 lg:mb-14">
 
-              <div className="inline-block bg-[var(--color-lightblue)] px-3 sm:px-5 py-1 sm:py-2 mb-3 sm:mb-5">
+              <div className="inline-block bg-lightblue px-3 sm:px-5 py-1 sm:py-2 mb-3 sm:mb-5">
                 <div
                   className="leading-[110%] text-[20px] sm:text-[26px] md:text-[32px] lg:text-[40px]"
                   style={{
@@ -74,7 +74,7 @@ export default function Explore() {
               {cards.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-[#0F4D81] text-center text-[#F7F6F2] px-8 py-10"
+                  className="bg-primary text-center text-[#F7F6F2] px-8 py-10"
                 >
                   <div className="w-28 h-28 mx-auto mb-6 bg-[#F7F6F2] rounded-full" />
 
@@ -105,7 +105,7 @@ export default function Explore() {
                       px-2
                     "
                   >
-                    <div className="bg-[#0F4D81] text-center text-[#F7F6F2] px-8 py-10 md:py-12">
+                    <div className="bg-primary text-center text-[#F7F6F2] px-8 py-10 md:py-12">
 
                       {/* Bigger Circle */}
                       <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-[#F7F6F2] rounded-full" />

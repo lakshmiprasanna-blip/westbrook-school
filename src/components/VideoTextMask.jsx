@@ -104,7 +104,7 @@ const VideoTextMask = () => {
       md:max-w-[260px] 
       lg:max-w-none lg:w-auto">
 
-      <button className="bg-[#9B1B2F] text-white py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+      <button className="bg-maroon text-white py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
         VISIT US
         <span className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
           <svg
@@ -119,9 +119,9 @@ const VideoTextMask = () => {
         </span>
       </button>
 
-      <button className="bg-white px-2 text-[#9B1B2F] py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+      <button className="bg-white px-2 text-maroon py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
         APPLY NOW
-        <span className="w-5 h-5 rounded-full border-2 border-[#9B1B2F] flex items-center justify-center">
+        <span className="w-5 h-5 rounded-full border-2 border-maroon flex items-center justify-center">
           <svg
             className="w-4 h-4"
             viewBox="0 0 24 24"

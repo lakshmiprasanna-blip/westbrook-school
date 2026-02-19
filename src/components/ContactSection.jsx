@@ -74,7 +74,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
 
           {/* LEFT SIDE */}
-          <div className="bg-[#0F4D81] px-8 sm:px-12 lg:px-16 py-12 flex flex-col justify-center">
+          <div className="bg-primary px-8 sm:px-12 lg:px-16 py-12 flex flex-col justify-center">
 
             <h2
               className="text-white mb-10 text-[30px] sm:text-[36px] lg:text-[48px] leading-[100%]"
@@ -196,7 +196,7 @@ export default function ContactSection() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full sm:w-[260px] h-[48px] bg-[#9B1B2F] 
+                className="w-full sm:w-[260px] h-[48px] bg-maroon 
                            text-white text-[16px] font-bold 
                            hover:bg-[#7f1626] transition"
               >

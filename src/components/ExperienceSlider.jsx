@@ -30,7 +30,7 @@ export default function ExperienceSection() {
     <section className="bg-[var(--color-primary)] py-16 md:py-20">
       <div className="container-custom">
         <div className="flex justify-center mb-10 md:mb-12">
-          <h2 className="heading bg-[var(--color-lightblue)] text-[var(--color-dark)] px-6 md:px-8 py-2 text-4xl md:text-5xl uppercase">
+          <h2 className="heading bg-lightblue text-dark px-6 md:px-8 py-2 text-4xl md:text-5xl uppercase">
             EXPERIENCE
           </h2>
         </div>

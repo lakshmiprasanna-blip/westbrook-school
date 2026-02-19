@@ -6,12 +6,22 @@
 @import "tailwindcss";
 
 /* Brand Colors */
-:root {
-  --color-primary: #0F4D81;
-  --color-maroon: #9B1B2F;
-  --color-dark: #2B292A;
-  --color-lightblue: #A2D5EB;
+@layer theme {
+  :root {
+    --color-primary: #0F4D81;
+    --color-maroon: #9B1B2F;
+    --color-dark: #2B292A;
+    --color-lightblue: #A2D5EB;
+  }
+
+  @theme {
+    --color-primary: #0F4D81;
+    --color-maroon: #9B1B2F;
+    --color-dark: #2B292A;
+    --color-lightblue: #A2D5EB;
+  }
 }
+
 
 /* Base Styles */
 @layer base {
@@ -48,7 +58,7 @@ p,
 }
 /* ================= CONTACT PAGE CTA OVERRIDE ================= */
 
-/* ================= CONTACT PAGE CTA OVERRIDE ================= */
+
 
 .contact-cta-override .relative.z-10 {
   align-items: flex-start !important;

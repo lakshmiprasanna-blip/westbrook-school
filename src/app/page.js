@@ -48,7 +48,7 @@ export default function Page() {
       Welcome to <br /> Westbrook International School
     </h2>
 
-    <p className="max-w-[850px] mx-auto text-base md:text-lg leading-relaxed text-[var(--color-dark)]">
+    <p className="max-w-[850px] mx-auto text-base md:text-lg leading-relaxed text-dark">
       At Westbrook, every child is recognised as a unique learner,
       guided with care, respect, and belief in their potential.
       We create a safe and joyful learning environment where children

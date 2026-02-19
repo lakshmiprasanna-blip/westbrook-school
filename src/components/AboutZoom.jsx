@@ -109,7 +109,7 @@ export default function AboutZoom() {
                 }
           }
         >
-          <h2 className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[140px] text-[#9B1B2F] leading-[90%]">
+          <h2 className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[140px] text-maroon leading-[90%]">
             LEARNING
           </h2>
 
@@ -123,7 +123,7 @@ export default function AboutZoom() {
             CHARACTER
           </div>
 
-          <h2 className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[140px] text-[#9B1B2F] leading-[90%]">
+          <h2 className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[140px] text-maroon leading-[90%]">
             THAT SHAPES
           </h2>
         </div>
@@ -138,7 +138,7 @@ export default function AboutZoom() {
             }}
           >
             <div
-              className="absolute left-1/2 -translate-x-1/2 w-[12px] bg-[#9B1B2F] rounded-full transition-transform duration-75"
+              className="absolute left-1/2 -translate-x-1/2 w-[12px] bg-maroon rounded-full transition-transform duration-75"
               style={{
                 height: `${thumbHeight}px`,
                 transform: `translate(-50%, ${thumbPosition}px)`,

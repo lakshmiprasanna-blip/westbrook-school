@@ -16,7 +16,7 @@ export default function MindsSection() {
               leading-[34px] 
               md:leading-[52px] 
               lg:leading-[62px] 
-              text-[var(--color-primary)]"
+              text-primary"
 >
 
             
@@ -38,7 +38,7 @@ export default function MindsSection() {
             
             <button
               className="
-                bg-[var(--color-maroon)] text-white
+                bg-maroon text-white
                 w-[160px]
                 px-5 py-2 text-sm
                 uppercase tracking-wide
@@ -50,11 +50,12 @@ export default function MindsSection() {
 
             <button
               className="
-                border-2 border-[var(--color-maroon)] text-[var(--color-maroon)]
+                border-2 border-maroon
+                text-maroon
                 w-[160px]
                 px-5 py-2 text-sm
                 uppercase tracking-wide
-                hover:bg-[var(--color-maroon)] hover:text-white transition font-bold
+                hover:bg-maroon hover:text-white transition font-bold
               "
             >
               Book a Visit

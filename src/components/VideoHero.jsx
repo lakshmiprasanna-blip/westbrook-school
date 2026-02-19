@@ -66,7 +66,7 @@ export default function VideoHero({
   const Heading = ({ top, bottom }) => (
     <div className="mb-4">
       {top && (
-        <div className="bg-[#A2D5EB] inline-block px-4 py-2 mb-2">
+        <div className="bg-lightblue inline-block px-4 py-2 mb-2">
           <h2
             className="leading-[100%]"
             style={{
@@ -81,7 +81,7 @@ export default function VideoHero({
       )}
 
       {bottom && (
-        <div className="bg-[#A2D5EB] inline-block px-4 py-2">
+        <div className="bg-lightblue inline-block px-4 py-2">
           <h2
             className="leading-[100%]"
             style={{

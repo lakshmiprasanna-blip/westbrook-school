@@ -48,8 +48,8 @@ export default function FAQSection() {
 
           {/* Left Heading - Vertically Centered */}
           <div className="flex justify-center md:justify-start">
-            <div className="bg-[#A2D5EB] px-8 py-4">
-              <h2 className="text-[36px] md:text-[48px] leading-[1] text-[#2B292A]">
+            <div className="bg-lightblue px-8 py-4">
+              <h2 className="text-[36px] md:text-[48px] leading-[1] text-dark">
                 FAQ’s
               </h2>
             </div>
@@ -75,8 +75,8 @@ export default function FAQSection() {
               isActive
                 ? "bg-[var(--color-primary)] text-white"
                 : isRedDefault
-                ? "text-[var(--color-maroon)] hover:bg-[var(--color-maroon)] hover:text-white"
-                : "text-[var(--color-dark)] hover:bg-[var(--color-maroon)] hover:text-white"
+                ? "text-maroon hover:bg-maroon hover:text-white"
+                : "text-dark hover:bg-maroon hover:text-white"
             }
           `}
         >

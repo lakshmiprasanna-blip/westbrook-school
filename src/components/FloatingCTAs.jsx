@@ -11,7 +11,7 @@ export default function FloatingCTAs() {
         <a
           href="#"
           className="
-            bg-[var(--color-maroon)] text-white
+            bg-maroon text-white
             text-[11px] font-semibold tracking-wide
             w-[44px] h-[100px]
             flex items-center justify-center

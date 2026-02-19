@@ -7,7 +7,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="w-full">
-      <div className="bg-[#b3202a] md:bg-[#0F4D81] text-white">
+      <div className="bg-[#b3202a] md:bg-primary text-white">
         <div className="container-custom mx-auto px-6 lg:px-8 py-16 md:py-28">
           <div className="flex flex-col items-center text-center space-y-8 md:hidden">
             <Image
@@ -63,15 +63,15 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex flex-col gap-6">
-              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-[#0F4D81] transition">
+              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition">
                 <FaFacebookF size={16} />
               </Link>
 
-              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-[#0F4D81] transition">
+              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition">
                 <FaInstagram size={16} />
               </Link>
 
-              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-[#0F4D81] transition">
+              <Link href="#" className="w-12 h-12 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition">
                 <FaLinkedinIn size={16} />
               </Link>
             </div>

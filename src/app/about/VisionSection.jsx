@@ -14,7 +14,7 @@ export default function VisionSection() {
             w-[260px] h-[260px] 
             md:w-[360px] md:h-[360px] 
             lg:w-[480px] lg:h-[480px]
-            bg-[var(--color-lightblue)] 
+            bg-lightblue 
             rounded-full 
             -z-10
           " />
@@ -42,8 +42,8 @@ export default function VisionSection() {
 
           <h2 className="heading 
             inline-block 
-            bg-[var(--color-lightblue)] 
-            text-[#2B292A] 
+            bg-lightblue 
+            text-dark 
             px-5 py-2 
             font-semibold 
             mb-6">
