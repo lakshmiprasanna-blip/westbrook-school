@@ -8,11 +8,11 @@ export default function GallerySection() {
 useEffect(() => {
   const topTimer = setInterval(() => {
     setTopIndex((prev) => (prev + 1) % topImages.length);
-  }, 1000); // adjust speed if needed
+  }, 1200); // adjust speed if needed
 
   const bottomTimer = setInterval(() => {
     setBottomIndex((prev) => (prev + 1) % bottomImages.length);
-  }, 1000);
+  }, 1200);
 
   return () => {
     clearInterval(topTimer);
