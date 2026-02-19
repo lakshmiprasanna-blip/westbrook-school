@@ -1,9 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function GallerySection() {
+  // AUTO SCROLL — MOBILE ONLY
+useEffect(() => {
+  const topTimer = setInterval(() => {
+    setTopIndex((prev) => (prev + 1) % topImages.length);
+  }, 1000); // adjust speed if needed
+
+  const bottomTimer = setInterval(() => {
+    setBottomIndex((prev) => (prev + 1) % bottomImages.length);
+  }, 1000);
+
+  return () => {
+    clearInterval(topTimer);
+    clearInterval(bottomTimer);
+  };
+}, []);
+
   const topImages = [
     "/assets/explore-collage5.webp",
     "/assets/explore-collage3.webp",

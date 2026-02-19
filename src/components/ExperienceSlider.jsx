@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import ScrollButton from "./ScrollButton";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ExperienceSection() {
   const images = [
@@ -51,14 +52,29 @@ export default function ExperienceSection() {
           </div>
 
           {/* Center Image */}
-          <div className="relative w-full md:w-[820px] h-[400px] md:h-[480px] overflow-hidden">
-            <Image
-              src={images[current]}
-              alt="Center"
-              fill
-              className="object-cover"
-            />
+         <div className="relative w-full md:w-[820px] h-[400px] md:h-[480px] overflow-hidden">
+          <AnimatePresence mode="sync">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={images[current]}
+                alt="Center"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
           </div>
+
 
           {/* Right Image */}
           <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
