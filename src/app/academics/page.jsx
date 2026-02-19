@@ -3,6 +3,7 @@ import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
 import ContactCTA from "../../components/ContactCTA"
 import ScrollSlider from "../../components/AcademicsScrollSection"
+
 export default function Academics() {
     return (
         <>

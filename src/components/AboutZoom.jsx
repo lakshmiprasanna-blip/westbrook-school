@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function AboutZoom() {
   const sectionRef = useRef(null);
@@ -85,12 +86,16 @@ export default function AboutZoom() {
             : "sticky top-0 h-screen"
         } overflow-hidden flex items-center justify-center`}
       >
-        {/* Background */}
-        <img
-          src="/assets/scroll-img1.webp"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover object-top"
-        />
+        {/* Background (Converted to Image) */}
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/scroll-img1.webp"
+            alt=""
+            fill
+            priority
+            className="object-cover object-top"
+          />
+        </div>
 
         {/* Soft overlay */}
         <div className="absolute inset-0 bg-white/65" />

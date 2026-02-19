@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ScrollButton from "./ScrollButton";
+import Image from "next/image";
 
 export default function VideoHero({
   videoSrc,
@@ -137,13 +138,15 @@ export default function VideoHero({
         </div>
       </div>
 
-      <div className="w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
-        <img
+     <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
+        <Image
           src={slide.image}
           alt=""
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
       </div>
+
     </div>
   );
 
@@ -248,13 +251,15 @@ export default function VideoHero({
                   <div className="container-custom py-10">
 
                     {/* IMAGE */}
-                    <div className="w-full mb-6">
-                      <img
-                        src={slide.image}
-                        alt=""
-                        className="w-full h-[280px] md:h-[340px] object-cover object-top"
-                      />
-                    </div>
+                   <div className="relative w-full h-[280px] md:h-[340px] mb-6">
+                  <Image
+                    src={slide.image}
+                    alt=""
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+
 
                     {/* TITLE */}
                     <Heading

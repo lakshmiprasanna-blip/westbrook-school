@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function GallerySection() {
   const topImages = [
@@ -31,22 +32,21 @@ export default function GallerySection() {
             auto-rows-[260px]
           "
         >
-          {/* Your exact desktop layout untouched */}
 
           <div className="relative">
-            <img src="/assets/explore-collage5.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage5.webp" alt="" fill className="object-cover" />
           </div>
 
           <div className="relative">
-            <img src="/assets/explore-collage3.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage3.webp" alt="" fill className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <img src="/assets/explore-collage1.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage1.webp" alt="" fill className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <img src="/assets/explore-collage6.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage6.webp" alt="" fill className="object-cover" />
           </div>
 
           <div className="flex items-center justify-center text-center p-8">
@@ -58,27 +58,25 @@ export default function GallerySection() {
           </div>
 
           <div className="relative">
-            <img src="/assets/explore-collage2.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage2.webp" alt="" fill className="object-cover" />
           </div>
 
           <div className="relative">
-            <img src="/assets/explore-collage4.webp" className="w-full h-full object-cover" />
+            <Image src="/assets/explore-collage4.webp" alt="" fill className="object-cover" />
           </div>
         </div>
 
-        {/* ================= TABLET VERSION (NEW) ================= */}
+        {/* ================= TABLET VERSION ================= */}
         <div className="hidden md:grid lg:hidden grid-cols-2 gap-6">
 
-          {/* Top 2 Images */}
           <div className="relative h-[260px]">
-            <img src="/assets/explore-collage5.webp" className="w-full h-full object-cover rounded-sm" />
+            <Image src="/assets/explore-collage5.webp" alt="" fill className="object-cover rounded-sm" />
           </div>
 
           <div className="relative h-[260px]">
-            <img src="/assets/explore-collage3.webp" className="w-full h-full object-cover rounded-sm" />
+            <Image src="/assets/explore-collage3.webp" alt="" fill className="object-cover rounded-sm" />
           </div>
 
-          {/* Full Width Text */}
           <div className="col-span-2 flex items-center justify-center text-center px-10 py-6">
             <p className="!font-[Playfair_Display] !font-bold !text-[26px] !leading-[120%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
@@ -87,13 +85,12 @@ export default function GallerySection() {
             </p>
           </div>
 
-          {/* Bottom 2 Images */}
           <div className="relative h-[260px]">
-            <img src="/assets/explore-collage6.webp" className="w-full h-full object-cover rounded-sm" />
+            <Image src="/assets/explore-collage6.webp" alt="" fill className="object-cover rounded-sm" />
           </div>
 
           <div className="relative h-[260px]">
-            <img src="/assets/explore-collage2.webp" className="w-full h-full object-cover rounded-sm" />
+            <Image src="/assets/explore-collage2.webp" alt="" fill className="object-cover rounded-sm" />
           </div>
 
         </div>
@@ -108,8 +105,8 @@ export default function GallerySection() {
               style={{ transform: `translateX(-${topIndex * 100}%)` }}
             >
               {topImages.map((img, i) => (
-                <div key={i} className="min-w-full">
-                  <img src={img} className="w-full h-[300px] object-cover" />
+                <div key={i} className="min-w-full relative h-[300px]">
+                  <Image src={img} alt="" fill className="object-cover" />
                 </div>
               ))}
             </div>
@@ -143,8 +140,8 @@ export default function GallerySection() {
               style={{ transform: `translateX(-${bottomIndex * 100}%)` }}
             >
               {bottomImages.map((img, i) => (
-                <div key={i} className="min-w-full">
-                  <img src={img} className="w-full h-[300px] object-cover" />
+                <div key={i} className="min-w-full relative h-[300px]">
+                  <Image src={img} alt="" fill className="object-cover" />
                 </div>
               ))}
             </div>

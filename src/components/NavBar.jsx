@@ -20,7 +20,7 @@ export default function NavBar() {
 
   return (
     <header className="w-full bg-white lg:bg-[#0f4c81] shadow-sm lg:shadow-none">
-      <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
+      <div className="container-custom  mx-auto flex items-center justify-between px-6 py-4">
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
