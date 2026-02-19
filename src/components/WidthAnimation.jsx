@@ -88,7 +88,7 @@ export default function WidthAnimation({ sections }) {
                     width={40}
                     className="w-10 h-10 mb-3"
                   />
-                  <p className="text-white font-semibold text-lg whitespace-nowrap">
+                  <p className="paragraph text-white font-semibold text-lg whitespace-nowrap">
                     {section.title}
                   </p>
                 </div>
@@ -110,10 +110,10 @@ export default function WidthAnimation({ sections }) {
                     width={56}
                     className="w-14 h-14 mb-3"
                   />
-                  <p className="text-white font-bold text-2xl mb-2 whitespace-nowrap">
+                  <p className="paragraph text-white font-bold text-2xl mb-2 whitespace-nowrap">
                     {section.title}
                   </p>
-                  <p className="text-white/90 text-sm leading-relaxed">
+                  <p className="paragraph text-white/90 text-sm leading-relaxed">
                     {section.description}
                   </p>
                 </div>
@@ -179,7 +179,7 @@ export default function WidthAnimation({ sections }) {
                 animate={{ opacity: isActive ? 0 : 1 }}
                 transition={{ duration: 0.2 }}
               >
-                <p className="text-white font-medium text-lg">
+                <p className="paragraph text-white font-medium text-lg">
                   {section.title}
                 </p>
               </motion.div>
@@ -197,10 +197,10 @@ export default function WidthAnimation({ sections }) {
                   width={40}
                   className="mb-2"
                 />
-                <p className="text-white font-bold text-xl mb-2">
+                <p className="paragraph text-white font-bold text-xl mb-2">
                   {section.title}
                 </p>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="paragraph text-white/90 text-sm leading-relaxed">
                   {section.description}
                 </p>
               </motion.div>

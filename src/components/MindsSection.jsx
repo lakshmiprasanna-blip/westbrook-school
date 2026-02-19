@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export default function MindsSection() {
   return (
-    <section className="lg:h-[600px]">
-      <div className="container-custom h-full flex flex-col md:flex-col lg:flex-row items-center justify-between">
+    <section className="lg:h-[600px] bg-offwhite">
+      <div className="container-custom  h-full flex flex-col md:flex-col lg:flex-row items-center justify-between">
         
         {/* TEXT SECTION */}
         <div className="max-w-[480px] text-center lg:text-left pt-12 lg:pt-0">

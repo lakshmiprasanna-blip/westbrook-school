@@ -66,7 +66,7 @@ export default function LearningSpacesSection() {
             </h2>
           </div>
 
-          <p className="max-w-xl mx-auto 
+          <p className="paragraph max-w-4xl mx-auto 
                         !font-[Montserrat] 
                         !text-[16px] md:!text-[17px] 
                         !leading-[24px] 
@@ -117,7 +117,7 @@ export default function LearningSpacesSection() {
                       {item.title}
                     </h3>
 
-                    <p className="!font-[Montserrat] 
+                    <p className="paragraph !font-[Montserrat] 
                                   !text-[16px] 
                                   !leading-[24px] 
                                   text-dark">
@@ -171,7 +171,7 @@ export default function LearningSpacesSection() {
                     {item.title}
                   </h3>
 
-                  <p className="!font-[Montserrat] 
+                  <p className="paragraph !font-[Montserrat] 
                                  !text-[15px] 
                                  !leading-[22px] 
                                  text-dark">

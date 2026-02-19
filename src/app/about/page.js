@@ -54,14 +54,14 @@ export default function About() {
               </div>
 
               <div className="max-w-[950px]">
-                <p className="text-[16px] md:text-[18px] leading-[28px] md:leading-[30px] mb-5 text-[#555]">
+                <p className="paragraph text-[16px] md:text-[18px] leading-[28px] md:leading-[30px] mb-5 text-[#555]">
                   Westbrook International School is built on the belief that education
                   must do more than deliver academic results. It must shape thinking,
                   character, and confidence in a way that supports children throughout
                   their school years and beyond.
                 </p>
 
-                <p className="text-[16px] md:text-[18px] leading-[28px] md:leading-[30px] text-[#555]">
+                <p className="paragraph text-[16px] md:text-[18px] leading-[28px] md:leading-[30px] text-[#555]">
                   Westbrook is guided by experienced academicians from the Tapasya School
                   group, whose long-standing work in education forms the academic backbone
                   of the school. Their experience brings clarity, structure, and academic

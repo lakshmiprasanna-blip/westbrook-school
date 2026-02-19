@@ -101,7 +101,7 @@ export default function ContactSection() {
                 />
 
                 {errors.parentName && (
-                  <p className="text-red-300 text-xs mt-1">
+                  <p className="paragraph text-red-300 text-xs mt-1">
                     {errors.parentName}
                   </p>
                 )}
@@ -149,7 +149,7 @@ export default function ContactSection() {
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
                 {errors.mobile && (
-                  <p className="text-red-300 text-xs mt-1">
+                  <p className="paragraph text-red-300 text-xs mt-1">
                     {errors.mobile}
                   </p>
                 )}
@@ -166,7 +166,7 @@ export default function ContactSection() {
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
                 {errors.email && (
-                  <p className="text-red-300 text-xs mt-1">
+                  <p className="paragraph text-red-300 text-xs mt-1">
                     {errors.email}
                   </p>
                 )}
@@ -183,7 +183,7 @@ export default function ContactSection() {
                   className="w-full px-4 py-3 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none resize-none"
                 />
                 {errors.message && (
-                  <p className="text-red-300 text-xs mt-1">
+                  <p className="paragraph text-red-300 text-xs mt-1">
                     {errors.message}
                   </p>
                 )}

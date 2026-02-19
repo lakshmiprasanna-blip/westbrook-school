@@ -102,7 +102,7 @@ export default function VideoHero({
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-xl paragraph">
           <Heading
             top={slide.headingTop}
             bottom={slide.headingBottom}
@@ -110,7 +110,7 @@ export default function VideoHero({
 
           {slide.subTitle && (
             <p
-              className="mb-4 leading-[100%]"
+              className="paragraph mb-4 leading-[100%]"
               style={{
                 fontFamily: "Playfair Display, serif",
                 fontWeight: 700,

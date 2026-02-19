@@ -59,7 +59,7 @@ export default function LeadershipSection({ data }) {
                 </div>
 
                 <div className="flex items-center justify-between mt-4">
-                  <p className="text-white !text-[12px] !font-semibold uppercase tracking-wide">
+                  <p className="paragraph text-white !text-[12px] !font-semibold uppercase tracking-wide">
                     {item.role}
                   </p>
 
@@ -108,7 +108,7 @@ export default function LeadershipSection({ data }) {
               </h3>
 
               <div className="flex items-center justify-between mt-3">
-                <p className="text-white !text-[14px] uppercase tracking-wide">
+                <p className="paragraph text-white !text-[14px] uppercase tracking-wide">
                   {data[current].role}
                 </p>
 
@@ -188,7 +188,7 @@ export default function LeadershipSection({ data }) {
             </h3>
 
             <div className="flex items-center justify-between mt-3">
-              <p className="text-white !text-[13px] uppercase tracking-wide">
+              <p className="paragraph text-white !text-[13px] uppercase tracking-wide">
                 {item.role}
               </p>
 

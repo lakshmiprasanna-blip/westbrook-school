@@ -28,7 +28,7 @@ export default function ContactCTA({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 50%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.11) 0%, rgba(0,0,0,0.12) 40%)",
         }}
       />
 
@@ -37,7 +37,7 @@ export default function ContactCTA({
 
         {/* Heading */}
         <h2
-          className="text-white mb-4 text-[30px] md:text-[40px] lg:text-[48px] leading-[1]"
+          className="text-white mb-4 text-[30px] md:text-[40px] lg:text-[40px] leading-[1]"
           style={{
             fontFamily: "Playfair Display, serif",
             fontWeight: 700,
@@ -48,7 +48,7 @@ export default function ContactCTA({
 
         {/* Sub Text */}
         <p
-          className="text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
+          className="paragraph text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 500,
@@ -62,7 +62,7 @@ export default function ContactCTA({
 
           <Link href="/contact">
             <button
-              className="px-8 py-3 text-white text-sm md:text-base font-bold bg-maroon"
+              className="px-7 py-3 text-white text-sm md:text-base font-semibold bg-maroon"
             >
               CONTACT US
             </button>
@@ -70,7 +70,7 @@ export default function ContactCTA({
 
           <Link href="/">
             <button
-              className="px-8 py-3 text-white text-sm md:text-base font-bold bg-primary"
+              className="px-7 py-3 text-white text-sm md:text-base font-semibold bg-primary"
             >
               APPLY NOW
             </button>

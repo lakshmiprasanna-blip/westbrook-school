@@ -285,7 +285,7 @@ export default function CurriculumSection() {
             {item.title}
           </h3>
 
-          <p className="text-sm leading-relaxed text-white/90">
+          <p className="paragraph text-sm leading-relaxed text-white/90">
             {item.description}
           </p>
 

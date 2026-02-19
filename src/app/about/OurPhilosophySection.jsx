@@ -28,16 +28,16 @@ export default function OurPhilosophySection() {
 
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-5 md:px-5 text-left text-white">
+      <div className="relative z-10 mx-auto max-w-5xl px-5 md:px-5 text-left text-white">
 
-        <p className="text-[15px] md:text-[18px] leading-[26px] md:leading-[30px] mb-6">
+        <p className="paragraph mb-6">
           At Westbrook International School, education is guided by strong
           academics and deeply rooted values. We believe learning goes beyond
           academic achievement to include character, discipline, compassion,
           and cultural grounding.
         </p>
 
-        <p className="text-[15px] md:text-[18px] leading-[26px] md:leading-[30px]">
+        <p className="paragraph">
           Modern, globally aligned teaching practices are balanced with values
           such as integrity, respect, responsibility, and empathy drawn from
           India’s heritage. Each child is supported in a safe and engaging

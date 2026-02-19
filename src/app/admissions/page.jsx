@@ -24,7 +24,7 @@ export default function Admissions() {
     </h1>
 
     {/* Content */}
-    <div className="mt-6 sm:mt-8 md:mt-10 max-w-3xl mx-auto space-y-4">
+    <div className="paragraph mt-6 sm:mt-8 md:mt-10 max-w-4xl mx-auto space-y-4">
 
       <p
         className="!font-[Montserrat] !font-normal
