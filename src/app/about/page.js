@@ -6,6 +6,7 @@ import VisionSection from "./VisionSection";
 import CoreValues from "./CoreValues";
 import LeaderShipSection from "./LeaderShipSection";
 import ContactCTA from "../../components/ContactCTA";
+import AboutZoom from "../../components/AboutZoom";
 
 export default function About() {
   const leadershipData = [
@@ -88,6 +89,7 @@ export default function About() {
       </section>
       
       <OurPhilosophySection/>
+      <AboutZoom/>
       <VisionSection/>
       <CoreValues/>
       <LeaderShipSection
