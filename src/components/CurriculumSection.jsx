@@ -155,7 +155,7 @@ export default function CurriculumSection() {
             initial={{ opacity: 0, x: -60 }}
             animate={{
               opacity: isActive ? 1 : 0,
-              x: isActive ? 25 : -60,   // 👈 strong visible right movement
+              x: isActive ? 1 : -60,   
             }}
             transition={{
               duration: 0.6,

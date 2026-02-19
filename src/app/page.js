@@ -63,8 +63,7 @@ export default function Page() {
 
       <CurriculumSection />
 
-      <InfoSection
-        topLabel="Why Westbrook"
+      <InfoSection topLabel="Why Westbrook"
         introText="When values guide learning, students grow with clarity and an understanding of future choices."
         tag="Academic"
         subTag="Excellence"
@@ -72,8 +71,7 @@ export default function Page() {
         image="/assets/info1.png"
       />
 
-      <InfoSection
-        tag="Co-Curricular"
+      <InfoSection tag="Co-Curricular"
         subTag="Opportunities"
         description="Co-curricular learning at Westbrook supports creativity, movement, and problem-solving while complementing academics. Activities such as pottery, gymnastics, and robotics are integrated thoughtfully to maintain balance within the school day."
         image="/assets/info2.png"
