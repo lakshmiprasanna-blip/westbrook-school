@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
