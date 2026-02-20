@@ -15,7 +15,7 @@ export default function ScrollButton({
         w-[50px] h-[50px]
         sm:w-[55px] sm:h-[55px]
         md:w-[60px] md:h-[60px]
-        transition-colors duration-300
+        transition-colors duration-300 transition cursor-pointer
         ${className}
       `}
       style={{ backgroundColor: bgColor }}

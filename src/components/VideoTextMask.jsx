@@ -35,20 +35,31 @@ const VideoTextMask = () => {
       className="relative h-screen overflow-hidden bg-black"
     >
       {/* Background Video */}
+      {/* Background Video */}
       <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        autoPlay
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          priority="true"
+        >
+          <source src={VIDEO_SRC} type="video/mp4" />
+        </video>
+
+          {/* ✅ Custom Linear Gradient Overlay */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.7) -15.82%, rgba(220,220,220,0.08) 43.38%, rgba(0,0,0,0.25) 66.47%, rgba(0,0,0,0.7) 104.13%, rgba(82,82,82,0.25) 104.13%)",
+          }}
+        />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      
 
       {/* Knockout Animation */}
       {overlayVisible && (
@@ -104,7 +115,7 @@ const VideoTextMask = () => {
       md:max-w-[260px] 
       lg:max-w-none lg:w-auto">
 
-      <button className="bg-maroon text-white py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+      <button className="bg-maroon text-white py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide transition cursor-pointer">
         VISIT US
         <span className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
           <svg
@@ -119,7 +130,7 @@ const VideoTextMask = () => {
         </span>
       </button>
 
-      <button className="bg-white px-2 text-maroon py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide">
+      <button className="bg-white px-2 text-maroon py-3 flex items-center justify-center gap-3 text-[13px] md:text-[15px] lg:text-[14px] font-semibold tracking-wide transition cursor-pointer">
         APPLY NOW
         <span className="w-5 h-5 rounded-full border-2 border-maroon flex items-center justify-center">
           <svg

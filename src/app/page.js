@@ -2,7 +2,7 @@ import Image from "next/image";
 import CurriculumSection from "../components/CurriculumSection";
 import InfoSection from "../components/InfoSection";
 import ExperienceSlider from "../components/ExperienceSlider";
-import MindsSection from "../components/MindsSection";
+import FAQSection from "../components/FAQSection";
 import VideoTextMask from "../components/VideoTextMask";
 import FloatingCTAs from "../components/FloatingCTAs";
 
@@ -85,7 +85,7 @@ export default function Page() {
       />
 
       <ExperienceSlider />
-      <MindsSection />
+      <FAQSection />
     </>
   );
 }

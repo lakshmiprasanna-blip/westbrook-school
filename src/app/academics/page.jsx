@@ -56,23 +56,24 @@ export default function Academics() {
             <div>
             <InfoSection
                 topLabel="Why Westbrook"
-            introText="When values guide learning, students grow with clarity and an understanding of future choices."
-                    tag="Academic"
-                    subTag="Excellence"
-                    description="Strong academics focus on clear teaching, steady progress, and close teacher support. Students are guided to understand concepts, apply ideas meaningfully, and build confidence within the classroom, reducing the need for excessive after-school coaching"
+            introText="How Learning Is Guided at Westbrook."
+                    tag="SOCIAL AND"
+                    subTag="EMOTIONAL"
+                    description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
                     image="/assets/info1.png"
                 />
 
                 <InfoSection
-                    tag="Co-Curricular"
-                    subTag="Opportunities"
-                    description="Co-curricular learning at Westbrook supports creativity, movement, and problem-solving while complementing academics. Activities such as pottery, gymnastics, and robotics are integrated thoughtfully to maintain balance within the school day."
+                    tag="VALUES IN"
+                    subTag="DAILY PRACTICE"
+                    description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
                     image="/assets/info2.png"
                     reverse
                 />
                 <InfoSection
-                    tag="WellBeing"
-                    description="A calm and supportive environment helps children learn better. Social and emotional learning is woven into daily school life through guided practices inspired by Roots of Empathy, supporting empathy, self-regulation, and positive classroom relationships."
+                    tag="CLARITY AND"
+                    subTag="DIRECTION"
+                    description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
                     image="/assets/info3.png"
                 />
                 </div>

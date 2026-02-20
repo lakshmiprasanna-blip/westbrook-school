@@ -74,10 +74,10 @@ export default function InfoSection({
 
             {/* Desktop Button */}
             <div className="hidden md:block">
-              <button className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition">
-                KNOW MORE
-              </button>
-            </div>
+            <button className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
+              KNOW MORE
+            </button>
+          </div>
           </div>
 
           {/* Mobile Button */}

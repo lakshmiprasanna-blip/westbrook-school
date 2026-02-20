@@ -38,11 +38,12 @@ export default function MindsSection() {
             
             <button
               className="
+                border-2 border-maroon
                 bg-maroon text-white
                 w-[160px]
                 px-5 py-2 text-sm
                 uppercase tracking-wide
-                hover:opacity-90 transition font-semibold
+                hover:opacity-90 transition font-semibold cursor-pointer
               "
             >
               Apply Now
@@ -55,7 +56,7 @@ export default function MindsSection() {
                 w-[160px]
                 px-5 py-2 text-sm
                 uppercase tracking-wide
-                hover:bg-maroon hover:text-white transition font-bold
+                hover:bg-maroon hover:text-white transition font-bold cursor-pointer
               "
             >
               Book a Visit
