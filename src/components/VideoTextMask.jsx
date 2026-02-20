@@ -32,7 +32,7 @@ const VideoTextMask = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-black"
+      className="relative h-screen overflow-hidden bg-black "
     >
       {/* Background Video */}
       {/* Background Video */}

@@ -12,7 +12,7 @@ useEffect(() => {
 
   const bottomTimer = setInterval(() => {
     setBottomIndex((prev) => (prev + 1) % bottomImages.length);
-  }, 1200);
+  }, 1300);
 
   return () => {
     clearInterval(topTimer);

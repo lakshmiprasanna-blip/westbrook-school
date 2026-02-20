@@ -9,7 +9,9 @@ import FloatingCTAs from "../components/FloatingCTAs";
 export default function Page() {
   return (
     <>
+    <div className="pt-[80px] lg:pt-[93px]">
       <VideoTextMask />
+      </div>
       <FloatingCTAs />
 
       <section className="relative w-full py-12 md:py-21 overflow-hidden bg-offwhite">

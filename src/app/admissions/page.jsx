@@ -4,6 +4,7 @@ import VideoHero from "../../components/VideoHero";
 import FAQSection from "../../components/FAQSection";
 import ContactCTA from "../../components/ContactCTA";
 
+
 export default function Admissions() {
   return (
     <>
@@ -46,6 +47,8 @@ export default function Admissions() {
 
   </div>
 </section>
+
+
 
 
 <VideoHero

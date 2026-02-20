@@ -19,7 +19,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white lg:bg-[#0f4c81] shadow-sm lg:shadow-none">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white lg:bg-[#0f4c81] shadow-sm lg:shadow-none">
       <div className="container-custom  mx-auto flex items-center justify-between px-6 py-4">
         
         {/* Logo */}

@@ -4,18 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import ScrollButton from "./ScrollButton";
 import Image from "next/image";
 
-export default function VideoHero({
+export default function VideoHeroAnimation({
   videoSrc,
   title,
   slides = [],
 }) {
-  
   const scrollRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
 
-  const totalSlides = slides.length + 1;
+  /* ---------- CONFIG ---------- */
+  const HORIZONTAL_PANELS = Math.min(2, slides.length + 1);
+  const horizontalSlides = slides.slice(0, HORIZONTAL_PANELS - 1);
+  const verticalSlides = slides.slice(HORIZONTAL_PANELS - 1);
 
   /* ---------------- SCREEN DETECTION ---------------- */
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function VideoHero({
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  /* ---------------- DESKTOP SCROLL LOGIC (UNCHANGED) ---------------- */
+  /* ---------------- DESKTOP SCROLL (HORIZONTAL PART) ---------------- */
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -51,9 +53,10 @@ export default function VideoHero({
   }, [isDesktop]);
 
   const translateX = isDesktop
-    ? progress * (totalSlides - 1) * -100
+    ? progress * (HORIZONTAL_PANELS - 1) * -100
     : 0;
 
+  /* ---------------- MOBILE NAV ---------------- */
   const nextMobile = () =>
     setMobileIndex((prev) =>
       prev === slides.length - 1 ? 0 : prev + 1
@@ -74,7 +77,7 @@ export default function VideoHero({
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "clamp(32px, 6vw, 48px)", // Increased for mobile/tablet
+              fontSize: "clamp(32px, 6vw, 48px)",
             }}
           >
             {top}
@@ -99,7 +102,7 @@ export default function VideoHero({
     </div>
   );
 
-  /* ---------------- DESKTOP SLIDE LAYOUT (UNTOUCHED) ---------------- */
+  /* ---------------- HORIZONTAL SLIDE ---------------- */
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
@@ -139,82 +142,121 @@ export default function VideoHero({
         </div>
       </div>
 
-     <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
-        <Image
-          src={slide.image}
-          alt=""
-          fill
-          className="object-cover"
-        />
+      <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
+        <Image src={slide.image} alt="" fill className="object-cover" />
       </div>
-
     </div>
   );
 
   return (
     <>
-      {/* ================= DESKTOP VERSION (UNCHANGED) ================= */}
+      {/* ================= DESKTOP ================= */}
       {isDesktop && (
-        <section
-          ref={scrollRef}
-          className="relative w-full"
-          style={{ height: `${totalSlides * 100}vh` }}
-        >
-          <div className="sticky top-0 h-screen overflow-hidden">
-            <div
-              className="flex h-full"
-              style={{
-                width: `${totalSlides * 100}vw`,
-                transform: `translateX(${translateX}vw)`,
-                transition: "transform 0.1s linear",
-              }}
-            >
-              <div className="w-screen h-screen relative">
-               <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
-
-          <div
-  className="absolute inset-0 pointer-events-none"
-  style={{
-    background:
-      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
-  }}
-/>
-
-                <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
-                  <h2
-                    className="text-white uppercase leading-[100%]"
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontWeight: 630,
-                      fontVariant: "small-caps",
-                      fontSize: "clamp(36px, 8vw, 160px)",
-                    }}
+        <>
+          {/* -------- HORIZONTAL SECTION -------- */}
+          <section
+            ref={scrollRef}
+            className="relative w-full z-0"
+            style={{ height: `${HORIZONTAL_PANELS * 100}vh` }}
+          >
+           <div className="sticky top-0 h-screen overflow-hidden z-0">
+              <div
+                className="flex h-full"
+                style={{
+                  width: `${HORIZONTAL_PANELS * 100}vw`,
+                  transform: `translateX(${translateX}vw)`,
+                  transition: "transform 0.1s linear",
+                }}
+              >
+                {/* VIDEO PANEL */}
+                <div className="w-screen h-screen relative">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
                   >
-                    {title}
-                  </h2>
+                    <source src={videoSrc} type="video/mp4" />
+                  </video>
+
+                  <div className="absolute inset-0 bg-black/30" />
+
+                  <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
+                    <h2 className="text-white uppercase leading-[100%] font-semibold text-[clamp(36px,8vw,160px)]">
+                      {title}
+                    </h2>
+                  </div>
+                </div>
+
+                {horizontalSlides.map((slide, index) => (
+                  <SlideLayout key={index} slide={slide} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* -------- STACKED VERTICAL PANELS (OVERLAP) -------- */}
+          <section
+            className="relative w-full z-10"
+            style={{ height: `${verticalSlides.length * 100}vh` }}
+            
+          >
+            {verticalSlides.map((slide, index) => (
+              <div
+                key={index}
+                className="
+                  sticky top-0 h-screen bg-white flex items-center
+                  will-change-transform will-change-opacity
+                "
+                style={{ zIndex: index + 1 }}
+              >
+                <div
+                  className="
+                    container-custom grid grid-cols-1 lg:grid-cols-2 gap-12 items-center
+                    transition-all duration-[900ms]
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+                  "
+                >
+                  {/* TEXT */}
+                  <div>
+                    <Heading
+                      top={slide.headingTop}
+                      bottom={slide.headingBottom}
+                    />
+
+                    {slide.subTitle && (
+                      <p className="mb-4 text-[#9B1B2F] font-bold">
+                        {slide.subTitle}
+                      </p>
+                    )}
+
+                    {slide.description && (
+                      <p className="text-gray-600">
+                        {slide.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* IMAGE */}
+                  <div className="relative w-full h-[340px] md:h-[440px]">
+                    <Image
+                      src={slide.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
               </div>
-
-              {slides.map((slide, index) => (
-                <SlideLayout key={index} slide={slide} />
-              ))}
-            </div>
-          </div>
-        </section>
+            ))}
+          </section>
+        </>
       )}
 
-      {/* ================= MOBILE + TABLET VERSION ================= */}
+      {/* ================= MOBILE (UNCHANGED) ================= */}
       {!isDesktop && (
         <>
-          {/* Video */}
           <section className="relative w-full">
             <div className="w-full h-[70vh] relative">
               <video
@@ -230,22 +272,13 @@ export default function VideoHero({
               <div className="absolute inset-0 bg-black/40" />
 
               <div className="relative z-10 flex items-center justify-center h-full text-center">
-                <h2
-                  className="text-white uppercase leading-[100%]"
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontWeight: 630,
-                    fontVariant: "small-caps",
-                    fontSize: "36px",
-                  }}
-                >
+                <h2 className="text-white uppercase text-[36px]">
                   {title}
                 </h2>
               </div>
             </div>
           </section>
 
-          {/* Slides */}
           <section className="overflow-hidden relative">
             <div
               className="flex transition-transform duration-500"
@@ -256,60 +289,36 @@ export default function VideoHero({
               {slides.map((slide, index) => (
                 <div key={index} className="min-w-full">
                   <div className="container-custom py-10">
+                    <div className="relative w-full h-[280px] md:h-[340px] mb-6">
+                      <Image
+                        src={slide.image}
+                        alt=""
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
 
-                    {/* IMAGE */}
-                   <div className="relative w-full h-[280px] md:h-[340px] mb-6">
-                  <Image
-                    src={slide.image}
-                    alt=""
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
-
-
-                    {/* TITLE */}
                     <Heading
                       top={slide.headingTop}
                       bottom={slide.headingBottom}
                     />
 
-                    {/* SUBTITLE */}
                     {slide.subTitle && (
-                      <p
-                        className="mb-4"
-                        style={{
-                          fontFamily: "Playfair Display, serif",
-                          fontWeight: 700,
-                          fontSize: "clamp(20px, 4.5vw, 24px)",
-                          color: "#9B1B2F",
-                          
-                        }}
-                      >
+                      <p className="mb-4 text-[#9B1B2F] font-bold">
                         {slide.subTitle}
                       </p>
                     )}
 
-                    {/* DESCRIPTION */}
                     {slide.description && (
-                      <p
-                        style={{
-                          fontFamily: "Montserrat, sans-serif",
-                          fontWeight: 400,
-                          fontSize: "clamp(16px, 3vw, 18px)",
-                          color: "#4B5563",
-                        }}
-                      >
+                      <p className="text-gray-600">
                         {slide.description}
                       </p>
                     )}
-
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Buttons */}
             <div className="container-custom mt-4 mb-8">
               <div className="flex">
                 <ScrollButton

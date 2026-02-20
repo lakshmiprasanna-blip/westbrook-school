@@ -155,7 +155,7 @@ export default function LearningSpacesSection() {
             {spaces.map((item, index) => (
               <div key={index} className="min-w-full">
 
-                <div className="relative w-full h-[240px] mb-4">
+                <div className="relative w-full h-[240px] ">
                   <Image
                     src={item.image}
                     alt={item.title}
