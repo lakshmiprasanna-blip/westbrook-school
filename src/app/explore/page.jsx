@@ -7,8 +7,10 @@ import LearningSpacesSection from "../../components/LearningSpacesSection";
 import ContactCTA from "../../components/ContactCTA";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
+import { useRef } from "react";
 
 export default function Explore() {
+  const sliderRef = useRef(null);
   const cards = [
   {
     title: "A Safe Campus",
@@ -78,11 +80,11 @@ export default function Explore() {
                 >
                   <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full" />
 
-                  <div className="mb-3 text-[21px] font-bold font-[Playfair_Display]">
+                  <div className="mb-3 text-[21px] font-bold font-playfair">
                     {item.title}
                   </div>
 
-                  <div className="text-[15px] leading-[24px] font-[Montserrat]">
+                  <div className="text-[15px] leading-[24px] font-montserrat">
                     {item.text}
                   </div>
                 </div>
@@ -93,7 +95,7 @@ export default function Explore() {
             <div className="lg:hidden relative overflow-hidden">
 
               <div
-                id="safety-slider"
+                ref={sliderRef}
                 className="flex overflow-x-auto scroll-smooth no-scrollbar"
               >
                 {cards.map((item, index) => (
@@ -110,11 +112,11 @@ export default function Explore() {
                       {/* Bigger Circle */}
                       <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full" />
 
-                      <div className="mb-4 text-[20px] md:text-[22px] font-bold font-[Playfair_Display]">
+                      <div className="mb-4 text-[20px] md:text-[22px] font-bold font-playfair">
                         {item.title}
                       </div>
 
-                      <div className="text-[15px] md:text-[16px] leading-[24px] md:leading-[26px] font-[Montserrat]">
+                      <div className="text-[15px] md:text-[16px] leading-[24px] md:leading-[26px] font-montserrat">
                         {item.text}
                       </div>
 
@@ -126,20 +128,24 @@ export default function Explore() {
               {/* Buttons */}
               <div className="flex justify-center mt-8">
                 <ScrollButton
-                  direction="left"
-                  onClick={() => {
-                    const slider = document.getElementById("safety-slider");
-                    slider.scrollBy({
-                      left: -slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1),
-                      behavior: "smooth",
-                    });
-                  }}
-                  className="border-r border-white/30"
-                />
+                    direction="left"
+                    onClick={() => {
+                      const slider = sliderRef.current;
+                      if (!slider) return;
+
+                      slider.scrollBy({
+                        left: -slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1),
+                        behavior: "smooth",
+                      });
+                    }}
+                    className="border-r border-white/30"
+                  />
                 <ScrollButton
                   direction="right"
                   onClick={() => {
-                    const slider = document.getElementById("safety-slider");
+                    const slider = sliderRef.current;
+                    if (!slider) return;
+
                     slider.scrollBy({
                       left: slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1),
                       behavior: "smooth",

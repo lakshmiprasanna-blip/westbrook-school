@@ -90,7 +90,7 @@
               src="/assets/scroll-img1.webp"
               alt=""
               fill
-              priority
+              sizes="100vw"
               className="object-cover object-top"
             />
           </div>

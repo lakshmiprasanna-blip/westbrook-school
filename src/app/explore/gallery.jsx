@@ -4,21 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function GallerySection() {
-  // AUTO SCROLL — MOBILE ONLY
-useEffect(() => {
-  const topTimer = setInterval(() => {
-    setTopIndex((prev) => (prev + 1) % topImages.length);
-  }, 1300); // adjust speed if needed
 
-  const bottomTimer = setInterval(() => {
-    setBottomIndex((prev) => (prev + 1) % bottomImages.length);
-  }, 1300);
-
-  return () => {
-    clearInterval(topTimer);
-    clearInterval(bottomTimer);
-  };
-}, []);
+  /* ---------------- IMAGE ARRAYS ---------------- */
 
   const topImages = [
     "/assets/explore-collage5.webp",
@@ -32,8 +19,28 @@ useEffect(() => {
     "/assets/explore-collage4.webp",
   ];
 
+  /* ---------------- STATE ---------------- */
+
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
+
+  /* ---------------- AUTO SCROLL (MOBILE) ---------------- */
+
+  useEffect(() => {
+    const topTimer = setInterval(() => {
+      setTopIndex((prev) => (prev + 1) % topImages.length);
+    }, 1500);
+
+    const bottomTimer = setInterval(() => {
+      setBottomIndex((prev) => (prev + 1) % bottomImages.length);
+    }, 1500);
+
+    return () => {
+      clearInterval(topTimer);
+      clearInterval(bottomTimer);
+    };
+  }, [topImages.length, bottomImages.length]);
+
 
   return (
     <section className="w-full bg-white py-14 lg:py-20">
@@ -50,23 +57,31 @@ useEffect(() => {
         >
 
           <div className="relative">
-            <Image src="/assets/explore-collage5.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage3.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <Image src="/assets/explore-collage1.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage1.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <Image src="/assets/explore-collage6.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage6.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
 
           <div className="flex items-center justify-center text-center p-8">
-            <p className="paragraph !font-[Playfair_Display] !font-bold !text-[24px] !leading-[110%] text-primary">
+            <p className="paragraph font-playfair !font-bold !text-[24px] !leading-[110%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
@@ -74,11 +89,15 @@ useEffect(() => {
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage2.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage4.webp" alt="" fill className="object-cover" />
+            <Image src="/assets/explore-collage4.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover" />
           </div>
         </div>
 
@@ -86,15 +105,19 @@ useEffect(() => {
         <div className="hidden md:grid lg:hidden grid-cols-2 gap-6">
 
           <div className="relative h-[260px]">
-            <Image src="/assets/explore-collage5.webp" alt="" fill className="object-cover rounded-sm" />
+            <Image src="/assets/explore-collage5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover rounded-sm" />
           </div>
 
           <div className="relative h-[260px]">
-            <Image src="/assets/explore-collage3.webp" alt="" fill className="object-cover rounded-sm" />
+            <Image src="/assets/explore-collage3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover rounded-sm" />
           </div>
 
           <div className="col-span-2 flex items-center justify-center text-center px-10 py-6">
-            <p className="paragraph !font-[Playfair_Display] !font-bold !text-[26px] !leading-[120%] text-primary">
+            <p className="paragraph font-playfair !font-bold !text-[26px] !leading-[120%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
@@ -102,11 +125,15 @@ useEffect(() => {
           </div>
 
           <div className="relative h-[260px]">
-            <Image src="/assets/explore-collage6.webp" alt="" fill className="object-cover rounded-sm" />
+            <Image src="/assets/explore-collage6.webp" alt="" fill   sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover rounded-sm" />
           </div>
 
           <div className="relative h-[260px]">
-            <Image src="/assets/explore-collage2.webp" alt="" fill className="object-cover rounded-sm" />
+            <Image src="/assets/explore-collage2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover rounded-sm" />
           </div>
 
         </div>
@@ -122,7 +149,7 @@ useEffect(() => {
             >
               {topImages.map((img, i) => (
                 <div key={i} className="min-w-full relative h-[300px]">
-                  <Image src={img} alt="" fill className="object-cover" />
+                  <Image src={img} alt="" fill sizes="100vw" className="object-cover" />
                 </div>
               ))}
             </div>
@@ -142,7 +169,7 @@ useEffect(() => {
 
           {/* CENTER TEXT */}
           <div className="px-4 text-center">
-            <p className="paragraph !font-[Playfair_Display] !font-bold !text-[20px] !leading-[120%] text-primary">
+            <p className="paragraph font-playfair !font-bold !text-[20px] !leading-[120%] text-primary">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
@@ -157,7 +184,7 @@ useEffect(() => {
             >
               {bottomImages.map((img, i) => (
                 <div key={i} className="min-w-full relative h-[300px]">
-                  <Image src={img} alt="" fill className="object-cover" />
+                  <Image src={img} alt="" fill sizes="100vw" className="object-cover" />
                 </div>
               ))}
             </div>

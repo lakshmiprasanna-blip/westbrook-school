@@ -71,7 +71,7 @@ export default function MindsSection() {
             src="/assets/minds.png"
             alt="Students"
             fill
-            priority
+            
             className="object-cover md:object-contain lg:object-fill"
           />
         </div>

@@ -209,7 +209,7 @@ export default function ContactSection() {
               alt="Contact"
               fill
               className="object-cover"
-              priority
+              
             />
           </div>
 

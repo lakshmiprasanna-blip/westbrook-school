@@ -35,10 +35,10 @@ export default function Footer() {
 
             {/* Links */}
             <div className="space-y-5 text-[15px] uppercase tracking-wide">
-              <Link href="#" className="block">ABOUT US</Link>
-              <Link href="#" className="block">ADMISSIONS</Link>
-              <Link href="#" className="block">ACADEMICS</Link>
-              <Link href="#" className="block">CONTACT US</Link>
+              <Link href="/about" className="block">ABOUT US</Link>
+              <Link href="/admissions" className="block">ADMISSIONS</Link>
+              <Link href="/academics" className="block">ACADEMICS</Link>
+              <Link href="/contact" className="block">CONTACT US</Link>
             </div>
 
             {/* Social */}
@@ -74,10 +74,10 @@ export default function Footer() {
             <div className="flex gap-24 text-[14px] uppercase tracking-wide">
 
               <div className="space-y-6">
-                <Link href="#" className="block hover:opacity-80">ABOUT US</Link>
-                <Link href="#" className="block hover:opacity-80">ADMISSIONS</Link>
-                <Link href="#" className="block hover:opacity-80">ACADEMICS</Link>
-                <Link href="#" className="block hover:opacity-80">CONTACT US</Link>
+                <Link href="/about" className="block hover:opacity-80">ABOUT US</Link>
+                <Link href="/admissions" className="block hover:opacity-80">ADMISSIONS</Link>
+                <Link href="/academics" className="block hover:opacity-80">ACADEMICS</Link>
+                <Link href="/contact" className="block hover:opacity-80">CONTACT US</Link>
               </div>
 
               <div className="space-y-6">

@@ -17,7 +17,7 @@ export default function Admissions() {
 
     {/* Heading */}
     <h1
-      className="!font-[Playfair_Display] !font-bold
+      className="font-playfair !font-bold
                  !text-[28px] sm:!text-[34px] md:!text-[42px] lg:!text-[48px]
                  !leading-[110%] text-[var(--color-primary)]"
     >
@@ -28,7 +28,7 @@ export default function Admissions() {
     <div className="paragraph mt-6 sm:mt-8 md:mt-10 max-w-4xl mx-auto space-y-4">
 
       <p
-        className="!font-[Montserrat] !font-normal
+        className="font-montserrat !font-normal
                    !text-[15px] sm:!text-[16px] md:!text-[17px]
                    !leading-[24px] sm:!leading-[26px] md:!leading-[28px]"
       >
@@ -36,7 +36,7 @@ export default function Admissions() {
       </p>
 
       <p
-        className="!font-[Montserrat] !font-normal
+        className="font-montserrat !font-normal
                    !text-[15px] sm:!text-[16px] md:!text-[17px]
                    !leading-[24px] sm:!leading-[26px] md:!leading-[28px]"
       >

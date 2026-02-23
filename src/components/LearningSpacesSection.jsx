@@ -59,7 +59,7 @@ export default function LearningSpacesSection() {
         {/* ===== Section Heading ===== */}
         <div className=" text-start md:text-center mb-10 lg:mb-12">
           <div className="inline-block bg-lightblue px-5 py-1.5 mb-4">
-            <h2 className="!font-[Playfair_Display] !font-bold 
+            <h2 className="font-playfair !font-bold 
                            !text-[28px] md:!text-[34px] lg:!text-[40px] 
                            !leading-[100%]">
               LEARNING SPACES
@@ -67,7 +67,7 @@ export default function LearningSpacesSection() {
           </div>
 
           <p className="paragraph max-w-4xl mx-auto 
-                        !font-[Montserrat] 
+                        font-montserrat
                         !text-[16px] md:!text-[17px] 
                         !leading-[24px] 
                         text-dark">
@@ -111,13 +111,13 @@ export default function LearningSpacesSection() {
                   </div>
 
                   <div className="p-5 space-y-2.5">
-                    <h3 className="!font-[Playfair_Display] !font-bold 
+                    <h3 className="font-playfair !font-bold 
                                    !text-[22px] !leading-[100%] 
                                    text-maroon">
                       {item.title}
                     </h3>
 
-                    <p className="paragraph !font-[Montserrat] 
+                    <p className="paragraph font-montserrat
                                   !text-[16px] 
                                   !leading-[24px] 
                                   text-dark">
@@ -165,13 +165,13 @@ export default function LearningSpacesSection() {
                 </div>
 
                 <div className="bg-offwhite p-4 space-y-2">
-                  <h3 className="!font-[Playfair_Display] !font-bold 
+                  <h3 className="font-playfair !font-bold 
                                  !text-[20px] !leading-[100%] 
                                  text-maroon">
                     {item.title}
                   </h3>
 
-                  <p className="paragraph !font-[Montserrat] 
+                  <p className="paragraph font-montserrat
                                  !text-[15px] 
                                  !leading-[22px] 
                                  text-dark">

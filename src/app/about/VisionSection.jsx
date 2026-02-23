@@ -9,15 +9,17 @@ export default function VisionSection() {
         <div className="relative flex justify-center items-center">
 
           {/* Perfect Circle Background */}
-          <div className="
-            absolute 
-            w-[260px] h-[260px] 
-            md:w-[360px] md:h-[360px] 
-            lg:w-[480px] lg:h-[480px]
-            bg-lightblue 
-            rounded-full 
-            -z-10
-          " />
+          <div
+            className="
+              absolute 
+              w-[260px] h-[260px] 
+              md:w-[360px] md:h-[360px] 
+              lg:w-[480px] lg:h-[480px]
+              bg-[#A2D5EB]
+              rounded-full 
+              -z-10
+            "
+          />
 
           {/* Image */}
           <Image
@@ -32,7 +34,7 @@ export default function VisionSection() {
               h-auto
               object-contain
             "
-            priority
+            
           />
 
         </div>
@@ -40,20 +42,24 @@ export default function VisionSection() {
         {/* TEXT SIDE */}
         <div className="text-center md:text-left">
 
-          <h2 className="heading 
-            inline-block 
-            bg-lightblue 
-            text-dark 
-            px-5 py-2 
-            font-semibold 
-            mb-6">
+          <h2
+            className="
+              inline-block 
+              bg-[#A2D5EB]
+              px-5 py-2 
+              font-semibold 
+              mb-6
+            "
+          >
             OUR VISION
           </h2>
 
-          <p className="paragraph 
-            max-w-lg 
-            text-base md:text-lg 
-            leading-relaxed">
+          <p
+            className="
+              max-w-lg 
+              leading-relaxed
+            "
+          >
             To emerge as a world-class institution of learning that nurtures
             curious minds, strong character, and global competence, while
             remaining deeply rooted in Indian values, culture, and ethos,

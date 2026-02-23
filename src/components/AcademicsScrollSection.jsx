@@ -6,10 +6,10 @@ import ScrollButton from "./ScrollButton";
 
 export default function ScrollSlider({
   slides = [],
-  sectionBgClass = "bg-offwhite",
-  cardBgClass = "bg-primary",
+  sectionBgClass = "bg-[#F7F6F2]",
+  cardBgClass = "bg-[#0F4D81]",
   cardTextClass = "text-white",
-  arrowBgClass = "bg-maroon",
+  arrowBgClass = "bg-[#9B1B2F]",
   indicatorWidth = "25%",
   minHeight = 520,
 }) {
@@ -31,16 +31,8 @@ export default function ScrollSlider({
 
         {/* MOBILE TITLE */}
         <div className="md:hidden mb-5">
-          <div className="bg-lightblue inline-block px-6 py-2">
-            <h2
-              className="text-dark"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "24px",
-                lineHeight: "100%",
-              }}
-            >
+          <div className="bg-[#A2D5EB] inline-block px-6 py-2">
+            <h2 className="text-[#2B292A]">
               OUR APPROACH
             </h2>
           </div>
@@ -66,9 +58,9 @@ export default function ScrollSlider({
                     <Image
                       src={slide.image}
                       alt={slide.title || "Slide image"}
-                      fill
+                      fill   sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
-                      priority
+                      
                     />
                   </div>
 
@@ -77,30 +69,15 @@ export default function ScrollSlider({
                     style={{ minHeight: "240px" }}
                   >
                     {slide.title && (
-                      <div
-                        className="mb-3"
-                        style={{
-                          fontFamily: "Playfair Display, serif",
-                          fontWeight: 700,
-                          fontSize: "24px",
-                          lineHeight: "120%",
-                        }}
-                      >
+                      <h3 className={`mb-3 ${cardTextClass}`}>
                         {slide.title}
-                      </div>
+                      </h3>
                     )}
 
                     {slide.description && (
-                      <div
-                        style={{
-                          fontFamily: "Montserrat, sans-serif",
-                          fontWeight: 400,
-                          fontSize: "16px",
-                          lineHeight: "140%",
-                        }}
-                      >
+                      <p className={cardTextClass}>
                         {slide.description}
-                      </div>
+                      </p>
                     )}
                   </div>
                 </div>
@@ -111,39 +88,21 @@ export default function ScrollSlider({
                   style={{ minHeight: `${minHeight}px` }}
                 >
                   {slide.smallTitle && (
-                    <div
-                      className="text-[16px] md:text-[18px] mb-6"
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                        fontWeight: 500,
-                      }}
-                    >
+                    <p className={`mb-6 ${cardTextClass} font-medium`}>
                       {slide.smallTitle}
-                    </div>
+                    </p>
                   )}
 
                   {slide.title && (
-                    <div
-                      className="text-[32px] md:text-[40px] lg:text-[48px] leading-[100%] mb-6"
-                      style={{
-                        fontFamily: "Playfair Display, serif",
-                        fontWeight: 700,
-                      }}
-                    >
+                    <h2 className={`mb-6 ${cardTextClass}`}>
                       {slide.title}
-                    </div>
+                    </h2>
                   )}
 
                   {slide.description && (
-                    <div
-                      className="text-[16px] md:text-[20px] leading-[150%] max-w-lg"
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                        fontWeight: 400,
-                      }}
-                    >
+                    <p className={`max-w-lg ${cardTextClass}`}>
                       {slide.description}
-                    </div>
+                    </p>
                   )}
 
                   {/* INDICATOR */}
@@ -167,9 +126,9 @@ export default function ScrollSlider({
                     <Image
                       src={slide.image}
                       alt={slide.title || "Slide image"}
-                      fill
+                      fill sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
-                      priority
+                      
                     />
                   </div>
                 </div>

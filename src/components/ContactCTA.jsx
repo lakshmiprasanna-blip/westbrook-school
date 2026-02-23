@@ -4,7 +4,9 @@ import Image from "next/image";
 
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
+  align = "center",
 }) {
+  const isLeft = align === "left";
   return (
     <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
 
@@ -12,15 +14,15 @@ export default function ContactCTA({
       <Image
         src={imageSrc}
         alt="Group"
-        fill
-        priority
+        fill  sizes="100vw"
+        
         className="
           object-cover
           object-center
           md:object-[center_top]
           lg:object-center
         "
-        sizes="100vw"
+       
       />
 
       {/* Dark Overlay */}
@@ -33,32 +35,34 @@ export default function ContactCTA({
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+      <div
+  className={`
+    relative z-10 h-full px-6
+    flex flex-col justify-center
+    ${isLeft ? "items-start text-left" : "items-center text-center"}
+  `}
+>
 
         {/* Heading */}
         <h2
-          className="text-white mb-4 text-[30px] md:text-[40px] lg:text-[40px] leading-[1]"
-          style={{
-            fontFamily: "Playfair Display, serif",
-            fontWeight: 700,
-          }}
+  className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] lg:text-[40px] leading-[1]"
         >
           We’d love to hear from you!
         </h2>
 
         {/* Sub Text */}
-        <p
-          className="paragraph text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
-          style={{
-            fontFamily: "Montserrat, sans-serif",
-            fontWeight: 500,
-          }}
-        >
+       <p
+  className="font-montserrat font-medium text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
+>
           Feel free to get in touch, or apply now
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div
+  className={`flex flex-col sm:flex-row gap-4 ${
+    isLeft ? "justify-start" : "justify-center"
+  }`}
+>
 
           <Link href="/contact">
             <button

@@ -22,9 +22,9 @@ export default function LeadershipSection({ data }) {
         {/* Heading */}
         <div className="text-center mb-12">
           <div className="inline-block bg-lightblue px-5 py-1.5">
-            <h2 className="font-[Playfair_Display] font-bold text-5xl">
-              LEADERSHIP TEAM
-            </h2>
+            <h2 className="font-playfair font-bold text-5xl">
+  LEADERSHIP TEAM
+</h2>
           </div>
         </div>
 
@@ -43,15 +43,18 @@ export default function LeadershipSection({ data }) {
                 onClick={() => setSelectedImage(item.image)}
               >
                 <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                />
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="(max-width: 768px) 100vw,
+                      (max-width: 1024px) 50vw,
+                      33vw"
+                className="object-cover"
+              />
               </div>
 
               {/* Blue Section */}
-              <div className="bg-[#1F4E79] group-hover:bg-maroon transition-all duration-300 px-6 py-6 flex flex-col justify-between flex-1">
+              <div className="bg-primary group-hover:bg-maroon transition-all duration-300 px-6 py-6 flex flex-col justify-between flex-1">
                 <div>
                   <h3 className="text-white !text-[26px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
                     {item.title}
@@ -95,14 +98,17 @@ export default function LeadershipSection({ data }) {
               onClick={() => setSelectedImage(data[current].image)}
             >
               <Image
-                src={data[current].image}
-                alt={data[current].title}
-                fill
-                className="object-cover"
-              />
+              src={data[current].image}
+              alt={data[current].title}
+              fill
+              sizes="(max-width: 768px) 100vw,
+                    (max-width: 1024px) 50vw,
+                    33vw"
+              className="object-cover"
+            />
             </div>
 
-            <div className="bg-[#1F4E79] px-5 py-5">
+            <div className="bg-primary px-5 py-5">
               <h3 className="text-white !text-[26px] font-semibold leading-tight">
                 {data[current].title}
               </h3>
@@ -174,15 +180,18 @@ export default function LeadershipSection({ data }) {
             className="relative w-full h-[360px]"
             onClick={() => setSelectedImage(item.image)}
           >
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              className="object-cover"
-            />
+           <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            sizes="(max-width: 768px) 100vw,
+                  (max-width: 1024px) 50vw,
+                  33vw"
+            className="object-cover"
+          />
           </div>
 
-          <div className="bg-[#1F4E79] px-6 py-5">
+          <div className="bg-primary px-6 py-5">
             <h3 className="text-white !text-[22px] font-semibold leading-tight">
               {item.title}
             </h3>
@@ -264,11 +273,12 @@ export default function LeadershipSection({ data }) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={selectedImage}
-                alt="Preview"
-                fill
-                className="object-contain"
-              />
+            src={selectedImage}
+            alt="Preview"
+            fill
+            sizes="100vw"
+            className="object-contain"
+          />
             </motion.div>
           </motion.div>
         )}
