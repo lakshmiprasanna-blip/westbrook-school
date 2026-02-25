@@ -142,28 +142,7 @@ export default function CurriculumSection() {
                     {item.description}
                   </motion.p>
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -60 }}
-                    animate={{
-                      opacity: isActive ? 1 : 0,
-                      x: isActive ? 1 : -60,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      delay: isActive ? 0.4 : 0,
-                      ease: [0.25, 1, 0.5, 1],
-                    }}
-                    className="flex items-center gap-4 text-sm font-semibold tracking-wide text-white"
-                  >
-                    DISCOVER MORE
-                    <motion.span
-                      animate={{ x: isActive ? 10 : 0 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="w-7 h-7 rounded-full border border-white flex items-center justify-center"
-                    >
-                      →
-                    </motion.span>
-                  </motion.div>
+                  
                 </motion.div>
               </motion.div>
             );
@@ -245,12 +224,7 @@ export default function CurriculumSection() {
                     {item.description}
                   </p>
 
-                  <div className="mt-4 flex items-center gap-3 text-sm font-semibold text-white">
-                    DISCOVER MORE
-                    <span className="w-6 h-6 rounded-full border border-white flex items-center justify-center">
-                      →
-                    </span>
-                  </div>
+                 
                 </motion.div>
               </div>
             );

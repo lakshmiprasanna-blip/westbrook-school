@@ -30,7 +30,7 @@ const faqData = [
   },
 ];
 
-export default function FAQSection() {
+export default function FAQSection({ faqData }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (

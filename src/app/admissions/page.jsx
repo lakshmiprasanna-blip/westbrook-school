@@ -6,6 +6,33 @@ import ContactCTA from "../../components/ContactCTA";
 
 
 export default function Admissions() {
+  const admissionsfaqData = [
+  {
+    question: "Which grades are open for admission?",
+    answer:
+      "Admissions are currently open for Nursery to Grade 5.",
+  },
+  {
+    question: "Is there any entrance test for children?",
+    answer:
+      "No. Westbrook does not conduct entrance exams. Admissions are based on interaction and alignment, not testing.",
+  },
+  {
+    question: "Is the school suitable for first-time school-goers?",
+    answer:
+      "Yes. The Early Years Programme is designed to help children transition into school comfortably and confidently.",
+  },
+  {
+    question: "Can parents meet the school leadership?",
+    answer:
+      "Yes. Parents can interact with the school leadership for guidance and clarity at any stage of the admission process.",
+  },
+  {
+    question: "Is transport available?",
+    answer:
+      "Transportation is planned within a 5–10 km radius and will be communicated during the admissions process.",
+  },
+];
   return (
     <>
       <PageBanner image="/assets/banner1.webp" />
@@ -112,8 +139,8 @@ export default function Admissions() {
 
 
 
-       <FAQSection/>
-    <ContactCTA/>
+    <FAQSection  faqData={admissionsfaqData}/>
+    <ContactCTA imageSrc="/assets/academics-contactcta.webp"/>
     </>
   );
 }

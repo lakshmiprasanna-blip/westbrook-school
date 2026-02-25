@@ -14,8 +14,11 @@ export default function Academics() {
                     {
                     smallTitle: "Our Curriculum",
                     title: "What we follow",
-                    description:
-                        "The IGCSE curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.",
+                    description: (
+                    <>
+                        The <span className="font-bold">international</span> curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.
+                    </>
+                    ),
                     image: "/assets/academicsscroll1.webp",
                     },
                     {
@@ -32,9 +35,6 @@ export default function Academics() {
                     },
                 ]}
             />
-
-           
- 
             <VideoHero videoSrc="/assets/academic-aivideo.mp4"
                 title="LEARNING JOURNEY"
                 slides={[
@@ -54,7 +54,6 @@ export default function Academics() {
                     },
                 ]}
             />
-
             {/* InfoSection */}
             <div>
             <InfoSection
@@ -82,7 +81,7 @@ export default function Academics() {
                 </div>
 
             
-            <ContactCTA imageSrc="/assets/academics-contactcta.webp"/>
+            <ContactCTA imageSrc="/assets/admissions-footer-banner.png" title="Begin Your Child’s Journey with Westbrook" subtitle="Please share your details, and our admissions team will be in touch to guide you through the next steps."/>
             
         </>
     )

@@ -10,7 +10,7 @@ export default function Contact() {
 
       {/* Override wrapper */}
       <div className="contact-cta-override">
-        <ContactCTA imageSrc="/assets/contact-banner.webp" />
+        <ContactCTA imageSrc="/assets/contact-us-footer.png" />
       </div>
     </>
   );

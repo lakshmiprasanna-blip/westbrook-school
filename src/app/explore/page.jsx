@@ -15,18 +15,22 @@ export default function Explore() {
   {
     title: "A Safe Campus",
     text: "Controlled entry points and CCTV monitoring help maintain a secure school environment throughout the day.",
+    icon: "/assets/explore-icon2.svg",
   },
   {
     title: "Clear Supervision",
     text: "Structured routines and staff presence ensure children are guided, supported, and never left unattended.",
+    icon: "/assets/explore-icon3.svg",
   },
   {
     title: "Respectful School Culture",
     text: "A strict anti-bullying approach supports positive behaviour, inclusion, and mutual respect among students.",
+    icon: "/assets/explore-icon1.svg",
   },
   {
     title: "Emotional Support",
     text: "Social and emotional learning is woven into daily routines, helping children understand feelings and relationships.",
+    icon: "/assets/explore-icon4.svg",
   },
 ];
 
@@ -76,9 +80,15 @@ export default function Explore() {
               {cards.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-primary text-center text-offwhite px-8 py-10"
+                  className="bg-primary text-center text-offwhite px-8 py-8"
                 >
-                  <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full" />
+                  <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="w-16 h-16 object-contain"
+                  />
+                </div>
 
                   <div className="mb-3 text-[21px] font-bold font-playfair">
                     {item.title}
@@ -110,7 +120,13 @@ export default function Explore() {
                     <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12">
 
                       {/* Bigger Circle */}
-                      <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full" />
+                      <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
+                      <img
+                        src={item.icon}
+                        alt={item.title}
+                        className="w-18 md:w-18 h-18 md:h-18 object-contain"
+                      />
+                    </div>
 
                       <div className="mb-4 text-[20px] md:text-[22px] font-bold font-playfair">
                         {item.title}
