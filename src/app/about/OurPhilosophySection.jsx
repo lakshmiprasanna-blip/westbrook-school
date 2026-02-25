@@ -24,7 +24,7 @@ export default function OurPhilosophySection() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-5 md:px-5 text-left text-white">
+      <div className="relative z-10 mx-auto max-w-5xl px-5 md:px-5 text-center text-white">
 
         <p className="mb-6 text-white">
           At Westbrook International School, education is guided by strong

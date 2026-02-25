@@ -10,14 +10,14 @@ const sections = [
     topLabel: "CURRICULUM",
     description:
       "A thoughtful beginning to learning that builds curiosity, early skills, and confidence through guided play, structured routines, and close teacher support.",
-    image: "/assets/curriculum1.png",
+    image: "/assets/2bce95a20276a61e5788948d06e10463d657c0aa.png",
   },
   {
     title: "PRE PRIMARY",
     topLabel: "EARLY YEARS",
     description:
       "Early learning that focuses on language, movement, play, and social development through clear routines and guided exploration.",
-    image: "/assets/curriculum2.png",
+    image: "/assets/Frame 2610539.png",
   },
   {
     title: "PRIMARY SCHOOL",
@@ -85,8 +85,8 @@ export default function CurriculumSection() {
                         ? "#9B1B2F"
                         : "#0F4D81",
                     }}
-                    transition={{ duration: 0.4 }}
-                    className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[13px] tracking-[2px] font-semibold"
+                    transition={{ duration: 0.7 }}
+                    className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[15px]  font-semibold"
                   >
                     {item.topLabel}
                   </motion.div>
@@ -136,7 +136,7 @@ export default function CurriculumSection() {
 
                   <motion.p
                     animate={{ opacity: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.4, delay: isActive ? 0.35 : 0 }}
+                    transition={{ duration: 0.4, delay: isActive ? 0.3 : 0 }}
                     className="leading-relaxed mb-8 text-white/90"
                   >
                     {item.description}
@@ -225,6 +225,7 @@ export default function CurriculumSection() {
                   </p>
 
                  
+                  
                 </motion.div>
               </div>
             );

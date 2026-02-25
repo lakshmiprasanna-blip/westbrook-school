@@ -140,7 +140,7 @@ export default function Admissions() {
 
 
     <FAQSection  faqData={admissionsfaqData}/>
-    <ContactCTA imageSrc="/assets/academics-contactcta.webp"/>
+    <ContactCTA imageSrc="/assets/admissions-footer-banner.png" title="Begin Your Child’s Journey with Westbrook" subtitle="Please share your details, and our admissions team will be in touch to guide you through the next steps."/>
     </>
   );
 }

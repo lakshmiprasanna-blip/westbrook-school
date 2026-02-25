@@ -5,12 +5,12 @@ import ContactSection from "../../components/ContactSection";
 export default function Contact() {
   return (
     <>
-      <PageBanner image="/assets/explorebanner.webp" />
+      <PageBanner image="/assets/contactbanner.webp" />
       <ContactSection />
 
       {/* Override wrapper */}
       <div className="contact-cta-override">
-        <ContactCTA imageSrc="/assets/contact-us-footer.png" />
+        <ContactCTA imageSrc="/assets/contactfooter.webp" />
       </div>
     </>
   );

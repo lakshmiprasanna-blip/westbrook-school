@@ -83,7 +83,7 @@ const VideoTextMask = () => {
 
       {/* Hero Content — ALWAYS visible */}
      <div className="relative z-20 h-full flex items-end justify-center pb-12 md:pb-20 lg:pb-34">
-  <div className="container-custom w-full 
+  <div className="lg:max-w-xl w-full 
   flex flex-col 
   items-center 
   text-center 

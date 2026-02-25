@@ -57,25 +57,25 @@ export default function GallerySection() {
         >
 
           <div className="relative">
-            <Image src="/assets/explore-collage5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery1.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
-         33vw" className="object-cover" />
+         33vw" className="object-cover object-top" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover object-top" />
+          </div>
+
+          <div className="relative row-span-2">
+            <Image src="/assets/explore-gallery3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <Image src="/assets/explore-collage1.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
-         (max-width: 1024px) 50vw,
-         33vw" className="object-cover" />
-          </div>
-
-          <div className="relative row-span-2">
-            <Image src="/assets/explore-collage6.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery6.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
@@ -89,13 +89,13 @@ export default function GallerySection() {
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage4.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery4.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>

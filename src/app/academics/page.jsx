@@ -2,6 +2,7 @@ import PageBanner from "../../components/PageBanner"
 import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
 import ContactCTA from "../../components/ContactCTA"
+import FloatingCTAs from "../../components/FloatingCTAs"
 import ScrollSlider from "../../components/AcademicsScrollSection"
 
 
@@ -9,6 +10,7 @@ export default function Academics() {
     return (
         <>
             <PageBanner image="/assets/academic-banner.webp" />
+            <FloatingCTAs />
              <ScrollSlider
                 slides={[
                     {
@@ -19,19 +21,19 @@ export default function Academics() {
                         The <span className="font-bold">international</span> curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.
                     </>
                     ),
-                    image: "/assets/academicsscroll1.webp",
+                    image: "/assets/academicsscroll.webp",
                     },
                     {
                     title: "How learning progresses ?",
                     description:
                         "Subjects are structured to build understanding gradually across grades, allowing students to connect ideas and strengthen foundations over time.",
-                    image: "/assets/info1.png",
+                    image: "/assets/academicsscroll2.webp",
                     },
                     {
                     title: "Why this matters ?",
                     description:
                         "This approach helps students move beyond memorization and develop confidence in applying what they learn.",
-                    image: "/assets/explore-collage1.webp",
+                    image: "/assets/academicsscroll3.webp",
                     },
                 ]}
             />
@@ -62,26 +64,26 @@ export default function Academics() {
                     tag="SOCIAL AND"
                     subTag="EMOTIONAL"
                     description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
-                    image="/assets/info1.png"
+                    image="/assets/academics-info1.webp"
                 />
 
                 <InfoSection
                     tag="VALUES IN"
                     subTag="DAILY PRACTICE"
                     description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
-                    image="/assets/info2.png"
+                    image="/assets/academics-info2.webp"
                     reverse
                 />
                 <InfoSection
                     tag="CLARITY AND"
                     subTag="DIRECTION"
                     description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
-                    image="/assets/info3.png"
+                    image="/assets/academics-info3.webp"
                 />
                 </div>
 
             
-            <ContactCTA imageSrc="/assets/admissions-footer-banner.png" title="Begin Your Child’s Journey with Westbrook" subtitle="Please share your details, and our admissions team will be in touch to guide you through the next steps."/>
+            <ContactCTA />
             
         </>
     )
