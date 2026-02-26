@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-export const runtime = "nodejs";
-import fs from "fs";
+// export const runtime = "nodejs";
+// import fs from "fs";
 import path from "path";
 
 // ================= SAVE LEAD LOCALLY =================
@@ -20,112 +20,52 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
-    const {
-      parentName,
-      childName,
-      grade,
-      mobile,
-      email,
-      message,
-      variant,
-    } = body;
+    const { parentName, childName, grade, mobile, email, message, variant } = body;
 
-    // ================= VALIDATION =================
-    if (variant === "contact") {
-      // Contact form validation
-      if (!parentName || !mobile || !email || !message) {
-        return NextResponse.json(
-          { success: false, message: "Required fields missing" },
-          { status: 400 }
-        );
-      }
-    } else {
-      // Enquiry form validation (simple/detailed)
-      if (!parentName || !childName || !mobile || !email) {
-        return NextResponse.json(
-          { success: false, message: "Required fields missing" },
-          { status: 400 }
-        );
-      }
+    if (!parentName || !mobile || !email) {
+      return NextResponse.json(
+        { success: false, message: "Required fields missing" },
+        { status: 400 }
+      );
     }
 
-    // ================= CRM CONFIG =================
     const ACCESS_CODE = "C814-C612-A9C4-8F9B-72ED-BBBD";
 
-    const crmPayload = {
-      access_code: ACCESS_CODE,
-
-      // Required CRM fields
-      name: parentName,
-      email: email,
-      phone: mobile,
-
-      // Optional CRM fields
-      grade: grade || "",
-      parent_name: parentName || "",
-      student_name: childName || "",
-      message: message || "",
-      source: variant === "contact" ? "Website Contact" : "Website Enquiry",
-    };
-
-    let crmResponseBody = null;
-    let crmStatusCode = 0;
-    let crmSuccess = false;
-
-    // ================= SEND TO CRM =================
-    try {
-      const crmRes = await fetch(
-        "https://leadapi.yellowslate.com/api/webhooks/web/client",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(crmPayload),
-        }
-      );
-
-      crmStatusCode = crmRes.status;
-      const text = await crmRes.text();
-
-      try {
-        crmResponseBody = JSON.parse(text);
-      } catch {
-        crmResponseBody = { raw: text };
+    const crmRes = await fetch(
+      "https://leadapi.yellowslate.com/api/webhooks/web/client",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_code: ACCESS_CODE,
+          name: parentName,
+          email,
+          phone: mobile,
+          grade: grade || "",
+          student_name: childName || "",
+          message: message || "",
+          source: variant === "contact"
+            ? "Website Contact"
+            : "Website Enquiry",
+        }),
       }
+    );
 
-      crmSuccess = crmRes.ok;
-    } catch (error) {
-      crmResponseBody = { error: error.message };
-    }
-
-    // ================= SAVE LOCALLY =================
-    saveLead({
-      id: `${Date.now()}`,
-      submittedAt: new Date().toISOString(),
-      formVariant: variant || "unknown",
-      formData: body,
-      requestPayload: crmPayload,
-      crmResponse: crmResponseBody,
-      crmStatusCode,
-      success: crmSuccess,
-    });
-
-    // ================= RESPONSE =================
-    if (crmSuccess) {
-      return NextResponse.json({
-        success: true,
-        message: "Lead submitted successfully!",
-      });
-    } else {
+    if (!crmRes.ok) {
+      console.error("CRM failed:", await crmRes.text());
       return NextResponse.json(
         { success: false, message: "CRM submission failed" },
         { status: 500 }
       );
     }
-  } catch (error) {
-    console.error("Lead submission error:", error);
 
+    return NextResponse.json({
+      success: true,
+      message: "Lead submitted successfully!",
+    });
+
+  } catch (error) {
+    console.error("Server Error:", error);
     return NextResponse.json(
       { success: false, message: "Server error" },
       { status: 500 }
