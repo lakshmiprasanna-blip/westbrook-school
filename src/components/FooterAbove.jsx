@@ -46,11 +46,11 @@ export default function FooterAbove({
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="bg-[#9B1B2F] hover:opacity-90 text-white px-6 py-3 rounded-full font-medium transition">
+              <button className="bg-[#9B1B2F]  text-white px-6 py-3 rounded-full font-medium transition">
                 {primaryBtnText}
               </button>
 
-              <button className="bg-[#0F4D81] hover:opacity-90 text-white px-6 py-3 rounded-full font-medium transition">
+              <button className="bg-[#0F4D81] text-white px-6 py-3 rounded-full font-medium transition">
                 {secondaryBtnText}
               </button>
             </div>

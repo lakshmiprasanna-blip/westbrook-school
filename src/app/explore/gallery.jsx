@@ -43,7 +43,7 @@ export default function GallerySection() {
 
 
   return (
-    <section className="w-full bg-white py-14 lg:py-20">
+    <section className="w-full bg-primary py-14 lg:py-20">
       <div className="container-custom">
 
         {/* ================= DESKTOP VERSION (UNCHANGED) ================= */}
@@ -51,51 +51,51 @@ export default function GallerySection() {
           className="
             hidden lg:grid
             grid-cols-3 
-            gap-6
+            gap-4
             auto-rows-[260px]
           "
         >
 
           <div className="relative">
-            <Image src="/assets/explore-collage5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery1.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
-         33vw" className="object-cover" />
+         33vw" className="object-cover object-top" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+         (max-width: 1024px) 50vw,
+         33vw" className="object-cover object-top" />
+          </div>
+
+          <div className="relative row-span-2">
+            <Image src="/assets/explore-gallery3.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
 
           <div className="relative row-span-2">
-            <Image src="/assets/explore-collage1.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery6.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
 
-          <div className="relative row-span-2">
-            <Image src="/assets/explore-collage6.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
-         (max-width: 1024px) 50vw,
-         33vw" className="object-cover" />
-          </div>
-
-          <div className="flex items-center justify-center text-center p-8">
-            <p className="paragraph font-playfair !font-bold !text-[24px] !leading-[110%] text-primary">
+          <div className="flex items-center justify-center text-center p-6">
+            <h2 className="paragraph font-playfair !font-bold !text-[24px] !leading-[110%] text-offwhite">
               At Westbrook, early learning spaces are designed to feel familiar,
               calm, and inviting, helping young children feel comfortable as they
               begin their school journey.
-            </p>
+            </h2>
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage2.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery5.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>
 
           <div className="relative">
-            <Image src="/assets/explore-collage4.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
+            <Image src="/assets/explore-gallery4.webp" alt="" fill  sizes="(max-width: 768px) 100vw,
          (max-width: 1024px) 50vw,
          33vw" className="object-cover" />
           </div>

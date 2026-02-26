@@ -7,36 +7,35 @@ export default function ImageContentSection({
   title,
   description,
   bgColor = "#F5F5F5",
-  breakText = true, // true = allow break, false = no break
+  breakText = true,
   primaryBtnText,
   secondaryBtnText,
 }) {
   return (
     <section
-      className="w-full py-16 md:py-24"
+      className="w-full py-8"
       style={{ backgroundColor: bgColor }}
     >
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="container-custom mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
 
         {/* LEFT IMAGE */}
-        <div className="w-full md:w-1/2">
-          <div className="relative w-full h-[350px] md:h-[450px]">
+        <div className="w-full md:w-4/5"> {/* 👈 wider column */}
+          <div className="relative w-full h-[450px] overflow-hidden">
             <Image
               src={imageSrc}
               alt="section image"
               fill
-              className="object-contain"
               priority
+              className="object-cover"
             />
           </div>
         </div>
-
         {/* RIGHT CONTENT */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
+        <div className="w-full md:w-1/2 md:pl-10 text-center md:text-left"> {/* 👈 move right */}
 
           {/* TITLE */}
           <h2
-            className={`text-3xl md:text-4xl font-semibold text-gray-800 ${
+            className={`text-3xl md:text-5xl font-semibold text-gray-800 ${
               breakText ? "" : "whitespace-nowrap"
             }`}
           >
@@ -50,20 +49,19 @@ export default function ImageContentSection({
 
           {/* BUTTONS */}
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-
             {primaryBtnText && (
-              <button className="px-6 py-3 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition">
+              <button className="px-6 py-3 bg-maroon text-white rounded-full font-medium transition">
                 {primaryBtnText}
               </button>
             )}
 
             {secondaryBtnText && (
-              <button className="px-6 py-3 bg-blue-700 text-white rounded-full font-medium hover:bg-blue-800 transition">
+              <button className="px-6 py-3 bg-primary text-white rounded-full font-medium transition">
                 {secondaryBtnText}
               </button>
             )}
-
           </div>
+
         </div>
 
       </div>

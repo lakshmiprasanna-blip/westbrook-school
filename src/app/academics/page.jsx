@@ -2,6 +2,7 @@ import PageBanner from "../../components/PageBanner"
 import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
 import ContactCTA from "../../components/ContactCTA"
+import FloatingCTAs from "../../components/FloatingCTAs"
 import ScrollSlider from "../../components/AcademicsScrollSection"
 import FooterAbove from "../../components/FooterAbove"
 import ImageContentSection from "../../components/ImageContentSection"
@@ -11,32 +12,33 @@ export default function Academics() {
     return (
         <>
             <PageBanner image="/assets/academic-banner.webp" />
+            <FloatingCTAs />
              <ScrollSlider
                 slides={[
                     {
                     smallTitle: "Our Curriculum",
                     title: "What we follow",
-                    description:
-                        "The IGCSE curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.",
-                    image: "/assets/academicsscroll1.webp",
+                    description: (
+                    <>
+                        The <span className="font-bold">international</span> curriculum forms the academic framework at Westbrook, supporting concept clarity, application, and clear communication.
+                    </>
+                    ),
+                    image: "/assets/academicsscroll.webp",
                     },
                     {
                     title: "How learning progresses ?",
                     description:
                         "Subjects are structured to build understanding gradually across grades, allowing students to connect ideas and strengthen foundations over time.",
-                    image: "/assets/info1.png",
+                    image: "/assets/academicsscroll2.webp",
                     },
                     {
                     title: "Why this matters ?",
                     description:
                         "This approach helps students move beyond memorization and develop confidence in applying what they learn.",
-                    image: "/assets/explore-collage1.webp",
+                    image: "/assets/academicsscroll3.webp",
                     },
                 ]}
             />
-
-           
- 
             <VideoHero videoSrc="/assets/academic-aivideo.mp4"
                 title="LEARNING JOURNEY"
                 slides={[
@@ -56,7 +58,6 @@ export default function Academics() {
                     },
                 ]}
             />
-
             {/* InfoSection */}
             <div>
             <InfoSection
@@ -65,27 +66,27 @@ export default function Academics() {
                     tag="SOCIAL AND"
                     subTag="EMOTIONAL"
                     description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
-                    image="/assets/info1.png"
+                    image="/assets/academics-info1.webp"
                 />
 
                 <InfoSection
                     tag="VALUES IN"
                     subTag="DAILY PRACTICE"
                     description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
-                    image="/assets/info2.png"
+                    image="/assets/academics-info2.webp"
                     reverse
                 />
                 <InfoSection
                     tag="CLARITY AND"
                     subTag="DIRECTION"
                     description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
-                    image="/assets/info3.png"
+                    image="/assets/academics-info3.webp"
                 />
                 </div>
 
             
             {/* <ContactCTA imageSrc="/assets/academics-contactcta.webp"/> */}
-<FooterAbove
+{/* <FooterAbove
   imageSrc="/assets/footer-above1.png"
   heading={<>We’d love to hear <br /> from you!</>}
   description="Feel free to get in touch, or apply now"
@@ -93,16 +94,17 @@ export default function Academics() {
   imageHeight="450px"
   imageWidthClass="flex"
   noWrap={false}
-/>
+/> */}
 <ImageContentSection
 imageSrc="/assets/footer-above1.png"
   title="We’d love to hear from you!"
   description="Feel free to get in touch, or apply now"
   bgColor="#EDEBE8"
-  breakText={false}
+  breakText={true}
   primaryBtnText="CONTACT US"
   secondaryBtnText="APPLY NOW"
 />
+            <ContactCTA />
             
         </>
     )

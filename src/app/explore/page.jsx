@@ -178,8 +178,8 @@ export default function Explore() {
 /> */}
 <ImageContentSection
  imageSrc="/assets/footer-exploree.png"
-  title="Transforming Education Together"
-  description="Building bright futures with excellence and care."
+  title="We’d love to hear from you!"
+  description="Feel free to get in touch, or apply now"
   bgColor="#ffffff"
    primaryBtnText="CONTACT US"
   secondaryBtnText="APPLY NOW"

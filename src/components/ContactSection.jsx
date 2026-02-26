@@ -71,6 +71,18 @@ export default function ContactSection() {
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
 
+
+                    {/* RIGHT IMAGE */}
+          <div className="relative w-full h-[350px] sm:h-[450px] lg:h-auto">
+            <Image
+              src="/assets/contactimg.webp"
+              alt="Contact"
+              fill
+              className="object-cover"
+              
+            />
+          </div>
+
           {/* LEFT SIDE */}
           <div className="bg-primary px-8 sm:px-12 lg:px-16 py-12 flex flex-col justify-center">
 
@@ -202,16 +214,7 @@ export default function ContactSection() {
             </form>
           </div>
 
-          {/* RIGHT IMAGE */}
-          <div className="relative w-full h-[350px] sm:h-[450px] lg:h-auto">
-            <Image
-              src="/assets/explore-collage6.webp"
-              alt="Contact"
-              fill
-              className="object-cover"
-              
-            />
-          </div>
+
 
         </div>
       </div>

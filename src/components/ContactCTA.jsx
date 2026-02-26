@@ -5,6 +5,8 @@ import Image from "next/image";
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
   align = "center",
+  title ="We’d love to hear from you!",
+  subtitle = "Feel free to get in touch, or apply now"
 }) {
   const isLeft = align === "left";
   return (
@@ -28,60 +30,46 @@ export default function ContactCTA({
       {/* Dark Overlay */}
       <div
         className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.11) 0%, rgba(0,0,0,0.12) 40%)",
-        }}
+       style={{
+  background:
+    "linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.25) 70%)",
+}}
       />
 
       {/* Content */}
-      <div
-  className={`
+     <div
+  className="
+    max-w-xl
     relative z-10 h-full px-6
-    flex flex-col justify-center
-    ${isLeft ? "items-start text-left" : "items-center text-center"}
-  `}
+    mx-auto
+    flex flex-col justify-center items-center text-center
+  "
 >
+  {/* Heading */}
+  <h2 className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] lg:text-[40px] leading-[1.3]">
+    {title}
+  </h2>
 
-        {/* Heading */}
-        <h2
-  className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] lg:text-[40px] leading-[1]"
-        >
-          We’d love to hear from you!
-        </h2>
+  {/* Sub Text */}
+  <p className="font-montserrat font-medium text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]">
+    {subtitle}
+  </p>
 
-        {/* Sub Text */}
-       <p
-  className="font-montserrat font-medium text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]"
->
-          Feel free to get in touch, or apply now
-        </p>
+  {/* Buttons */}
+  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+    <Link href="/contact">
+      <button className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer">
+        CONTACT US
+      </button>
+    </Link>
 
-        {/* Buttons */}
-        <div
-  className={`flex flex-col sm:flex-row gap-4 ${
-    isLeft ? "justify-start" : "justify-center"
-  }`}
->
-
-          <Link href="/contact">
-            <button
-              className="px-7 py-3 text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
-            >
-              CONTACT US
-            </button>
-          </Link>
-
-          <Link href="/">
-            <button
-              className="px-7 py-3 text-white text-sm md:text-base font-semibold bg-primary cursor-pointer"
-            >
-              APPLY NOW
-            </button>
-          </Link>
-
-        </div>
-      </div>
+    <Link href="/">
+      <button className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-primary cursor-pointer">
+        APPLY NOW
+      </button>
+    </Link>
+  </div>
+</div>
     </section>
   );
 }
