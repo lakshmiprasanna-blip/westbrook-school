@@ -9,17 +9,22 @@ export default function CoreValuesSection() {
     {
       title: "Learning at the Child’s Pace",
       desc: "Every child is guided based on their pace, strengths, and learning needs through close teacher involvement and mentoring. This helps learning progress steadily without pressure or comparison.",
-      image: "/assets/corevalues1.png",
+      image: "/assets/corevalues1.webp",
     },
     {
-      title: "Holistic Development",
-      desc: "We focus on emotional, physical, and intellectual growth through structured activities.",
-      image: "/assets/corevalues2.png",
+      title: "Values That Shape Behaviour",
+      desc: "Culture and values are woven into everyday school life through interactions, routines, and expectations, helping children grow with respect, responsibility, and empathy.",
+      image: "/assets/corevalues2 (2).webp",
     },
     {
-      title: "Safe & Nurturing Environment",
-      desc: "Children learn best in a secure, caring, and joyful atmosphere.",
-      image: "/assets/corevalues4.png",
+      title: "Adaptable and Evolving Pedagogy",
+      desc: "Teaching practices are reviewed and refined to remain relevant to how children learn today, ensuring learning stays meaningful and effective.",
+      image: "/assets/corevalues3.webp",
+    },
+    {
+      title: "Education Without Burnout",
+      desc: "Strong classroom teaching and clear academic foundations reduce the need for excessive after-school coaching, allowing children time for rest, reflection, and balanced growth.",
+      image: "/assets/corevalues4.webp",
     },
   ];
 

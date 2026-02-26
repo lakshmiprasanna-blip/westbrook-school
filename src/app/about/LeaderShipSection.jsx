@@ -95,7 +95,7 @@ const [selectedLeader, setSelectedLeader] = useState(null);
             className="group cursor-pointer"
           >
             <div
-              className="relative w-full h-[380px]"
+              className="relative w-full h-[400px]"
               onClick={() => setSelectedLeader(data[current])}
             >
               <Image
