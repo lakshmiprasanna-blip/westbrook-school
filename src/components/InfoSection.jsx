@@ -48,7 +48,11 @@ export default function InfoSection({
             <Image
               src={image}
               alt={heading || `${tag || "Section"} image`}
+<<<<<<< HEAD
               width={1000}
+=======
+              width={900}
+>>>>>>> 72ff591fc8610c72140351ed14b517ef403aee4e
               height={500}
               className="w-full h-[240px] md:h-[500px] object-cover"
             />

@@ -83,7 +83,7 @@ const VideoTextMask = () => {
 
       {/* Hero Content — ALWAYS visible */}
      <div className="relative z-20 h-full flex items-end justify-center pb-12 md:pb-20 lg:pb-34">
-  <div className="lg:max-w-xl w-full 
+  <div className="lg:max-w-3xl w-full 
   flex flex-col 
   items-center 
   text-center 
@@ -96,7 +96,7 @@ const VideoTextMask = () => {
         text-[18px] 
         sm:text-[22px] 
         md:text-[40px] 
-        lg:!text-[34px]"
+        lg:!text-[48px]"
         style={{
          
           fontWeight: 600,
