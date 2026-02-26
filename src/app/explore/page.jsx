@@ -8,6 +8,7 @@ import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function Explore() {
   const sliderRef = useRef(null);
