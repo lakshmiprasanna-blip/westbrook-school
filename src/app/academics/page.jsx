@@ -1,3 +1,4 @@
+"use client"
 import PageBanner from "../../components/PageBanner"
 import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
@@ -5,9 +6,12 @@ import FloatingCTAs from "../../components/FloatingCTAs"
 import ScrollSlider from "../../components/AcademicsScrollSection"
 import FooterAbove from "../../components/FooterAbove"
 import ImageContentSection from "../../components/ImageContentSection"
+import { useState } from "react"
+import EnquiryModal from "../../components/FormComponent"
 
 
 export default function Academics() {
+    const [formType, setFormType] = useState(null);
     return (
         <>
             <PageBanner image="/assets/academic-banner.webp" />
@@ -59,28 +63,37 @@ export default function Academics() {
             />
             {/* InfoSection */}
             <div>
-            <InfoSection
-                topLabel="Why Westbrook"
-            introText="How Learning Is Guided at Westbrook."
+                    <InfoSection
+                    topLabel="Why Westbrook"
+                    introText="How Learning Is Guided at Westbrook."
                     tag="SOCIAL AND"
                     subTag="EMOTIONAL"
                     description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
                     image="/assets/academics-info1.webp"
-                />
+                    showButton={true}
+                    buttonText="KNOW MORE"
+                    onButtonClick={() => setFormType("values")}
+                    /> 
 
-                <InfoSection
+                    <InfoSection
                     tag="VALUES IN"
                     subTag="DAILY PRACTICE"
                     description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
                     image="/assets/academics-info2.webp"
                     reverse
-                />
-                <InfoSection
+                    showButton={true}
+                    buttonText="KNOW MORE"
+                    buttonLink="/values-in-practice"
+                    onButtonClick={() => setFormType("simple")}
+                    />
+
+                    <InfoSection
                     tag="CLARITY AND"
                     subTag="DIRECTION"
                     description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
                     image="/assets/academics-info3.webp"
-                />
+                    className="lg:pb-20"
+                    />
                 </div>
 
 <ImageContentSection

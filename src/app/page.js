@@ -120,7 +120,7 @@ export default function Page() {
 
           </div>
 
-          <h2 className="heading !text-[24px] md:!text-5xl text-[var(--color-maroon)] leading-tight mb-6">
+          <h2 className="heading !text-[24px] md:!text-5xl text-[var(--color-primary)] leading-tight mb-6">
             Welcome to <br /> Westbrook International School
           </h2>
 
@@ -140,27 +140,35 @@ export default function Page() {
       <CurriculumSection />
 
     
+<InfoSection
+  topLabel="Why Westbrook"
+  introText="When values guide learning, students grow with clarity and an understanding of future choices."
+  tag="Academic"
+  subTag="Excellence"
+  description="Strong academics focus on clear teaching, steady progress, and close teacher support. Students are guided to understand concepts, apply ideas meaningfully, and build confidence within the classroom, reducing the need for excessive after-school coaching"
+  image="/assets/info1.png"
+  showButton={true}
+  buttonText="KNOW MORE"
+  buttonLink="/academics"
+/>
 
-      <InfoSection topLabel="Why Westbrook"
-        introText="When values guide learning, students grow with clarity and an understanding of future choices."
-        tag="Academic"
-        subTag="Excellence"
-        description="Strong academics focus on clear teaching, steady progress, and close teacher support. Students are guided to understand concepts, apply ideas meaningfully, and build confidence within the classroom, reducing the need for excessive after-school coaching"
-        image="/assets/info1.png"
-      />
+<InfoSection
+  tag="Co-Curricular"
+  subTag="Opportunities"
+  description="Co-curricular learning at Westbrook supports creativity, movement, and problem-solving while complementing academics. Activities such as pottery, gymnastics, and robotics are integrated thoughtfully to maintain balance within the school day."
+  image="/assets/info2.png"
+  reverse
+  showButton={true}
+  buttonText="KNOW MORE"
+  buttonLink="/explore"
+/>
 
-      <InfoSection tag="Co-Curricular"
-        subTag="Opportunities"
-        description="Co-curricular learning at Westbrook supports creativity, movement, and problem-solving while complementing academics. Activities such as pottery, gymnastics, and robotics are integrated thoughtfully to maintain balance within the school day."
-        image="/assets/info2.png"
-        reverse
-      />
-
-      <InfoSection
-        tag="WellBeing"
-        description="A calm and supportive environment helps children learn better. Social and emotional learning is woven into daily school life through guided practices inspired by Roots of Empathy, supporting empathy, self-regulation, and positive classroom relationships."
-        image="/assets/info3.png"
-      />
+<InfoSection
+  tag="WellBeing"
+  description="A calm and supportive environment helps children learn better. Social and emotional learning is woven into daily school life through guided practices inspired by Roots of Empathy, supporting empathy, self-regulation, and positive classroom relationships."
+  image="/assets/info3.png"
+  className="lg:pb-20"
+/>
 
       <ExperienceSlider />
       <FAQSection faqData={homefaqData} />

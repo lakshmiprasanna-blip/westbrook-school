@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function InfoSection({
   topLabel,
@@ -8,13 +9,21 @@ export default function InfoSection({
   heading,
   description,
   image,
+ className = "",
+ buttonLink = null,      // for redirection
+  onButtonClick = null,
   reverse = false,
+
+  // NEW PROPS
+  showButton = false,
+  buttonText = "DISCOVER MORE",
+  
 }) {
   return (
     <section
-      className="relative w-full bg-offwhite overflow-hidden
+      className={`relative w-full bg-offwhite overflow-hidden
       bg-[url('/assets/linesbg.png')] 
-      bg-cover bg-center bg-no-repeat"
+      bg-cover bg-center bg-no-repeat ${className}`}
     >
       {/* TOP LABEL */}
       {topLabel && (
@@ -46,12 +55,12 @@ export default function InfoSection({
           {/* IMAGE */}
           <div className="w-full md:w-2/3">
             <Image
-  src={image}
-  alt={heading || `${tag || "Section"} image`}
-  width={1000}
-  height={500}
-  className="w-full h-[240px] md:h-[500px] object-cover"
-/>
+              src={image}
+              alt={heading || `${tag || "Section"} image`}
+              width={1000}
+              height={500}
+              className="w-full h-[240px] md:h-[500px] object-cover"
+            />
           </div>
 
           {/* TEXT */}
@@ -72,24 +81,52 @@ export default function InfoSection({
               {description}
             </p>
 
-            {/* Desktop Button */}
-            <div className="hidden md:block">
-            <button className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
-              KNOW MORE
-            </button>
-          </div>
+            {/* DESKTOP BUTTON */}
+            {showButton && (
+                <div className="hidden md:block">
+                  {buttonLink ? (
+                    <Link href={buttonLink}>
+                      <button className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
+                        {buttonText}
+                      </button>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={onButtonClick}
+                      className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer"
+                    >
+                      {buttonText}
+                    </button>
+                  )}
+                </div>
+              )}
           </div>
 
-          {/* Mobile Button */}
-          <div className="md:hidden">
-            <button className="flex items-center gap-3 text-primary text-md font-bold tracking-wide">
-              DISCOVER MORE
-              <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px]">
-                →
-              </span>
-            </button>
-          </div>
-
+          {/* MOBILE BUTTON */}
+          {showButton && (
+  <div className="md:hidden">
+    {buttonLink ? (
+      <Link href={buttonLink}>
+        <button className="flex items-center gap-3 text-primary text-md font-bold tracking-wide">
+          {buttonText}
+          <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px]">
+            →
+          </span>
+        </button>
+      </Link>
+    ) : (
+      <button
+        onClick={onButtonClick}
+        className="flex items-center gap-3 text-primary text-md font-bold tracking-wide"
+      >
+        {buttonText}
+        <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px]">
+          →
+        </span>
+      </button>
+    )}
+  </div>
+)}
         </div>
       </div>
     </section>

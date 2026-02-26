@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 import { Montserrat, Playfair_Display } from "next/font/google";
-import localFont from "next/font/local";
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
