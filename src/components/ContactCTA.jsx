@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import EnquiryForm from "./FormComponent"; // adjust path if needed
+
 
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
   align = "center",
   title ="We’d love to hear from you!",
-  subtitle = "Feel free to get in touch, or apply now"
+  subtitle = "Feel free to get in touch, or apply now",
 }) {
   
   return (
@@ -57,18 +59,23 @@ export default function ContactCTA({
 
   {/* Buttons */}
   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-    <Link href="/contact">
-      <button className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer">
-        CONTACT US
-      </button>
-    </Link>
+    <button
+  onClick={() => setFormType("detailed")}
+  className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
+>
+  CONTACT US
+</button>
 
-    <Link href="/">
-      <button className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-primary cursor-pointer">
-        APPLY NOW
-      </button>
-    </Link>
+<button
+  onClick={() => setFormType("simple")}
+  className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-primary cursor-pointer"
+>
+  APPLY NOW
+</button>
   </div>
+
+
+
 </div>
     </section>
   );

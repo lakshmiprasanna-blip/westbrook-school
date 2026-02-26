@@ -12,7 +12,7 @@ export default function InfoSection({
 }) {
   return (
     <section
-      className="relative w-full bg-offwhite overflow-hidden 
+      className="relative w-full bg-offwhite overflow-hidden
       bg-[url('/assets/linesbg.png')] 
       bg-cover bg-center bg-no-repeat"
     >
