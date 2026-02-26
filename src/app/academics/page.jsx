@@ -1,7 +1,6 @@
 import PageBanner from "../../components/PageBanner"
 import VideoHero from "../../components/VideoHero"
 import InfoSection from "../../components/InfoSection"
-import ContactCTA from "../../components/ContactCTA"
 import FloatingCTAs from "../../components/FloatingCTAs"
 import ScrollSlider from "../../components/AcademicsScrollSection"
 import FooterAbove from "../../components/FooterAbove"
@@ -84,17 +83,6 @@ export default function Academics() {
                 />
                 </div>
 
-            
-            {/* <ContactCTA imageSrc="/assets/academics-contactcta.webp"/> */}
-{/* <FooterAbove
-  imageSrc="/assets/footer-above1.png"
-  heading={<>We’d love to hear <br /> from you!</>}
-  description="Feel free to get in touch, or apply now"
-  bgColor="#C8C8C8"
-  imageHeight="450px"
-  imageWidthClass="flex"
-  noWrap={false}
-/> */}
 <ImageContentSection
 imageSrc="/assets/footer-above1.png"
   title="We’d love to hear from you!"

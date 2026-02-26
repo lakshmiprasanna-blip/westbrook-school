@@ -1,10 +1,10 @@
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
-import VideoHero from "../../components/VideoHero";
+
 import FAQSection from "../../components/FAQSection";
 import ContactCTA from "../../components/ContactCTA";
 import VideoHeroAnimation from "../../components/VideoHeroAnimation";
-import Link from "next/link";
+
 
 
 export default function Admissions() {

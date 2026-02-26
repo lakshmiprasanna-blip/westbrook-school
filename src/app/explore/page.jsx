@@ -4,7 +4,6 @@
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
-import ContactCTA from "../../components/ContactCTA";
 import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
@@ -84,10 +83,12 @@ export default function Explore() {
                   className="bg-primary text-center text-offwhite px-8 py-8"
                 >
                   <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
-                  <img
+                  <Image
                     src={item.icon}
                     alt={item.title}
-                    className="w-16 h-16 object-contain"
+                    width={64}
+                    height={64}
+                    className="object-contain"
                   />
                 </div>
 
@@ -122,10 +123,12 @@ export default function Explore() {
 
                       {/* Bigger Circle */}
                       <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
-                      <img
+                      <Image
                         src={item.icon}
                         alt={item.title}
-                        className="w-18 md:w-18 h-18 md:h-18 object-contain"
+                        width={72}
+                        height={72}
+                        className="object-contain"
                       />
                     </div>
 

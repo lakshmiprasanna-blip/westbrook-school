@@ -5,8 +5,8 @@ import OurPhilosophySection from "./OurPhilosophySection";
 import VisionSection from "./VisionSection";
 import CoreValues from "./CoreValues";
 import LeaderShipSection from "./LeaderShipSection";
-import ContactCTA from "../../components/ContactCTA";
 import AboutZoom from "../../components/AboutZoom";
+import ImageContentSection from "../../components/ImageContentSection";
 
 export default function About() {
 const leadershipData = [
@@ -104,7 +104,16 @@ const leadershipData = [
         sectionBg="bg-[#F3F3F3]"
       />
         
-        <ContactCTA imageSrc="/assets/about-contact.png"/>
+        <ImageContentSection
+        imageSrc="/assets/minds.webp"
+          title="We’d love to hear from you!"
+          description="Feel free to get in touch, or apply now"
+          bgColor="#ffffff"
+          primaryBtnText="CONTACT US"
+          secondaryBtnText="APPLY NOW"
+          breakText={false}
+          reverse={true}
+        />
 
     </>
   );

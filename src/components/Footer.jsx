@@ -32,10 +32,10 @@ export default function Footer() {
 {/* Location Section */}
             <div className="text-sm space-y-4 max-w-xs">
              <p className="text-white">
-  <span className="uppercase tracking-wide">Location :</span><br />
-  2-46/2/B/8/2 & 34, Guttala Begumpet,
-  Madhapur, Hyderabad - 500081
-</p>
+              <span className="uppercase tracking-wide">Location :</span><br />
+              2-46/2/B/8/2 & 34, Guttala Begumpet,
+              Madhapur, Hyderabad - 500081
+            </p>
 
   <p>
     <span className="uppercase tracking-wide text-white">Mail Us :</span><br />
@@ -98,22 +98,22 @@ export default function Footer() {
             {/* Center Section */}
             <div className="flex gap-20">
 {/* Location Info */}
-             <div className="space-y-6 text-sm max-w-[400px] text-white">
- <p className="text-white">
-  <span className="uppercase tracking-wide">Location : </span>
-  2-46/2/B/8/2 & 34, Guttala Begumpet,
-  Madhapur, Hyderabad - 500081
-</p>
+             <div className="space-y-6 text-sm max-w-[300px] text-white">
+              <p className="text-white">
+                <span className="uppercase tracking-wide">Location : </span>
+                2-46/2/B/8/2 & 34, Guttala Begumpet,
+                Madhapur, Hyderabad - 500081
+              </p>
 
-  <p>
-    <span className="uppercase tracking-wide text-white">Mail Us : </span>
-    <a
-      href="mailto:info@westbrookinternational.com"
-      className="underline hover:opacity-80 text-white"
-    >
-      info@westbrookinternational.com
-    </a>
-  </p>
+                <p>
+                  <span className="uppercase tracking-wide text-white">Mail Us : </span>
+                  <a
+                    href="mailto:info@westbrookinternational.com"
+                    className="underline hover:opacity-80 text-white"
+                  >
+                    info@westbrookinternational.com
+                  </a>
+                </p>
 
   <p>
     <span className="uppercase tracking-wide text-white">Call Us : </span>

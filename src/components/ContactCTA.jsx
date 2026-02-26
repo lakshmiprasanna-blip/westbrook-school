@@ -10,7 +10,7 @@ export default function ContactCTA({
   title ="We’d love to hear from you!",
   subtitle = "Feel free to get in touch, or apply now",
 }) {
-  const isLeft = align === "left";
+  
   return (
     <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
 
