@@ -5,6 +5,7 @@ import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
 import ContactCTA from "../../components/ContactCTA";
+import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
 import { useRef } from "react";
@@ -180,7 +181,15 @@ export default function Explore() {
         <GallerySection/>
 
 
-        <ContactCTA imageSrc="/assets/groupimg-2.webp"/>
+        <ImageContentSection
+        imageSrc="/assets/footer-exploree.png"
+          title="We’d love to hear from you!"
+          description="Feel free to get in touch, or apply now"
+          bgColor="#ffffff"
+          primaryBtnText="CONTACT US"
+          secondaryBtnText="APPLY NOW"
+          breakText={false}
+        />
     </>
   );
 }

@@ -13,7 +13,7 @@ export default function ImageContentSection({
 }) {
   return (
     <section
-      className="w-full py-8"
+      className="w-full pt-10"
       style={{ backgroundColor: bgColor }}
     >
       <div className="container-custom mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">

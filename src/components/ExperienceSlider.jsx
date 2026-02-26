@@ -22,10 +22,9 @@ export default function ExperienceSection() {
     setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   const nextSlide = () =>
-    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-
-  const leftIndex = current === 0 ? images.length - 1 : current - 1;
-  const rightIndex = current === images.length - 1 ? 0 : current + 1;
+    setCurrent((prev) =>
+      prev === images.length - 1 ? 0 : prev + 1
+    );
 
   return (
     <section className="bg-primary py-16 md:py-20">
@@ -41,49 +40,33 @@ export default function ExperienceSection() {
         {/* Carousel */}
         <div className="flex items-center justify-center gap-6">
 
-          {/* Left Image */}
-          {/* <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
-            <Image
-              src={images[leftIndex]}
-              alt="Left"
-              fill
-              className="object-cover"
-            />
-          </div> */}
-
           {/* Center Image */}
-         <div className="relative w-full md:w-[1000px] h-[400px] md:h-[560px] overflow-hidden">
-          <AnimatePresence mode="sync">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={images[current]}
-                alt="Center"
-                fill
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative w-full md:w-[1000px] h-[360px] md:h-[520px] overflow-hidden">
+            <AnimatePresence mode="sync">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={images[current]}
+                  alt="Experience"
+                  fill
+                  sizes="100vw"
+                  className="object-cover object-center"
+                  
+                style={{ objectPosition: "center 20%" }}
+                  priority
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
-
-
-          {/* Right Image */}
-          {/* <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
-            <Image
-              src={images[rightIndex]}
-              alt="Right"
-              fill
-              className="object-cover"
-            />
-          </div> */}
 
         </div>
 
