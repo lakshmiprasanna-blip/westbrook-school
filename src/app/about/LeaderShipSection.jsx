@@ -40,7 +40,7 @@ const [selectedLeader, setSelectedLeader] = useState(null);
             >
               {/* Image */}
               <div
-                className="relative w-full h-[320px] flex-shrink-0"
+                className="relative w-full h-[380px] flex-shrink-0"
                 onClick={() => setSelectedLeader(item)}
               >
                 <Image

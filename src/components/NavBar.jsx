@@ -51,7 +51,7 @@ export default function NavBar() {
 
             {/* Desktop Logo */}
             <Image
-              src="/assets/logoo.png"
+              src="/assets/westbrook.svg"
               alt="Westbrook International School"
               width={220}
               height={60}

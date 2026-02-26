@@ -44,7 +44,7 @@ export default function InfoSection({
           } items-start md:items-center gap-3 md:gap-24`}
         >
           {/* IMAGE */}
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-2/3">
             <Image
   src={image}
   alt={heading || `${tag || "Section"} image`}
