@@ -104,7 +104,7 @@ imageSrc="/assets/footer-above1.png"
   primaryBtnText="CONTACT US"
   secondaryBtnText="APPLY NOW"
 />
-            <ContactCTA />
+            
             
         </>
     )
