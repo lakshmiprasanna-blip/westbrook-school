@@ -5,6 +5,7 @@ import ExperienceSlider from "../components/ExperienceSlider";
 import FAQSection from "../components/FAQSection";
 import VideoTextMask from "../components/VideoTextMask";
 import FloatingCTAs from "../components/FloatingCTAs";
+import VideoHeroAnimation from "../components/VideoHeroAnimation";
 
 export default function Page() {
   const homefaqData = [
@@ -91,6 +92,8 @@ export default function Page() {
       </section>
 
       <CurriculumSection />
+
+    
 
       <InfoSection topLabel="Why Westbrook"
         introText="When values guide learning, students grow with clarity and an understanding of future choices."

@@ -169,24 +169,24 @@ export default function VideoHero({
                 transition: "transform 0.1s linear",
               }}
             >
-              <div className="w-screen h-screen relative">
-               <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
+                          <div className="w-screen h-screen relative">
+                          <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover"
+                        >
+                          <source src={videoSrc} type="video/mp4" />
+                        </video>
 
-          <div
-  className="absolute inset-0 pointer-events-none"
-  style={{
-    background:
-      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
-  }}
-/>
+                      <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
+              }}
+            />
 
                 <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
                   <h2

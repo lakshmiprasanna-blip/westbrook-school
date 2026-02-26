@@ -1,23 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ScrollButton from "./ScrollButton";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function VideoHeroAnimation({
   videoSrc,
   title,
   slides = [],
 }) {
-  const scrollRef = useRef(null);
-  const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
-
-  /* ---------- CONFIG ---------- */
-  const HORIZONTAL_PANELS = Math.min(2, slides.length + 1);
-  const horizontalSlides = slides.slice(0, HORIZONTAL_PANELS - 1);
-  const verticalSlides = slides.slice(HORIZONTAL_PANELS - 1);
+  const [scrollY, setScrollY] = useState(0);
 
   /* ---------------- SCREEN DETECTION ---------------- */
   useEffect(() => {
@@ -30,31 +25,25 @@ export default function VideoHeroAnimation({
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  /* ---------------- DESKTOP SCROLL (HORIZONTAL PART) ---------------- */
+  /* ---------------- SMOOTH SCROLL LISTENER ---------------- */
   useEffect(() => {
     if (!isDesktop) return;
 
+    let ticking = false;
+
     const handleScroll = () => {
-      const el = scrollRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const totalScroll = el.scrollHeight - window.innerHeight;
-
-      if (rect.top <= 0 && Math.abs(rect.top) <= totalScroll) {
-        const scrollAmount = Math.abs(rect.top);
-        const scrollProgress = scrollAmount / totalScroll;
-        setProgress(scrollProgress);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
-
-  const translateX = isDesktop
-    ? progress * (HORIZONTAL_PANELS - 1) * -100
-    : 0;
 
   /* ---------------- MOBILE NAV ---------------- */
   const nextMobile = () =>
@@ -102,159 +91,142 @@ export default function VideoHeroAnimation({
     </div>
   );
 
-  /* ---------------- HORIZONTAL SLIDE ---------------- */
-  const SlideLayout = ({ slide }) => (
-    <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
-        <div className="w-full max-w-xl paragraph">
-          <Heading
-            top={slide.headingTop}
-            bottom={slide.headingBottom}
-          />
-
-          {slide.subTitle && (
-            <p
-              className="paragraph mb-4 leading-[100%]"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-                fontSize: "clamp(18px, 2.5vw, 24px)",
-                color: "#9B1B2F",
-              }}
-            >
-              {slide.subTitle}
-            </p>
-          )}
-
-          {slide.description && (
-            <p
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(17px, 2vw, 18px)",
-                lineHeight: "clamp(22px, 2.5vw, 26px)",
-                color: "#4B5563",
-              }}
-            >
-              {slide.description}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
-        <Image src={slide.image} alt="" fill className="object-cover" />
-      </div>
-    </div>
-  );
-
   return (
     <>
       {/* ================= DESKTOP ================= */}
       {isDesktop && (
-        <>
-          {/* -------- HORIZONTAL SECTION -------- */}
-          <section
-            ref={scrollRef}
-            className="relative w-full z-0"
-            style={{ height: `${HORIZONTAL_PANELS * 100}vh` }}
-          >
-           <div className="sticky top-0 h-screen overflow-hidden z-0">
-              <div
-                className="flex h-full"
-                style={{
-                  width: `${HORIZONTAL_PANELS * 100}vw`,
-                  transform: `translateX(${translateX}vw)`,
-                  transition: "transform 0.1s linear",
-                }}
-              >
-                {/* VIDEO PANEL */}
-                <div className="w-screen h-screen relative">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
+        <section
+          className="relative w-full"
+          style={{ height: `${(slides.length + 1) * 100}vh` }}
+        >
+          {/* VIDEO SLIDE */}
+          <div className="sticky top-0 h-screen z-10">
+             <div className="w-screen h-screen relative">
+                          <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover"
+                        >
+                          <source src={videoSrc} type="video/mp4" />
+                        </video>
+
+                      <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
+              }}
+            />
+
+                <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
+                  <h2
+                    className="text-white uppercase leading-[100%]"
+                    style={{
+                      fontFamily: "Montserrat, sans-serif",
+                      fontWeight: 630,
+                      fontVariant: "small-caps",
+                      fontSize: "clamp(36px, 8vw, 160px)",
+                    }}
                   >
-                    <source src={videoSrc} type="video/mp4" />
-                  </video>
-
-                  <div className="absolute inset-0 bg-black/30" />
-
-                  <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
-                    <h2 className="text-white uppercase leading-[100%] font-semibold text-[clamp(36px,8vw,160px)]">
-                      {title}
-                    </h2>
-                  </div>
+                    {title}
+                  </h2>
                 </div>
-
-                {horizontalSlides.map((slide, index) => (
-                  <SlideLayout key={index} slide={slide} />
-                ))}
               </div>
-            </div>
-          </section>
+          </div>
 
-          {/* -------- STACKED VERTICAL PANELS (OVERLAP) -------- */}
-          <section
-            className="relative w-full z-10"
-            style={{ height: `${verticalSlides.length * 100}vh` }}
-            
-          >
-            {verticalSlides.map((slide, index) => (
+          {/* STACKED SLIDES WITH SMOOTH WHITE FADE */}
+          {slides.map((slide, index) => {
+            const slideHeight =
+              typeof window !== "undefined"
+                ? window.innerHeight
+                : 0;
+
+            const slideStart = (index + 1) * slideHeight;
+            const fadeStart = slideStart - slideHeight;
+
+            let progress = 0;
+
+            if (scrollY > fadeStart && scrollY < slideStart) {
+              progress =
+                (scrollY - fadeStart) / slideHeight;
+            }
+
+            progress = Math.max(0, Math.min(1, progress));
+
+            return (
               <div
                 key={index}
-                className="
-                  sticky top-0 h-screen bg-white flex items-center
-                  will-change-transform will-change-opacity
-                "
-                style={{ zIndex: index + 1 }}
+                className="stack-slide sticky top-0 h-screen relative bg-white"
+                style={{ zIndex: index + 20 }}
               >
+                {/* SMOOTH WHITE OVERLAY */}
                 <div
-                  className="
-                    container-custom grid grid-cols-1 lg:grid-cols-2 gap-12 items-center
-                    transition-all duration-[900ms]
-                    ease-[cubic-bezier(0.22,1,0.36,1)]
-                  "
-                >
-                  {/* TEXT */}
-                  <div>
-                    <Heading
-                      top={slide.headingTop}
-                      bottom={slide.headingBottom}
-                    />
+                  className="absolute inset-0 bg-white pointer-events-none"
+                  style={{ opacity: progress }}
+                />
 
-                    {slide.subTitle && (
-                      <p className="mb-4 text-[#9B1B2F] font-bold">
-                        {slide.subTitle}
-                      </p>
-                    )}
+            <div className="relative z-10 h-full flex">
 
-                    {slide.description && (
-                      <p className="text-gray-600">
-                        {slide.description}
-                      </p>
-                    )}
-                  </div>
+              {/* LEFT SIDE */}
+              <div className="w-1/2 flex items-center bg-white">
+                <div className="max-w-xl ml-8 md:ml-12 lg:ml-40 lg:mr-20">
+                  
+                  <Heading
+                    top={slide.headingTop}
+                    bottom={slide.headingBottom}
+                  />
 
-                  {/* IMAGE */}
-                  <div className="relative w-full h-[340px] md:h-[440px]">
-                    <Image
-                      src={slide.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  {slide.subTitle && (
+                    <p className="text-[#9B1B2F] font-bold mb-3">
+                      {slide.subTitle}
+                    </p>
+                  )}
+
+                  {slide.description && (
+                    <p className="text-gray-600">
+                      {slide.description}
+                    </p>
+                  )}
+
+                  {slide.button && (
+                    <Link href={slide.button.link}>
+                      <button
+                        className={`mt-6 font-semibold transition-all duration-300 rounded-full
+                          ${
+                            slide.button.variant === "filledLarge"
+                              ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
+                              : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+                          }
+                        `}
+                      >
+                        {slide.button.text}
+                      </button>
+                    </Link>
+                  )}
+
                 </div>
               </div>
-            ))}
-          </section>
-        </>
+
+              {/* RIGHT SIDE IMAGE */}
+              <div className="w-1/2 relative">
+                <Image
+                  src={slide.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+            </div>
+              </div>
+            );
+          })}
+        </section>
       )}
 
-      {/* ================= MOBILE (UNCHANGED) ================= */}
+      {/* ================= MOBILE ================= */}
       {!isDesktop && (
         <>
           <section className="relative w-full">
@@ -314,6 +286,19 @@ export default function VideoHeroAnimation({
                         {slide.description}
                       </p>
                     )}
+                    {slide.button && (
+  <Link href={slide.button.link}>
+    <button
+      className="mt-6 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
+      style={{
+        border: "1.5px solid #9B1B2F",
+        color: "#9B1B2F",
+      }}
+    >
+      {slide.button.text}
+    </button>
+  </Link>
+)}
                   </div>
                 </div>
               ))}
@@ -325,7 +310,6 @@ export default function VideoHeroAnimation({
                   direction="left"
                   onClick={prevMobile}
                   bgColor="#9B1B2F"
-                  className="border-r border-white/30"
                 />
                 <ScrollButton
                   direction="right"
