@@ -9,23 +9,29 @@ import ContactCTA from "../../components/ContactCTA";
 import AboutZoom from "../../components/AboutZoom";
 
 export default function About() {
-  const leadershipData = [
-    {
-      title: "Mrs. Sanjana Reddy",
-      role:"FOUNDER & DIRECTOR ",
-      image: "/assets/leader1.png",
-    },
-    {
-      title: "Mrs. K. Padma Praveena",
-      role:"PRINCIPAL & ACADEMIC LEADER",
-      image: "/assets/leader2.png",
-    },
-    {
-      title: "Mr. K Madhusudhana",
-      role:"FOUNDER & ACADEMIC LEADER",
-      image: "/assets/leader3.png",
-    },
-  ];
+const leadershipData = [
+  {
+    title: "Mrs. Sanjana Reddy",
+    role: "FOUNDER & DIRECTOR",
+    image: "/assets/leader1.png",
+    description:
+      "Mrs. Koduru Padma Praveena brings over three decades of rich experience in school education. She served as Principal and Teacher at CV Raman Primary School and Suprayoga Residential School in Nellore District from 1992 to 2000. Since 2001, she has been a key pillar at Tapasya High School, Hyderabad, serving as Principal and contributing significantly to academic planning, school administration, and teacher mentoring. Her journey reflects deep commitment, stability, and a child-centric approach to educational leadership."
+  },
+  {
+    title: "Mrs. K. Padma Praveena",
+    role: "PRINCIPAL & ACADEMIC LEADER",
+    image: "/assets/leader2.png",
+    description:
+      `Mrs. Koduru Padma Praveena brings over three decades of rich experience in school education. She served as Principal and Teacher at CV Raman Primary School and Suprayoga Residential School in Nellore District from 1992 to 2000. Since 2001, she has been a key pillar at Tapasya High School, Hyderabad, serving as Principal and contributing significantly to academic planning, school administration, and teacher mentoring. Her journey reflects deep commitment, stability, and a child-centric approach to educational leadership.`
+  },
+  {
+    title: "Mr. K Madhusudhana",
+    role: "FOUNDER & ACADEMIC LEADER",
+    image: "/assets/leader3.png",
+    description:
+      "Sri Koduru Madhusudhana Reddy is a senior academic leader and education administrator with over four decades of experience in Chemistry education. He has founded and led institutions ranging from CV Raman Educational Institutes in Nellore to Tapasya Educational Institutes in Hyderabad. Renowned for inspiring students and mentoring educators and administrators, he is also versatile across the social sciences, Biology, and English. Respected for his academic rigour and holistic outlook, he remains an avid learner committed to continuous growth and evolution."
+  }
+];
   return (
     <>
       <PageBanner image="/assets/about-banner.png" />
@@ -97,7 +103,9 @@ export default function About() {
         data={leadershipData}
         sectionBg="bg-[#F3F3F3]"
       />
+        
         <ContactCTA imageSrc="/assets/about-contact.png"/>
+
     </>
   );
 }

@@ -7,7 +7,9 @@ import LearningSpacesSection from "../../components/LearningSpacesSection";
 import ContactCTA from "../../components/ContactCTA";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
+import FooterAbove from "../../components/FooterAbove"
 import { useRef } from "react";
+import ImageContentSection from "../../components/ImageContentSection";
 
 export default function Explore() {
   const sliderRef = useRef(null);
@@ -164,7 +166,25 @@ export default function Explore() {
         <GallerySection/>
 
 
-        <ContactCTA imageSrc="/assets/groupimg-2.webp"/>
+        {/* <ContactCTA imageSrc="/assets/groupimg-2.webp"/> */}
+{/* <FooterAbove
+  imageSrc="/assets/footer-exploree.png"
+ heading="We’d love to hear from you!"
+  description="Feel free to get in touch, or apply now"
+  bgColor="#ffffff"
+  imageHeight="550px"
+  imageWidthClass="lg:w-1/2"
+  noWrap={true}
+/> */}
+<ImageContentSection
+ imageSrc="/assets/footer-exploree.png"
+  title="Transforming Education Together"
+  description="Building bright futures with excellence and care."
+  bgColor="#ffffff"
+   primaryBtnText="CONTACT US"
+  secondaryBtnText="APPLY NOW"
+  breakText={false}
+/>
     </>
   );
 }

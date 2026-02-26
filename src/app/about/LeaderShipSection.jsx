@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import PrincipalModal from "../../components/PrincipalModal";
 
 export default function LeadershipSection({ data }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+const [selectedLeader, setSelectedLeader] = useState(null);
   const [current, setCurrent] = useState(0);
 
   const prevSlide = () => {
@@ -40,7 +41,7 @@ export default function LeadershipSection({ data }) {
               {/* Image */}
               <div
                 className="relative w-full h-[320px] flex-shrink-0"
-                onClick={() => setSelectedImage(item.image)}
+                onClick={() => setSelectedLeader(item)}
               >
                 <Image
                 src={item.image}
@@ -95,7 +96,7 @@ export default function LeadershipSection({ data }) {
           >
             <div
               className="relative w-full h-[380px]"
-              onClick={() => setSelectedImage(data[current].image)}
+              onClick={() => setSelectedLeader(data[current])}
             >
               <Image
               src={data[current].image}
@@ -178,7 +179,7 @@ export default function LeadershipSection({ data }) {
         <div className="group cursor-pointer">
           <div
             className="relative w-full h-[360px]"
-            onClick={() => setSelectedImage(item.image)}
+            onClick={() => setSelectedLeader(item)}
           >
            <Image
             src={item.image}
@@ -255,7 +256,7 @@ export default function LeadershipSection({ data }) {
       </div>
 
       {/* Image Preview Modal */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {selectedImage && (
           <motion.div
             className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
@@ -282,7 +283,10 @@ export default function LeadershipSection({ data }) {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </section>
+      </AnimatePresence> */}
+<PrincipalModal
+  leader={selectedLeader}
+  onClose={() => setSelectedLeader(null)}
+/>    </section>
   );
 }

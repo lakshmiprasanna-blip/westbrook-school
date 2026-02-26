@@ -42,17 +42,17 @@ export default function ExperienceSection() {
         <div className="flex items-center justify-center gap-6">
 
           {/* Left Image */}
-          <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
+          {/* <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
             <Image
               src={images[leftIndex]}
               alt="Left"
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
 
           {/* Center Image */}
-         <div className="relative w-full md:w-[820px] h-[400px] md:h-[480px] overflow-hidden">
+         <div className="relative w-full md:w-[1000px] h-[400px] md:h-[560px] overflow-hidden">
           <AnimatePresence mode="sync">
             <motion.div
               key={current}
@@ -69,7 +69,6 @@ export default function ExperienceSection() {
                 src={images[current]}
                 alt="Center"
                 fill
-                className="object-cover"
               />
             </motion.div>
           </AnimatePresence>
@@ -77,14 +76,14 @@ export default function ExperienceSection() {
 
 
           {/* Right Image */}
-          <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
+          {/* <div className="hidden md:block relative w-[220px] h-[480px] overflow-hidden">
             <Image
               src={images[rightIndex]}
               alt="Right"
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
 
         </div>
 
