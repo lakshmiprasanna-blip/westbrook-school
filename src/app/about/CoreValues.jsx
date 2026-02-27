@@ -40,7 +40,7 @@ export default function CoreValuesSection() {
     <section className="bg-primary overflow-hidden py-14 lg:py-18">
 
       {/* ===== TOP CONTENT ===== */}
-      <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start gap-10 mb-8 md:mb-12">
+      <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start md:mt-15 gap-10 mb-8 md:mb-12">
 
         {/* LEFT STRIP */}
         <div className="flex justify-center md:justify-start">
@@ -73,19 +73,20 @@ export default function CoreValuesSection() {
       </div>
 
       {/* ===== IMAGE ===== */}
-      <div className="px-6">
-        <div className="relative w-full h-[280px] md:h-[450px] lg:h-[520px]">
-          <Image
-  src={slides[current].image}
-  alt={slides[current].title}
-  fill
-  sizes="(max-width: 768px) 100vw,
-         (max-width: 1024px) 100vw,
-         100vw"
-  className="object-cover rounded-sm"
-/>
-        </div>
-      </div>
+      {/* ===== IMAGE ===== */}
+<div className="container-custom">
+  <div className="relative w-full h-[280px] md:h-[450px] lg:h-[520px]">
+    <Image
+      src={slides[current].image}
+      alt={slides[current].title}
+      fill
+      sizes="(max-width: 768px) 100vw,
+            (max-width: 1024px) 100vw,
+            100vw"
+      className="object-cover"
+    />
+  </div>
+</div>
 
       {/* ===== MOBILE TEXT (BELOW IMAGE) */}
       <div className="container-custom mt-6 md:hidden text-white min-h-[170px]">
