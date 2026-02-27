@@ -138,32 +138,48 @@ export default function LeadsPage() {
             </thead>
 
             <tbody>
-              {leads.map((lead, i) => (
-                <tr key={i} className="border-t hover:bg-gray-50 transition">
-                  <td className="px-6 py-4 font-medium">{lead.parent_name || "—"}</td>
-                  <td className="px-6 py-4">{lead.child_name || "—"}</td>
-                  <td className="px-6 py-4">{lead.grade || "—"}</td>
-                  <td>{lead.email}</td>
-                  <td>{lead.mobile}</td>
-                  <td>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        lead.success
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-600"
-                      }`}
-                    >
-                      {lead.success ? "Success" : "Failed"}
-                    </span>
-                  </td>
-                  <td>
-                    {lead.created_at
-                      ? new Date(lead.created_at).toLocaleString()
-                      : "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+  {leads.map((lead, i) => (
+    <tr key={i} className="border-t hover:bg-gray-50 transition">
+      <td className="px-6 py-4 font-medium">
+        {lead.formData?.parentName || "—"}
+      </td>
+
+      <td className="px-6 py-4">
+        {lead.formData?.childName || "—"}
+      </td>
+
+      <td className="px-6 py-4">
+        {lead.formData?.grade || "—"}
+      </td>
+
+      <td>
+        {lead.formData?.email || "—"}
+      </td>
+
+      <td>
+        {lead.formData?.mobile || "—"}
+      </td>
+
+      <td>
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+            lead.success
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-600"
+          }`}
+        >
+          {lead.success ? "Success" : "Failed"}
+        </span>
+      </td>
+
+      <td>
+        {lead.submittedAt
+          ? new Date(lead.submittedAt).toLocaleString()
+          : "—"}
+      </td>
+    </tr>
+  ))}
+</tbody>
           </table>
 
           {leads.length === 0 && (

@@ -10,21 +10,21 @@ const sections = [
     topLabel: "CURRICULUM",
     description:
       "A thoughtful beginning to learning that builds curiosity, early skills, and confidence through guided play, structured routines, and close teacher support.",
-    image: "/assets/2bce95a20276a61e5788948d06e10463d657c0aa.png",
+    image: "/assets/curriculum1.webp",
   },
   {
     title: "PRE PRIMARY",
     topLabel: "EARLY YEARS",
     description:
       "Early learning that focuses on language, movement, play, and social development through clear routines and guided exploration.",
-    image: "/assets/Frame 2610539.png",
+    image: "/assets/curriculum2.webp",
   },
   {
     title: "PRIMARY SCHOOL",
     topLabel: "GRADE 1-5",
     description:
       "Encouraging exploration, academic growth, and values that prepare students for lifelong success.",
-    image: "/assets/curriculum3.png",
+    image: "/assets/curriculum3.webp",
   },
 ];
 

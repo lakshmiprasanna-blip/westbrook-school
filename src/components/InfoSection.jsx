@@ -29,7 +29,7 @@ export default function InfoSection({
       {topLabel && (
         <div className="absolute top-0 left-0 w-full">
           <div className="container-custom mx-auto px-6">
-            <span className="inline-flex items-center px-6 py-4 bg-primary text-white text-xs font-semibold uppercase tracking-wider">
+            <span className="inline-flex items-center px-6 py-4 bg-primary text-white text-sm font-semibold uppercase tracking-wider">
               {topLabel}
             </span>
           </div>
