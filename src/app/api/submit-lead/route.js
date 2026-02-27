@@ -9,17 +9,22 @@ const RATE_LIMIT_MAX = 5;
 
 function checkRateLimit(ip) {
   const now = Date.now();
+
   for (const [key, entry] of rateLimitMap) {
     if (now - entry.firstRequest > RATE_LIMIT_WINDOW) {
       rateLimitMap.delete(key);
     }
   }
+
   const entry = rateLimitMap.get(ip);
+
   if (!entry) {
     rateLimitMap.set(ip, { count: 1, firstRequest: now });
     return true;
   }
+
   if (entry.count >= RATE_LIMIT_MAX) return false;
+
   entry.count++;
   return true;
 }
@@ -27,9 +32,11 @@ function checkRateLimit(ip) {
 function saveLead(entry) {
   const logDir = path.join(process.cwd(), "leads");
   const logFile = path.join(logDir, "leads.json");
+
   if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
   }
+
   fs.appendFileSync(logFile, JSON.stringify(entry) + "\n", "utf8");
 }
 
@@ -75,17 +82,19 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { parentName,
+
+    const {
+      parentName,
       childName,
       grade,
       mobile,
       email,
       message,
       variant,
-      honeypot
+      honeypot,
     } = body;
 
-    // --- Honeypot Check (bots fill this, humans don't) ---
+    // --- Honeypot Check ---
     if (honeypot) {
       return NextResponse.json({
         success: true,
@@ -93,10 +102,8 @@ export async function POST(request) {
       });
     }
 
-
-     // ================= VALIDATION =================
+    // ---------- VALIDATION ----------
     if (variant === "contact") {
-      // Contact form validation
       if (!parentName || !mobile || !email || !message) {
         return NextResponse.json(
           { success: false, message: "Required fields missing" },
@@ -104,7 +111,6 @@ export async function POST(request) {
         );
       }
     } else {
-      // Enquiry form validation (simple/detailed)
       if (!parentName || !childName || !mobile || !email) {
         return NextResponse.json(
           { success: false, message: "Required fields missing" },
@@ -113,12 +119,10 @@ export async function POST(request) {
       }
     }
 
-    
-   
-
     // --- CRM Submission ---
     const ACCESS_CODE =
       process.env.SCALEDINO_ACCESS_CODE || "C814-C612-A9C4-8F9B-72ED-BBBD";
+
     const API_ENDPOINT =
       process.env.SCALEDINO_API_URL ||
       "https://leadapi.yellowslate.com/api/webhooks/web/client";
@@ -126,10 +130,8 @@ export async function POST(request) {
     const crmPayload = {
       access_code: ACCESS_CODE,
       name: parentName,
-      email: email,
+      email,
       phone: mobile,
-
-      // Optional CRM fields
       grade: grade || "",
       parent_name: parentName || "",
       student_name: childName || "",
@@ -149,35 +151,39 @@ export async function POST(request) {
       });
 
       crmStatusCode = crmRes.status;
-      const crmText = await crmRes.text();
+
+      const text = await crmRes.text();
 
       try {
-        crmResponseBody = JSON.parse(crmText);
+        crmResponseBody = JSON.parse(text);
       } catch {
-        crmResponseBody = { raw: crmText };
+        crmResponseBody = { raw: text };
       }
 
       crmSuccess = crmRes.ok;
     } catch (fetchError) {
+      console.error("CRM ERROR:", fetchError);
       crmResponseBody = { error: fetchError.message };
-      crmStatusCode = 0;
       crmSuccess = false;
     }
 
-    // --- Save Lead (always, regardless of CRM result) ---
+    // --- Save Lead Locally (ALWAYS SAVE) ---
     try {
       saveLead({
         id: `${Date.now()}-${Math.random().toString(36).substring(2, 8)}`,
         submittedAt: new Date().toISOString(),
         formData: {
-          parentName,
-      childName,
-      grade,
-      mobile,
-      email,
-      message,
-      variant,
-          
+          name: parentName,
+          email,
+          phone: mobile,
+          grade: grade || "",
+          parent_name: parentName || "",
+          student_name: childName || "",
+          message: message || "",
+          source:
+            variant === "contact"
+              ? "Website Contact"
+              : "Website Enquiry",
         },
         requestPayload: crmPayload,
         crmResponse: crmResponseBody,
@@ -185,29 +191,21 @@ export async function POST(request) {
         success: crmSuccess,
       });
     } catch (writeError) {
-      console.error("Failed to write lead to file:", writeError);
-      return NextResponse.json(
-        { success: false, message: "Please try again later." },
-        { status: 500 }
-      );
+      console.error("FILE WRITE ERROR:", writeError);
     }
 
-    // --- Return Response ---
-    if (crmSuccess) {
-      return NextResponse.json({
-        success: true,
-        message: "Lead submitted successfully!",
-      });
-    } else {
-      return NextResponse.json(
-        { success: false, message: "Please try again later." },
-        { status: 500 }
-      );
-    }
+    // --- FINAL RESPONSE (NEVER FAIL USER BECAUSE OF CRM) ---
+    return NextResponse.json({
+      success: true,
+      message: "Lead submitted successfully!",
+      crmStatus: crmSuccess ? "success" : "failed",
+    });
+
   } catch (error) {
     console.error("Lead submission error:", error);
+
     return NextResponse.json(
-      { success: false, message: "Please try again later." },
+      { success: false, message: "Something went wrong." },
       { status: 500 }
     );
   }

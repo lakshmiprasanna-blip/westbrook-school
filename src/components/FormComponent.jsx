@@ -16,6 +16,7 @@ export default function EnquiryForm({ variant = "simple" }) {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   const inputStyle =
     "w-full px-5 py-3 rounded-xl border bg-transparent placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1f4e79]";
@@ -32,37 +33,31 @@ export default function EnquiryForm({ variant = "simple" }) {
     });
   };
 
-  // ✅ UPDATED VALIDATION
+  // ✅ VALIDATION
   const validate = () => {
     let newErrors = {};
     const nameRegex = /^[A-Za-z ]+$/;
 
-    // Parent Name
     if (!formData.parentName.trim()) {
       newErrors.parentName = "Required";
     } else if (!nameRegex.test(formData.parentName.trim())) {
       newErrors.parentName = "Only letters allowed";
     }
 
-    // Child Name
     if (!formData.childName.trim()) {
       newErrors.childName = "Required";
     } else if (!nameRegex.test(formData.childName.trim())) {
       newErrors.childName = "Only letters allowed";
     }
 
-    // Grade
-    if (!formData.grade)
-      newErrors.grade = "Required";
+    if (!formData.grade) newErrors.grade = "Required";
 
-    // Mobile
     if (!formData.mobile) {
       newErrors.mobile = "Required";
     } else if (!/^[0-9]{10}$/.test(formData.mobile.trim())) {
       newErrors.mobile = "Enter valid 10 digit number";
     }
 
-    // Email
     if (!formData.email) {
       newErrors.email = "Required";
     } else if (
@@ -73,12 +68,9 @@ export default function EnquiryForm({ variant = "simple" }) {
       newErrors.email = "Enter valid email";
     }
 
-    // Detailed variant fields
     if (variant === "detailed") {
-      if (!formData.date)
-        newErrors.date = "Required";
-      if (!formData.time)
-        newErrors.time = "Required";
+      if (!formData.date) newErrors.date = "Required";
+      if (!formData.time) newErrors.time = "Required";
     }
 
     setErrors(newErrors);
@@ -88,7 +80,6 @@ export default function EnquiryForm({ variant = "simple" }) {
   // ✅ SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validate()) return;
 
     try {
@@ -105,9 +96,9 @@ export default function EnquiryForm({ variant = "simple" }) {
           grade: formData.grade,
           mobile: formData.mobile.trim(),
           email: formData.email.trim(),
-          date: formData.date,
-          time: formData.time,
+          message: "",
           variant,
+          honeypot,
         }),
       });
 
@@ -125,6 +116,8 @@ export default function EnquiryForm({ variant = "simple" }) {
           date: "",
           time: "",
         });
+
+        setHoneypot("");
       } else {
         alert(data.message || "Something went wrong.");
       }
@@ -140,6 +133,7 @@ export default function EnquiryForm({ variant = "simple" }) {
       onSubmit={handleSubmit}
       className="bg-[#f4f4f4] rounded-3xl p-8 max-w-lg mx-auto"
     >
+<<<<<<< HEAD
       {/* Logo */}
       <div className="flex justify-center mb-6">
       
@@ -154,6 +148,17 @@ export default function EnquiryForm({ variant = "simple" }) {
                     priority
                   />
       </div>
+=======
+      {/* Honeypot */}
+      <input
+        type="text"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        style={{ display: "none" }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
+>>>>>>> 4707caf2ea3bf36bb584d0185b0f5c6b44a0b955
 
       {/* Parent Name */}
       <div>
@@ -174,49 +179,11 @@ export default function EnquiryForm({ variant = "simple" }) {
         )}
       </div>
 
-      {/* SIMPLE */}
       {variant === "simple" && renderCommonFields()}
 
-      {/* DETAILED */}
       {variant === "detailed" && (
         <>
           {renderCommonFields()}
-
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <div>
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className={`${inputStyle} ${
-                  errors.date ? "border-red-500" : "border-[#9ecae6]"
-                }`}
-              />
-              {errors.date && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.date}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                className={`${inputStyle} ${
-                  errors.time ? "border-red-500" : "border-[#9ecae6]"
-                }`}
-              />
-              {errors.time && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.time}
-                </p>
-              )}
-            </div>
-          </div>
         </>
       )}
 
@@ -233,7 +200,6 @@ export default function EnquiryForm({ variant = "simple" }) {
   function renderCommonFields() {
     return (
       <>
-        {/* Child Name */}
         <div className="mt-4">
           <input
             type="text"
@@ -252,7 +218,6 @@ export default function EnquiryForm({ variant = "simple" }) {
           )}
         </div>
 
-        {/* Grade */}
         <div className="mt-4">
           <select
             name="grade"
@@ -273,7 +238,6 @@ export default function EnquiryForm({ variant = "simple" }) {
           )}
         </div>
 
-        {/* Mobile */}
         <div className="mt-4">
           <input
             type="text"
@@ -292,7 +256,6 @@ export default function EnquiryForm({ variant = "simple" }) {
           )}
         </div>
 
-        {/* Email */}
         <div className="mt-4">
           <input
             type="email"

@@ -64,7 +64,7 @@ const VideoTextMask = () => {
       {/* Knockout Animation */}
       {overlayVisible && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white select-none pointer-events-none"
+  className="absolute inset-0 z-30 flex items-center justify-center bg-white select-none pointer-events-none"
           style={{ mixBlendMode: "screen" }}
           animate={{
             scale: zoom ? 40 : 1,
