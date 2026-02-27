@@ -187,6 +187,7 @@ export default function Explore() {
 
         <ImageContentSection
         imageSrc="/assets/footer-exploree.png"
+        mobileImageSrc="/assets/explore-mobile.png"
           title="We’d love to hear from you!"
           description="Feel free to get in touch, or apply now"
           bgColor="#ffffff"
@@ -194,6 +195,16 @@ export default function Explore() {
           secondaryBtnText="APPLY NOW"
           breakText={false}
         />
+        {/* <ImageContentSection
+  desktopImage="/assets/footer-exploree.png"
+  mobileImage="/assets/footer-exploree.png"
+  title="We’d love to hear from you!"
+  description="Feel free to get in touch or apply now."
+  primaryBtnText="BOOK A VISIT"
+  secondaryBtnText="APPLY NOW"
+  onPrimaryClick={() => setShowPopup(true)}
+  onSecondaryClick={() => setShowPopup(true)}
+/> */}
     </>
   );
 }
