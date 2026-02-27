@@ -106,15 +106,19 @@ export default function ScrollSlider({
                   )}
 
                   {/* INDICATOR */}
-                  <div className="mt-10 w-[60%] h-[2px] bg-white/30 relative overflow-hidden">
-                    <div
-                      className="absolute top-0 h-[2px] bg-white transition-all duration-500"
-                      style={{
-                        width: indicatorWidth,
-                        transform: `translateX(${current * 100}%)`,
-                      }}
-                    />
-                  </div>
+                  {/* INDICATOR - DESKTOP FIX */}
+                <div className="mt-10 w-[60%] h-[2px] bg-white/30 relative overflow-hidden">
+                  <div
+                    className="absolute top-0 left-0 h-[2px] bg-white transition-all duration-500"
+                    style={{
+                      width: `${100 / slides.length}%`,
+                      left:
+                        current === slides.length - 1
+                          ? `${100 - 100 / slides.length}%`
+                          : `${(100 / slides.length) * current}%`,
+                    }}
+                  />
+                </div>
                 </div>
 
                 {/* DESKTOP IMAGE */}
