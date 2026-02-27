@@ -32,9 +32,8 @@ export default function Footer() {
 {/* Location Section */}
             <div className="text-sm space-y-4 max-w-xs">
              <p className="text-white">
-              <span className="uppercase tracking-wide">Location :</span><br />
-              2-46/2/B/8/2 & 34, Guttala Begumpet,
-              Madhapur, Hyderabad - 500081
+              <span className="uppercase tracking-wide">location :</span><br />
+              2-46/2/8/8/20 & 34, Guttala Begumpet, Madhapur, Hyderabad -500081
             </p>
 
   <p>
@@ -100,9 +99,9 @@ export default function Footer() {
 {/* Location Info */}
              <div className="space-y-6 text-sm max-w-[300px] text-white">
               <p className="text-white">
-                <span className="uppercase tracking-wide">Location : </span>
-                2-46/2/B/8/2 & 34, Guttala Begumpet,
-                Madhapur, Hyderabad - 500081
+                <span className="uppercase tracking-wide">location :</span><br />
+              2-46/2/8/8/20 & 34, Guttala Begumpet, Madhapur, Hyderabad -500081
+            
               </p>
 
                 <p>

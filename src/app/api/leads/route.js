@@ -5,9 +5,7 @@ import path from "path";
 export async function GET(request) {
   // --- Password Check ---
   const password = request.headers.get("x-leads-password");
-console.log("ENV:", process.env.LEADS_PASSWORD);
-
-if (!password || password !== process.env.LEADS_PASSWORD) {
+  if (!password || password !== process.env.LEADS_PASSWORD) {
     return NextResponse.json(
       { error: "Unauthorized" },
       { status: 401 }
