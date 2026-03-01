@@ -1,48 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LeadsPage() {
-  /* ---------------- AUTH ---------------- */
+  /* ---------- AUTH ---------- */
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
 
-  /* ---------------- DATA ---------------- */
+  /* ---------- DATA ---------- */
   const [leads, setLeads] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  /* ---------------- CHECK SAVED PASSWORD ---------------- */
-  useEffect(() => {
-    const saved = sessionStorage.getItem("leads_password");
-    if (!saved) return;
-
-    fetch("/api/leads", {
-      headers: { "x-leads-password": saved },
-    }).then((res) => {
-      if (res.ok) {
-        setPassword(saved);
-        setAuthenticated(true);
-      } else {
-        sessionStorage.removeItem("leads_password");
-      }
-    });
-  }, []);
-
-  /* ---------------- FETCH LEADS ---------------- */
+  /* ---------- FETCH LEADS AFTER LOGIN ---------- */
   useEffect(() => {
     if (!authenticated) return;
 
     setLoading(true);
     fetch("/api/leads", {
-      headers: { "x-leads-password": password },
+      headers: {
+        "x-leads-password": password,
+      },
     })
       .then((res) => {
         if (res.status === 401) {
           setAuthenticated(false);
-          sessionStorage.removeItem("leads_password");
-          setAuthError("Invalid password");
+          setAuthError("Incorrect password");
           return null;
         }
         return res.json();
@@ -56,20 +40,26 @@ export default function LeadsPage() {
       .catch(() => setLoading(false));
   }, [authenticated, password]);
 
-  /* ---------------- LOGIN ---------------- */
+  /* ---------- LOGIN ---------- */
   const handleLogin = (e) => {
     e.preventDefault();
     if (!password.trim()) {
-      setAuthError("Enter password");
+      setAuthError("Please enter password");
       return;
     }
-
-    sessionStorage.setItem("leads_password", password);
-    setAuthenticated(true);
     setAuthError("");
+    setAuthenticated(true);
   };
 
-  /* ---------------- STATS ---------------- */
+  /* ---------- LOGOUT ---------- */
+  const handleLogout = () => {
+    setAuthenticated(false);
+    setPassword("");
+    setLeads([]);
+    setTotal(0);
+  };
+
+  /* ---------- STATS ---------- */
   const successCount = leads.filter((l) => l.success === true).length;
   const failedCount = leads.filter((l) => l.success === false).length;
 
@@ -89,7 +79,7 @@ export default function LeadsPage() {
           </p>
 
           {authError && (
-            <p className="mb-3 text-sm text-red-600 text-center">
+            <p className="mb-4 text-sm text-red-600 text-center">
               {authError}
             </p>
           )}
@@ -100,6 +90,7 @@ export default function LeadsPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border rounded-lg px-4 py-3 mb-4"
+            autoFocus
           />
 
           <button className="w-full bg-[#A03D13] text-white py-3 rounded-lg">
@@ -117,15 +108,12 @@ export default function LeadsPage() {
 
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-semibold">Leads Dashboard</h1>
+          <h1 className="text-3xl font-semibold text-[#A03D13]">
+            Leads Dashboard
+          </h1>
           <button
-            onClick={() => {
-              sessionStorage.removeItem("leads_password");
-              setAuthenticated(false);
-              setPassword("");
-              setLeads([]);
-            }}
-            className="border px-4 py-2 rounded-lg"
+            onClick={handleLogout}
+            className="border px-4 py-2 rounded-lg bg-white"
           >
             Logout
           </button>
@@ -140,9 +128,9 @@ export default function LeadsPage() {
 
         {/* Table */}
         {loading ? (
-          <p className="text-center py-20">Loading...</p>
+          <p className="text-center py-20 text-gray-400">Loading leads…</p>
         ) : leads.length === 0 ? (
-          <p className="text-center py-20">No leads found</p>
+          <p className="text-center py-20 text-gray-400">No leads found</p>
         ) : (
           <div className="bg-white rounded-xl border overflow-x-auto">
             <table className="w-full text-sm">
@@ -161,10 +149,18 @@ export default function LeadsPage() {
                 {leads.map((lead) => (
                   <tr key={lead._id} className="border-t">
                     <td className="px-4 py-3">{lead.formData?.parent_name}</td>
-                    <td className="px-4 py-3">{lead.formData?.child_name || "—"}</td>
-                    <td className="px-4 py-3">{lead.formData?.grade || "—"}</td>
-                    <td className="px-4 py-3">{lead.formData?.email}</td>
-                    <td className="px-4 py-3">{lead.formData?.mobile}</td>
+                    <td className="px-4 py-3">
+                      {lead.formData?.child_name || "—"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {lead.formData?.grade || "—"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {lead.formData?.email}
+                    </td>
+                    <td className="px-4 py-3">
+                      {lead.formData?.mobile}
+                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded text-xs ${
@@ -190,7 +186,7 @@ export default function LeadsPage() {
   );
 }
 
-/* ---------------- STAT CARD ---------------- */
+/* ---------- STAT CARD ---------- */
 function Stat({ label, value, color = "text-[#A03D13]" }) {
   return (
     <div className="bg-white rounded-xl p-4 border">
