@@ -3,45 +3,46 @@
 import { useEffect, useState } from "react";
 
 export default function LeadsPage() {
-  /* ================= AUTH ================= */
+  /* ---------------- AUTH ---------------- */
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
 
-  /* ================= DATA ================= */
+  /* ---------------- DATA ---------------- */
   const [leads, setLeads] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  /* ================= FILTERS ================= */
-  const [search, setSearch] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
-  const [viewLead, setViewLead] = useState(null);
-
-  /* ================= AUTO LOGIN ================= */
+  /* ---------------- CHECK SAVED PASSWORD ---------------- */
   useEffect(() => {
     const saved = sessionStorage.getItem("leads_password");
-    if (saved) {
-      setPassword(saved);
-      setAuthenticated(true);
-    }
+    if (!saved) return;
+
+    fetch("/api/leads", {
+      headers: { "x-leads-password": saved },
+    }).then((res) => {
+      if (res.ok) {
+        setPassword(saved);
+        setAuthenticated(true);
+      } else {
+        sessionStorage.removeItem("leads_password");
+      }
+    });
   }, []);
 
-  /* ================= FETCH LEADS ================= */
+  /* ---------------- FETCH LEADS ---------------- */
   useEffect(() => {
     if (!authenticated) return;
 
     setLoading(true);
-
     fetch("/api/leads", {
       headers: { "x-leads-password": password },
     })
       .then((res) => {
         if (res.status === 401) {
-          sessionStorage.removeItem("leads_password");
           setAuthenticated(false);
-          setAuthError("Incorrect password");
+          sessionStorage.removeItem("leads_password");
+          setAuthError("Invalid password");
           return null;
         }
         return res.json();
@@ -55,75 +56,59 @@ export default function LeadsPage() {
       .catch(() => setLoading(false));
   }, [authenticated, password]);
 
-  /* ================= LOGIN ================= */
+  /* ---------------- LOGIN ---------------- */
   const handleLogin = (e) => {
     e.preventDefault();
     if (!password.trim()) {
       setAuthError("Enter password");
       return;
     }
+
     sessionStorage.setItem("leads_password", password);
     setAuthenticated(true);
     setAuthError("");
   };
 
+  /* ---------------- STATS ---------------- */
+  const successCount = leads.filter((l) => l.success === true).length;
+  const failedCount = leads.filter((l) => l.success === false).length;
+
   /* ================= LOGIN SCREEN ================= */
   if (!authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDF6F2] p-6">
-        <div className="bg-white p-8 rounded-xl shadow border w-full max-w-sm">
-          <h1 className="text-2xl font-semibold text-center mb-4 text-[#A03D13]">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white p-8 rounded-xl shadow-sm border w-full max-w-sm"
+        >
+          <h1 className="text-2xl font-semibold text-center mb-2">
             Leads Dashboard
           </h1>
+          <p className="text-sm text-gray-500 text-center mb-6">
+            Enter password to continue
+          </p>
 
           {authError && (
-            <p className="text-sm text-red-600 mb-3 text-center">
+            <p className="mb-3 text-sm text-red-600 text-center">
               {authError}
             </p>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border rounded-lg px-4 py-3 text-sm"
-            />
-            <button className="w-full bg-[#A03D13] text-white py-3 rounded-lg text-sm">
-              Access
-            </button>
-          </form>
-        </div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border rounded-lg px-4 py-3 mb-4"
+          />
+
+          <button className="w-full bg-[#A03D13] text-white py-3 rounded-lg">
+            Login
+          </button>
+        </form>
       </div>
     );
   }
-
-  /* ================= FILTER LOGIC ================= */
-  const filtered = leads.filter((lead) => {
-    const q = search.toLowerCase();
-    const matchesSearch =
-      !q ||
-      (lead.formData?.parent_name || "").toLowerCase().includes(q) ||
-      (lead.formData?.email || "").toLowerCase().includes(q) ||
-      (lead.formData?.mobile || "").includes(q);
-
-    let matchesDate = true;
-
-    if (dateFrom) {
-      const from = new Date(dateFrom);
-      from.setHours(0, 0, 0, 0);
-      if (new Date(lead.submittedAt) < from) matchesDate = false;
-    }
-
-    if (dateTo) {
-      const to = new Date(dateTo);
-      to.setHours(23, 59, 59, 999);
-      if (new Date(lead.submittedAt) > to) matchesDate = false;
-    }
-
-    return matchesSearch && matchesDate;
-  });
 
   /* ================= DASHBOARD ================= */
   return (
@@ -131,105 +116,68 @@ export default function LeadsPage() {
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-3xl font-semibold text-[#A03D13]">
-              Leads Dashboard
-            </h1>
-            <p className="text-sm text-gray-500">
-              Total Leads: {total}
-            </p>
-          </div>
-
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-semibold">Leads Dashboard</h1>
           <button
             onClick={() => {
               sessionStorage.removeItem("leads_password");
               setAuthenticated(false);
               setPassword("");
+              setLeads([]);
             }}
-            className="border px-4 py-2 rounded-lg text-sm"
+            className="border px-4 py-2 rounded-lg"
           >
             Logout
           </button>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-5">
-          <input
-            type="text"
-            placeholder="Search name / email / phone"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-lg px-4 py-2 text-sm flex-1"
-          />
-
-          <input
-            type="date"
-            value={dateFrom}
-            onChange={(e) => setDateFrom(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm"
-          />
-
-          <input
-            type="date"
-            value={dateTo}
-            onChange={(e) => setDateTo(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-sm"
-          />
-
-          {(search || dateFrom || dateTo) && (
-            <button
-              onClick={() => {
-                setSearch("");
-                setDateFrom("");
-                setDateTo("");
-              }}
-              className="border px-3 py-2 rounded-lg text-sm"
-            >
-              Clear
-            </button>
-          )}
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <Stat label="Total Leads" value={total} />
+          <Stat label="Successful" value={successCount} color="text-green-600" />
+          <Stat label="Failed" value={failedCount} color="text-red-600" />
         </div>
 
         {/* Table */}
         {loading ? (
-          <p className="text-center py-20 text-gray-400">Loading…</p>
-        ) : filtered.length === 0 ? (
-          <p className="text-center py-20 text-gray-400">No leads found</p>
+          <p className="text-center py-20">Loading...</p>
+        ) : leads.length === 0 ? (
+          <p className="text-center py-20">No leads found</p>
         ) : (
           <div className="bg-white rounded-xl border overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-[#FDF6F2]">
+              <thead className="bg-[#f5e8e2]">
                 <tr>
-                  <th className="p-4 text-left">Parent</th>
-                  <th className="p-4 text-left">Child</th>
-                  <th className="p-4 text-left">Grade</th>
-                  <th className="p-4 text-left">Email</th>
-                  <th className="p-4 text-left">Mobile</th>
-                  <th className="p-4 text-left">Date</th>
-                  <th className="p-4"></th>
+                  <th className="px-4 py-3 text-left">Parent</th>
+                  <th className="px-4 py-3 text-left">Child</th>
+                  <th className="px-4 py-3 text-left">Grade</th>
+                  <th className="px-4 py-3 text-left">Email</th>
+                  <th className="px-4 py-3 text-left">Mobile</th>
+                  <th className="px-4 py-3 text-left">Status</th>
+                  <th className="px-4 py-3 text-left">Date</th>
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((lead, i) => (
-                  <tr key={lead._id || i} className="border-t">
-                    <td className="p-4">{lead.formData?.parent_name || "—"}</td>
-                    <td className="p-4">{lead.formData?.child_name || "—"}</td>
-                    <td className="p-4">{lead.formData?.grade || "—"}</td>
-                    <td className="p-4">{lead.formData?.email || "—"}</td>
-                    <td className="p-4">{lead.formData?.mobile || "—"}</td>
-                    <td className="p-4 text-gray-500">
-                      {lead.submittedAt
-                        ? new Date(lead.submittedAt).toLocaleString("en-IN")
-                        : "—"}
-                    </td>
-                    <td className="p-4">
-                      <button
-                        onClick={() => setViewLead(lead)}
-                        className="text-xs bg-[#A03D13] text-white px-3 py-1 rounded"
+                {leads.map((lead) => (
+                  <tr key={lead._id} className="border-t">
+                    <td className="px-4 py-3">{lead.formData?.parent_name}</td>
+                    <td className="px-4 py-3">{lead.formData?.child_name || "—"}</td>
+                    <td className="px-4 py-3">{lead.formData?.grade || "—"}</td>
+                    <td className="px-4 py-3">{lead.formData?.email}</td>
+                    <td className="px-4 py-3">{lead.formData?.mobile}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-1 rounded text-xs ${
+                          lead.success
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-600"
+                        }`}
                       >
-                        View
-                      </button>
+                        {lead.success ? "Success" : "Failed"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {new Date(lead.submittedAt).toLocaleString("en-IN")}
                     </td>
                   </tr>
                 ))}
@@ -238,28 +186,16 @@ export default function LeadsPage() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
 
-      {/* View Modal */}
-      {viewLead && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-2xl w-full relative">
-            <button
-              onClick={() => setViewLead(null)}
-              className="absolute top-3 right-4 text-xl"
-            >
-              ×
-            </button>
-
-            <h2 className="text-xl font-semibold mb-4 text-[#A03D13]">
-              Lead Details
-            </h2>
-
-            <pre className="bg-gray-900 text-green-400 p-4 rounded text-xs overflow-auto">
-              {JSON.stringify(viewLead, null, 2)}
-            </pre>
-          </div>
-        </div>
-      )}
+/* ---------------- STAT CARD ---------------- */
+function Stat({ label, value, color = "text-[#A03D13]" }) {
+  return (
+    <div className="bg-white rounded-xl p-4 border">
+      <p className="text-xs text-gray-400 uppercase">{label}</p>
+      <p className={`text-3xl font-bold ${color}`}>{value}</p>
     </div>
   );
 }
