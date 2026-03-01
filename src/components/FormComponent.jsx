@@ -133,7 +133,6 @@ export default function EnquiryForm({ variant = "simple" }) {
       onSubmit={handleSubmit}
       className="bg-[#f4f4f4] rounded-3xl p-8 max-w-lg mx-auto"
     >
-<<<<<<< HEAD
       {/* Logo */}
       <div className="flex justify-center mb-6">
       
@@ -148,7 +147,6 @@ export default function EnquiryForm({ variant = "simple" }) {
                     priority
                   />
       </div>
-=======
       {/* Honeypot */}
       <input
         type="text"
@@ -158,7 +156,6 @@ export default function EnquiryForm({ variant = "simple" }) {
         tabIndex={-1}
         autoComplete="off"
       />
->>>>>>> 4707caf2ea3bf36bb584d0185b0f5c6b44a0b955
 
       {/* Parent Name */}
       <div>
