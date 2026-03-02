@@ -38,7 +38,7 @@ const leadershipData = [
   }
 ];
   return (
-    <>
+    <>-
       <PageBanner image="/assets/about-banner.webp" />
       <FloatingCTAs />
       <section className="w-full bg-white py-12 md:py-25">

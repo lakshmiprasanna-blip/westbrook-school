@@ -146,7 +146,7 @@ export default function Admissions() {
     subTitle: "Simple. Personal. Child-first.",
     description:
       "There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention.",
-    image: "/assets/scroll-img1.webp",
+    image: "/assets/our_admission_1x.webp",
     button: {
       text: "KNOW MORE",
       link: "/about",
@@ -161,7 +161,7 @@ export default function Admissions() {
     subTitle: "Step One",
     description:
       "Reach out to us through the enquiry form or contact our admissions team. This helps us understand your interest and answer your initial questions.",
-    image: "/assets/scroll-img2.webp",
+    image: "/assets/our_admission_2x.webp",
     button: {
       text: "KNOW MORE",
       link: "/about",
@@ -176,7 +176,7 @@ export default function Admissions() {
     subTitle: "Step Two",
     description:
       "Parents are invited for a conversation with our team to understand the school’s approach, daily routines, and academic framework.",
-    image: "/assets/scroll-img3.webp",
+    image: "/assets/our_admission_3x.webp",
     button: {
       text: "KNOW MORE",
       link: "/academics",
@@ -191,7 +191,7 @@ export default function Admissions() {
     subTitle: "Step Three",
     description:
       "A relaxed interaction with the child helps us understand comfort levels and readiness, without pressure or assessment.",
-    image: "/assets/scroll-img5.webp",
+    image: "/assets/our_admission_4x.webp",
     button: {
       text: "KNOW MORE",
       link: "/approach",
@@ -207,7 +207,7 @@ export default function Admissions() {
       "Every admission matters to us, and each family is guided through the process with clarity and care.",
     description:
       "Once aligned, admissions are confirmed through a simple documentation process.",
-    image: "/assets/scroll-img4.webp",
+    image: "/assets/our_admission_5x.webp",
     button: {
   text: "APPLY NOW",
   link: "/contact",
