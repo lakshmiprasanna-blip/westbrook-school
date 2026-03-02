@@ -43,21 +43,24 @@ export default function VisionSection() {
         <div className="text-center md:text-left">
 
           <h2
-            className="
-              inline-block 
-              bg-[#A2D5EB]
-              px-5 py-2 
-              font-semibold 
-              mb-6
-            "
-          >
-            OUR VISION
-          </h2>
+  className="
+    inline-block
+    bg-[#A2D5EB]
+    px-2 py-2
+    font-semibold
+    mb-6
+    !text-[38px] 
+  "
+>
+  OUR VISION
+</h2>
 
           <p
             className="
               max-w-lg 
               leading-relaxed
+              text-left
+              !text-[16px] !sm:text-[16px] !md:text-[18px]
             "
           >
             To emerge as a world-class institution of learning that nurtures

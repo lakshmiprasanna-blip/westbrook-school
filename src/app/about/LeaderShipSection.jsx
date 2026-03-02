@@ -50,7 +50,7 @@ const [selectedLeader, setSelectedLeader] = useState(null);
                 sizes="(max-width: 768px) 100vw,
                       (max-width: 1024px) 50vw,
                       33vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
               </div>
 
@@ -105,7 +105,7 @@ const [selectedLeader, setSelectedLeader] = useState(null);
               sizes="(max-width: 768px) 100vw,
                     (max-width: 1024px) 50vw,
                     33vw"
-              className="object-cover"
+              className="object-cover object-top"
             />
             </div>
 
@@ -188,7 +188,7 @@ const [selectedLeader, setSelectedLeader] = useState(null);
             sizes="(max-width: 768px) 100vw,
                   (max-width: 1024px) 50vw,
                   33vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
           </div>
 

@@ -9,24 +9,26 @@ export default function OurPhilosophySection() {
       {/* Top Center Label */}
       <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
         <div
-          className="
-            bg-[#F7F6F2]
-            h-16 md:h-20
-            px-3
-            md:px-6
-            md:py-4
-            font-semibold
-            tracking-widest
-            text-[#0F4D81]
-            border border-[#F7F6F2]
-            flex items-end justify-center
-          "
-        >
-          OUR PHILOSOPHY
-        </div>
+  className="
+    bg-[#F7F6F2]
+    px-4 py-5
+    md:h-20
+    md:px-6
+    md:py-4
+    font-semibold
+    tracking-widest
+    text-[#0F4D81]
+    border border-[#F7F6F2]
+    flex items-end justify-center
+    text-md !font-bold md:text-base      /* smaller on mobile */
+    whitespace-nowrap          /* prevents line break */
+  "
+>
+  OUR PHILOSOPHY
+</div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl md:max-w-6xl px-6 md:px-0 text-center text-white">
+      <div className="relative z-10 mx-auto max-w-5xl md:max-w-6xl px-6 md:px-0 md:text-center text-white">
         <p className="mt-4 mb-6 text-white md:text-lg leading-relaxed">
           At Westbrook International School, education is guided by strong
           academics and deeply rooted values. We believe learning goes beyond

@@ -122,7 +122,18 @@
     color: #2B292A;
   }
 }
-
+@media (max-width: 1024px) {
+  .intro-text {
+    font-size: 30px;
+    line-height: 42px;
+  }
+}
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
 /* ================= CONTACT PAGE CTA OVERRIDE ================= */
 
 /* DESKTOP - RIGHT ALIGN */
