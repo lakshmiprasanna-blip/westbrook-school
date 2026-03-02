@@ -143,7 +143,7 @@ export default function EnquiryForm({ variant = "simple" }) {
       {/* Logo */}
       <div className="flex justify-center mb-6">
            <Image
-                    src="/svg/logo-mob.svg"
+                    src="/assets/westbrook.svg"
                     alt="Westbrook International School"
                     width={300}
                     height={60}
