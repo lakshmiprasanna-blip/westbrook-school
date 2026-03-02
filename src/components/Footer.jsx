@@ -25,8 +25,8 @@ export default function Footer() {
       <div className={`${topBg} text-white`}>
         <div className="container-custom mx-auto px-6 lg:px-4 py-16 md:py-24">
 
-          {/* MOBILE */}
-          <div className="flex flex-col items-center text-center space-y-8 md:hidden">
+          {/* MOBILE + TABLET (up to lg) */}
+          <div className="flex flex-col items-center text-center space-y-8 lg:hidden">
             <Image
               src={isHome ? "/assets/logoo.png" : "/assets/logo1.svg"}
               alt="Westbrook International School"
@@ -35,14 +35,16 @@ export default function Footer() {
               className="w-[280px] h-auto"
             />
 
-            <div className="text-sm space-y-4 max-w-xs">
+            <div className="text-sm space-y-4 max-w-sm">
               <p className="text-white">
                 <span className="uppercase tracking-wide font-semibold text-white">Location :</span>{" "}
                 2-46/2/8/8/20 & 34, Guttala Begumpet, Madhapur, Hyderabad -500081
               </p>
               <p className="text-white">
                 <span className="uppercase tracking-wide font-semibold text-white">Mail Us :</span>{" "}
-                <a href="mailto:info@westbrookinternational.com" className="underline hover:opacity-80 text-white">info@westbrookinternational.com</a>
+                <a href="mailto:info@westbrookinternational.com" className="underline hover:opacity-80 text-white">
+                  info@westbrookinternational.com
+                </a>
               </p>
               <p className="text-white">
                 <span className="uppercase tracking-wide font-semibold text-white">Call Us :</span>{" "}
@@ -59,15 +61,19 @@ export default function Footer() {
 
             <div className="flex gap-4 pt-2">
               {socialLinks.map(({ Icon, href }, i) => (
-                <Link key={i} href={href} className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition">
+                <Link
+                  key={i}
+                  href={href}
+                  className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition"
+                >
                   <Icon size={18} />
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* DESKTOP */}
-          <div className="hidden md:flex md:items-center gap-6">
+          {/* DESKTOP (lg and above) */}
+          <div className="hidden lg:flex lg:items-center gap-6">
 
             {/* Logo */}
             <div className="flex-shrink-0 mr-8">
@@ -76,7 +82,7 @@ export default function Footer() {
                 alt="Westbrook International School"
                 width={500}
                 height={120}
-                className="w-[380px] lg:w-[460px] h-auto"
+                className="w-[320px] xl:w-[420px] h-auto"
               />
             </div>
 
@@ -88,7 +94,9 @@ export default function Footer() {
               </p>
               <p className="text-white">
                 <span className="uppercase tracking-wide font-semibold text-white">Mail Us :</span>{" "}
-                <a href="mailto:info@westbrookinternational.com" className="underline hover:opacity-80 text-white">info@westbrookinternational.com</a>
+                <a href="mailto:info@westbrookinternational.com" className="underline hover:opacity-80 text-white">
+                  info@westbrookinternational.com
+                </a>
               </p>
               <p className="text-white">
                 <span className="uppercase tracking-wide font-semibold text-white">Call Us :</span>{" "}
@@ -97,7 +105,7 @@ export default function Footer() {
             </div>
 
             {/* Navigation */}
-            <div className="space-y-4 text-[14px] uppercase tracking-wide text-white ml-6">
+            <div className="space-y-4 text-[14px] uppercase tracking-wide text-white ml-6 flex-shrink-0">
               <Link href="/about" className="block hover:opacity-80">ABOUT US</Link>
               <Link href="/admissions" className="block hover:opacity-80">ADMISSIONS</Link>
               <Link href="/academics" className="block hover:opacity-80">ACADEMICS</Link>
@@ -105,9 +113,13 @@ export default function Footer() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex flex-col gap-4 ml-6">
+            <div className="flex flex-col gap-4 ml-6 flex-shrink-0">
               {socialLinks.map(({ Icon, href }, i) => (
-                <Link key={i} href={href} className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition">
+                <Link
+                  key={i}
+                  href={href}
+                  className="w-11 h-11 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition"
+                >
                   <Icon size={20} />
                 </Link>
               ))}

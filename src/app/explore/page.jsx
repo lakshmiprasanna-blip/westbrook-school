@@ -225,28 +225,19 @@ export default function Explore() {
               className="relative w-full max-w-md"
             >
               {/* Close Button */}
-              <button
-                onClick={() => setFormType(null)}
-                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-              >
-                ✕
-              </button>
+                                           <button
+    onClick={() => setFormType(null)}
+    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+  >
+    ✕
+  </button>
 
               <EnquiryForm variant={formType} />
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-        {/* <ImageContentSection
-  desktopImage="/assets/footer-exploree.png"
-  mobileImage="/assets/footer-exploree.png"
-  title="We’d love to hear from you!"
-  description="Feel free to get in touch or apply now."
-  primaryBtnText="BOOK A VISIT"
-  secondaryBtnText="APPLY NOW"
-  onPrimaryClick={() => setShowPopup(true)}
-  onSecondaryClick={() => setShowPopup(true)}
-/> */}
+
     </>
   );
 }

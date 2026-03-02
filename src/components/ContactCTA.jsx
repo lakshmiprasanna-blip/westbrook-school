@@ -52,7 +52,7 @@ export default function ContactCTA({
                 setFormType("detailed");
                 setShowPopup(true);
               }}
-              className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon"
+              className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
             >
               CONTACT US
             </button>
@@ -62,7 +62,7 @@ export default function ContactCTA({
                 setFormType("simple");
                 setShowPopup(true);
               }}
-              className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-primary"
+              className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-primary cursor-pointer"
             >
               APPLY NOW
             </button>
@@ -87,12 +87,12 @@ export default function ContactCTA({
     onClick={(e) => e.stopPropagation()}
     className="relative w-full max-w-md mx-auto" // ✅ add mx-auto
   >
-    <button
-      onClick={() => setFormType(null)}
-      className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-    >
-      ✕
-    </button>
+                  <button
+    onClick={() => setFormType(null)}
+    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+  >
+    ✕
+  </button>
     <EnquiryForm variant={formType} />
   </motion.div>
 </motion.div>

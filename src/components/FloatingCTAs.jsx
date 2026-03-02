@@ -18,7 +18,7 @@ export default function FloatingCTAs() {
           <button
             onClick={() => setFormType("detailed")}
             className="
-              bg-maroon text-white
+              bg-maroon text-white cursor-pointer
               text-[11px] font-semibold tracking-wide
               w-[44px] h-[100px]
               flex items-center justify-center
@@ -33,7 +33,7 @@ export default function FloatingCTAs() {
           <button
             onClick={() => setFormType("simple")}
             className="
-              bg-primary text-white
+              bg-primary text-white cursor-pointer
               text-[11px] font-semibold tracking-wide
               w-[44px] h-[100px]
               flex items-center justify-center
@@ -66,13 +66,18 @@ export default function FloatingCTAs() {
               className="relative w-full max-w-md"
             >
               {/* Close Button */}
-              <button
+              {/* <button
                 onClick={() => setFormType(null)}
                 className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
               >
                 ✕
-              </button>
-
+              </button> */}
+  <button
+    onClick={() => setFormType(null)}
+    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+  >
+    ✕
+  </button>
               <EnquiryForm variant={formType} />
             </motion.div>
           </motion.div>

@@ -67,7 +67,8 @@ const [selectedLeader, setSelectedLeader] = useState(null);
                     {item.role}
                   </p>
 
-                  <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-maroon">
+                  <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-maroon"
+                  onClick={() => setSelectedLeader(item)}>
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -119,7 +120,8 @@ const [selectedLeader, setSelectedLeader] = useState(null);
                   {data[current].role}
                 </p>
 
-                <div className="w-8 h-8 rounded-full bg-[#2E5C88] flex items-center justify-center">
+                <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-maroon"
+                onClick={() => setSelectedLeader(data[current])}>
                   <svg
                     className="w-4 h-4 text-white"
                     fill="none"
@@ -202,7 +204,8 @@ const [selectedLeader, setSelectedLeader] = useState(null);
                 {item.role}
               </p>
 
-              <div className="w-8 h-8 rounded-full bg-[#2E5C88] flex items-center justify-center">
+              <div className="w-7 h-7 border-3 border-white rounded-full  flex items-center justify-center transition-all duration-300 group-hover:bg-maroon"
+              onClick={() => setSelectedLeader(item)}>
                 <svg
                   className="w-4 h-4 text-white"
                   fill="none"

@@ -151,12 +151,12 @@ export default function Academics() {
               className="relative w-full max-w-md"
             >
               {/* Close Button */}
-              <button
-                onClick={() => setFormType(null)}
-                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-              >
-                ✕
-              </button>
+                             <button
+    onClick={() => setFormType(null)}
+    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+  >
+    ✕
+  </button>
 
               <EnquiryForm variant={formType} />
             </motion.div>

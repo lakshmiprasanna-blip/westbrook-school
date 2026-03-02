@@ -73,7 +73,7 @@ export default function ImageContentSection({
         >
           {/* IMAGE */}
           <div className="w-full md:w-4/5">
-            <div className="relative w-full h-[450px] overflow-hidden">
+            <div className="relative w-full h-[480px] overflow-hidden">
               <Image
                 src={imageSrc}
                 alt="section image"
@@ -99,7 +99,7 @@ export default function ImageContentSection({
                 <button
                   onClick={onPrimaryClick}
                   type="button"
-                  className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition"
+                  className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
                 >
                   {primaryBtnText}
                 </button>
@@ -108,7 +108,7 @@ export default function ImageContentSection({
                 <button
                   onClick={onSecondaryClick}
                   type="button"
-                  className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition"
+                  className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
                 >
                   {secondaryBtnText}
                 </button>
