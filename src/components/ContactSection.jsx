@@ -13,6 +13,7 @@ export default function ContactSection() {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // ✅ Added loading
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,23 +47,57 @@ export default function ContactSection() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  // ✅ CRM INTEGRATION ADDED (UI untouched)
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-    } else {
+      return;
+    }
+
+    try {
+      setLoading(true);
       setErrors({});
-      console.log("Form submitted:", formData);
-      alert("Form submitted successfully!");
-      setFormData({
-        parentName: "",
-        grade: "",
-        mobile: "",
-        email: "",
-        message: "",
+
+      const res = await fetch("/api/submit-lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          parentName: formData.parentName.trim(),
+          childName: "", // not available
+          grade: formData.grade,
+          mobile: formData.mobile.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          date: "",
+          time: "",
+          variant: "contact", // important for CRM
+        }),
       });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Message sent successfully!");
+        setFormData({
+          parentName: "",
+          grade: "",
+          mobile: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        alert(data.message || "Something went wrong.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,19 +106,17 @@ export default function ContactSection() {
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
 
-
-                    {/* RIGHT IMAGE */}
+          {/* RIGHT IMAGE (unchanged) */}
           <div className="relative w-full h-[350px] sm:h-[450px] lg:h-auto">
             <Image
               src="/assets/contactimg.webp"
               alt="Contact"
               fill
               className="object-cover"
-              
             />
           </div>
 
-          {/* LEFT SIDE */}
+          {/* LEFT SIDE (unchanged UI) */}
           <div className="bg-primary px-8 sm:px-12 lg:px-16 py-12 flex flex-col justify-center">
 
             <h2
@@ -111,7 +144,6 @@ export default function ContactSection() {
                   placeholder="Parent name"
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
-
                 {errors.parentName && (
                   <p className="paragraph text-red-300 text-xs mt-1">
                     {errors.parentName}
@@ -201,20 +233,17 @@ export default function ContactSection() {
                 )}
               </div>
 
-              {/* Submit */}
+              {/* Submit (UI unchanged, just added loading state) */}
               <button
                 type="submit"
-                className="w-full sm:w-[260px] h-12 bg-maroon 
-                           text-white text-[16px] font-bold 
-                           hover:bg-[#7f1626] transition"
+                disabled={loading}
+                className="w-full sm:w-[260px] h-12 bg-maroon text-white text-[16px] font-bold hover:bg-[#7f1626] transition disabled:opacity-50"
               >
-                SUBMIT
+                {loading ? "Submitting..." : "SUBMIT"}
               </button>
 
             </form>
           </div>
-
-
 
         </div>
       </div>
