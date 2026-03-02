@@ -60,14 +60,14 @@ export default function Academics() {
             subTitle: "Empathy, Healthy,",
             description:
               "The early years are shaped around warmth, security, and gentle exploration. Children are encouraged to observe, ask questions, and engage with the world through play, stories, movement, and conversation.",
-            image: "/assets/scroll-img1.webp",
+            image: "/assets/academicsanimation1.webp",
           },
           {
             headingTop: "PRIMARY YEARS",
             subTitle: "Simple. Personal. Child-first.",
             description:
               "The primary years focus on building strong academic foundations while developing independence and curiosity.",
-            image: "/assets/scroll-img5.webp",
+            image: "/assets/academicsanimation2.webp",
           },
         ]}
       />
@@ -75,7 +75,7 @@ export default function Academics() {
       {/* INFO SECTIONS */}
       <div>
         <InfoSection
-          topLabel="Why Westbrook"
+          topLabel="Pedagogy"
           introText="How Learning Is Guided at Westbrook."
           tag="SOCIAL AND"
           subTag="EMOTIONAL"

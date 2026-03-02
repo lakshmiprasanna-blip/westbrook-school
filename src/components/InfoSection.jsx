@@ -26,25 +26,25 @@ export default function InfoSection({
       bg-cover bg-center bg-no-repeat ${className}`}
     >
             {/* TOP LABEL */}
-           {topLabel && (
-  <div className="absolute top-0 left-3 md:left-37">
-    
-    {/* Label box */}
-    <div className="bg-primary px-5 md:px-8 pt-6 md:pt-8 pb-3 md:pb-4">
-      <span className="text-white text-xs md:text-sm font-semibold uppercase tracking-wider">
-        {topLabel}
-      </span>
-    </div>
-
-  </div>
-)}
+            {/* TOP LABEL */}
+            {topLabel && (
+              <div className="absolute top-0 left-0 w-full">
+                <div className="container-custom mx-auto px-6">
+                  <div className="bg-primary inline-block px-5 md:px-8 pt-6 md:pt-8 pb-3 md:pb-4">
+                    <span className="text-white text-xs md:text-sm font-semibold uppercase tracking-wider">
+                      {topLabel}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
 
       {/* CONTENT */}
       <div className="container-custom mx-auto px-6 pt-6 md:pt-20 pb-6 md:pb-6">
 
         {/* INTRO TEXT */}
         {introText && (
-          <p className="paragraph intro-text max-w-[520px] text-dark mb-6 md:mb-10 mt-11 md:mt-15">
+          <p className="paragraph intro-text max-w-[520px] text-dark mb-6 md:mb-10 mt- md:mt-15">
             {introText}
           </p>
         )}

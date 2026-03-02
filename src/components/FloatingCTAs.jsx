@@ -9,7 +9,7 @@ export default function FloatingCTAs() {
 
   return (
     <>
-      <div className="fixed right-0 top-[70%] -translate-y-1/2 z-50">
+      <div className="fixed right-0 top-[60%] -translate-y-1/2 z-50">
 
         {/* Outer Wrapper */}
         <div className="flex flex-col overflow-hidden rounded-l-2xl shadow-lg">
