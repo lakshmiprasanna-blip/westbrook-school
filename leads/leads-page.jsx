@@ -115,7 +115,7 @@ export default function LeadsPage() {
       !q ||
       (lead.formData?.name || "").toLowerCase().includes(q) ||
       (lead.formData?.email || "").toLowerCase().includes(q) ||
-      (lead.formData?.phone || "").includes(q);
+      (lead.formData?.mobile || "").includes(q);
 
     let matchesDate = true;
     if (dateFrom) {
@@ -227,7 +227,7 @@ export default function LeadsPage() {
                 <th className="px-6 py-5 text-left">Child Name</th>
                 <th className="px-6 py-5 text-left">Grade</th>
                 <th>Email</th>
-                <th>Phone</th>
+                <th>Mobile</th>
                 <th>Status</th>
                 <th>Date</th>
               </tr>
