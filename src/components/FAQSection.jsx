@@ -70,7 +70,7 @@ export default function FAQSection({ faqData }) {
                         isActive
                           ? "bg-primary text-white"
                           :isRedDefault
-                          ? "text-dark md:text-maroon hover:bg-maroon hover:text-white"
+                          ? "text-dark hover:bg-maroon hover:text-white"
                           : "text-dark hover:bg-maroon hover:text-white"
                       }
                     `}
