@@ -98,7 +98,7 @@ export async function POST(request) {
     if (honeypot) {
       return NextResponse.json({
         success: true,
-        message: "Lead submitted successfully!",
+        message: "submitted successfully!",
       });
     }
 

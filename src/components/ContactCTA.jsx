@@ -12,7 +12,7 @@ export default function ContactCTA({
   subtitle = "Feel free to get in touch, or apply now",
 }) {
   const [showPopup, setShowPopup] = useState(false);
-  const [formType, setFormType] = useState("simple");
+  const [formType, setFormType] = useState(null);
 
   return (
     <>
@@ -73,31 +73,29 @@ export default function ContactCTA({
       <AnimatePresence>
         {formType && (
           <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setFormType(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-md"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setFormType(null)}
-                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-              >
-                ✕
-              </button>
-
-              <EnquiryForm variant={formType} />
-            </motion.div>
-          </motion.div>
+  className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  onClick={() => setFormType(null)}
+>
+  <motion.div
+    initial={{ scale: 0.85, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    exit={{ scale: 0.85, opacity: 0 }}
+    transition={{ duration: 0.25 }}
+    onClick={(e) => e.stopPropagation()}
+    className="relative w-full max-w-md mx-auto" // ✅ add mx-auto
+  >
+    <button
+      onClick={() => setFormType(null)}
+      className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+    >
+      ✕
+    </button>
+    <EnquiryForm variant={formType} />
+  </motion.div>
+</motion.div>
         )}
       </AnimatePresence>
     
