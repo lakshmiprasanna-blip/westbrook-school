@@ -59,8 +59,8 @@ export default function EnquiryForm({
   const errorStyle = isLight ? "text-red-500 text-xs mt-1" : "text-red-300 text-xs mt-1";
 
   const submitBtn = isLight
-    ? "w-full mt-2 bg-[#1f4e79] text-white py-3 rounded-xl hover:opacity-90 transition disabled:opacity-50 font-semibold text-base"
-    : "w-full sm:w-[260px] h-12 bg-maroon text-white text-[16px] font-bold hover:bg-[#7f1626] transition disabled:opacity-50";
+    ? "w-full mt-2 bg-[#1f4e79] text-white py-3 rounded-xl hover:opacity-90 cursor-pointer transition disabled:opacity-50 font-semibold text-base"
+    : "w-full sm:w-[260px] h-12 bg-maroon text-white text-[16px] font-bold cursor-pointer hover:bg-[#7f1626] transition disabled:opacity-50";
 
   const wrapper = isLight
     ? "w-full px-4 py-6"
@@ -175,6 +175,8 @@ export default function EnquiryForm({
         <option value="Grade 1">Grade 1</option>
         <option value="Grade 2">Grade 2</option>
         <option value="Grade 3">Grade 3</option>
+        <option value="Grade 4">Grade 4</option>
+        <option value="Grade 5">Grade 5</option>
       </select>
       {/* chevron */}
       <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">

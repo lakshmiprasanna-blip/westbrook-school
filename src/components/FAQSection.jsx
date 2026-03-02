@@ -65,7 +65,7 @@ export default function FAQSection({ faqData }) {
                     onClick={() =>
                       setActiveIndex(isActive ? null : index)
                     }
-                    className={`w-full flex justify-between items-center gap-4 px-6 md:px-8 py-6 text-left transition-colors duration-300
+                    className={`w-full flex justify-between items-center cursor-pointer gap-4 px-6 md:px-8 py-6 text-left transition-colors duration-300
                       ${
                         isActive
                           ? "bg-primary text-white"
