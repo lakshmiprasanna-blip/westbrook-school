@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import Image from "next/image";
@@ -14,6 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function About() {
     const [formType, setFormType] = useState(null);
       const [showPopup, setShowPopup] = useState(false);
+      const router = useRouter();
 const leadershipData = [
   {
     title: "Mrs. Sanjana Reddy",
@@ -120,9 +122,8 @@ const leadershipData = [
           breakText={false}
           reverse={true}
         
-        onPrimaryClick={() => {
-        setFormType("simple");
-          setShowPopup(true);
+         onPrimaryClick={() => {
+          router.push("/contact"); // ✅ now it works
         }}
         onSecondaryClick={() => {
           setFormType("detailed");

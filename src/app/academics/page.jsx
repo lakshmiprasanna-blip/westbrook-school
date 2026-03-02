@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
 import VideoHero from "../../components/VideoHero";
 import InfoSection from "../../components/InfoSection";
@@ -15,6 +15,7 @@ export default function Academics() {
   const [showPopup, setShowPopup] = useState(false);
   const [variant, setVariant] = useState("simple");
     const [formType, setFormType] = useState(null);
+     const router = useRouter();
 
 
   return (
@@ -124,9 +125,8 @@ export default function Academics() {
         breakText
         primaryBtnText="CONTACT US"
         secondaryBtnText="APPLY NOW"
-        onPrimaryClick={() => {
-        setFormType("simple");
-          setShowPopup(true);
+         onPrimaryClick={() => {
+          router.push("/contact"); // ✅ now it works
         }}
         onSecondaryClick={() => {
           setFormType("detailed");

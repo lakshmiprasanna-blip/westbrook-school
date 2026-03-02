@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import EnquiryForm from "./FormComponent";
@@ -13,7 +14,7 @@ export default function ContactCTA({
 }) {
   const [showPopup, setShowPopup] = useState(false);
   const [formType, setFormType] = useState(null);
-
+const router = useRouter();
   return (
     <>
       <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
@@ -48,15 +49,11 @@ export default function ContactCTA({
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => {
-                setFormType("detailed");
-                setShowPopup(true);
-              }}
-              className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
-            >
-              CONTACT US
-            </button>
-
+  onClick={() => router.push("/contact")}
+  className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
+>
+  CONTACT US
+</button>
             <button
               onClick={() => {
                 setFormType("simple");
@@ -69,7 +66,6 @@ export default function ContactCTA({
           </div>
         </div>
       </section>
-{/* ✅ POPUP MODAL */}
       <AnimatePresence>
         {formType && (
           <motion.div
