@@ -41,7 +41,7 @@ export default function NavBar() {
           <Link href="/" className="flex items-center">
             {/* Mobile Logo */}
             <Image
-              src="/assets/logo-m.png"
+              src="/assets/westbrookschool.svg"
               alt="Westbrook International School"
               width={200}
               height={60}

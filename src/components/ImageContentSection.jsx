@@ -60,7 +60,7 @@ export default function ImageContentSection({
               alt="section image"
               fill
               priority
-              className="object-cover"
+              // className="object-cover"
             />
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function ImageContentSection({
                 alt="section image"
                 fill
                 priority
-                className={`object-cover ${reverse ? "object-[center_85%]" : ""}`}
+                className={` ${reverse ? "object-[center_85%]" : ""}`}
               />
             </div>
           </div>

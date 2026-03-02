@@ -194,22 +194,23 @@ export default function Explore() {
 
 
         <ImageContentSection
-        imageSrc="/assets/footer-exploree.png"
-        mobileImageSrc="/assets/explore-mobile.png"
-          title="We’d love to hear from you!"
-          description="Feel free to get in touch, or apply now"
-          bgColor="#ffffff"
-          primaryBtnText="CONTACT US"
-        secondaryBtnText="APPLY NOW"
-        onPrimaryClick={() => {
-        setFormType("simple");
-          setShowPopup(true);
-        }}
-        onSecondaryClick={() => {
-          setFormType("detailed");
-          setShowPopup(true);
-        }}
-      />
+  imageSrc="/assets/footer-exploree.png"
+  mobileImageSrc="/assets/explore-mobile.png"
+  title="We'd love to hear from you!"
+  description="Feel free to get in touch, or apply now"
+  bgColor="#ffffff"
+  primaryBtnText="CONTACT US"
+  secondaryBtnText="APPLY NOW"
+  breakText={false}
+  onPrimaryClick={() => {
+    setFormType("simple");
+    setShowPopup(true);
+  }}
+  onSecondaryClick={() => {
+    setFormType("detailed");
+    setShowPopup(true);
+  }}
+/>
 
   {/* ✅ POPUP MODAL */}
       <AnimatePresence>
