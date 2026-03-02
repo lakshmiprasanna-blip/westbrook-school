@@ -144,7 +144,7 @@ export default function LeadsPage() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-semibold text-[#A03D13]">Leads Dashboard</h1>
-            <p className="text-sm text-gray-500 mt-1">VSR Vriksha Nature Cure Centre</p>
+            <p className="text-sm text-gray-500 mt-1">WestBrook School</p>
           </div>
           <button
             onClick={() => {
