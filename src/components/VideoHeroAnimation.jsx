@@ -171,14 +171,11 @@ export default function VideoHeroAnimation({
 
               {/* LEFT SIDE */}
               <div className="w-1/2 flex items-center bg-white">
-                <div className="max-w-xl 
-                ml-6 
-                sm:ml-10 
-                md:ml-16 
-                lg:ml-5 
-                xl:ml-20 
-                2xl:ml-58 
-                !min-[2559px]:ml-[110px]"
+                <div
+                className="max-w-xl"
+                style={{
+                  marginLeft: "max(1.5rem, calc((100vw - 80rem) / 2))"
+                }}
               >
                   
                   <Heading
