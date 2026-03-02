@@ -101,7 +101,7 @@ export default function VideoHeroAnimation({
         >
           {/* VIDEO SLIDE */}
           <div className="sticky top-0 h-screen z-10">
-             <div className="w-screen h-screen relative">
+             <div className="w-full h-screen relative">
                           <video
                           autoPlay
                           loop
@@ -167,7 +167,7 @@ export default function VideoHeroAnimation({
                   style={{ opacity: progress }}
                 />
 
-            <div className="relative z-10 h-full flex">
+            <div className="relative z-10 h-full flex w-full max-w-full">
 
               {/* LEFT SIDE */}
               <div className="w-1/2 flex items-center bg-white">

@@ -118,7 +118,7 @@ export default function FAQSection({ faqData }) {
                   </button>
 
                   {isActive && (
-                    <div className="bg-white px-6 md:px-8 py-6 text-[16px] leading-relaxed">
+                    <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
                       {item.answer}
                     </div>
                   )}
