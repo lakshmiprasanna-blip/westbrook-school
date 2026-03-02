@@ -77,8 +77,8 @@ export default function InfoSection({
                     <Link href={buttonLink}>
                       <button className="flex items-center gap-3 text-primary text-md font-bold tracking-wide">
                         {buttonText}
-                        <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px]">
-                          →
+                        <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px] leading-none">
+                          <span className="-mt-[1px]">→</span>
                         </span>
                       </button>
                     </Link>
@@ -88,9 +88,9 @@ export default function InfoSection({
                       className="flex items-center gap-3 text-primary text-md font-bold tracking-wide"
                     >
                       {buttonText}
-                      <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px]">
-                        →
-                      </span>
+                      <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px] leading-none">
+                          <span className="-mt-[1px]">→</span>
+                        </span>
                     </button>
                   )}
                 </div>
