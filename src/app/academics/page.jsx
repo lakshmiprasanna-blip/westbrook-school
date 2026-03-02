@@ -19,7 +19,9 @@ export default function Academics() {
 
   return (
     <>
+    <div className="pt-[70px] lg:pt-[80px]">
       <PageBanner image="/assets/academic-banner.webp" />
+        </div>
       <FloatingCTAs />
 
       <ScrollSlider

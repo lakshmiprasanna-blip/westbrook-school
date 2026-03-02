@@ -40,7 +40,11 @@ export default function Explore() {
 
   return (
     <>
-      <PageBanner image="/assets/explorebanner.webp" />
+      
+      <div className="pt-[70px] lg:pt-[80px]">
+        <PageBanner image="/assets/explorebanner.webp" />
+      </div>
+      
       <FloatingCTAs />
       <LearningSpacesSection />
 
@@ -115,15 +119,16 @@ export default function Explore() {
                 className="flex overflow-x-auto scroll-smooth no-scrollbar"
               >
                 {cards.map((item, index) => (
-                  <div
-                    key={index}
-                    className="
-                      min-w-full 
-                      md:min-w-[50%] 
-                      px-2
-                    "
-                  >
-                    <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12">
+                 <div
+                  key={index}
+                  className="
+                    min-w-full 
+                    md:min-w-[50%] 
+                    px-2
+                    flex
+                  "
+                >
+                   <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12 h-full flex flex-col">
 
                       {/* Bigger Circle */}
                       <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">

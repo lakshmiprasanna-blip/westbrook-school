@@ -37,7 +37,9 @@ export default function Admissions() {
 ];
   return (
     <>
+    <div className="pt-[70px] lg:pt-[80px]">
       <PageBanner image="/assets/banner1.webp" />
+        </div>
       <FloatingCTAs />
       
       {/* The Westbrook Way Section */}

@@ -43,7 +43,7 @@ const leadershipData = [
       <PageBanner image="/assets/about-banner.webp" />
       <FloatingCTAs />
       <section className="w-full bg-white py-12 md:py-25">
-  <div className="container-custom ">
+        <div className="container-custom ">
 
     <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
 

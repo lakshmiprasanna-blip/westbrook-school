@@ -5,7 +5,9 @@ import ContactSection from "../../components/ContactSection";
 export default function Contact() {
   return (
     <>
+      <div className="pt-[70px] lg:pt-[80px]">
       <PageBanner image="/assets/contactbanner.webp" />
+        </div>
       <ContactSection />
 
       {/* Override wrapper */}
