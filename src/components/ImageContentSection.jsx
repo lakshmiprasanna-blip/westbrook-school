@@ -99,12 +99,8 @@ export default function ImageContentSection({
                 <button
                   onClick={onPrimaryClick}
                   type="button"
-<<<<<<< HEAD
                   className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
-=======
-                  className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap cursor-pointer hover:opacity-90 transition"
->>>>>>> 6365cca2109e3d330eb63493dc449f2b7efa9c04
-                >
+            >
                   {primaryBtnText}
                 </button>
               )}
@@ -112,12 +108,9 @@ export default function ImageContentSection({
                 <button
                   onClick={onSecondaryClick}
                   type="button"
-<<<<<<< HEAD
                   className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
-=======
-                  className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap cursor-pointer hover:opacity-90 transition"
->>>>>>> 6365cca2109e3d330eb63493dc449f2b7efa9c04
-                >
+
+>
                   {secondaryBtnText}
                 </button>
               )}
