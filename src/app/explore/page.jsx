@@ -1,5 +1,7 @@
 "use client";
-
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
@@ -7,10 +9,11 @@ import LearningSpacesSection from "../../components/LearningSpacesSection";
 import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
-import { useRef } from "react";
-import Image from "next/image";
+import EnquiryForm from "../../components/FormComponent";
 
 export default function Explore() {
+  const [formType, setFormType] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
   const sliderRef = useRef(null);
   const cards = [
   {
@@ -192,9 +195,48 @@ export default function Explore() {
           description="Feel free to get in touch, or apply now"
           bgColor="#ffffff"
           primaryBtnText="CONTACT US"
-          secondaryBtnText="APPLY NOW"
-          breakText={false}
-        />
+        secondaryBtnText="APPLY NOW"
+        onPrimaryClick={() => {
+        setFormType("simple");
+          setShowPopup(true);
+        }}
+        onSecondaryClick={() => {
+          setFormType("detailed");
+          setShowPopup(true);
+        }}
+      />
+
+  {/* ✅ POPUP MODAL */}
+      <AnimatePresence>
+        {formType && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setFormType(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setFormType(null)}
+                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+              >
+                ✕
+              </button>
+
+              <EnquiryForm variant={formType} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
         {/* <ImageContentSection
   desktopImage="/assets/footer-exploree.png"
   mobileImage="/assets/footer-exploree.png"

@@ -1,3 +1,5 @@
+"use client";
+import { useRef, useState } from "react";
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import Image from "next/image";
@@ -7,8 +9,11 @@ import CoreValues from "./CoreValues";
 import LeaderShipSection from "./LeaderShipSection";
 import AboutZoom from "../../components/AboutZoom";
 import ImageContentSection from "../../components/ImageContentSection";
-
+import EnquiryForm from "../../components/FormComponent";
+import { motion, AnimatePresence } from "framer-motion";
 export default function About() {
+    const [formType, setFormType] = useState(null);
+      const [showPopup, setShowPopup] = useState(false);
 const leadershipData = [
   {
     title: "Mrs. Sanjana Reddy",
@@ -113,8 +118,48 @@ const leadershipData = [
           secondaryBtnText="APPLY NOW"
           breakText={false}
           reverse={true}
-        />
+        
+        onPrimaryClick={() => {
+        setFormType("simple");
+          setShowPopup(true);
+        }}
+        onSecondaryClick={() => {
+          setFormType("detailed");
+          setShowPopup(true);
+        }}
+      />
 
+  {/* ✅ POPUP MODAL */}
+      <AnimatePresence>
+        {formType && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setFormType(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setFormType(null)}
+                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+              >
+                ✕
+              </button>
+
+              <EnquiryForm variant={formType} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ContactSection() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     parentName: "",
     grade: "",
@@ -13,7 +16,7 @@ export default function ContactSection() {
   });
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false); // ✅ Added loading
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,25 +37,17 @@ export default function ContactSection() {
       newErrors.mobile = "Mobile number must be 10 digits.";
     }
 
-    if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
-    ) {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
-    }
-
-    if (!formData.message.trim() || formData.message.length < 10) {
-      newErrors.message = "Message must be at least 10 characters.";
     }
 
     return newErrors;
   };
 
-  // ✅ CRM INTEGRATION ADDED (UI untouched)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -64,33 +59,24 @@ export default function ContactSection() {
 
       const res = await fetch("/api/submit-lead", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           parentName: formData.parentName.trim(),
-          childName: "", // not available
+          childName: "",
           grade: formData.grade,
           mobile: formData.mobile.trim(),
           email: formData.email.trim(),
           message: formData.message.trim(),
           date: "",
           time: "",
-          variant: "contact", // important for CRM
+          variant: "contact",
         }),
       });
 
       const data = await res.json();
 
       if (data.success) {
-        alert("Message sent successfully!");
-        setFormData({
-          parentName: "",
-          grade: "",
-          mobile: "",
-          email: "",
-          message: "",
-        });
+        router.push("/thank-you");
       } else {
         alert(data.message || "Something went wrong.");
       }
@@ -106,7 +92,7 @@ export default function ContactSection() {
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
 
-          {/* RIGHT IMAGE (unchanged) */}
+          {/* IMAGE */}
           <div className="relative w-full h-[350px] sm:h-[450px] lg:h-auto">
             <Image
               src="/assets/contactimg.webp"
@@ -116,15 +102,11 @@ export default function ContactSection() {
             />
           </div>
 
-          {/* LEFT SIDE (unchanged UI) */}
+          {/* FORM */}
           <div className="bg-primary px-8 sm:px-12 lg:px-16 py-12 flex flex-col justify-center">
-
             <h2
               className="text-white mb-10 text-[30px] sm:text-[36px] lg:text-[48px] leading-[100%]"
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontWeight: 700,
-              }}
+              style={{ fontFamily: "Playfair Display, serif", fontWeight: 700 }}
             >
               Contact us
             </h2>
@@ -145,9 +127,7 @@ export default function ContactSection() {
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
                 {errors.parentName && (
-                  <p className="paragraph text-red-300 text-xs mt-1">
-                    {errors.parentName}
-                  </p>
+                  <p className="text-red-300 text-xs mt-1">{errors.parentName}</p>
                 )}
               </div>
 
@@ -161,25 +141,19 @@ export default function ContactSection() {
                     formData.grade ? "text-black" : "text-gray-500"
                   }`}
                 >
-                  <option value="" disabled hidden>
-                    Grade
-                  </option>
+                  <option value="" disabled hidden>Grade</option>
                   <option value="Pre Primary">Pre Primary</option>
                   <option value="Grade 1">Grade 1</option>
                   <option value="Grade 2">Grade 2</option>
                 </select>
-
                 <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                  <svg
-                    className="w-4 h-4 text-gray-600"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
+                {errors.grade && (
+                  <p className="text-red-300 text-xs mt-1">{errors.grade}</p>
+                )}
               </div>
 
               {/* Mobile */}
@@ -193,9 +167,7 @@ export default function ContactSection() {
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
                 {errors.mobile && (
-                  <p className="paragraph text-red-300 text-xs mt-1">
-                    {errors.mobile}
-                  </p>
+                  <p className="text-red-300 text-xs mt-1">{errors.mobile}</p>
                 )}
               </div>
 
@@ -210,13 +182,11 @@ export default function ContactSection() {
                   className="w-full h-12 px-4 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none"
                 />
                 {errors.email && (
-                  <p className="paragraph text-red-300 text-xs mt-1">
-                    {errors.email}
-                  </p>
+                  <p className="text-red-300 text-xs mt-1">{errors.email}</p>
                 )}
               </div>
 
-              {/* Message */}
+              {/* Message - NO validation */}
               <div>
                 <textarea
                   name="message"
@@ -226,14 +196,9 @@ export default function ContactSection() {
                   rows={4}
                   className="w-full px-4 py-3 bg-[#E5E5E5] rounded-md text-[14px] font-medium focus:outline-none resize-none"
                 />
-                {errors.message && (
-                  <p className="paragraph text-red-300 text-xs mt-1">
-                    {errors.message}
-                  </p>
-                )}
               </div>
 
-              {/* Submit (UI unchanged, just added loading state) */}
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={loading}
@@ -244,7 +209,6 @@ export default function ContactSection() {
 
             </form>
           </div>
-
         </div>
       </div>
     </section>
