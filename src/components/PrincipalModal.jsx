@@ -48,7 +48,7 @@ export default function PrincipalModal({ leader, onClose }) {
              md:w-14 md:h-14
              rounded-full 
              flex items-center justify-center
-             z-50"
+             z-50 cursor-pointer"
 >
   <span className="text-white text-2xl sm:text-3xl font-semibold leading-none">
     ×
