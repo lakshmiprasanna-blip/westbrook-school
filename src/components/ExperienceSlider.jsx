@@ -27,7 +27,7 @@ export default function ExperienceSection() {
     );
 
   return (
-    <section className="bg-primary py-16 md:py-20">
+    <section className="bg-primary py-16 md:py-20 navbar-white-trigger">
       <div className="container-custom">
 
         {/* Heading */}

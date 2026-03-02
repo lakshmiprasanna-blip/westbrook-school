@@ -34,7 +34,15 @@ export default function NavBar() {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-white lg:bg-[#0f4c81] shadow-sm lg:shadow-none">
+      <header
+        className="
+          fixed top-0 left-0 w-full z-50
+          bg-white lg:bg-[#0f4c81]
+          shadow-sm
+          lg:shadow-[0_8px_20px_rgba(255,255,255,0.25)]
+          transition-shadow duration-300
+        "
+      >
         <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
           
           {/* Logo */}
