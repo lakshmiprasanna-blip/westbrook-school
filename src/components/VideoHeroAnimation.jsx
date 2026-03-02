@@ -171,7 +171,7 @@ export default function VideoHeroAnimation({
 
               {/* LEFT SIDE */}
               <div className="w-1/2 flex items-center bg-white">
-                <div className="max-w-xl ml-8 md:ml-12 lg:ml-40 lg:mr-20">
+                <div className="max-w-xl mx-auto lg:ml-[2vw] xl:ml-[8vw] 2xl:ml-[26vw]">
                   
                   <Heading
                     top={slide.headingTop}
