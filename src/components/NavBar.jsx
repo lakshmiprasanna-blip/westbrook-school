@@ -17,37 +17,52 @@ const NAV_ITEMS = [
 export default function NavBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [showShadow, setShowShadow] = useState(false);
 
   /* Lock background scroll when menu is open */
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
 
+  /* Show shadow only when overlapping .navbar-white-trigger */
+  useEffect(() => {
+    const handleScroll = () => {
+      const trigger = document.querySelector(".navbar-white-trigger");
+      if (!trigger) return;
+
+      const rect = trigger.getBoundingClientRect();
+
+      // Navbar height ~80px
+      if (rect.top <= 80 && rect.bottom >= 80) {
+        setShowShadow(true);
+      } else {
+        setShowShadow(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      {/* HEADER */}
       <header
-        className="
+        className={`
           fixed top-0 left-0 w-full z-50
           bg-white lg:bg-[#0f4c81]
-          shadow-sm
-          lg:shadow-[0_8px_20px_rgba(255,255,255,0.25)]
           transition-shadow duration-300
-        "
+          ${showShadow ? "lg:shadow-[0_8px_20px_rgba(255,255,255,0.35)]" : ""}
+        `}
       >
         <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
           
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            {/* Mobile Logo */}
             <Image
               src="/assets/westbrookschool.svg"
               alt="Westbrook International School"
@@ -57,7 +72,6 @@ export default function NavBar() {
               priority
             />
 
-            {/* Desktop Logo */}
             <Image
               src="/assets/westbrook.svg"
               alt="Westbrook International School"
@@ -101,28 +115,21 @@ export default function NavBar() {
         </div>
       </header>
 
-      {/* MOBILE FULLSCREEN MENU */}
+      {/* MOBILE MENU (unchanged) */}
       <div
         className={`
-          lg:hidden
-          fixed inset-0
-          bg-white
-          z-50
-          flex flex-col
+          lg:hidden fixed inset-0 bg-white z-50 flex flex-col
           transition-transform duration-500 ease-in-out
           ${isOpen ? "translate-y-0" : "-translate-y-full"}
         `}
       >
-        {/* Top Bar (Logo + X) */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <Image
             src="/assets/logo-m.png"
             alt="Westbrook International School"
             width={180}
             height={50}
-            className="object-contain"
           />
-
           <button
             onClick={() => setIsOpen(false)}
             className="text-[#1C1B1F]"
@@ -131,7 +138,6 @@ export default function NavBar() {
           </button>
         </div>
 
-        {/* Nav Links */}
         <div className="flex flex-col items-center justify-start px-6 py-9 flex-1 space-y-8">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;

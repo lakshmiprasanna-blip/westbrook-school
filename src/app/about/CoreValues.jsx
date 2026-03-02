@@ -37,7 +37,7 @@ export default function CoreValuesSection() {
     setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-primary overflow-hidden py-14 lg:py-18">
+    <section className="bg-primary overflow-hidden py-14 lg:py-18 navbar-white-trigger">
 
       {/* ===== TOP CONTENT ===== */}
       <div className="container-custom grid grid-cols-1 md:grid-cols-2 items-start md:mt-15 gap-10 mb-8 md:mb-12">
