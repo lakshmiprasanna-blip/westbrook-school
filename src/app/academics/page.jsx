@@ -81,7 +81,7 @@ export default function Academics() {
           introText="How Learning Is Guided at Westbrook"
           tag="SOCIAL AND"
           subTag="EMOTIONAL"
-          description="At Westbrook, learning begins with emotional awareness and self-understanding."
+          description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
           image="/assets/academics-info1.webp"
           showButton
           buttonText="KNOW MORE"
@@ -94,7 +94,7 @@ export default function Academics() {
         <InfoSection
           tag="VALUES IN"
           subTag="DAILY PRACTICE"
-          description="Values are reinforced through classroom interactions and routines."
+          description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
           image="/assets/academics-info2.webp"
           reverse
           showButton
@@ -108,7 +108,7 @@ export default function Academics() {
         <InfoSection
           tag="CLARITY AND"
           subTag="DIRECTION"
-          description="Students develop confidence, discipline, and thoughtful choices."
+          description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
           image="/assets/academics-info3.webp"
           className="lg:pb-20"
         />
