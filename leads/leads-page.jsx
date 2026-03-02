@@ -101,7 +101,38 @@ export default function LeadsPage() {
     );
   }
 
+<<<<<<< HEAD
   /* ================= DASHBOARD ================= */
+=======
+  // --- Dashboard ---
+  const filtered = leads.filter((lead) => {
+    const q = search.toLowerCase();
+    const matchesSearch =
+      !q ||
+      (lead.formData?.name || "").toLowerCase().includes(q) ||
+      (lead.formData?.email || "").toLowerCase().includes(q) ||
+      (lead.formData?.mobile || "").includes(q);
+
+    let matchesDate = true;
+    if (dateFrom) {
+      const from = new Date(dateFrom);
+      from.setHours(0, 0, 0, 0);
+      if (new Date(lead.submittedAt) < from) matchesDate = false;
+    }
+    if (dateTo) {
+      const to = new Date(dateTo);
+      to.setHours(23, 59, 59, 999);
+      if (new Date(lead.submittedAt) > to) matchesDate = false;
+    }
+
+    return matchesSearch && matchesDate;
+  });
+
+  const successCount = leads.filter((l) => l.success).length;
+  const failedCount = leads.filter((l) => !l.success).length;
+  const hasFilters = search || dateFrom || dateTo;
+
+>>>>>>> c84a58e116785705aae5f630902b84c8ab296db8
   return (
     <div className="min-h-screen bg-[#FDF6F2] p-6">
       <div className="max-w-6xl mx-auto">
@@ -132,6 +163,7 @@ export default function LeadsPage() {
         ) : leads.length === 0 ? (
           <p className="text-center py-20 text-gray-400">No leads found</p>
         ) : (
+<<<<<<< HEAD
           <div className="bg-white rounded-xl border overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-[#f5e8e2]">
@@ -179,6 +211,77 @@ export default function LeadsPage() {
                 ))}
               </tbody>
             </table>
+=======
+          <div className="bg-white rounded-xl shadow-sm border border-[#f0ddd5] overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr>
+                <th className="px-6 py-5 text-left">Parent Name</th>
+                <th className="px-6 py-5 text-left">Child Name</th>
+                <th className="px-6 py-5 text-left">Grade</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((lead, i) => (
+                    <tr
+                      key={lead.id || i}
+                      className={`border-t border-[#f5e8e2] ${
+                        i % 2 === 0 ? "bg-white" : "bg-[#fdf6f2]"
+                      }`}
+                    >
+                      <td className="px-4 py-3 text-gray-400">{i + 1}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
+                            lead.success
+                              ? "bg-green-100 text-green-700"
+                              : lead.status === "error"
+                              ? "bg-orange-100 text-orange-600"
+                              : "bg-red-100 text-red-600"
+                          }`}
+                        >
+                          {lead.success ? "Success" : "Failed"}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-gray-800">{lead.formData?.parent_name || "—"}</td>
+                      <td className="px-4 py-3 text-gray-800">{lead.formData?.child_name || "—"}</td>
+                      <td className="px-4 py-3 text-gray-800">{lead.formData?.grade || "—"}</td>
+                      <td className="px-4 py-3 text-gray-600">{lead.formData?.email || "—"}</td>
+                      <td className="px-4 py-3 text-gray-600">{lead.formData?.mobile || "—"}</td>
+                      
+                      <td className="px-4 py-3 text-gray-400 whitespace-nowrap">
+                        {lead.submittedAt
+                          ? new Date(lead.submittedAt).toLocaleString("en-IN", {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : "—"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <button
+                          onClick={() => setViewLead(lead)}
+                          className="px-3 py-1 rounded-lg text-xs font-medium bg-[#A03D13] text-white hover:bg-[#7f3214] transition-colors"
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-4 py-3 border-t border-[#f0ddd5] text-xs text-gray-400">
+              Showing {filtered.length} of {total} leads
+            </div>
+>>>>>>> c84a58e116785705aae5f630902b84c8ab296db8
           </div>
         )}
       </div>
