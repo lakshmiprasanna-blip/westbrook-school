@@ -76,7 +76,7 @@ export default function Academics() {
       <div>
         <InfoSection
           topLabel="Pedagogy"
-          introText="How Learning Is Guided at Westbrook."
+          introText="How Learning Is Guided at Westbrook"
           tag="SOCIAL AND"
           subTag="EMOTIONAL"
           description="At Westbrook, learning begins with emotional awareness and self-understanding."
