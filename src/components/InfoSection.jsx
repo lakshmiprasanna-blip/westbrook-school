@@ -64,21 +64,33 @@ export default function InfoSection({
               className="w-full h-[240px] md:h-[500px] object-cover"
             />
 
-            {/* MOBILE DESCRIPTION (after image) */}
+            {/* MOBILE DESCRIPTION */}
             <div className="md:hidden mt-4">
               <p className="paragraph text-dark text-base leading-relaxed mb-4">
                 {description}
               </p>
 
-              {/* MOBILE BUTTON (after description) */}
+              {/* MOBILE BUTTON */}
               {showButton && (
                 <div>
                   {buttonLink ? (
                     <Link href={buttonLink}>
                       <button className="flex items-center gap-3 text-primary text-md font-bold tracking-wide">
                         {buttonText}
-                        <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px] leading-none">
-                          <span className="-mt-[1px]">→</span>
+                        <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="w-4 h-4"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="M13 6l6 6-6 6" />
+                          </svg>
                         </span>
                       </button>
                     </Link>
@@ -88,9 +100,21 @@ export default function InfoSection({
                       className="flex items-center gap-3 text-primary text-md font-bold tracking-wide"
                     >
                       {buttonText}
-                      <span className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-[12px] leading-none">
-                          <span className="-mt-[1px]">→</span>
-                        </span>
+                      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="w-3 h-3"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="M13 6l6 6-6 6" />
+                        </svg>
+                      </span>
                     </button>
                   )}
                 </div>
@@ -104,21 +128,22 @@ export default function InfoSection({
               <h3 className="heading inline-block mb-2 bg-lightblue text-dark text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {tag}
               </h3>
-              
             )}
-              <br/>
+
+            <br />
+
             {subTag && (
               <h3 className="heading inline-block mb-4 bg-lightblue text-dark text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {subTag}
               </h3>
             )}
 
-            {/* DESKTOP DESCRIPTION ONLY */}
+            {/* DESKTOP DESCRIPTION */}
             <p className="hidden md:block paragraph max-w-[447px] text-dark text-base md:text-lg leading-relaxed mb-5">
               {description}
             </p>
 
-            {/* DESKTOP BUTTON ONLY */}
+            {/* DESKTOP BUTTON */}
             {showButton && (
               <div className="hidden md:block">
                 {buttonLink ? (
