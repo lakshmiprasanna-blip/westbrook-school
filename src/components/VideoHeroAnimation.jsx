@@ -193,7 +193,7 @@ export default function VideoHeroAnimation({
                   {slide.button && (
                     <Link href={slide.button.link}>
                       <button
-                        className={`mt-6 font-semibold transition-all duration-300 rounded-full
+                        className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
                           ${
                             slide.button.variant === "filledLarge"
                               ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
@@ -289,7 +289,7 @@ export default function VideoHeroAnimation({
                     {slide.button && (
   <Link href={slide.button.link}>
     <button
-      className="mt-6 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
+      className="mt-6 px-8 py-3 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
       style={{
         border: "1.5px solid #9B1B2F",
         color: "#9B1B2F",

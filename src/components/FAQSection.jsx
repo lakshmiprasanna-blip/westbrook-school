@@ -44,8 +44,8 @@ export default function FAQSection({ faqData }) {
 
           {/* Left Heading */}
           <div className="flex justify-center md:justify-start">
-            <div className="bg-lightblue px-8 py-4">
-              <h2 className="text-[36px] md:text-[48px] leading-[1] text-dark">
+            <div className="bg-lightblue px-5 py-2">
+              <h2 className="!text-[48px] md:text-[48px] leading-[1] text-dark">
                 FAQ’s
               </h2>
             </div>
@@ -69,8 +69,8 @@ export default function FAQSection({ faqData }) {
                       ${
                         isActive
                           ? "bg-primary text-white"
-                          : isRedDefault
-                          ? "text-maroon hover:bg-maroon hover:text-white"
+                          :isRedDefault
+                          ? "text-dark hover:bg-maroon hover:text-white"
                           : "text-dark hover:bg-maroon hover:text-white"
                       }
                     `}

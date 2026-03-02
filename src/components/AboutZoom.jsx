@@ -125,87 +125,101 @@ export default function AboutZoom() {
   const thumbPosition = progress * maxMove;
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full"
-      style={{
-        height: isMobile
-          ? "55vh"
-          : isTablet
-          ? "180vh"
-          : "250vh",
-      }}
+  <section
+    ref={sectionRef}
+    className="relative w-full"
+    style={{
+      height: isMobile
+        ? "55vh"
+        : isTablet
+        ? "180vh"
+        : "250vh",
+    }}
+  >
+    <div
+      className={`${
+        isMobile ? "relative h-full" : "sticky top-0 h-screen"
+      } overflow-hidden flex items-center justify-center`}
     >
-      <div
-        className={`${
-          isMobile ? "relative h-full" : "sticky top-0 h-screen"
-        } overflow-hidden flex items-center justify-center`}
-      >
-        {/* Background */}
-        <div className="absolute inset-0">
-          <Image
-            src="/assets/scroll-img1.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-top"
-          />
-        </div>
+      {/* Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/scroll-img1.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+      </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-white/65" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-white/70" />
 
-        {/* TEXT */}
-        <div
-          className="relative z-10 text-center px-6"
-          style={
-            isMobile
-              ? {}
-              : {
-                  transform: `scale(${scale})`,
-                  transition: "transform 0.2s ease-out",
-                }
-          }
-        >
-          <h2
-            className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[70px] text-maroon leading-[90%]"
-            style={{
-              opacity:
-                progress > fadeStart
-                  ? titleOpacity
-                  : contentOpacity,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
+      {/* ================= MOBILE LAYOUT (FIGMA EXACT) ================= */}
+      {isMobile && (
+        <div className="relative z-10 text-center px-1">
+          <h2 className="uppercase font-serif font-bold !text-[30px] text-maroon !leading-[95%]">
             LEARNING
           </h2>
 
-          <div
-            className="uppercase tracking-[2px] text-[14px] sm:text-[16px] md:text-[20px] text-maroon"
-            style={{
-              opacity: contentOpacity,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
+          <div className="uppercase !text-[20px] text-[#0F4D81]">
             CHARACTER
           </div>
 
-          <h2
-            className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[70px] text-maroon leading-[90%]"
-            style={{
-              opacity:
-                progress > fadeStart
-                  ? titleOpacity
-                  : contentOpacity,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
+          <h2 className="uppercase font-serif font-bold !text-[30px] text-maroon leading-[95%]">
             THAT SHAPES
           </h2>
         </div>
+      )}
 
-        {/* Scroll Indicator */}
-        {!isMobile && (
+      {/* ================= DESKTOP LAYOUT (UNCHANGED) ================= */}
+      {!isMobile && (
+        <>
+          <div
+            className="relative z-10 text-center px-6"
+            style={{
+              transform: `scale(${scale})`,
+              transition: "transform 0.2s ease-out",
+            }}
+          >
+            <h2
+              className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[70px] text-maroon leading-[90%]"
+              style={{
+                opacity:
+                  progress > fadeStart
+                    ? titleOpacity
+                    : contentOpacity,
+                transition: "opacity 0.3s ease-out",
+              }}
+            >
+              LEARNING
+            </h2>
+
+            <div
+              className="uppercase tracking-[2px] text-[14px] sm:text-[16px] md:text-[20px] text-maroon"
+              style={{
+                opacity: contentOpacity,
+                transition: "opacity 0.3s ease-out",
+              }}
+            >
+              CHARACTER
+            </div>
+
+            <h2
+              className="uppercase font-serif font-bold text-[36px] sm:text-[50px] md:text-[80px] lg:text-[70px] text-maroon leading-[90%]"
+              style={{
+                opacity:
+                  progress > fadeStart
+                    ? titleOpacity
+                    : contentOpacity,
+                transition: "opacity 0.3s ease-out",
+              }}
+            >
+              THAT SHAPES
+            </h2>
+          </div>
+
+          {/* Scroll Indicator */}
           <div
             ref={trackRef}
             className={`absolute right-6 ${
@@ -214,7 +228,6 @@ export default function AboutZoom() {
             style={{
               height: `${trackHeight}px`,
               width: "4px",
-             
             }}
           >
             <div
@@ -229,8 +242,9 @@ export default function AboutZoom() {
               }}
             />
           </div>
-        )}
-      </div>
-    </section>
-  );
+        </>
+      )}
+    </div>
+  </section>
+);
 }

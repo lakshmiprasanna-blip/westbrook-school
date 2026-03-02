@@ -20,29 +20,30 @@ const leadershipData = [
     role: "FOUNDER & DIRECTOR",
     image: "/assets/leader1.webp",
     description:
-      "Mrs. Koduru Padma Praveena brings over three decades of rich experience in school education. She served as Principal and Teacher at CV Raman Primary School and Suprayoga Residential School in Nellore District from 1992 to 2000. Since 2001, she has been a key pillar at Tapasya High School, Hyderabad, serving as Principal and contributing significantly to academic planning, school administration, and teacher mentoring. Her journey reflects deep commitment, stability, and a child-centric approach to educational leadership."
+      "Mrs. Sanjana Reddy is the Founder of Westbrook International School, guided by a strong personal belief in value-led and balanced education. While her professional background lies in a well-established family real estate business, her decision to establish Westbrook grew from her close connection with children and her perspective as a parent. Her focus has been on creating a school where strong academic foundations, personal guidance, and values-based learning come together, allowing children to grow with clarity and without excessive academic pressure."
   },
   {
     title: "Mrs. K. Padma Praveena",
     role: "PRINCIPAL & ACADEMIC LEADER",
     image: "/assets/leader2.webp",
-    description:
-      `Mrs. Koduru Padma Praveena brings over three decades of rich experience in school education. She served as Principal and Teacher at CV Raman Primary School and Suprayoga Residential School in Nellore District from 1992 to 2000. Since 2001, she has been a key pillar at Tapasya High School, Hyderabad, serving as Principal and contributing significantly to academic planning, school administration, and teacher mentoring. Her journey reflects deep commitment, stability, and a child-centric approach to educational leadership.`
-  },
+   description:
+      "Mrs. Koduru Padma Praveena brings over three decades of rich experience in school education. She served as Principal and Teacher at CV Raman Primary School and Suprayoga Residential School in Nellore District from 1992 to 2000. Since 2001, she has been a key pillar at Tapasya High School, Hyderabad, serving as Principal and contributing significantly to academic planning, school administration, and teacher mentoring. Her journey reflects deep commitment, stability, and a child-centric approach to educational leadership."},
   {
     title: "Mr. K Madhusudhana",
     role: "FOUNDER & ACADEMIC LEADER",
     image: "/assets/leader3.webp",
     description:
-      "Sri Koduru Madhusudhana Reddy is a senior academic leader and education administrator with over four decades of experience in Chemistry education. He has founded and led institutions ranging from CV Raman Educational Institutes in Nellore to Tapasya Educational Institutes in Hyderabad. Renowned for inspiring students and mentoring educators and administrators, he is also versatile across the social sciences, Biology, and English. Respected for his academic rigour and holistic outlook, he remains an avid learner committed to continuous growth and evolution."
+      `Sri Koduru Madhusudhana Reddy is a senior academic leader and education administrator with over four decades of experience in Chemistry education. He has founded and led institutions ranging from CV Raman Educational Institutes in Nellore to Tapasya Educational Institutes in Hyderabad. Renowned for inspiring students and mentoring educators and administrators, he is also versatile across the social sciences, Biology, and English. Respected for his academic rigour and holistic outlook, he remains an avid learner committed to continuous growth and evolution.`
+
+    
   }
 ];
   return (
-    <>
+    <>-
       <PageBanner image="/assets/about-banner.webp" />
       <FloatingCTAs />
       <section className="w-full bg-white py-12 md:py-25">
-  <div className="container-custom ">
+        <div className="container-custom ">
 
     <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
 

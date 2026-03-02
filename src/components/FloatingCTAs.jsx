@@ -21,7 +21,7 @@ export default function FloatingCTAs() {
               bg-maroon text-white cursor-pointer
               text-[11px] font-semibold tracking-wide
               w-[44px] h-[100px]
-              flex items-center justify-center
+              flex items-center cursor-pointer justify-center
               rotate-180
               [writing-mode:vertical-rl]
             "
@@ -36,7 +36,7 @@ export default function FloatingCTAs() {
               bg-primary text-white cursor-pointer
               text-[11px] font-semibold tracking-wide
               w-[44px] h-[100px]
-              flex items-center justify-center
+              flex items-center cursor-pointer justify-center
               rotate-180
               [writing-mode:vertical-rl]
             "
