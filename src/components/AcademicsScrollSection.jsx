@@ -30,7 +30,7 @@ export default function ScrollSlider({
       <div className="container-custom">
 
         {/* MOBILE TITLE */}
-        <div className="md:hidden mb-5">
+        <div className="md:hidden mb-5 text-center">
           <div className="bg-[#A2D5EB] inline-block px-6 py-2">
             <h2 className="text-[#2B292A]">
               OUR APPROACH

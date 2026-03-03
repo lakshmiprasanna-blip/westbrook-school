@@ -37,7 +37,7 @@ export default function InfoSection({
 
       {/* CONTENT */}
       <div
-        className={`container-custom mx-auto px-6 pb-6 md:pb-6 ${
+        className={`container-custom mx-auto px-6 pb-6 ${
           topLabel ? "pt-24 md:pt-28" : "pt-6 md:pt-24"
         }`}
       >
@@ -52,7 +52,7 @@ export default function InfoSection({
         <div
           className={`flex flex-col md:flex-row ${
             reverse ? "md:flex-row-reverse" : ""
-          } items-start md:items-center gap-3 md:gap-24`}
+          } items-start md:items-center gap-6 md:gap-24`}
         >
           {/* IMAGE */}
           <div className="w-full md:w-2/3 order-2 md:order-1">
@@ -69,57 +69,27 @@ export default function InfoSection({
               <p className="paragraph text-dark text-base leading-relaxed mb-4">
                 {description}
               </p>
-
-              {/* MOBILE BUTTON */}
-              {showButton && (
-                <div>
-                  {buttonLink ? (
-                    <Link href={buttonLink}>
-                      <button className="flex items-center gap-3 text-primary text-md font-bold tracking-wide">
-                        {buttonText}
-                        <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="w-4 h-4"
-                          >
-                            <path d="M5 12h14" />
-                            <path d="M13 6l6 6-6 6" />
-                          </svg>
-                        </span>
-                      </button>
-                    </Link>
-                  ) : (
-                    <button
-                      onClick={onButtonClick}
-                      className="flex items-center gap-3 text-primary text-md font-bold tracking-wide"
-                    >
-                      {buttonText}
-                      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="w-3 h-3"
-                        >
-                          <path d="M5 12h14" />
-                          <path d="M13 6l6 6-6 6" />
-                        </svg>
-                      </span>
-                    </button>
-                  )}
-                </div>
-              )}
             </div>
+
+            {/* BUTTON (MOBILE POSITION) */}
+            {showButton && (
+              <div className="md:hidden mt-4">
+                {buttonLink ? (
+                  <Link href={buttonLink}>
+                    <button className="border border-maroon text-maroon px-3 py-2 rounded-full text-xs font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
+                      {buttonText}
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    onClick={onButtonClick}
+                    className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer"
+                  >
+                    {buttonText}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           {/* TEXT */}
@@ -143,7 +113,7 @@ export default function InfoSection({
               {description}
             </p>
 
-            {/* DESKTOP BUTTON */}
+            {/* BUTTON (DESKTOP POSITION) */}
             {showButton && (
               <div className="hidden md:block">
                 {buttonLink ? (

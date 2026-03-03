@@ -61,7 +61,9 @@ export default function Explore() {
 
               <div className="inline-block bg-lightblue px-3 sm:px-5 py-1 sm:py-2 mb-3 sm:mb-5">
                 <div
-                  className="leading-[110%] text-[20px] sm:text-[26px] md:text-[32px] lg:text-[40px]"
+                  className="font-playfair !font-bold 
+                           !text-[26px] md:!text-[34px] lg:!text-[40px] 
+                           !leading-[100%]"
                   style={{
                     fontFamily: "Playfair Display, serif",
                     fontWeight: 700,
@@ -73,10 +75,10 @@ export default function Explore() {
               </div>
 
               <div
-                className="leading-[120%] text-[16px] sm:text-[20px] md:text-[24px] lg:text-[30px]"
+                className="leading-[120%] text-[18px] sm:text-[20px] md:text-[24px] lg:text-[30px]"
                 style={{
                   fontFamily: "Playfair Display, serif",
-                  fontWeight: 700,
+                  fontWeight: 800,
                   color: "#9B1B2F",
                 }}
               >
@@ -159,59 +161,84 @@ export default function Explore() {
               {/* Buttons */}
               <div className="flex justify-center mt-8">
                 <ScrollButton
-                    direction="left"
-                    onClick={() => {
-                      const slider = sliderRef.current;
-                      if (!slider) return;
-
-                      slider.scrollBy({
-                        left: -slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1),
-                        behavior: "smooth",
-                      });
-                    }}
-                    className="border-r border-white/30"
-                  />
-                <ScrollButton
-                  direction="right"
+                  direction="left"
                   onClick={() => {
                     const slider = sliderRef.current;
                     if (!slider) return;
 
-                    slider.scrollBy({
-                      left: slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1),
-                      behavior: "smooth",
-                    });
+                    const slideWidth =
+                      slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1);
+
+                    if (slider.scrollLeft <= 0) {
+                      // If at first slide → go to last
+                      slider.scrollTo({
+                        left: slider.scrollWidth - slider.offsetWidth,
+                        behavior: "smooth",
+                      });
+                    } else {
+                      slider.scrollBy({
+                        left: -slideWidth,
+                        behavior: "smooth",
+                      });
+                    }
                   }}
+                  className="border-r border-white/30"
                 />
-              </div>
+                <ScrollButton
+              direction="right"
+              onClick={() => {
+                const slider = sliderRef.current;
+                if (!slider) return;
 
-            </div>
+                const slideWidth =
+                  slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1);
 
-          </div>
-        </section>
+                if (
+                  slider.scrollLeft + slider.offsetWidth >=
+                  slider.scrollWidth - 5
+                ) {
+                  // If at last slide → go back to first
+                  slider.scrollTo({
+                    left: 0,
+                    behavior: "smooth",
+                  });
+                } else {
+                  slider.scrollBy({
+                    left: slideWidth,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+            />
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </section>
 
 
 
-        <GallerySection/>
+                    <GallerySection/>
 
 
-        <ImageContentSection
-  imageSrc="/assets/footer-exploree.png"
-  mobileImageSrc="/assets/explore-mobile.png"
-  title="We'd love to hear from you!"
-  description="Feel free to get in touch, or apply now"
-  bgColor="#ffffff"
-  primaryBtnText="CONTACT US"
-  secondaryBtnText="APPLY NOW"
-  breakText={false}
-  onPrimaryClick={() => {
-          router.push("/contact"); // ✅ now it works
-        }}
-  onSecondaryClick={() => {
-    setFormType("detailed");
-    setShowPopup(true);
-  }}
-/>
+                    <ImageContentSection
+              imageSrc="/assets/footer-exploree.png"
+              mobileImageSrc="/assets/explore-mobile.png"
+              title="We'd love to hear from you!"
+              description="Feel free to get in touch, or apply now"
+              bgColor="#ffffff"
+              primaryBtnText="CONTACT US"
+              secondaryBtnText="APPLY NOW"
+              breakText={false}
+              onPrimaryClick={() => {
+                      router.push("/contact"); // ✅ now it works
+                    }}
+              onSecondaryClick={() => {
+                setFormType("detailed");
+                setShowPopup(true);
+              }}
+            />
 
   {/* ✅ POPUP MODAL */}
       <AnimatePresence>
@@ -233,9 +260,9 @@ export default function Explore() {
             >
               {/* Close Button */}
                                            <button
-    onClick={() => setFormType(null)}
-    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-  >
+            onClick={() => setFormType(null)}
+            className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+          >
     ✕
   </button>
 

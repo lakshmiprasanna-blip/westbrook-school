@@ -73,8 +73,8 @@ export default function LearningSpacesSection() {
       <div className="container-custom">
 
         {/* ===== Section Heading ===== */}
-        <div className=" text-start md:text-center mb-10 lg:mb-12">
-          <div className="inline-block bg-lightblue px-5 py-1.5 mb-4">
+        <div className="text-center mb-10 lg:mb-12">
+          <div className=" inline-block bg-lightblue px-5 py-1.5 mb-4">
             <h2 className="font-playfair !font-bold 
                            !text-[28px] md:!text-[34px] lg:!text-[40px] 
                            !leading-[100%]">
@@ -83,7 +83,7 @@ export default function LearningSpacesSection() {
           </div>
 
           <p className="paragraph max-w-4xl mx-auto 
-                        font-montserrat
+                        font-montserrat !text-start
                         !text-[16px] md:!text-[17px] 
                         !leading-[24px] 
                         text-dark">
@@ -199,7 +199,7 @@ export default function LearningSpacesSection() {
             ))}
           </div>
 
-          <div className="flex mt-1">
+          <div className="flex mt-8  justify-center">
             <ScrollButton
               direction="left"
               onClick={prevMobile}

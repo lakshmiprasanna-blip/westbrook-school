@@ -7,13 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function ExperienceSection() {
   const images = [
-    "/assets/experience1.png",
-    "/assets/experience2.png",
-    "/assets/experience3.png",
-    "/assets/experience4.png",
-    "/assets/experience5.png",
-    "/assets/experience6.png",
-    "/assets/experience7.png",
+    "/assets/experience1.webp",
+    "/assets/experience2.webp",
+    "/assets/experience3.webp",
+    "/assets/experience4.webp",
+    "/assets/experience5.webp",
+    "/assets/experience6.webp",
+    
   ];
 
   const [current, setCurrent] = useState(1);
@@ -41,7 +41,7 @@ export default function ExperienceSection() {
         <div className="flex items-center justify-center gap-6">
 
           {/* Center Image */}
-          <div className="relative w-full md:w-[1000px] h-[360px] md:h-[520px] overflow-hidden">
+          <div className="relative w-full md:w-[2000px] h-[360px] md:h-[520px] overflow-hidden">
             <AnimatePresence mode="sync">
               <motion.div
                 key={current}
@@ -59,7 +59,7 @@ export default function ExperienceSection() {
                   alt="Experience"
                   fill
                   sizes="100vw"
-                  className="object-cover object-center"
+                  className="object-cover"
                   
                 style={{ objectPosition: "center 20%" }}
                   priority

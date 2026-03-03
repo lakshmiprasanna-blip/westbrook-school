@@ -292,24 +292,24 @@ export default function VideoHeroAnimation({
                       </p>
                     )}
                     {slide.button && (
-  <Link href={slide.button.link}>
-    <button
-      className="mt-6 px-8 py-3 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
-      style={{
-        border: "1.5px solid #9B1B2F",
-        color: "#9B1B2F",
-      }}
-    >
-      {slide.button.text}
-    </button>
-  </Link>
-)}
+                    <Link href={slide.button.link}>
+                      <button
+                        className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
+                        style={{
+                          border: "1px solid #9B1B2F",
+                          color: "#9B1B2F",
+                        }}
+                      >
+                        {slide.button.text}
+                      </button>
+                    </Link>
+                  )}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="container-custom mt-4 mb-8">
+            <div className="container-custom flex justify-center mt-4 mb-8">
               <div className="flex">
                 <ScrollButton
                   direction="left"
