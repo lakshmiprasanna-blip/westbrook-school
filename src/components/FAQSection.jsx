@@ -45,7 +45,7 @@ export default function FAQSection({ faqData }) {
           {/* Left Heading */}
           <div className="flex justify-center md:justify-start">
             <div className="bg-lightblue px-5 py-2">
-              <h2 className="!text-[48px] md:text-[48px] leading-[1] text-dark">
+              <h2 className="!text-[38px] md:text-[48px] leading-[1] text-dark">
                 FAQ’s
               </h2>
             </div>
@@ -118,7 +118,7 @@ export default function FAQSection({ faqData }) {
                   </button>
 
                   {isActive && (
-                    <div className="bg-white px-6 md:px-8 py-6 text-[18px] font-semibold leading-relaxed">
+                    <div className="bg-white px-6 md:px-8 py-6 text-[18px]  leading-relaxed">
                       {item.answer}
                     </div>
                   )}

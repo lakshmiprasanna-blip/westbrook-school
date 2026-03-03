@@ -95,18 +95,18 @@ export default function InfoSection({
           {/* TEXT */}
           <div className="w-full md:w-1/2 order-1 md:order-2">
             {tag && (
-              <h3 className="heading inline-block mb-2 bg-lightblue text-dark text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
-                {tag}
-              </h3>
-            )}
+            <h3 className="inline-block mb-2 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+              {tag}
+            </h3>
+          )}
 
-            <br />
+          <br />
 
-            {subTag && (
-              <h3 className="heading inline-block mb-4 bg-lightblue text-dark text-3xl md:text-5xl px-3 py-1 uppercase tracking-wider">
-                {subTag}
-              </h3>
-            )}
+          {subTag && (
+            <h3 className="inline-block mb-4 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+              {subTag}
+            </h3>
+          )}
 
             {/* DESKTOP DESCRIPTION */}
             <p className="hidden md:block paragraph max-w-[447px] text-dark text-base md:text-lg leading-relaxed mb-5">

@@ -32,7 +32,7 @@ export default function ScrollSlider({
         {/* MOBILE TITLE */}
         <div className="md:hidden mb-5 text-center">
           <div className="bg-[#A2D5EB] inline-block px-6 py-2">
-            <h2 className="text-[#2B292A]">
+            <h2 className="text-[#2B292A] !text-3xl">
               OUR APPROACH
             </h2>
           </div>
@@ -54,7 +54,7 @@ export default function ScrollSlider({
 
                 {/* MOBILE */}
                 <div className="md:hidden w-full">
-                  <div className="relative w-full h-[320px]">
+                  <div className="relative w-full h-[290px]">
                     <Image
                       src={slide.image}
                       alt={slide.title || "Slide image"}

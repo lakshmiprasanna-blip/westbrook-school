@@ -45,7 +45,7 @@ export default function CoreValuesSection() {
         {/* LEFT STRIP */}
         <div className="flex justify-center md:justify-start">
           <div className="bg-[#A2D5EB] px-6 py-2 inline-block w-fit">
-            <h2 className="leading-[100%] text-[#2B292A]">
+            <h2 className="leading-[100%] !text-3xl  text-[#2B292A]">
               OUR CORE VALUES
             </h2>
           </div>

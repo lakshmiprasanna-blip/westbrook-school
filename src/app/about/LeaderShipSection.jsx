@@ -119,7 +119,7 @@ export default function LeadershipSection({ data }) {
         {/* Heading */}
         <div className="text-center mb-12">
           <div className="inline-block bg-lightblue px-5 py-1.5">
-            <h2 className="font-playfair font-bold text-5xl">LEADERSHIP TEAM</h2>
+            <h2 className="font-playfair font-bold !text-3xl ">LEADERSHIP TEAM</h2>
           </div>
         </div>
 
