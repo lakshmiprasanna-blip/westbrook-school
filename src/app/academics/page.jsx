@@ -12,8 +12,7 @@ import EnquiryForm from "../../components/FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Academics() {
-  const [showPopup, setShowPopup] = useState(false);
-  const [variant, setVariant] = useState("simple");
+  
     const [formType, setFormType] = useState(null);
      const router = useRouter();
 
@@ -86,10 +85,9 @@ export default function Academics() {
           image="/assets/academics-info1.webp"
           showButton
           buttonText="KNOW MORE"
-          onButtonClick={() => {
-            setVariant("simple");
-            setShowPopup(true);
-          }}
+                   onButtonClick={() => {
+  setFormType("simple");
+}}
         />
 
         <InfoSection
@@ -100,10 +98,9 @@ export default function Academics() {
           reverse
           showButton
           buttonText="KNOW MORE"
-          onButtonClick={() => {
-            setVariant("simple");
-            setShowPopup(true);
-          }}
+         onButtonClick={() => {
+  setFormType("simple");
+}}
         />
 
         <InfoSection
@@ -129,9 +126,8 @@ export default function Academics() {
           router.push("/contact"); // ✅ now it works
         }}
         onSecondaryClick={() => {
-          setFormType("simple");
-          setShowPopup(true);
-        }}
+  setFormType("simple");
+}}
       />
 
   {/* ✅ POPUP MODAL */}
