@@ -105,7 +105,7 @@ export default function Footer() {
             </div>
 
             {/* Navigation */}
-            <div className="space-y-4 text-[14px] uppercase tracking-wide text-white ml-6 flex-shrink-0">
+            <div className="space-y-5 text-[14px] uppercase tracking-wide text-white ml-6 flex-shrink-0">
               <Link href="/about" className="block hover:opacity-80">ABOUT US</Link>
               <Link href="/admissions" className="block hover:opacity-80">ADMISSIONS</Link>
               <Link href="/academics" className="block hover:opacity-80">ACADEMICS</Link>
