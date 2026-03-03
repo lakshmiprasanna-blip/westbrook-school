@@ -222,23 +222,6 @@ export default function Explore() {
                     <GallerySection/>
 
 
-        <ImageContentSection
-  imageSrc="/assets/footer-exploree.png"
-  mobileImageSrc="/assets/explore-mobile.png"
-  title="We'd love to hear from you!"
-  description="Feel free to get in touch, or apply now"
-  bgColor="#ffffff"
-  primaryBtnText="CONTACT US"
-  secondaryBtnText="APPLY NOW"
-  breakText={false}
-  onPrimaryClick={() => {
-          router.push("/contact"); // ✅ now it works
-        }}
-  onSecondaryClick={() => {
-    setFormType("simple");
-    setShowPopup(true);
-  }}
-/>
                     <ImageContentSection
               imageSrc="/assets/footer-exploree.png"
               mobileImageSrc="/assets/explore-mobile.png"
