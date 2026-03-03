@@ -17,7 +17,7 @@ export default function ContactCTA({
 const router = useRouter();
   return (
     <>
-      <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
+      <section className="relative w-full h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden ">
         {/* Background Image */}
         <Image
           src={imageSrc}
@@ -38,7 +38,7 @@ const router = useRouter();
 
         {/* Content */}
         <div className="max-w-xl relative z-10 h-full px-6 mx-auto flex flex-col justify-center items-center text-center">
-          <h2 className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] leading-[1.3]">
+          <h2 className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] leading-[1.3] ">
             {title}
           </h2>
 

@@ -129,7 +129,7 @@ export default function Academics() {
           router.push("/contact"); // ✅ now it works
         }}
         onSecondaryClick={() => {
-          setFormType("detailed");
+          setFormType("simple");
           setShowPopup(true);
         }}
       />
