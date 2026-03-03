@@ -51,8 +51,8 @@ export default function Explore() {
       <LearningSpacesSection />
 
   
-       {/* ================= SAFETY & WELL BEING SECTION ================= */}
-       
+         {/* ================= SAFETY & WELL BEING SECTION ================= */}
+
         <section className="w-full bg-offwhite py-12 md:py-16 lg:py-20">
           <div className="container-custom">
 
@@ -62,8 +62,8 @@ export default function Explore() {
               <div className="inline-block bg-lightblue px-3 sm:px-5 py-1 sm:py-2 mb-3 sm:mb-5">
                 <div
                   className="font-playfair !font-bold 
-                           !text-[26px] md:!text-[34px] lg:!text-[40px] 
-                           !leading-[100%]"
+                            !text-[26px] md:!text-[34px] lg:!text-[40px] 
+                            !leading-[100%]"
                   style={{
                     fontFamily: "Playfair Display, serif",
                     fontWeight: 700,
@@ -87,7 +87,7 @@ export default function Explore() {
 
             </div>
 
-            {/* ================= DESKTOP (UNCHANGED) ================= */}
+            {/* ================= DESKTOP ================= */}
             <div className="hidden lg:grid grid-cols-4 gap-6">
               {cards.map((item, index) => (
                 <div
@@ -95,14 +95,14 @@ export default function Explore() {
                   className="bg-primary text-center text-offwhite px-8 py-8"
                 >
                   <div className="w-28 h-28 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
-                </div>
+                    <Image
+                      src={item.icon}
+                      alt={item.title}
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                    />
+                  </div>
 
                   <div className="mb-3 text-[21px] font-bold font-playfair">
                     {item.title}
@@ -115,35 +115,35 @@ export default function Explore() {
               ))}
             </div>
 
-            {/* ================= TAB + MOBILE SLIDER ================= */}
+            {/* ================= MOBILE + TAB SLIDER ================= */}
             <div className="lg:hidden relative overflow-hidden">
 
               <div
                 ref={sliderRef}
-                className="flex overflow-x-auto scroll-smooth no-scrollbar"
+                className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory"
               >
                 {cards.map((item, index) => (
-                 <div
-                  key={index}
-                  className="
-                    min-w-full 
-                    md:min-w-[50%] 
-                    px-2
-                    flex
-                  "
-                >
-                   <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12 h-full flex flex-col">
+                  <div
+                    key={index}
+                    className="
+                      min-w-full 
+                      md:min-w-[50%] 
+                      px-2
+                      flex
+                      snap-start
+                    "
+                  >
+                    <div className="bg-primary text-center text-offwhite px-8 py-10 md:py-12 h-full flex flex-col">
 
-                      {/* Bigger Circle */}
                       <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-6 bg-offwhite rounded-full flex items-center justify-center">
-                      <Image
-                        src={item.icon}
-                        alt={item.title}
-                        width={72}
-                        height={72}
-                        className="object-contain"
-                      />
-                    </div>
+                        <Image
+                          src={item.icon}
+                          alt={item.title}
+                          width={72}
+                          height={72}
+                          className="object-contain"
+                        />
+                      </div>
 
                       <div className="mb-4 text-[20px] md:text-[22px] font-bold font-playfair">
                         {item.title}
@@ -169,53 +169,45 @@ export default function Explore() {
                     const slideWidth =
                       slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1);
 
-                    if (slider.scrollLeft <= 0) {
-                      // If at first slide → go to last
-                      slider.scrollTo({
-                        left: slider.scrollWidth - slider.offsetWidth,
-                        behavior: "smooth",
-                      });
-                    } else {
-                      slider.scrollBy({
-                        left: -slideWidth,
-                        behavior: "smooth",
-                      });
-                    }
+                    const isAtStart = slider.scrollLeft <= 0;
+
+                    slider.scrollTo({
+                      left: isAtStart
+                        ? slider.scrollWidth - slider.offsetWidth
+                        : slider.scrollLeft - slideWidth,
+                      behavior: "smooth",
+                    });
                   }}
                   className="border-r border-white/30"
                 />
+
                 <ScrollButton
-              direction="right"
-              onClick={() => {
-                const slider = sliderRef.current;
-                if (!slider) return;
+                  direction="right"
+                  onClick={() => {
+                    const slider = sliderRef.current;
+                    if (!slider) return;
 
-                const slideWidth =
-                  slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1);
+                    const slideWidth =
+                      slider.offsetWidth / (window.innerWidth >= 768 ? 2 : 1);
 
-                if (
-                  slider.scrollLeft + slider.offsetWidth >=
-                  slider.scrollWidth - 5
-                ) {
-                  // If at last slide → go back to first
-                  slider.scrollTo({
-                    left: 0,
-                    behavior: "smooth",
-                  });
-                } else {
-                  slider.scrollBy({
-                    left: slideWidth,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-            />
-                          </div>
+                    const isAtEnd =
+                      slider.scrollLeft + slider.offsetWidth >=
+                      slider.scrollWidth - 5;
 
-                        </div>
+                    slider.scrollTo({
+                      left: isAtEnd
+                        ? 0
+                        : slider.scrollLeft + slideWidth,
+                      behavior: "smooth",
+                    });
+                  }}
+                />
+              </div>
 
-                      </div>
-                    </section>
+            </div>
+
+          </div>
+        </section>
 
 
 
@@ -235,7 +227,7 @@ export default function Explore() {
                       router.push("/contact"); // ✅ now it works
                     }}
               onSecondaryClick={() => {
-                setFormType("detailed");
+                setFormType("simple");
                 setShowPopup(true);
               }}
             />
