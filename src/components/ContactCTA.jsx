@@ -48,8 +48,18 @@ const router = useRouter();
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-  onClick={() => router.push("/contact")}
+          <button
+  onClick={() => {
+    if (typeof window !== "undefined" && window.location.pathname === "/contact") {
+      // ✅ Already on contact page → scroll
+      document
+        .getElementById("contact-form")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // ✅ Not on contact page → redirect
+      router.push("/contact");
+    }
+  }}
   className="px-7 py-3 rounded-full text-white text-sm md:text-base font-semibold bg-maroon cursor-pointer"
 >
   CONTACT US

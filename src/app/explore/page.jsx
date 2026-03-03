@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
 import FloatingCTAs from "../../components/FloatingCTAs";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
@@ -15,6 +15,8 @@ export default function Explore() {
   const [formType, setFormType] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
   const sliderRef = useRef(null);
+       const router = useRouter();
+
   const cards = [
   {
     title: "A Safe Campus",
@@ -203,9 +205,8 @@ export default function Explore() {
   secondaryBtnText="APPLY NOW"
   breakText={false}
   onPrimaryClick={() => {
-    setFormType("simple");
-    setShowPopup(true);
-  }}
+          router.push("/contact"); // ✅ now it works
+        }}
   onSecondaryClick={() => {
     setFormType("detailed");
     setShowPopup(true);

@@ -9,7 +9,7 @@ export default function ContactSection() {
 
   return (
 
-    <section className="w-full bg-offwhite py-14 lg:py-20">
+    <section className="w-full bg-offwhite py-14 lg:py-20" id="contact-form"  >
 
       <div className="container-custom">
 
