@@ -310,7 +310,7 @@ export default function VideoHero({
             </div>
 
             {/* Buttons */}
-            <div className="container-custom mt-4 mb-8">
+            <div className="container-custom mt-4 mb-8 flex justify-center">
               <div className="flex">
                 <ScrollButton
                   direction="left"
