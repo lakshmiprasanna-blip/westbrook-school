@@ -19,8 +19,13 @@ export default function ImageContentSection({
     <section className="w-full pt-10" style={{ backgroundColor: bgColor }}>
       <div className="container-custom mx-auto px-6">
 
+       
         {/* MOBILE LAYOUT: text on top, image below */}
-        <div className="flex flex-col md:hidden gap-6 items-center text-center">
+        <div
+          className={`flex flex-col md:hidden items-center text-center ${
+            reverse ? "gap-1" : "gap-6"
+          }`}
+        >
           {/* CONTENT — top on mobile */}
           <div className="w-full">
             <h2
@@ -30,7 +35,11 @@ export default function ImageContentSection({
             >
               {title}
             </h2>
-            <p className="mt-4 text-gray-600 max-w-lg mx-auto">{description}</p>
+
+            <p className="mt-4 text-gray-600 max-w-lg mx-auto">
+              {description}
+            </p>
+
             <div className="mt-6 flex flex-row gap-3 justify-center flex-wrap">
               {primaryBtnText && (
                 <button
@@ -41,6 +50,7 @@ export default function ImageContentSection({
                   {primaryBtnText}
                 </button>
               )}
+
               {secondaryBtnText && (
                 <button
                   onClick={onSecondaryClick}
@@ -54,15 +64,23 @@ export default function ImageContentSection({
           </div>
 
           {/* IMAGE — bottom on mobile */}
-          <div className="w-full relative h-[300px] overflow-hidden">
-            <Image
-              src={mobileImageSrc || imageSrc}
-              alt="section image"
-              fill
-              priority
-              // className="object-cover"
-            />
-          </div>
+          <div
+              className={`w-[110%] relative overflow-hidden
+                ${
+                  reverse
+                    ? "h-[360px] min-[425px]:h-[400px]"
+                    : "h-[300px] min-[425px]:h-[460px]"
+                }
+              `}
+            >
+              <Image
+                src={mobileImageSrc || imageSrc}
+                alt="section image"
+                fill
+                priority
+                className="object-cover object-bottom"
+              />
+            </div>
         </div>
 
         {/* DESKTOP LAYOUT: side by side */}
@@ -75,16 +93,16 @@ export default function ImageContentSection({
           <div className="w-full md:w-4/5">
             <div className="relative w-full h-[480px] overflow-hidden">
             <Image
-  src={imageSrc}
-  alt="section image"
-  fill
-  priority
-  className={`
-    object-contain
-    lg:object-cover
-    ${reverse ? "object-[center_85%]" : ""}
-  `}
-/>
+          src={imageSrc}
+          alt="section image"
+          fill
+          priority
+          className={`
+            object-contain
+            lg:object-cover
+            ${reverse ? "object-[center_85%]" : ""}
+          `}
+        />
             </div>
           </div>
 

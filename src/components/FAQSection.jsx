@@ -30,7 +30,7 @@ const faqData = [
   },
 ];
 
-export default function FAQSection({ faqData }) {
+export default function FAQSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -69,7 +69,7 @@ export default function FAQSection({ faqData }) {
                       ${
                         isActive
                           ? "bg-primary text-white"
-                          :isRedDefault
+                          : isRedDefault
                           ? "text-dark hover:bg-maroon hover:text-white"
                           : "text-dark hover:bg-maroon hover:text-white"
                       }
@@ -117,12 +117,21 @@ export default function FAQSection({ faqData }) {
                     </span>
                   </button>
 
-                  {isActive && (
-                    <div className="bg-white px-6 md:px-8 py-6 text-[18px]  leading-relaxed">
-                      {item.answer}
-                    </div>
+                  {/* Mobile Divider when CLOSED */}
+                  {!isActive && (
+                    <div className="block md:hidden h-px bg-gray-200 w-full"></div>
                   )}
 
+                  {isActive && (
+                    <>
+                      <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
+                        {item.answer}
+                      </div>
+
+                      {/* Mobile Divider when OPEN */}
+                      <div className="block md:hidden h-px bg-gray-200 w-full"></div>
+                    </>
+                  )}
                 </div>
               );
             })}

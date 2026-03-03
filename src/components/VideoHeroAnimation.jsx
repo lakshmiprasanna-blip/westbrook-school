@@ -9,6 +9,7 @@ export default function VideoHeroAnimation({
   videoSrc,
   title,
   slides = [],
+  onPopupOpen, // ✅ ADDED (nothing else changed)
 }) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
@@ -45,7 +46,6 @@ export default function VideoHeroAnimation({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
 
-  /* ---------------- MOBILE NAV ---------------- */
   const nextMobile = () =>
     setMobileIndex((prev) =>
       prev === slides.length - 1 ? 0 : prev + 1
@@ -56,7 +56,6 @@ export default function VideoHeroAnimation({
       prev === 0 ? slides.length - 1 : prev - 1
     );
 
-  /* ---------------- HEADING ---------------- */
   const Heading = ({ top, bottom }) => (
     <div className="mb-4">
       {top && (
@@ -73,7 +72,6 @@ export default function VideoHeroAnimation({
           </h2>
         </div>
       )}
-
       {bottom && (
         <div className="bg-lightblue inline-block px-4 py-2">
           <h2
@@ -99,44 +97,42 @@ export default function VideoHeroAnimation({
           className="relative w-full"
           style={{ height: `${(slides.length + 1) * 100}vh` }}
         >
-          {/* VIDEO SLIDE */}
           <div className="sticky top-0 h-screen z-10">
-             <div className="w-full h-screen relative">
-                          <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="absolute inset-0 w-full h-full object-cover"
-                        >
-                          <source src={videoSrc} type="video/mp4" />
-                        </video>
+            <div className="w-full h-screen relative">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src={videoSrc} type="video/mp4" />
+              </video>
 
-                      <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
-              }}
-            />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
+                }}
+              />
 
-                <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
-                  <h2
-                    className="text-white uppercase leading-[100%]"
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontWeight: 630,
-                      fontVariant: "small-caps",
-                      fontSize: "clamp(36px, 8vw, 160px)",
-                    }}
-                  >
-                    {title}
-                  </h2>
-                </div>
+              <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
+                <h2
+                  className="text-white uppercase leading-[100%]"
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontWeight: 630,
+                    fontVariant: "small-caps",
+                    fontSize: "clamp(36px, 8vw, 160px)",
+                  }}
+                >
+                  {title}
+                </h2>
               </div>
+            </div>
           </div>
 
-          {/* STACKED SLIDES WITH SMOOTH WHITE FADE */}
           {slides.map((slide, index) => {
             const slideHeight =
               typeof window !== "undefined"
@@ -161,70 +157,82 @@ export default function VideoHeroAnimation({
                 className="stack-slide sticky top-0 h-screen relative bg-white"
                 style={{ zIndex: index + 20 }}
               >
-                {/* SMOOTH WHITE OVERLAY */}
                 <div
                   className="absolute inset-0 bg-white pointer-events-none"
                   style={{ opacity: progress }}
                 />
 
-            <div className="relative z-10 h-full flex w-full max-w-full">
+                <div className="relative z-10 h-full flex w-full max-w-full">
 
-              {/* LEFT SIDE */}
-              <div className="w-1/2 flex items-center bg-white">
-                <div
-                className="max-w-xl"
-                style={{
-                  marginLeft: "max(1.5rem, calc((100vw - 80rem) / 2))"
-                }}
-              >
-                  
-                  <Heading
-                    top={slide.headingTop}
-                    bottom={slide.headingBottom}
-                  />
+                  <div className="w-1/2 flex items-center bg-white">
+                    <div
+                      className="max-w-xl"
+                      style={{
+                        marginLeft: "max(1.5rem, calc((100vw - 80rem) / 2))"
+                      }}
+                    >
+                      <Heading
+                        top={slide.headingTop}
+                        bottom={slide.headingBottom}
+                      />
 
-                  {slide.subTitle && (
-                    <p className="text-[#9B1B2F] font-bold mb-3">
-                      {slide.subTitle}
-                    </p>
-                  )}
+                      {slide.subTitle && (
+                        <p className="text-[#9B1B2F] font-bold mb-3">
+                          {slide.subTitle}
+                        </p>
+                      )}
 
-                  {slide.description && (
-                    <p className="text-gray-600">
-                      {slide.description}
-                    </p>
-                  )}
+                      {slide.description && (
+                        <p className="text-gray-600">
+                          {slide.description}
+                        </p>
+                      )}
 
-                  {slide.button && (
-                    <Link href={slide.button.link}>
-                      <button
-                        className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
-                          ${
-                            slide.button.variant === "filledLarge"
-                              ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
-                              : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
-                          }
-                        `}
-                      >
-                        {slide.button.text}
-                      </button>
-                    </Link>
-                  )}
+                      {/* ✅ BUTTON LOGIC ADDED ONLY HERE */}
+                      {slide.button && (
+                        slide.button.action === "popup" ? (
+                          <button
+                            onClick={() => onPopupOpen?.("simple")}
+                            className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
+                              ${
+                                slide.button.variant === "filledLarge"
+                                  ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
+                                  : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+                              }
+                            `}
+                          >
+                            {slide.button.text}
+                          </button>
+                        ) : (
+                          <Link href={slide.button.link}>
+                            <button
+                              className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
+                                ${
+                                  slide.button.variant === "filledLarge"
+                                    ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
+                                    : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+                                }
+                              `}
+                            >
+                              {slide.button.text}
+                            </button>
+                          </Link>
+                        )
+                      )}
+
+                    </div>
+                  </div>
+
+                  <div className="w-1/2 relative">
+                    <Image
+                      src={slide.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
 
                 </div>
-              </div>
-
-              {/* RIGHT SIDE IMAGE */}
-              <div className="w-1/2 relative">
-                <Image
-                  src={slide.image}
-                  alt=""
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-            </div>
               </div>
             );
           })}
@@ -291,19 +299,35 @@ export default function VideoHeroAnimation({
                         {slide.description}
                       </p>
                     )}
+
+                    {/* ✅ MOBILE BUTTON LOGIC ADDED */}
                     {slide.button && (
-                    <Link href={slide.button.link}>
-                      <button
-                        className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
-                        style={{
-                          border: "1px solid #9B1B2F",
-                          color: "#9B1B2F",
-                        }}
-                      >
-                        {slide.button.text}
-                      </button>
-                    </Link>
-                  )}
+                      slide.button.action === "popup" ? (
+                        <button
+                          onClick={() => onPopupOpen?.("simple")}
+                          className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
+                          style={{
+                            border: "1px solid #9B1B2F",
+                            color: "#9B1B2F",
+                          }}
+                        >
+                          {slide.button.text}
+                        </button>
+                      ) : (
+                        <Link href={slide.button.link}>
+                          <button
+                            className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
+                            style={{
+                              border: "1px solid #9B1B2F",
+                              color: "#9B1B2F",
+                            }}
+                          >
+                            {slide.button.text}
+                          </button>
+                        </Link>
+                      )
+                    )}
+
                   </div>
                 </div>
               ))}
@@ -311,16 +335,8 @@ export default function VideoHeroAnimation({
 
             <div className="container-custom flex justify-center mt-4 mb-8">
               <div className="flex">
-                <ScrollButton
-                  direction="left"
-                  onClick={prevMobile}
-                  bgColor="#9B1B2F"
-                />
-                <ScrollButton
-                  direction="right"
-                  onClick={nextMobile}
-                  bgColor="#9B1B2F"
-                />
+                <ScrollButton direction="left" onClick={prevMobile} bgColor="#9B1B2F" />
+                <ScrollButton direction="right" onClick={nextMobile} bgColor="#9B1B2F" />
               </div>
             </div>
           </section>

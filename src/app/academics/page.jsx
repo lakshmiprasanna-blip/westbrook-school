@@ -84,12 +84,10 @@ export default function Academics() {
           subTag="EMOTIONAL"
           description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
           image="/assets/academics-info1.webp"
-          showButton
+           showButton
           buttonText="KNOW MORE"
-          onButtonClick={() => {
-            setVariant("simple");
-            setShowPopup(true);
-          }}
+          onButtonClick={() => setFormType("simple")}
+
         />
 
         <InfoSection
@@ -98,12 +96,10 @@ export default function Academics() {
           description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
           image="/assets/academics-info2.webp"
           reverse
-          showButton
+           showButton
           buttonText="KNOW MORE"
-          onButtonClick={() => {
-            setVariant("simple");
-            setShowPopup(true);
-          }}
+          onButtonClick={() => setFormType("simple")}
+
         />
 
         <InfoSection
