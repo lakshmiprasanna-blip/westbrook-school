@@ -151,11 +151,9 @@ export default function Admissions() {
       "There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention.",
     image: "/assets/our_admission_1x.webp",
     button: {
-      text: "KNOW MORE",
-      link: "/about",
-      bg: "transparent",
-      border: "#9B1B2F",
-    },
+        text: "KNOW MORE",
+        popup: true,   // ✅ changed
+      },
   },
 
   {
@@ -165,12 +163,10 @@ export default function Admissions() {
     description:
       "Reach out to us through the enquiry form or contact our admissions team. This helps us understand your interest and answer your initial questions.",
     image: "/assets/our_admission_2x.webp",
-    button: {
-      text: "KNOW MORE",
-      link: "/about",
-      bg: "transparent",
-      border: "#9B1B2F",
-    },
+   button: {
+        text: "KNOW MORE",
+        popup: true,   // ✅ changed
+      },
   },
 
   {
@@ -181,11 +177,9 @@ export default function Admissions() {
       "Parents are invited for a conversation with our team to understand the school’s approach, daily routines, and academic framework.",
     image: "/assets/our_admission_3x.webp",
     button: {
-      text: "KNOW MORE",
-      link: "/academics",
-      bg: "transparent",
-      border: "#9B1B2F",
-    },
+        text: "KNOW MORE",
+        popup: true,   // ✅ changed
+      },
   },
 
   {
@@ -196,11 +190,9 @@ export default function Admissions() {
       "A relaxed interaction with the child helps us understand comfort levels and readiness, without pressure or assessment.",
     image: "/assets/our_admission_4x.webp",
     button: {
-      text: "KNOW MORE",
-      link: "/approach",
-      bg: "transparent",
-      border: "#9B1B2F",
-    },
+        text: "KNOW MORE",
+        popup: true,   // ✅ changed
+      },
   },
 
   {
