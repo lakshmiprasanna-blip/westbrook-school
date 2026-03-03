@@ -4,44 +4,34 @@ import { useEffect, useState } from "react";
 import ScrollButton from "./ScrollButton";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import EnquiryForm from "./FormComponent";
 
 export default function VideoHeroAnimation({
   videoSrc,
   title,
   slides = [],
-  onPopupOpen, // ✅ ADDED (nothing else changed)
+  onPopupOpen,
 }) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
-  /* ---------------- SCREEN DETECTION ---------------- */
   useEffect(() => {
     const checkScreen = () => {
       setIsDesktop(window.innerWidth >= 1024);
     };
-
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  /* ---------------- SMOOTH SCROLL LISTENER ---------------- */
   useEffect(() => {
     if (!isDesktop) return;
-
-    let ticking = false;
-
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setScrollY(window.scrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
@@ -134,41 +124,19 @@ export default function VideoHeroAnimation({
           </div>
 
           {slides.map((slide, index) => {
-            const slideHeight =
-              typeof window !== "undefined"
-                ? window.innerHeight
-                : 0;
-
-            const slideStart = (index + 1) * slideHeight;
-            const fadeStart = slideStart - slideHeight;
-
-            let progress = 0;
-
-            if (scrollY > fadeStart && scrollY < slideStart) {
-              progress =
-                (scrollY - fadeStart) / slideHeight;
-            }
-
-            progress = Math.max(0, Math.min(1, progress));
-
             return (
               <div
                 key={index}
-                className="stack-slide sticky top-0 h-screen relative bg-white"
+                className="sticky top-0 h-screen relative bg-white"
                 style={{ zIndex: index + 20 }}
               >
-                <div
-                  className="absolute inset-0 bg-white pointer-events-none"
-                  style={{ opacity: progress }}
-                />
-
                 <div className="relative z-10 h-full flex w-full max-w-full">
-
                   <div className="w-1/2 flex items-center bg-white">
                     <div
                       className="max-w-xl"
                       style={{
-                        marginLeft: "max(1.5rem, calc((100vw - 80rem) / 2))"
+                        marginLeft:
+                          "max(1.5rem, calc((100vw - 80rem) / 2))",
                       }}
                     >
                       <Heading
@@ -188,14 +156,14 @@ export default function VideoHeroAnimation({
                         </p>
                       )}
 
-                      {/* ✅ BUTTON LOGIC ADDED ONLY HERE */}
-                      {slide.button && (
-                        slide.button.action === "popup" ? (
+                      {slide.button &&
+                        (slide.button.action === "popup" ? (
                           <button
-                            onClick={() => onPopupOpen?.("simple")}
+                            onClick={() => setShowPopup(true)}
                             className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
                               ${
-                                slide.button.variant === "filledLarge"
+                                slide.button.variant ===
+                                "filledLarge"
                                   ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
                                   : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
                               }
@@ -208,7 +176,8 @@ export default function VideoHeroAnimation({
                             <button
                               className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
                                 ${
-                                  slide.button.variant === "filledLarge"
+                                  slide.button.variant ===
+                                  "filledLarge"
                                     ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
                                     : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
                                 }
@@ -217,9 +186,7 @@ export default function VideoHeroAnimation({
                               {slide.button.text}
                             </button>
                           </Link>
-                        )
-                      )}
-
+                        ))}
                     </div>
                   </div>
 
@@ -231,7 +198,6 @@ export default function VideoHeroAnimation({
                       className="object-cover"
                     />
                   </div>
-
                 </div>
               </div>
             );
@@ -274,12 +240,12 @@ export default function VideoHeroAnimation({
               {slides.map((slide, index) => (
                 <div key={index} className="min-w-full">
                   <div className="container-custom py-10">
-                    <div className="relative w-full h-[280px] md:h-[340px] mb-6">
+                    <div className="relative w-full h-[280px] mb-6">
                       <Image
                         src={slide.image}
                         alt=""
                         fill
-                        className="object-cover object-top"
+                        className="object-cover"
                       />
                     </div>
 
@@ -300,11 +266,10 @@ export default function VideoHeroAnimation({
                       </p>
                     )}
 
-                    {/* ✅ MOBILE BUTTON LOGIC ADDED */}
-                    {slide.button && (
-                      slide.button.action === "popup" ? (
+                    {slide.button &&
+                      (slide.button.action === "popup" ? (
                         <button
-                          onClick={() => onPopupOpen?.("simple")}
+                          onClick={() => setShowPopup(true)}
                           className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
                           style={{
                             border: "1px solid #9B1B2F",
@@ -325,9 +290,7 @@ export default function VideoHeroAnimation({
                             {slide.button.text}
                           </button>
                         </Link>
-                      )
-                    )}
-
+                      ))}
                   </div>
                 </div>
               ))}
@@ -335,13 +298,52 @@ export default function VideoHeroAnimation({
 
             <div className="container-custom flex justify-center mt-4 mb-8">
               <div className="flex">
-                <ScrollButton direction="left" onClick={prevMobile} bgColor="#9B1B2F" />
-                <ScrollButton direction="right" onClick={nextMobile} bgColor="#9B1B2F" />
+                <ScrollButton
+                  direction="left"
+                  onClick={prevMobile}
+                  bgColor="#9B1B2F"
+                />
+                <ScrollButton
+                  direction="right"
+                  onClick={nextMobile}
+                  bgColor="#9B1B2F"
+                />
               </div>
             </div>
           </section>
         </>
       )}
+
+      {/* ================= POPUP ================= */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowPopup(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md"
+            >
+              <button
+                onClick={() => setShowPopup(false)}
+                className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+              >
+                ✕
+              </button>
+
+              <EnquiryForm variant="simple" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

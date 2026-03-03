@@ -12,8 +12,7 @@ import EnquiryForm from "../../components/FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Academics() {
-  const [showPopup, setShowPopup] = useState(false);
-  const [variant, setVariant] = useState("simple");
+  
     const [formType, setFormType] = useState(null);
      const router = useRouter();
 
@@ -77,30 +76,32 @@ export default function Academics() {
 
       {/* INFO SECTIONS */}
       <div>
-        <InfoSection
-          topLabel="Pedagogy"
-          introText="How Learning Is Guided at Westbrook"
-          tag="SOCIAL AND"
-          subTag="EMOTIONAL"
-          description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
-          image="/assets/academics-info1.webp"
-           showButton
-          buttonText="KNOW MORE"
-          onButtonClick={() => setFormType("simple")}
+       <InfoSection
+        topLabel="Pedagogy"
+        introText="How Learning Is Guided at Westbrook"
+        tag="SOCIAL AND"
+        subTag="EMOTIONAL"
+        description="At Westbrook, learning begins with emotional awareness and self-understanding. Our pedagogy is inspired by approaches such as Roots of Empathy, where students develop empathy, emotional regulation, and interpersonal skills through guided observation, reflection, and discussion."
+        image="/assets/academics-info1.webp"
+        showButton
+        buttonText="KNOW MORE"
+        onButtonClick={() => {
+          setFormType("simple");
+        }}
+      />
 
-        />
-
-        <InfoSection
-          tag="VALUES IN"
-          subTag="DAILY PRACTICE"
-          description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
-          image="/assets/academics-info2.webp"
-          reverse
-           showButton
-          buttonText="KNOW MORE"
-          onButtonClick={() => setFormType("simple")}
-
-        />
+      <InfoSection
+        tag="VALUES IN"
+        subTag="DAILY PRACTICE"
+        description="Values are not treated as a separate subject. Respect, responsibility, empathy, and integrity are reinforced through classroom interactions, routines, and expectations, helping children internalize behaviour rather than simply follow rules."
+        image="/assets/academics-info2.webp"
+        reverse
+        showButton
+        buttonText="KNOW MORE"
+        onButtonClick={() => {
+          setFormType("simple");
+        }}
+      />
 
         <InfoSection
           tag="CLARITY AND"
@@ -125,9 +126,8 @@ export default function Academics() {
           router.push("/contact"); // ✅ now it works
         }}
         onSecondaryClick={() => {
-          setFormType("simple");
-          setShowPopup(true);
-        }}
+  setFormType("simple");
+}}
       />
 
   {/* ✅ POPUP MODAL */}

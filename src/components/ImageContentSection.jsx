@@ -93,16 +93,16 @@ export default function ImageContentSection({
           <div className="w-full md:w-4/5">
             <div className="relative w-full h-[480px] overflow-hidden">
             <Image
-          src={imageSrc}
-          alt="section image"
-          fill
-          priority
-          className={`
-            object-contain
-            lg:object-cover
-            ${reverse ? "object-[center_85%]" : ""}
-          `}
-        />
+  src={imageSrc}
+  alt="section image"
+  fill
+  priority
+  className={`
+    object-contain
+    lg:object-cover
+    ${reverse ? "object-[center_85%]" : ""}
+  `}
+/>
             </div>
           </div>
 
