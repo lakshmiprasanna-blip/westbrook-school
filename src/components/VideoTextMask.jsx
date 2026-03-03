@@ -32,7 +32,7 @@ const VideoTextMask = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-black "
+      className="relative h-screen z-40 overflow-hidden bg-black "
     >
       {/* Background Video */}
       {/* Background Video */}
@@ -43,7 +43,7 @@ const VideoTextMask = () => {
           playsInline
           autoPlay
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute  inset-0 w-full h-full object-cover"
           priority="true"
         >
           <source src={VIDEO_SRC} type="video/mp4" />
