@@ -170,8 +170,9 @@ export default function EnquiryForm({
         } ${!formData.grade ? "text-gray-400 sm:text-gray-500" : ""}`}
       >
         <option value="" disabled hidden>Grade</option>
-        <option value="Pre Primary">Pre-Primary</option>
-        <option value="Primary">Primary</option>
+        <option value="Nursery">Nursery</option>
+        <option value="Pre-Primary 1">Pre-Primary 1</option>
+        <option value="Pre-Primary 2">Pre-Primary 2</option>
         <option value="Grade 1">Grade 1</option>
         <option value="Grade 2">Grade 2</option>
         <option value="Grade 3">Grade 3</option>
