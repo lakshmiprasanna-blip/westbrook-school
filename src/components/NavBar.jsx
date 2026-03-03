@@ -54,7 +54,7 @@ export default function NavBar() {
       <header
         className={`
           fixed top-0 left-0 w-full 
-          bg-white lg:bg-[#0f4c81] z-30
+          bg-white lg:bg-[#0f4c81] z-40
           transition-shadow duration-300
           ${showShadow ? "lg:shadow-[0_8px_20px_rgba(255,255,255,0.35)]" : ""}
         `}
@@ -118,7 +118,7 @@ export default function NavBar() {
       {/* MOBILE MENU (unchanged) */}
       <div
         className={`
-          lg:hidden fixed inset-0 bg-white z-30 flex flex-col
+          lg:hidden fixed inset-0 bg-white z-40 flex flex-col
           transition-transform duration-500 ease-in-out
           ${isOpen ? "translate-y-0" : "-translate-y-full"}
         `}

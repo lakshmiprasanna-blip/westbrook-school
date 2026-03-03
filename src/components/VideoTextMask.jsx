@@ -32,7 +32,7 @@ const VideoTextMask = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen z-40 overflow-hidden bg-black "
+      className="relative h-screen overflow-hidden bg-black "
     >
       {/* Background Video */}
       {/* Background Video */}
@@ -64,7 +64,7 @@ const VideoTextMask = () => {
       {/* Knockout Animation */}
       {overlayVisible && (
         <motion.div
-  className="absolute inset-0 z-30 flex items-center justify-center bg-white select-none pointer-events-none"
+  className="absolute inset-0 z-50 flex items-center justify-center bg-white select-none pointer-events-none"
           style={{ mixBlendMode: "screen" }}
           animate={{
             scale: zoom ? 40 : 1,
