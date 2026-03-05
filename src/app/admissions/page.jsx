@@ -57,22 +57,17 @@ export default function Admissions() {
 
           <div className="paragraph mt-6 sm:mt-8 md:mt-10 max-w-4xl mx-auto space-y-4">
             <p>
-              Westbrook doesn’t treat admissions as a selection process, but as
-              the beginning of a partnership. We believe every child deserves
-              the opportunity to learn in an environment that understands their
-              pace, personality, and needs.
+              Westbrook doesn’t treat admissions as a selection process, but as the beginning of a partnership. We believe every child deserves the opportunity to learn in an environment that understands their pace, personality, and needs.
             </p>
 
             <p>
-              Our focus is on welcoming families, understanding the child, and
-              ensuring alignment between home and school. The process is
-              designed to feel calm, transparent, and supportive.
+              Our focus is on welcoming families, understanding the child, and ensuring alignment between home and school. The process is designed to feel calm, transparent, and supportive, just like the learning environment we aim to create.
             </p>
           </div>
         </div>
       </section>
 
-      {/* VIDEO HERO */}
+      
       <VideoHeroAnimation
         videoSrc="/assets/admission.aivideo.mp4"
         title="ADMISSIONS"
