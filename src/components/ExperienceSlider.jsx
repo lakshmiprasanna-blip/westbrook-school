@@ -60,9 +60,10 @@ export default function ExperienceSection() {
                   fill
                   sizes="100vw"
                   className="object-cover"
+                  priority="true"
                   
                 style={{ objectPosition: "center 20%" }}
-                  priority
+                  
                 />
               </motion.div>
             </AnimatePresence>

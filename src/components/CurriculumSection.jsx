@@ -65,6 +65,7 @@ export default function CurriculumSection() {
                     alt={item.title}
                     fill
                     className="object-cover"
+                    priority="true"
                   />
                 </div>
 
@@ -165,6 +166,7 @@ export default function CurriculumSection() {
                   alt={item.title}
                   fill
                   className="object-cover object-[center_20%]"
+                  priority="true"
                 />
 
                 <motion.div
