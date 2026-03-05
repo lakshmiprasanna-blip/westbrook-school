@@ -100,7 +100,7 @@ export default function ImageContentSection({
   className={`
     object-contain
     lg:object-cover
-    ${reverse ? "object-[center_85%]" : ""}
+    ${reverse ? "object-[center_69%]" : ""}
   `}
 />
             </div>
