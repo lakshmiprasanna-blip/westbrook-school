@@ -53,36 +53,32 @@ export default function FAQSection() {
           </div>
 
           {/* Accordion */}
-          <div className="md:col-span-2 bg-white shadow-md rounded-lg overflow-hidden">
+          <div className="md:col-span-2 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
 
             {faqData.map((item, index) => {
               const isActive = index === activeIndex;
-              const isRedDefault = index === 1 || index === 2;
 
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="border-b border-gray-200 last:border-b-0"
+                >
 
                   <button
                     onClick={() =>
                       setActiveIndex(isActive ? null : index)
                     }
-                    className={`w-full flex justify-between items-center cursor-pointer gap-4 px-6 md:px-8 py-6 text-left transition-colors duration-300
-                      ${
-                        isActive
-                          ? "bg-primary text-white"
-                          : isRedDefault
-                          ? "text-dark hover:bg-maroon hover:text-white"
-                          : "text-dark hover:bg-maroon hover:text-white"
-                      }
-                    `}
+                    className={`w-full flex justify-between items-center gap-4 px-6 md:px-8 py-6 text-left transition-colors duration-300
+                    ${
+                      isActive
+                        ? "bg-primary text-white"
+                        : "text-dark hover:bg-maroon hover:text-white"
+                    }`}
                   >
-
-                    {/* Question */}
                     <span className="flex-1 text-[18px] md:text-[20px] font-medium break-words">
                       {item.question}
                     </span>
 
-                    {/* Chevron */}
                     <span className="flex-shrink-0">
                       {isActive ? (
                         <svg
@@ -118,28 +114,22 @@ export default function FAQSection() {
                     </span>
                   </button>
 
-                  {/* Mobile Divider when CLOSED */}
-                  {!isActive && (
-                    <div className="block md:hidden h-px bg-gray-200 w-full"></div>
-                  )}
-
                   <AnimatePresence initial={false}>
-                  {isActive && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
-                        {item.answer}
-                      </div>
+                    {isActive && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
+                          {item.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                      <div className="block md:hidden h-px bg-gray-200 w-full"></div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
                 </div>
               );
             })}

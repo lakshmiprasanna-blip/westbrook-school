@@ -17,15 +17,10 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-// // Only if you downloaded the font
-// const century = localFont({
-//   src: "../public/fonts/Century751BT.woff2",
-//   variable: "--font-century",
-//   display: "swap",
-// });
 
 export const metadata = {
   title: "Westbrook",
+ 
 };
 
 export default function RootLayout({ children }) {
