@@ -14,6 +14,9 @@ export default function AboutZoom() {
 
   /* ---------------- SCREEN DETECTION ---------------- */
   useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+  useEffect(() => {
     const checkScreen = () => {
       const width = window.innerWidth;
       setIsMobile(width < 768);
@@ -24,6 +27,7 @@ export default function AboutZoom() {
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
+  
 
   /* ---------------- SCROLL SYNC ---------------- */
   useEffect(() => {

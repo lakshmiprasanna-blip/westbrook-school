@@ -34,12 +34,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${montserrat.variable} ${playfair.variable} min-h-screen flex flex-col`}
       >
+
         <NavBar />
 
         <main className="flex-grow">
           {children}
         </main>
-
+        
         <Footer />
       </body>
     </html>

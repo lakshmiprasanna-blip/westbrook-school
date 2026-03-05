@@ -56,7 +56,7 @@ export default function NavBar() {
           fixed top-0 left-0 w-full 
           bg-white lg:bg-[#0f4c81] z-40
           transition-shadow duration-300
-          ${showShadow ? "lg:shadow-[0_8px_20px_rgba(255,255,255,0.35)]" : ""}
+          ${showShadow ? "lg:shadow-[0_8px_20px_rgba(0,0,0,0.35)]" : ""}
         `}
       >
         <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">

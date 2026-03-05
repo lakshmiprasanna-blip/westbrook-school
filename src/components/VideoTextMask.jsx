@@ -33,6 +33,7 @@ const VideoTextMask = () => {
     <section
       ref={sectionRef}
       className="relative h-screen overflow-hidden bg-black "
+    
     >
       {/* Background Video */}
       {/* Background Video */}
@@ -43,7 +44,7 @@ const VideoTextMask = () => {
           playsInline
           autoPlay
           preload="auto"
-          className="absolute  inset-0 w-full h-full object-cover"
+          className="absolute inset-0 mt-22 w-full h-full object-cover"
           priority="true"
         >
           <source src={VIDEO_SRC} type="video/mp4" />
@@ -82,7 +83,7 @@ const VideoTextMask = () => {
       )}
 
       {/* Hero Content — ALWAYS visible */}
-     <div className="relative z-20 h-full flex items-end justify-center pb-12 md:pb-20 lg:pb-34">
+     <div className="relative z-20 h-full flex items-end justify-center pb-16 md:pb-24 lg:pb-15">
   <div className="lg:max-w-3xl w-full 
   flex flex-col 
   items-center 
