@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className="w-full">
 
       {/* ================= TOP SECTION ================= */}
-      <div className="bg-primary text-white navbar-white-trigger">
+      <div className="bg-primary text-white ">
         <div className="container-custom mx-auto px-6 lg:px-4 py-16 md:py-24 text-white">
 
           {/* ================= MOBILE + TABLET ================= */}

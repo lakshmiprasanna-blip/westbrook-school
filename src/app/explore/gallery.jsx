@@ -43,7 +43,7 @@ export default function GallerySection() {
 
 
   return (
-    <section className="w-full bg-primary py-14 lg:py-20 navbar-white-trigger">
+    <section className="w-full bg-primary py-14 lg:py-20 ">
       <div className="container-custom">
 
         {/* ================= DESKTOP VERSION (UNCHANGED) ================= */}

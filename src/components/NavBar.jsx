@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 export default function NavBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [showShadow, setShowShadow] = useState(false);
+  
 
   /* Lock background scroll when menu is open */
   useEffect(() => {
@@ -28,36 +28,36 @@ export default function NavBar() {
   }, [isOpen]);
 
   /* Show shadow only when overlapping .navbar-white-trigger */
-  useEffect(() => {
-    const handleScroll = () => {
-      const trigger = document.querySelector(".navbar-white-trigger");
-      if (!trigger) return;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const trigger = document.querySelector(".navbar-white-trigger");
+  //     if (!trigger) return;
 
-      const rect = trigger.getBoundingClientRect();
+  //     const rect = trigger.getBoundingClientRect();
 
-      // Navbar height ~80px
-      if (rect.top <= 80 && rect.bottom >= 80) {
-        setShowShadow(true);
-      } else {
-        setShowShadow(false);
-      }
-    };
+  //     // Navbar height ~80px
+  //     if (rect.top <= 80 && rect.bottom >= 80) {
+  //       setShowShadow(true);
+  //     } else {
+  //       setShowShadow(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+  //   window.addEventListener("scroll", handleScroll);
+  //   handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <>
       <header
-        className={`
-          fixed top-0 left-0 w-full 
-          bg-white lg:bg-[#0f4c81] z-40
-          transition-shadow duration-300
-          ${showShadow ? "lg:shadow-[0_8px_20px_rgba(0,0,0,0.35)]" : ""}
-        `}
+      className="
+        fixed top-0 left-0 w-full 
+        bg-white lg:bg-[#0f4c81] z-40
+        shadow-[0_8px_20px_rgba(0,0,0,0.35)]
+      "
+
       >
         <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
           

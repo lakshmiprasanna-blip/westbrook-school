@@ -105,9 +105,15 @@
 /* ================= GLOBAL UTILITIES ================= */
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
-  }
+  @apply max-w-7xl mx-auto px-6 lg:px-8;
+}
 
+/* Reduce container for screens below 1335px */
+@media (max-width: 1335px) {
+  .container-custom {
+    max-width: 64rem; /* Tailwind max-w-5xl = 1024px */
+  }
+}
   .py-global {
     padding-top: 16px;
     padding-bottom: 16px;
