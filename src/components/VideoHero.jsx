@@ -39,12 +39,13 @@ export default function VideoHero({
       const start = el.offsetTop;
       const scrollY = window.scrollY;
 
-      const releaseBuffer = window.innerHeight * 0.4; 
-const scrollDistance = (totalSlides - 1) * window.innerHeight + releaseBuffer;
+      const slideScrollDistance = (totalSlides - 1) * window.innerHeight;
+      const releaseBuffer = window.innerHeight * 0.45; // one full scroll after last slide
+      const totalDistance = slideScrollDistance + releaseBuffer;
 
-      const progressRaw = (scrollY - start) / scrollDistance;
+      const progressRaw = (scrollY - start) / slideScrollDistance;
 
-      /* Clamp value between 0 and 1 */
+      /* Clamp horizontal movement only for slides */
       const clamped = Math.max(0, Math.min(progressRaw, 1));
 
       setProgress(clamped);
@@ -163,7 +164,7 @@ const scrollDistance = (totalSlides - 1) * window.innerHeight + releaseBuffer;
         <section
           ref={scrollRef}
           className="relative w-full"
-          style={{ height: `${totalSlides * 100 + 50}vh` }}
+          style={{ height: `${(totalSlides + 1) * 100}vh` }}
         >
           <div className="sticky top-[72px] h-[calc(100vh-72px)] overflow-hidden">
 
