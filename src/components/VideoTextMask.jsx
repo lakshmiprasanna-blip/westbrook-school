@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const VIDEO_SRC = "/assets/Westbrook Website Video.mp4";
+const VIDEO_SRC = "/assets/homebannerai.webm";
 
 const VideoTextMask = () => {
   const sectionRef = useRef(null);
