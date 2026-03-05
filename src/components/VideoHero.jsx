@@ -163,7 +163,7 @@ const scrollDistance = (totalSlides - 1) * window.innerHeight + releaseBuffer;
         <section
           ref={scrollRef}
           className="relative w-full"
-          style={{ height: `${totalSlides * 100 + 20}vh` }}
+          style={{ height: `${totalSlides * 100 + 50}vh` }}
         >
           <div className="sticky top-[72px] h-[calc(100vh-72px)] overflow-hidden">
 
