@@ -29,26 +29,30 @@ export default function VideoHero({
   }, []);
 
   /* ---------------- DESKTOP SCROLL LOGIC (UNCHANGED) ---------------- */
-  useEffect(() => {
-    if (!isDesktop) return;
+useEffect(() => {
+  if (!isDesktop) return;
 
-    const handleScroll = () => {
-      const el = scrollRef.current;
-      if (!el) return;
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-      const rect = el.getBoundingClientRect();
-      const totalScroll = el.scrollHeight - window.innerHeight;
+    const rect = el.getBoundingClientRect();
 
-      if (rect.top <= 0 && Math.abs(rect.top) <= totalScroll) {
-        const scrollAmount = Math.abs(rect.top);
-        const scrollProgress = scrollAmount / totalScroll;
-        setProgress(scrollProgress);
-      }
-    };
+    const start = el.offsetTop;
+    const scrollY = window.scrollY;
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isDesktop]);
+    const scrollDistance = (totalSlides - 1) * window.innerHeight;
+
+    const progressRaw = (scrollY - start) / scrollDistance;
+
+    const clamped = Math.max(0, Math.min(progressRaw, 1));
+
+    setProgress(clamped);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [isDesktop, totalSlides]);
 
   const translateX = isDesktop
     ? progress * (totalSlides - 1) * -100
@@ -160,7 +164,7 @@ export default function VideoHero({
           className="relative w-full"
           style={{ height: `${totalSlides * 100}vh` }}
         >
-          <div className="sticky top-0 h-screen overflow-hidden">
+          <div className="sticky top-[72px] h-[calc(100vh-72px)] overflow-hidden">
             <div
               className="flex h-full"
               style={{

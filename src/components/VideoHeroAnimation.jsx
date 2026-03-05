@@ -87,7 +87,7 @@ export default function VideoHeroAnimation({
           className="relative w-full"
           style={{ height: `${(slides.length + 1) * 100}vh` }}
         >
-          <div className="sticky top-0 h-screen z-10">
+          <div className="sticky top-[72px] h-screen z-10">
             <div className="w-full h-screen relative">
               <video
                 autoPlay
@@ -127,7 +127,7 @@ export default function VideoHeroAnimation({
             return (
               <div
                 key={index}
-                className="sticky top-0 h-screen relative bg-white"
+                className="sticky top-[72px] h-screen relative bg-white"
                 style={{ zIndex: index + 20 }}
               >
                 <div className="relative z-10 h-full flex w-full max-w-full">

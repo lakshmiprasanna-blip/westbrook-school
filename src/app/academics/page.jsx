@@ -52,7 +52,7 @@ export default function Academics() {
           },
         ]}
       />
-
+      
       <VideoHero
         videoSrc="/assets/academic-aivideo.mp4"
         title="LEARNING JOURNEY"
@@ -73,6 +73,7 @@ export default function Academics() {
           },
         ]}
       />
+      
 
       {/* INFO SECTIONS */}
       <div>
