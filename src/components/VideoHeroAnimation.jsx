@@ -62,6 +62,7 @@ export default function VideoHeroAnimation({
           </h2>
         </div>
       )}
+      <br/>
       {bottom && (
         <div className="bg-lightblue inline-block px-4 py-2">
           <h2
@@ -135,19 +136,25 @@ export default function VideoHeroAnimation({
                     <div
                       className="max-w-xl"
                       style={{
-                        marginLeft:
-                          "max(1.5rem, calc((100vw - 80rem) / 2))",
+                        marginLeft: "max(1rem, calc((100vw - 1280px) / 2))",
                       }}
+
                     >
                       <Heading
-                        top={slide.headingTop}
+                        top={
+                          <>
+                            {slide.headingTop}
+                            
+                          </>
+                        }
                         bottom={slide.headingBottom}
                       />
+                      
 
                       {slide.subTitle && (
-                        <p className="text-[#9B1B2F] font-bold mb-3">
+                        <h3 className=" text-[#9B1B2F] font-bold leading-[1.5] mb-6">
                           {slide.subTitle}
-                        </p>
+                        </h3>
                       )}
 
                       {slide.description && (
@@ -255,7 +262,7 @@ export default function VideoHeroAnimation({
                     />
 
                     {slide.subTitle && (
-                      <p className="mb-4 text-[#9B1B2F] font-bold">
+                      <p className="!font-playfair text-[#9B1B2F] font-bold mb-4">
                         {slide.subTitle}
                       </p>
                     )}

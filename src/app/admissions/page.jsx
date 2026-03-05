@@ -78,7 +78,7 @@ export default function Admissions() {
             headingBottom: "PROCESS",
             subTitle: "Simple. Personal. Child-first.",
             description:
-              "There are no entrance exams or qualification tests at Westbrook.",
+              "There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention.",
             image: "/assets/our_admission_1x.webp",
             button: {
               text: "KNOW MORE",
@@ -90,7 +90,7 @@ export default function Admissions() {
             headingBottom: "A CONVERSATION",
             subTitle: "Step One",
             description:
-              "Reach out to us through the enquiry form or contact our admissions team.",
+              "Reach out to us through the enquiry form or contact our admissions team. This helps us understand your interest and answer your initial questions.",
             image: "/assets/our_admission_2x.webp",
             button: {
               text: "KNOW MORE",
@@ -102,7 +102,7 @@ export default function Admissions() {
             headingBottom: "INTERACTION",
             subTitle: "Step Two",
             description:
-              "Parents are invited for a conversation with our team.",
+              "Parents are invited for a conversation with our team to understand the school’s approach, daily routines, and academic framework.",
             image: "/assets/our_admission_3x.webp",
             button: {
               text: "KNOW MORE",
@@ -114,7 +114,7 @@ export default function Admissions() {
             headingBottom: "INTERACTION",
             subTitle: "Step Three",
             description:
-              "A relaxed interaction with the child helps us understand readiness.",
+              "A relaxed interaction with the child helps us understand comfort levels and readiness, without pressure or assessment.",
             image: "/assets/our_admission_4x.webp",
             button: {
               text: "KNOW MORE",
@@ -125,7 +125,7 @@ export default function Admissions() {
             headingTop: "ADMISSION",
             headingBottom: "CONFIRMATION",
             subTitle:
-              "Every admission matters to us, and each family is guided carefully.",
+              "Every admission matters to us, and each family is guided through the process with clarity and care.",
             description:
               "Once aligned, admissions are confirmed through a simple documentation process.",
             image: "/assets/our_admission_5x.webp",
@@ -143,7 +143,7 @@ export default function Admissions() {
       <ContactCTA
         imageSrc="/assets/admissions-footer-banner.png"
         title="Begin Your Child’s Journey with Westbrook"
-        subtitle="Please share your details, and our admissions team will be in touch."
+        subtitle="Please share your details, and our admissions team will be in touch to guide you through the next steps."
       />
 
       {/* POPUP MODAL */}

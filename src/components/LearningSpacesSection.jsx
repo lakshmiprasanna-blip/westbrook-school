@@ -82,15 +82,17 @@ export default function LearningSpacesSection() {
             </h2>
           </div>
 
-          <p className="paragraph max-w-4xl mx-auto 
-                        font-montserrat !text-start
-                        !text-[16px] md:!text-[17px] 
-                        !leading-[24px] 
-                        text-dark">
-            At Westbrook, early learning spaces are designed to feel familiar,
-            calm, and inviting, helping young children feel comfortable as they
-            begin their school journey.
-          </p>
+          <p
+  className="paragraph max-w-4xl mx-auto 
+  font-montserrat  md:text-center
+  !text-[16px] md:!text-[17px] 
+  !leading-[24px] 
+  text-dark"
+>
+  At Westbrook, early learning spaces are designed to feel familiar,
+  calm, and inviting, helping young children feel comfortable as they
+  begin their school journey.
+</p>
         </div>
 
         {/* ================= DESKTOP + TAB SLIDER ================= */}
