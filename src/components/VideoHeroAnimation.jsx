@@ -158,10 +158,11 @@ export default function VideoHeroAnimation({
                       )}
 
                       {slide.description && (
-                        <p className="text-gray-600">
-                          {slide.description}
-                        </p>
-                      )}
+  <p
+    className="text-gray-600 [&_b]:text-primary [&_b]:font-semibold"
+    dangerouslySetInnerHTML={{ __html: slide.description }}
+  />
+)}
 
                       {slide.button &&
                         (slide.button.action === "popup" ? (
@@ -169,10 +170,9 @@ export default function VideoHeroAnimation({
                             onClick={() => setShowPopup(true)}
                             className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
                               ${
-                                slide.button.variant ===
-                                "filledLarge"
+                                slide.button.variant === "filledLarge"
                                   ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
-                                  : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+                                  : "px-8 py-3 border border-[#9B1B2F] bg-[#F7F6F2] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
                               }
                             `}
                           >
@@ -182,13 +182,12 @@ export default function VideoHeroAnimation({
                           <Link href={slide.button.link}>
                             <button
                               className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
-                                ${
-                                  slide.button.variant ===
-                                  "filledLarge"
-                                    ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
-                                    : "px-8 py-3 border border-[#9B1B2F] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
-                                }
-                              `}
+  ${
+    slide.button.variant === "filledLarge"
+      ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
+      : "px-8 py-3 border border-[#9B1B2F] bg-[#F7F6F2] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+  }
+`}
                             >
                               {slide.button.text}
                             </button>

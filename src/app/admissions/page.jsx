@@ -78,7 +78,7 @@ export default function Admissions() {
             headingBottom: "PROCESS",
             subTitle: "Simple. Personal. Child-first.",
             description:
-              "There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention.",
+              `There are <b>no entrance exams or qualification tests</b> at Westbrook. Each admission is approached with care and individual attention.`,
             image: "/assets/our_admission_1x.webp",
             button: {
               text: "KNOW MORE",
