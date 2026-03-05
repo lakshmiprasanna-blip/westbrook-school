@@ -9,7 +9,7 @@ export default function VideoHero({
   title,
   slides = [],
 }) {
-  
+
   const scrollRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -28,31 +28,31 @@ export default function VideoHero({
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  /* ---------------- DESKTOP SCROLL LOGIC (UNCHANGED) ---------------- */
-useEffect(() => {
-  if (!isDesktop) return;
+  /* ---------------- DESKTOP SCROLL LOGIC (FIXED) ---------------- */
+  useEffect(() => {
+    if (!isDesktop) return;
 
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
+    const handleScroll = () => {
+      const el = scrollRef.current;
+      if (!el) return;
 
-    const rect = el.getBoundingClientRect();
+      const start = el.offsetTop;
+      const scrollY = window.scrollY;
 
-    const start = el.offsetTop;
-    const scrollY = window.scrollY;
+      const releaseBuffer = window.innerHeight * 0.4; 
+const scrollDistance = (totalSlides - 1) * window.innerHeight + releaseBuffer;
 
-    const scrollDistance = (totalSlides - 1) * window.innerHeight;
+      const progressRaw = (scrollY - start) / scrollDistance;
 
-    const progressRaw = (scrollY - start) / scrollDistance;
+      /* Clamp value between 0 and 1 */
+      const clamped = Math.max(0, Math.min(progressRaw, 1));
 
-    const clamped = Math.max(0, Math.min(progressRaw, 1));
+      setProgress(clamped);
+    };
 
-    setProgress(clamped);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [isDesktop, totalSlides]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isDesktop, totalSlides]);
 
   const translateX = isDesktop
     ? progress * (totalSlides - 1) * -100
@@ -78,7 +78,7 @@ useEffect(() => {
             style={{
               fontFamily: "Playfair Display, serif",
               fontWeight: 700,
-              fontSize: "clamp(32px, 6vw, 48px)", // Increased for mobile/tablet
+              fontSize: "clamp(32px, 6vw, 48px)",
             }}
           >
             {top}
@@ -103,11 +103,12 @@ useEffect(() => {
     </div>
   );
 
-  /* ---------------- DESKTOP SLIDE LAYOUT (UNTOUCHED) ---------------- */
+  /* ---------------- SLIDE LAYOUT ---------------- */
   const SlideLayout = ({ slide }) => (
     <div className="w-screen h-auto lg:h-screen flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-20 py-12 lg:py-0">
         <div className="w-full max-w-xl paragraph">
+
           <Heading
             top={slide.headingTop}
             bottom={slide.headingBottom}
@@ -140,10 +141,11 @@ useEffect(() => {
               {slide.description}
             </p>
           )}
+
         </div>
       </div>
 
-     <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
+      <div className="relative w-full lg:w-1/2 h-[55vh] sm:h-[65vh] lg:h-full">
         <Image
           src={slide.image}
           alt=""
@@ -151,46 +153,50 @@ useEffect(() => {
           className="object-cover"
         />
       </div>
-
     </div>
   );
 
   return (
     <>
-      {/* ================= DESKTOP VERSION (UNCHANGED) ================= */}
+      {/* ================= DESKTOP ================= */}
       {isDesktop && (
         <section
           ref={scrollRef}
           className="relative w-full"
-          style={{ height: `${totalSlides * 100}vh` }}
+          style={{ height: `${totalSlides * 100 + 20}vh` }}
         >
           <div className="sticky top-[72px] h-[calc(100vh-72px)] overflow-hidden">
+
             <div
               className="flex h-full"
               style={{
                 width: `${totalSlides * 100}vw`,
                 transform: `translateX(${translateX}vw)`,
                 transition: "transform 0.1s linear",
+                willChange: "transform",
               }}
             >
-                          <div className="w-screen h-screen relative">
-                          <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="absolute inset-0 w-full h-full object-cover"
-                        >
-                          <source src={videoSrc} type="video/mp4" />
-                        </video>
 
-                      <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
-              }}
-            />
+              {/* VIDEO HERO */}
+              <div className="w-screen h-screen relative">
+
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.36) 37.51%, rgba(0,0,0,0.54) 51.68%, rgba(0,0,0,0.30) 78.65%, rgba(0,0,0,0) 100%)",
+                  }}
+                />
 
                 <div className="relative z-10 flex items-center justify-center h-full text-center px-6">
                   <h2
@@ -205,22 +211,24 @@ useEffect(() => {
                     {title}
                   </h2>
                 </div>
+
               </div>
 
               {slides.map((slide, index) => (
                 <SlideLayout key={index} slide={slide} />
               ))}
+
             </div>
           </div>
         </section>
       )}
 
-      {/* ================= MOBILE + TABLET VERSION ================= */}
+      {/* ================= MOBILE + TABLET ================= */}
       {!isDesktop && (
         <>
-          {/* Video */}
           <section className="relative w-full">
             <div className="w-full h-[70vh] relative">
+
               <video
                 autoPlay
                 loop
@@ -246,39 +254,38 @@ useEffect(() => {
                   {title}
                 </h2>
               </div>
+
             </div>
           </section>
 
-          {/* Slides */}
           <section className="overflow-hidden relative">
+
             <div
               className="flex transition-transform duration-500"
               style={{
                 transform: `translateX(-${mobileIndex * 100}%)`,
               }}
             >
+
               {slides.map((slide, index) => (
                 <div key={index} className="min-w-full">
+
                   <div className="container-custom py-10">
 
-                    {/* IMAGE */}
-                   <div className="relative w-full h-[280px] md:h-[340px] mb-6">
-                  <Image
-                    src={slide.image}
-                    alt=""
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
+                    <div className="relative w-full h-[280px] md:h-[340px] mb-6">
+                      <Image
+                        src={slide.image}
+                        alt=""
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
 
-
-                    {/* TITLE */}
                     <Heading
                       top={slide.headingTop}
                       bottom={slide.headingBottom}
                     />
 
-                    {/* SUBTITLE */}
                     {slide.subTitle && (
                       <p
                         className="mb-4"
@@ -287,14 +294,12 @@ useEffect(() => {
                           fontWeight: 700,
                           fontSize: "clamp(20px, 4.5vw, 24px)",
                           color: "#9B1B2F",
-                          
                         }}
                       >
                         {slide.subTitle}
                       </p>
                     )}
 
-                    {/* DESCRIPTION */}
                     {slide.description && (
                       <p
                         style={{
@@ -309,11 +314,12 @@ useEffect(() => {
                     )}
 
                   </div>
+
                 </div>
               ))}
+
             </div>
 
-            {/* Buttons */}
             <div className="container-custom mt-4 mb-8 flex justify-center">
               <div className="flex">
                 <ScrollButton
@@ -329,6 +335,7 @@ useEffect(() => {
                 />
               </div>
             </div>
+
           </section>
         </>
       )}

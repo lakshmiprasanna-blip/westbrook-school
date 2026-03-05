@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqData = [
   {
@@ -122,16 +123,23 @@ export default function FAQSection() {
                     <div className="block md:hidden h-px bg-gray-200 w-full"></div>
                   )}
 
+                  <AnimatePresence initial={false}>
                   {isActive && (
-                    <>
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
                       <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
                         {item.answer}
                       </div>
 
-                      {/* Mobile Divider when OPEN */}
                       <div className="block md:hidden h-px bg-gray-200 w-full"></div>
-                    </>
+                    </motion.div>
                   )}
+                </AnimatePresence>
                 </div>
               );
             })}
