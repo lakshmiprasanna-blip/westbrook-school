@@ -30,11 +30,10 @@ const VideoTextMask = () => {
   }, [zoom]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-black "
-    
-    >
+      <section
+        ref={sectionRef}
+        className="relative h-[42vh] md:h-screen overflow-hidden bg-black "
+      >
       {/* Background Video */}
       {/* Background Video */}
       <video
@@ -83,7 +82,7 @@ const VideoTextMask = () => {
       )}
 
       {/* Hero Content — ALWAYS visible */}
-     <div className="relative z-20 h-full flex items-end justify-center pb-16 md:pb-24 lg:pb-15">
+     <div className="relative z-20 h-full flex items-end justify-center !p-6 md:pb-24 lg:pb-15">
   <div className="lg:max-w-3xl w-full 
   flex flex-col 
   items-center 
@@ -94,7 +93,7 @@ const VideoTextMask = () => {
     <div >
       <h2
         className="text-white leading-[120%] 
-        text-[18px] 
+        !text-[20px] 
         sm:text-[22px] 
         md:text-[40px] 
         lg:!text-[48px]"

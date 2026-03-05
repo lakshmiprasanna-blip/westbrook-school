@@ -2,28 +2,30 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import EnquiryForm from "./FormComponent"; // adjust path if needed
+import EnquiryForm from "./FormComponent";
 
 export default function FloatingCTAs() {
   const [formType, setFormType] = useState(null);
 
   return (
     <>
-      <div className="fixed right-0 top-[60%] -translate-y-1/2 z-50">
+      {/* CTA Position */}
+      <div className="fixed bottom-0 left-0 w-full md:w-auto md:left-auto md:right-0 md:top-[60%] md:-translate-y-1/2 z-50">
 
         {/* Outer Wrapper */}
-        <div className="flex flex-col overflow-hidden rounded-l-2xl shadow-lg">
+        <div className="flex flex-row md:flex-col bg-white md:bg-transparent md:overflow-hidden md:rounded-l-2xl shadow-lg">
 
           {/* VISIT US */}
           <button
             onClick={() => setFormType("detailed")}
             className="
+              flex-1 md:flex-none
               bg-maroon text-white cursor-pointer
-              text-[11px] font-semibold tracking-wide
-              w-[44px] h-[100px]
-              flex items-center cursor-pointer justify-center
-              rotate-180
-              [writing-mode:vertical-rl]
+              text-[15px] md:text-[12px] font-semibold tracking-wide
+              h-[50px] md:h-[100px] md:w-[44px]
+              flex items-center justify-center
+              md:rotate-180
+              md:[writing-mode:vertical-rl]
             "
           >
             VISIT US
@@ -33,12 +35,13 @@ export default function FloatingCTAs() {
           <button
             onClick={() => setFormType("simple")}
             className="
+              flex-1 md:flex-none
               bg-primary text-white cursor-pointer
-              text-[11px] font-semibold tracking-wide
-              w-[44px] h-[100px]
-              flex items-center cursor-pointer justify-center
-              rotate-180
-              [writing-mode:vertical-rl]
+              text-[15px] md:text-[12px] font-semibold tracking-wide
+              h-[50px] md:h-[100px] md:w-[44px]
+              flex items-center justify-center
+              md:rotate-180
+              md:[writing-mode:vertical-rl]
             "
           >
             APPLY NOW
@@ -47,7 +50,7 @@ export default function FloatingCTAs() {
         </div>
       </div>
 
-      {/* ✅ POPUP MODAL */}
+      {/* POPUP MODAL */}
       <AnimatePresence>
         {formType && (
           <motion.div
@@ -66,18 +69,13 @@ export default function FloatingCTAs() {
               className="relative w-full max-w-md"
             >
               {/* Close Button */}
-              {/* <button
+              <button
                 onClick={() => setFormType(null)}
-                className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
+                className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
               >
                 ✕
-              </button> */}
-  <button
-    onClick={() => setFormType(null)}
-    className="absolute top-3 right-3 bg-white rounded-full w-8 h-8 shadow flex items-center justify-center text-black font-bold"
-  >
-    ✕
-  </button>
+              </button>
+
               <EnquiryForm variant={formType} />
             </motion.div>
           </motion.div>
