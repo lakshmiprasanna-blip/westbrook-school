@@ -159,7 +159,7 @@ export default function CurriculumSection() {
               <div
                 key={index}
                 onClick={() => setActive(isActive ? null : index)}
-                className="relative w-full h-[240px] overflow-hidden cursor-pointer will-change-transform"
+                className="relative w-full h-[300px] sm:h-[320px] overflow-hidden cursor-pointer will-change-transform"
               >
                 <Image
                   src={item.image}
@@ -209,14 +209,14 @@ export default function CurriculumSection() {
                 <motion.div
                   initial={false}
                   animate={{
-                    y: isActive ? 0 : 180,
+                    y: isActive ? 0 : 220,
                     opacity: isActive ? 1 : 0,
                   }}
                   transition={{
                     duration: 0.75,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white"
+                  className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white bg-gradient-to-t from-[#00213D] via-[#00213D]/90 to-transparent"
                 >
                   <h3 className="uppercase mb-3 text-white">
                     {item.title}

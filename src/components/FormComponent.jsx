@@ -340,7 +340,7 @@ export default function EnquiryForm({
         )}
 
         {/* ── detailed: date + time ── */}
-        {/* {variant === "detailed" && (
+        {variant === "detailed" && (
           <div className="grid grid-cols-2 gap-3">
             <div>
               <input
@@ -369,13 +369,13 @@ export default function EnquiryForm({
               {errors.time && <p className={errorStyle}>{errors.time}</p>}
             </div>
           </div>
-        )} */}
-        {variant === "detailed" && (
+        )}
+        {/* {variant === "detailed" && (
         <div className="grid grid-cols-2 gap-3">
           <DateInput />
           <TimeInput />
         </div>
-      )}
+      )} */}
         {/* ── contact: message ── */}
         {variant === "contact" && (
           <div>
