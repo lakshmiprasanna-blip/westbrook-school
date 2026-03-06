@@ -2,6 +2,7 @@ export const submitLead = async ({
   name,
   email,
   phone,
+  grade = "",
   source = "Website",
   message = "",
   honeypot = "",
@@ -23,7 +24,7 @@ export const submitLead = async ({
     const response = await fetch("/api/submit-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, source, message, honeypot, pageName }),
+      body: JSON.stringify({ name, email, grade, phone, source, message, honeypot, pageName }),
     });
 
     const result = await response.json();
