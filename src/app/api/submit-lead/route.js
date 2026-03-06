@@ -84,15 +84,17 @@ export async function POST(request) {
     const body = await request.json();
 
     const {
-      parentName,
-      childName,
-      grade,
-      mobile,
-      email,
-      message,
-      variant,
-      honeypot,
-    } = body;
+  parentName,
+  childName,
+  grade,
+  mobile,
+  email,
+  message,
+  variant,
+  honeypot,
+  date,
+  time
+} = body;
 
     // --- Honeypot Check ---
     if (honeypot) {
@@ -128,17 +130,18 @@ export async function POST(request) {
       "https://leadapi.yellowslate.com/api/webhooks/web/client";
 
     const crmPayload = {
-      access_code: ACCESS_CODE,
-      name: parentName,
-      email,
-      phone: mobile,
-      grade: grade || "",
-      parent_name: parentName || "",
-      student_name: childName || "",
-      message: message || "",
-      source: variant === "contact" ? "Website Contact" : "Website Enquiry",
-    };
-
+  access_code: ACCESS_CODE,
+  name: parentName,
+  email,
+  phone: mobile,
+  grade: grade || "",
+  parent_name: parentName || "",
+  student_name: childName || "",
+  message: message || "",
+  source: variant === "contact" ? "Website Contact" : "Website Enquiry",
+  date: date || "",
+  time: time || ""
+};
     let crmResponseBody = null;
     let crmStatusCode = 0;
     let crmSuccess = false;
