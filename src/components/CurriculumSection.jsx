@@ -216,7 +216,7 @@ export default function CurriculumSection() {
                     duration: 0.75,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white bg-gradient-to-t from-[#00213D] via-[#00213D]/90 to-transparent"
+                  className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white"
                 >
                   <h3 className="uppercase mb-3 text-white">
                     {item.title}

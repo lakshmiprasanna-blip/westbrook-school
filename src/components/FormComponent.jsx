@@ -189,50 +189,50 @@ export default function EnquiryForm({
     </div>
   );
 // ─── Date Input with fake placeholder (works on iOS + Android) ────────────
-  const DateInput = () => (
-    <div className="relative">
-      <input
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-        className={`${inputStyle} ${errors.date ? "border-red-500" : ""} ${
-          !formData.date ? "text-transparent" : ""
-        }`}
-        style={{ colorScheme: "light" }}
-      />
-      {/* Fake placeholder — hidden once a value is picked */}
-      {!formData.date && (
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
-          Date
-        </span>
-      )}
-      {errors.date && <p className={errorStyle}>{errors.date}</p>}
-    </div>
-  );
+  // const DateInput = () => (
+  //   <div className="relative">
+  //     <input
+  //       type="date"
+  //       name="date"
+  //       value={formData.date}
+  //       onChange={handleChange}
+  //       className={`${inputStyle} ${errors.date ? "border-red-500" : ""} ${
+  //         !formData.date ? "text-transparent" : ""
+  //       }`}
+  //       style={{ colorScheme: "light" }}
+  //     />
+  //     {/* Fake placeholder — hidden once a value is picked */}
+  //     {!formData.date && (
+  //       <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
+  //         Date
+  //       </span>
+  //     )}
+  //     {errors.date && <p className={errorStyle}>{errors.date}</p>}
+  //   </div>
+  // );
 
-  // ─── Time Input with fake placeholder (works on iOS + Android) ────────────
-  const TimeInput = () => (
-    <div className="relative">
-      <input
-        type="time"
-        name="time"
-        value={formData.time}
-        onChange={handleChange}
-        className={`${inputStyle} ${errors.time ? "border-red-500" : ""} ${
-          !formData.time ? "text-transparent" : ""
-        }`}
-        style={{ colorScheme: "light" }}
-      />
-      {/* Fake placeholder — hidden once a value is picked */}
-      {!formData.time && (
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
-          Time
-        </span>
-      )}
-      {errors.time && <p className={errorStyle}>{errors.time}</p>}
-    </div>
-  );
+  // // ─── Time Input with fake placeholder (works on iOS + Android) ────────────
+  // const TimeInput = () => (
+  //   <div className="relative">
+  //     <input
+  //       type="time"
+  //       name="time"
+  //       value={formData.time}
+  //       onChange={handleChange}
+  //       className={`${inputStyle} ${errors.time ? "border-red-500" : ""} ${
+  //         !formData.time ? "text-transparent" : ""
+  //       }`}
+  //       style={{ colorScheme: "light" }}
+  //     />
+  //     {/* Fake placeholder — hidden once a value is picked */}
+  //     {!formData.time && (
+  //       <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
+  //         Time
+  //       </span>
+  //     )}
+  //     {errors.time && <p className={errorStyle}>{errors.time}</p>}
+  //   </div>
+  // );
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <div className={wrapper}>
@@ -272,12 +272,12 @@ export default function EnquiryForm({
           </div>
         )}
 {/* ── detailed: date + time (FIXED for mobile) ── */}
-        {variant === "detailed" && (
+        {/* {variant === "detailed" && (
           <div className="grid grid-cols-2 gap-3">
             <DateInput />
             <TimeInput />
           </div>
-        )}
+        )} */}
         {/* ── Mobile (all variants) ── */}
         <div>
           <input
