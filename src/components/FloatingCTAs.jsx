@@ -13,7 +13,9 @@ export default function FloatingCTAs() {
       <div className="fixed bottom-0 left-0 w-full md:w-auto md:left-auto md:right-0 md:top-[60%] md:-translate-y-1/2 z-50">
 
         {/* Outer Wrapper */}
-        <div className="flex flex-row md:flex-col bg-white md:bg-transparent md:overflow-hidden md:rounded-l-2xl shadow-lg">
+        <div className="flex flex-row md:flex-col bg-white md:bg-transparent md:overflow-hidden md:rounded-l-2xl shadow-[0_12px_32px_rgba(0,0,0,0.45)] md:shadow-none">
+           
+
 
           {/* VISIT US */}
           <button

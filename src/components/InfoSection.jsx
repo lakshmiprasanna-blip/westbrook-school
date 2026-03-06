@@ -77,14 +77,14 @@ export default function InfoSection({
               <div className="md:hidden mt-4">
                 {buttonLink ? (
                   <Link href={buttonLink}>
-                    <button className="border border-maroon text-maroon px-3 py-2 rounded-full text-xs font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
+                    <button className="w-[140px] h-[46px] border border-maroon text-maroon rounded-full text-sm font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer">
                       {buttonText}
                     </button>
                   </Link>
                 ) : (
                   <button
                     onClick={onButtonClick}
-                    className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer"
+                    className="w-[140px] h-[46px] border border-maroon text-maroon rounded-full text-sm font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer"
                   >
                     {buttonText}
                   </button>
@@ -96,18 +96,18 @@ export default function InfoSection({
           {/* TEXT */}
           <div className="w-full md:w-1/2 order-1 md:order-2">
             {tag && (
-            <h3 className="inline-block mb-2 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
-              {tag}
-            </h3>
-          )}
+              <h3 className="inline-block mb-2 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+                {tag}
+              </h3>
+            )}
 
-          <br />
+            <br />
 
-          {subTag && (
-            <h3 className="inline-block mb-4 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
-              {subTag}
-            </h3>
-          )}
+            {subTag && (
+              <h3 className="inline-block mb-4 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+                {subTag}
+              </h3>
+            )}
 
             {/* DESKTOP DESCRIPTION */}
             <p className="hidden md:block paragraph max-w-[447px] text-dark text-base md:text-lg leading-relaxed mb-5">
@@ -119,14 +119,14 @@ export default function InfoSection({
               <div className="hidden md:block">
                 {buttonLink ? (
                   <Link href={buttonLink}>
-                    <button className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer">
+                    <button className="w-[150px] h-[46px] border border-maroon text-maroon rounded-full text-md font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer">
                       {buttonText}
                     </button>
                   </Link>
                 ) : (
                   <button
                     onClick={onButtonClick}
-                    className="border border-maroon text-maroon px-5 py-3 rounded-full text-sm font-semibold hover:bg-maroon hover:text-white transition cursor-pointer"
+                    className="w-[150px] h-[46px] border border-maroon text-maroon rounded-full text-md font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer"
                   >
                     {buttonText}
                   </button>

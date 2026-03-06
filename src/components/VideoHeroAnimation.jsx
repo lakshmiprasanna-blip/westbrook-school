@@ -171,8 +171,8 @@ export default function VideoHeroAnimation({
                             className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
                               ${
                                 slide.button.variant === "filledLarge"
-                                  ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
-                                  : "px-8 py-3 border border-[#9B1B2F] bg-[#F7F6F2] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
+                          ? "w-[160px] h-[56px] flex items-center justify-center bg-[#F7CAC9] text-[#9B1B2F] rounded-full font-semibold transition-all duration-300"
+                          : "w-[160px] h-[56px] flex items-center justify-center border border-[#9B1B2F] text-[#9B1B2F] rounded-full font-semibold transition-all duration-300 hover:bg-[#F7CAC9] hover:border-[#F7CAC9]"
                               }
                             `}
                           >
