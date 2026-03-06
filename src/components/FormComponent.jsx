@@ -101,7 +101,7 @@ export default function EnquiryForm({
       }
     }
 
-    if (!formData.grade) newErrors.grade = "Please select a grade.";
+    if (!formData.grade) newErrors.grade = "Required";
 
     if (!/^[0-9]{10}$/.test(formData.mobile.trim())) {
       newErrors.mobile = "Enter valid 10-digit number";
@@ -159,8 +159,9 @@ export default function EnquiryForm({
   };
 
   // ─── Grade options (shared) ─────────────────────────────────────────────────
-  const GradeSelect = ({ twoCol = false }) => (
-    <div className={twoCol ? "" : "relative"}>
+const GradeSelect = ({ twoCol = false }) => (
+  <div>
+    <div className="relative">
       <select
         name="grade"
         value={formData.grade}
@@ -179,61 +180,26 @@ export default function EnquiryForm({
         <option value="Grade 4">Grade 4</option>
         <option value="Grade 5">Grade 5</option>
       </select>
-      {/* chevron */}
-      <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-        <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+
+      {/* Arrow */}
+      <div className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 flex items-center">
+        <svg
+          className="w-4 h-4 text-gray-500"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </div>
-      {errors.grade && <p className={errorStyle}>{errors.grade}</p>}
     </div>
-  );
-// ─── Date Input with fake placeholder (works on iOS + Android) ────────────
-  // const DateInput = () => (
-  //   <div className="relative">
-  //     <input
-  //       type="date"
-  //       name="date"
-  //       value={formData.date}
-  //       onChange={handleChange}
-  //       className={`${inputStyle} ${errors.date ? "border-red-500" : ""} ${
-  //         !formData.date ? "text-transparent" : ""
-  //       }`}
-  //       style={{ colorScheme: "light" }}
-  //     />
-  //     {/* Fake placeholder — hidden once a value is picked */}
-  //     {!formData.date && (
-  //       <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
-  //         Date
-  //       </span>
-  //     )}
-  //     {errors.date && <p className={errorStyle}>{errors.date}</p>}
-  //   </div>
-  // );
 
-  // // ─── Time Input with fake placeholder (works on iOS + Android) ────────────
-  // const TimeInput = () => (
-  //   <div className="relative">
-  //     <input
-  //       type="time"
-  //       name="time"
-  //       value={formData.time}
-  //       onChange={handleChange}
-  //       className={`${inputStyle} ${errors.time ? "border-red-500" : ""} ${
-  //         !formData.time ? "text-transparent" : ""
-  //       }`}
-  //       style={{ colorScheme: "light" }}
-  //     />
-  //     {/* Fake placeholder — hidden once a value is picked */}
-  //     {!formData.time && (
-  //       <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]">
-  //         Time
-  //       </span>
-  //     )}
-  //     {errors.time && <p className={errorStyle}>{errors.time}</p>}
-  //   </div>
-  // );
-  // ─── Render ────────────────────────────────────────────────────────────────
+    {errors.grade && <p className={errorStyle}>{errors.grade}</p>}
+  </div>
+);
+
+
   return (
     <div className={wrapper}>
       <form onSubmit={handleSubmit} className={card}>
