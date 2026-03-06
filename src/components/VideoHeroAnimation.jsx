@@ -265,12 +265,14 @@ export default function VideoHeroAnimation({
                         {slide.subTitle}
                       </p>
                     )}
-
+                    
                     {slide.description && (
-                      <p className="text-gray-600">
-                        {slide.description}
-                      </p>
+                      <p
+                        className="text-gray-600 [&_b]:text-primary [&_b]:font-semibold"
+                        dangerouslySetInnerHTML={{ __html: slide.description }}
+                      />
                     )}
+                   
 
                     {slide.button &&
                       (slide.button.action === "popup" ? (
