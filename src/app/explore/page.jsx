@@ -120,7 +120,7 @@ export default function Explore() {
 
               <div
                 ref={sliderRef}
-                className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory"
+                className="flex overflow-x-hidden snap-x snap-mandatory"
               >
                 {cards.map((item, index) => (
                   <div

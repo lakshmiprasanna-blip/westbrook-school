@@ -179,6 +179,19 @@
   padding: 12px 12px !important;
   
 }
+.footer-spacing {
+  padding-bottom: 0;
+}
+
+body.has-floating-cta .footer-spacing {
+  padding-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  body.has-floating-cta .footer-spacing {
+    padding-bottom: 0;
+  }
+}
 
 /* ================= TABLET ================= */
 @media (max-width: 1024px) {

@@ -14,7 +14,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full pb-12 md:pb-0">
+    <footer className="w-full footer-spacing">
 
       {/* ================= TOP SECTION ================= */}
       <div className="bg-primary text-white ">

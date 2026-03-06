@@ -3,12 +3,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import EnquiryForm from "./FormComponent";
+import { useEffect } from "react";
 
 export default function FloatingCTAs() {
   const [formType, setFormType] = useState(null);
+  
+  useEffect(() => {
+  document.body.classList.add("has-floating-cta");
 
+  return () => {
+    document.body.classList.remove("has-floating-cta");
+  };
+}, []);
   return (
-    <>
+    <div className="pb-[60px] md:pb-0">
       {/* CTA Position */}
       <div className="fixed bottom-0 left-0 w-full md:w-auto md:left-auto md:right-0 md:top-[60%] md:-translate-y-1/2 z-50">
 
@@ -83,6 +91,6 @@ export default function FloatingCTAs() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
