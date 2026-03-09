@@ -46,8 +46,8 @@ const VideoTextMask = () => {
           className="absolute inset-0 mt-22 w-full h-full object-cover"
           priority="true"
         >
-          <source src={VIDEO_SRC} type="video/webm" />
-          <source src="/assets/homeaivideo.mp4" type="video/mp4" />
+          <source playsInline src={VIDEO_SRC} type="video/webm" />
+          {/* <source playsInline src="/assets/homeaivideo.mp4" type="video/mp4" /> */}
           
         </video>
 
