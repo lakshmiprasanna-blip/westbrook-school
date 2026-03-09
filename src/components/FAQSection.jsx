@@ -75,7 +75,7 @@ export default function FAQSection({ faqData }) {
                         : "text-dark hover:bg-maroon hover:text-white"
                     }`}
                   >
-                    <span className="flex-1 text-[18px] md:text-[20px] font-medium break-words">
+                    <span className="flex-1 text-[16px] md:text-[20px] font-medium break-words">
                       {item.question}
                     </span>
 
@@ -123,7 +123,7 @@ export default function FAQSection({ faqData }) {
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="bg-white px-6 md:px-8 py-6 text-[18px] leading-relaxed">
+                        <div className="bg-white px-6 md:px-8 py-6 text-[14px] leading-relaxed">
                           {item.answer}
                         </div>
                       </motion.div>

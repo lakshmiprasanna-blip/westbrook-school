@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link"; 
+import Button from "./KnowMorebtn";
 
 export default function InfoSection({
   topLabel,
@@ -74,23 +75,15 @@ export default function InfoSection({
 
             {/* BUTTON (MOBILE POSITION) */}
             {showButton && (
-              <div className="md:hidden mt-4">
-                {buttonLink ? (
-                  <Link href={buttonLink}>
-                    <button className="w-[140px] h-[46px] border border-maroon text-maroon rounded-full text-sm font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer">
-                      {buttonText}
-                    </button>
-                  </Link>
-                ) : (
-                  <button
-                    onClick={onButtonClick}
-                    className="w-[140px] h-[46px] border border-maroon text-maroon rounded-full text-sm font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer"
-                  >
-                    {buttonText}
-                  </button>
-                )}
-              </div>
-            )}
+  <div className="md:hidden mt-4">
+    <Button
+      text={buttonText}
+      link={buttonLink}
+      onClick={onButtonClick}
+      className="w-[140px] h-[46px] text-sm"
+    />
+  </div>
+)}
           </div>
 
           {/* TEXT */}
@@ -116,23 +109,15 @@ export default function InfoSection({
 
             {/* BUTTON (DESKTOP POSITION) */}
             {showButton && (
-              <div className="hidden md:block">
-                {buttonLink ? (
-                  <Link href={buttonLink}>
-                    <button className="w-[150px] h-[46px] border border-maroon text-maroon rounded-full text-md font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer">
-                      {buttonText}
-                    </button>
-                  </Link>
-                ) : (
-                  <button
-                    onClick={onButtonClick}
-                    className="w-[150px] h-[46px] border border-maroon text-maroon rounded-full text-md font-semibold hover:bg-[#F7CAC9] hover:border-[#F7CAC9] transition cursor-pointer"
-                  >
-                    {buttonText}
-                  </button>
-                )}
-              </div>
-            )}
+  <div className="hidden md:block">
+    <Button
+      text={buttonText}
+      link={buttonLink}
+      onClick={onButtonClick}
+      className="w-[150px] h-[46px]"
+    />
+  </div>
+)}
           </div>
         </div>
       </div>

@@ -5,12 +5,15 @@ import { useState } from "react";
 import Image from "next/image";
 import EnquiryForm from "./FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
+import Button from "./KnowMorebtn";
 
 export default function ContactCTA({
   imageSrc = "/assets/groupimg-1.webp",
   align = "center",
   title = "We’d love to hear from you!",
   subtitle = "Feel free to get in touch, or apply now",
+  primaryBtnText,
+  secondaryBtnText,
 }) {
   const [formType, setFormType] = useState(null);
   const router = useRouter();
@@ -58,35 +61,30 @@ export default function ContactCTA({
           </p>
 
           {/* Buttons */}
-          <div className="flex !flex-row gap-4 justify-center">
-            
-            {/* CONTACT US */}
-            <button
-              onClick={() => {
-                if (
-                  typeof window !== "undefined" &&
-                  window.location.pathname === "/contact"
-                ) {
-                  document
-                    .getElementById("contact-form")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  router.push("/contact");
-                }
-              }}
-              className="!px-4 py-4 rounded-full text-white !text-sm md:text-base font-semibold bg-maroon cursor-pointer"
-            >
-              CONTACT US
-            </button>
-
-            {/* APPLY NOW */}
-            <button
-              onClick={() => setFormType("simple")}
-              className="!px-4 py-4 rounded-full text-white !text-sm md:text-base font-semibold bg-primary cursor-pointer"
-            >
-              APPLY NOW
-            </button>
-          </div>
+          <div className="mt-6 flex flex-row gap-3 justify-center flex-wrap">
+                       <Button
+                    text="CONTACT US"
+                    onClick={() => {
+                      if (
+                        typeof window !== "undefined" &&
+                        window.location.pathname === "/contact"
+                      ) {
+                        document
+                          .getElementById("contact-form")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        router.push("/contact");
+                      }
+                    }}
+                    className="!bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
+                  />
+                          
+                       <Button
+                    text="APPLY NOW"
+                    onClick={() => setFormType("simple")}
+                    className="!bg-primary !text-white !border-none !text-sm hover:!opacity-90"
+                  />
+                     </div>
         </div>
       </section>
 

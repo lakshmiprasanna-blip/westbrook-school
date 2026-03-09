@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Button from "./KnowMorebtn";
 
 export default function ImageContentSection({
   imageSrc,
@@ -42,23 +43,19 @@ export default function ImageContentSection({
 
             <div className="mt-6 flex flex-row gap-3 justify-center flex-wrap">
               {primaryBtnText && (
-                <button
-                  onClick={onPrimaryClick}
-                  type="button"
-                  className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap cursor-pointer hover:opacity-90 transition"
-                >
-                  {primaryBtnText}
-                </button>
-              )}
+                <Button
+                text={primaryBtnText}
+                onClick={onPrimaryClick}
+                className=" !bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
+              />
+                            )}
 
-              {secondaryBtnText && (
-                <button
-                  onClick={onSecondaryClick}
-                  type="button"
-                  className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap cursor-pointer hover:opacity-90 transition"
-                >
-                  {secondaryBtnText}
-                </button>
+                                          {secondaryBtnText && (
+                <Button
+                text={secondaryBtnText}
+                onClick={onSecondaryClick}
+                className=" !bg-primary !text-white !border-none !text-sm hover:!opacity-90"
+              />
               )}
             </div>
           </div>
@@ -93,16 +90,16 @@ export default function ImageContentSection({
           <div className="w-full md:w-4/5">
             <div className="relative w-full h-[480px] overflow-hidden">
             <Image
-  src={imageSrc}
-  alt="section image"
-  fill
-  priority
-  className={`
-    object-contain
-    lg:object-cover
-    ${reverse ? "object-[center_69%]" : ""}
-  `}
-/>
+              src={imageSrc}
+              alt="section image"
+              fill
+              priority
+              className={`
+                object-contain
+                lg:object-cover
+                ${reverse ? "object-[center_69%]" : ""}
+              `}
+            />
             </div>
           </div>
 
@@ -118,24 +115,19 @@ export default function ImageContentSection({
             <p className="mt-4 text-gray-600 max-w-lg">{description}</p>
             <div className="mt-6 flex flex-row gap-3 flex-wrap">
               {primaryBtnText && (
-                <button
+                  <Button
+                  text={primaryBtnText}
                   onClick={onPrimaryClick}
-                  type="button"
-                  className="px-5 py-2.5 bg-maroon text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
-            >
-                  {primaryBtnText}
-                </button>
-              )}
-              {secondaryBtnText && (
-                <button
+                  className=" !bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
+                />
+                )}
+                              {secondaryBtnText && (
+                  <Button
+                  text={secondaryBtnText}
                   onClick={onSecondaryClick}
-                  type="button"
-                  className="px-5 py-2.5 bg-primary text-white rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90 transition cursor-pointer"
-
->
-                  {secondaryBtnText}
-                </button>
-              )}
+                  className=" !bg-primary !text-white !border-none !text-sm hover:!opacity-90"
+                />
+                )}
             </div>
           </div>
         </div>

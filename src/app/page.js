@@ -147,7 +147,7 @@ export default function Page() {
   subTag="Excellence"
   description="Strong academics focus on clear teaching, steady progress, and close teacher support. Students are guided to understand concepts, apply ideas meaningfully, and build confidence within the classroom, reducing the need for excessive after-school coaching"
   image="/assets/info1.png"
-  showButton={true}
+  showButton
   buttonText="KNOW MORE"
   buttonLink="/academics"
 />
@@ -158,7 +158,7 @@ export default function Page() {
   description="Co-curricular learning at Westbrook supports creativity, movement, and problem-solving while complementing academics. Activities such as pottery, gymnastics, and robotics are integrated thoughtfully to maintain balance within the school day."
   image="/assets/info2.png"
   reverse
-  showButton={true}
+  showButton
   buttonText="KNOW MORE"
   buttonLink="/explore"
 />

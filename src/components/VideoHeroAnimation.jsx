@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import EnquiryForm from "./FormComponent";
+import Button from "./KnowMorebtn";
 
 export default function VideoHeroAnimation({
   videoSrc,
@@ -166,32 +167,19 @@ export default function VideoHeroAnimation({
 
                       {slide.button &&
                         (slide.button.action === "popup" ? (
-                          <button
-                            onClick={() => setShowPopup(true)}
-                            className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
-                              ${
-                                slide.button.variant === "filledLarge"
-                          ? "w-[160px] h-[56px] flex items-center justify-center bg-[#F7CAC9] text-[#9B1B2F] rounded-full font-semibold transition-all duration-300"
-                          : "w-[160px] h-[56px] flex items-center justify-center border border-[#9B1B2F] text-[#9B1B2F] rounded-full font-semibold transition-all duration-300 hover:bg-[#F7CAC9] hover:border-[#F7CAC9]"
-                              }
-                            `}
-                          >
-                            {slide.button.text}
-                          </button>
+                          <Button
+                          text={slide.button.text}
+                          onClick={() => setShowPopup(true)}
+                          className={`mt-6 
+                            
+                          `}
+                        />
                         ) : (
-                          <Link href={slide.button.link}>
-                            <button
-                              className={`mt-6 font-semibold cursor-pointer transition-all duration-300 rounded-full
-                              ${
-                                slide.button.variant === "filledLarge"
-                                  ? "px-12 py-4 bg-[#9B1B2F] text-white text-lg hover:scale-105"
-                                  : "px-8 py-3 border border-[#9B1B2F] bg-[#F7F6F2] text-[#9B1B2F] hover:bg-[#9B1B2F] hover:text-white"
-                              }
-                            `}
-                            >
-                              {slide.button.text}
-                            </button>
-                          </Link>
+                          <Button
+                        text={slide.button.text}
+                        link={slide.button.link}
+                        className="mt-6 bg-[#9B1B2F] text-white !border-none hover:!bg-[#9B1B2F] hover:!border-none"
+                      />
                         ))}
                     </div>
                   </div>
@@ -276,28 +264,17 @@ export default function VideoHeroAnimation({
 
                     {slide.button &&
                       (slide.button.action === "popup" ? (
-                        <button
-                          onClick={() => setShowPopup(true)}
-                          className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
-                          style={{
-                            border: "1px solid #9B1B2F",
-                            color: "#9B1B2F",
-                          }}
-                        >
-                          {slide.button.text}
-                        </button>
+                        <Button
+                        text={slide.button.text}
+                        onClick={() => setShowPopup(true)}
+                        className="mt-6 "
+                      />
                       ) : (
-                        <Link href={slide.button.link}>
-                          <button
-                            className="mt-6 px-4 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:bg-[#9B1B2F] hover:text-white"
-                            style={{
-                              border: "1px solid #9B1B2F",
-                              color: "#9B1B2F",
-                            }}
-                          >
-                            {slide.button.text}
-                          </button>
-                        </Link>
+                        <Button
+                        text={slide.button.text}
+                        link={slide.button.link}
+                        className="mt-6 bg-[#9B1B2F] text-white !border-none hover:!bg-[#9B1B2F] hover:!border-none"
+                      />
                       ))}
                   </div>
                 </div>
