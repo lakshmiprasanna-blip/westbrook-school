@@ -213,7 +213,7 @@ const GradeSelect = ({ twoCol = false }) => (
               width={300}
               height={60}
               className="object-contain w-auto max-w-[220px] sm:max-w-[300px]"
-              priority
+              
             />
           </div>
         )}

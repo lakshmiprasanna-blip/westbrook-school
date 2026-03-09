@@ -63,7 +63,7 @@ export default function InfoSection({
               width={1000}
               height={500}
               className="w-full h-[240px] md:h-[500px] object-cover"
-              priority="true"
+              
             />
 
             {/* MOBILE DESCRIPTION */}

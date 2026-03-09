@@ -74,7 +74,7 @@ export default function ImageContentSection({
                 src={mobileImageSrc || imageSrc}
                 alt="section image"
                 fill
-                priority
+                
                 className="object-cover object-bottom"
               />
             </div>
@@ -93,7 +93,7 @@ export default function ImageContentSection({
               src={imageSrc}
               alt="section image"
               fill
-              priority
+              
               className={`
                 object-contain
                 lg:object-cover

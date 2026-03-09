@@ -69,7 +69,7 @@ export default function NavBar() {
               width={200}
               height={60}
               className="object-contain lg:hidden"
-              priority
+              
             />
 
             <Image
@@ -78,7 +78,7 @@ export default function NavBar() {
               width={220}
               height={60}
               className="object-contain hidden lg:block"
-              priority
+              
             />
           </Link>
 
