@@ -82,7 +82,7 @@ export default function ImageContentSection({
 
         {/* DESKTOP LAYOUT: side by side */}
         <div
-          className={`hidden md:flex flex-row items-center justify-between gap-12 ${
+          className={`hidden md:flex flex-row items-center justify-between pl-20 ${
             reverse ? "flex-row-reverse" : ""
           }`}
         >

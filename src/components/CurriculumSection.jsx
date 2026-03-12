@@ -65,7 +65,6 @@ export default function CurriculumSection() {
                     alt={item.title}
                     fill
                     className="object-cover"
-                    
                   />
                 </div>
 
@@ -82,12 +81,11 @@ export default function CurriculumSection() {
                 <div className="absolute top-0 left-0 right-0 flex justify-center z-20">
                   <motion.div
                     animate={{
-                      backgroundColor: isActive
-                        ? "#9B1B2F"
-                        : "#0F4D81",
-                    }}
-                    transition={{ duration: 0.7 }}
-                    className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[15px]  font-semibold"
+  backgroundColor: isActive ? "#9B1B2F" : "#0F4D81",
+  x: isActive ? "-100%" : "0%",
+}}
+                    transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+                    className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[15px] font-semibold"
                   >
                     {item.topLabel}
                   </motion.div>
@@ -142,8 +140,6 @@ export default function CurriculumSection() {
                   >
                     {item.description}
                   </motion.p>
-
-                  
                 </motion.div>
               </motion.div>
             );
@@ -166,7 +162,6 @@ export default function CurriculumSection() {
                   alt={item.title}
                   fill
                   className="object-cover object-[center_20%]"
-                  
                 />
 
                 <motion.div
@@ -225,15 +220,11 @@ export default function CurriculumSection() {
                   <p className="leading-relaxed text-white/90">
                     {item.description}
                   </p>
-
-                 
-                  
                 </motion.div>
               </div>
             );
           })}
         </div>
-
       </div>
     </section>
   );
