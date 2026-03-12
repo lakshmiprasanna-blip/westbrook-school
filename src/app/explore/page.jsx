@@ -222,7 +222,7 @@ export default function Explore() {
               bgColor="#ffffff"
               primaryBtnText="CONTACT US"
               secondaryBtnText="APPLY NOW"
-              breakText={false}
+              // breakText={false}
               onPrimaryClick={() => {
                       router.push("/contact"); // ✅ now it works
                     }}

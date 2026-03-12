@@ -75,7 +75,7 @@ export default function ImageContentSection({
                 alt="section image"
                 fill
                 
-                className="object-cover object-bottom"
+                // className="object-cover object-bottom"
               />
             </div>
         </div>
@@ -94,11 +94,11 @@ export default function ImageContentSection({
               alt="section image"
               fill
               
-              className={`
-                object-contain
-                lg:object-cover
-                ${reverse ? "object-[center_69%]" : ""}
-              `}
+              // className={`
+              //   object-contain
+              //   lg:object-cover
+              //   ${reverse ? "object-[center_69%]" : ""}
+              // `}
             />
             </div>
           </div>

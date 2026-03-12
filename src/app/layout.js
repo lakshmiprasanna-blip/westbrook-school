@@ -20,7 +20,10 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: "Westbrook",
- 
+  description: "Westbrook International School",
+  icons: {
+    icon: "/assets/Favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

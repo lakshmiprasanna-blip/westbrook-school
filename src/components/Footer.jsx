@@ -76,6 +76,9 @@ export default function Footer() {
               <Link href="/academics" className="block hover:opacity-80 text-white">
                 ACADEMICS
               </Link>
+              <Link href="/explore" className="block hover:opacity-80 text-white">
+                EXPLORE
+              </Link>
               <Link href="/contact" className="block hover:opacity-80 text-white">
                 CONTACT US
               </Link>
@@ -153,6 +156,9 @@ export default function Footer() {
               </Link>
               <Link href="/academics" className="block hover:opacity-80 text-white">
                 ACADEMICS
+              </Link>
+              <Link href="/explore" className="block hover:opacity-80 text-white">
+                EXPLORE
               </Link>
               <Link href="/contact" className="block hover:opacity-80 text-white">
                 CONTACT US

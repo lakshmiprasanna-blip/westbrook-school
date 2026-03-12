@@ -105,18 +105,23 @@ export default function Academics() {
       />
 
         <InfoSection
-          tag="CLARITY AND"
-          subTag="DIRECTION"
-          description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
-          image="/assets/academics-info3.webp"
-          className="lg:pb-20"
-        />
+  tag="CLARITY AND"
+  subTag="DIRECTION"
+  description="By building emotional balance, self-awareness, and responsible decision-making from early years, students develop a stronger sense of direction as they grow. This foundation supports confidence, discipline, and thoughtful choices across academic and personal learning stages."
+  image="/assets/academics-info3.webp"
+  className="lg:pb-20"
+  showButton
+  buttonText="KNOW MORE"
+  onButtonClick={() => {
+    setFormType("simple");
+  }}
+/>
       </div>
 
       {/* FOOTER ABOVE / IMAGE CONTENT SECTION */}
       <ImageContentSection
         imageSrc="/assets/footer-above1.png"
-        mobileImageSrc="/assets/footer-above-mob.webp"
+        mobileImageSrc="/assets/footer-above1.png"
         title="We’d love to hear from you!"
         description="Feel free to get in touch, or apply now"
         bgColor="#EDEBE8"
