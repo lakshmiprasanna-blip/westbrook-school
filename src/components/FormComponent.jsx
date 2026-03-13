@@ -255,7 +255,12 @@ export default function EnquiryForm({
         .time-wrapper.has-value::before {
           display: none;
         }
-
+/* Fix iOS Safari grid collapse */
+.date-wrapper,
+.time-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
         input.enquiry-time {
           position: relative;
           width: 100%;
@@ -377,45 +382,46 @@ export default function EnquiryForm({
   )
 )}
           {/* ── detailed: Date + Time ── */}
-          {variant === "detailed" && (
-            <div className="grid grid-cols-2 gap-3">
+        {/* ── detailed: Date + Time ── */}
+{variant === "detailed" && (
+  <div className="flex flex-row gap-3 w-full">
 
-              {/* DATE */}
-              <div>
-                <div className={`date-wrapper ${formData.date ? "has-value" : ""}`}>
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={(e) => {
-                      setFormData({ ...formData, date: e.target.value });
-                      setErrors({ ...errors, date: "" });
-                    }}
-                    className={`enquiry-date ${formData.date ? "has-value" : ""} ${inputStyle} ${errors.date ? "border-red-500" : ""}`}
-                  />
-                </div>
-                {errors.date && <p className={errorStyle}>{errors.date}</p>}
-              </div>
+    {/* DATE */}
+    <div className="flex-1 min-w-0">
+      <div className={`date-wrapper ${formData.date ? "has-value" : ""}`}>
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={(e) => {
+            setFormData({ ...formData, date: e.target.value });
+            setErrors({ ...errors, date: "" });
+          }}
+          className={`enquiry-date ${formData.date ? "has-value" : ""} ${inputStyle} ${errors.date ? "border-red-500" : ""}`}
+        />
+      </div>
+      {errors.date && <p className={errorStyle}>{errors.date}</p>}
+    </div>
 
-              {/* TIME */}
-              <div>
-                <div className={`time-wrapper ${formData.time ? "has-value" : ""}`}>
-                  <input
-                    type="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={(e) => {
-                      setFormData({ ...formData, time: e.target.value });
-                      setErrors({ ...errors, time: "" });
-                    }}
-                    className={`enquiry-time ${formData.time ? "has-value" : ""} ${inputStyle} ${errors.time ? "border-red-500" : ""}`}
-                  />
-                </div>
-                {errors.time && <p className={errorStyle}>{errors.time}</p>}
-              </div>
+    {/* TIME */}
+    <div className="flex-1 min-w-0">
+      <div className={`time-wrapper ${formData.time ? "has-value" : ""}`}>
+        <input
+          type="time"
+          name="time"
+          value={formData.time}
+          onChange={(e) => {
+            setFormData({ ...formData, time: e.target.value });
+            setErrors({ ...errors, time: "" });
+          }}
+          className={`enquiry-time ${formData.time ? "has-value" : ""} ${inputStyle} ${errors.time ? "border-red-500" : ""}`}
+        />
+      </div>
+      {errors.time && <p className={errorStyle}>{errors.time}</p>}
+    </div>
 
-            </div>
-          )}
+  </div>
+)}
 
           {/* ── contact: message ── */}
           {variant === "contact" && (
