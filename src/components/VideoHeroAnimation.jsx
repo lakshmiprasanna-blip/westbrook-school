@@ -91,16 +91,17 @@ export default function VideoHeroAnimation({
         >
           <div className="sticky top-[72px] h-screen z-10">
             <div className="w-full h-screen relative">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
+             <video
+  autoPlay
+  loop
+  muted
+  playsInline
   webkit-playsinline="true"
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src={videoSrc} type="video/mp4" />
-              </video>
+  preload="auto"
+  className="absolute inset-0 w-full h-full object-cover"
+>
+  <source src={videoSrc} type="video/mp4" />
+</video>
 
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -206,15 +207,16 @@ export default function VideoHeroAnimation({
           <section className="relative w-full">
             <div className="w-full h-[70vh] relative">
               <video
-                autoPlay
-                loop
-                muted
-                playsInline
+  autoPlay
+  loop
+  muted
+  playsInline
   webkit-playsinline="true"
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src={videoSrc} type="video/mp4" />
-              </video>
+  preload="auto"
+  className="absolute inset-0 w-full h-full object-cover"
+>
+  <source src={videoSrc} type="video/mp4" />
+</video>
 
               <div className="absolute inset-0 bg-black/40" />
 
