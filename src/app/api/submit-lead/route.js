@@ -183,6 +183,8 @@ export async function POST(request) {
           parent_name: parentName || "",
           student_name: childName || "",
           message: message || "",
+          date: date || "",  
+    time: time || "",  
           source:
             variant === "contact"
               ? "Website Contact"

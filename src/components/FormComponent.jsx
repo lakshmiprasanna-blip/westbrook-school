@@ -342,40 +342,40 @@ export default function EnquiryForm({
           </div>
 
           {/* ── simple / detailed: childName + grade ── */}
-          {(variant === "simple" || variant === "detailed") && (
-            variant === "detailed" ? (
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <input
-                    type="text"
-                    name="childName"
-                    value={formData.childName}
-                    placeholder="Child name"
-                    onChange={handleChange}
-                    className={`${inputStyle} ${errors.childName ? "border-red-500" : ""}`}
-                  />
-                  {errors.childName && <p className={errorStyle}>{errors.childName}</p>}
-                </div>
-                <GradeSelect />
-              </div>
-            ) : (
-              <>
-                <div>
-                  <input
-                    type="text"
-                    name="childName"
-                    value={formData.childName}
-                    placeholder="Child name"
-                    onChange={handleChange}
-                    className={`${inputStyle} ${errors.childName ? "border-red-500" : ""}`}
-                  />
-                  {errors.childName && <p className={errorStyle}>{errors.childName}</p>}
-                </div>
-                <GradeSelect />
-              </>
-            )
-          )}
-
+         {/* ── simple / detailed: childName + grade ── */}
+{(variant === "simple" || variant === "detailed") && (
+  variant === "detailed" ? (
+    <>
+      <div>
+        <input
+          type="text"
+          name="childName"
+          value={formData.childName}
+          placeholder="Child name"
+          onChange={handleChange}
+          className={`${inputStyle} ${errors.childName ? "border-red-500" : ""}`}
+        />
+        {errors.childName && <p className={errorStyle}>{errors.childName}</p>}
+      </div>
+      <GradeSelect />
+    </>
+  ) : (
+    <>
+      <div>
+        <input
+          type="text"
+          name="childName"
+          value={formData.childName}
+          placeholder="Child name"
+          onChange={handleChange}
+          className={`${inputStyle} ${errors.childName ? "border-red-500" : ""}`}
+        />
+        {errors.childName && <p className={errorStyle}>{errors.childName}</p>}
+      </div>
+      <GradeSelect />
+    </>
+  )
+)}
           {/* ── detailed: Date + Time ── */}
           {variant === "detailed" && (
             <div className="grid grid-cols-2 gap-3">

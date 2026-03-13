@@ -89,7 +89,7 @@ export default function InfoSection({
           {/* TEXT */}
           <div className="w-full md:w-1/2 order-1 md:order-2">
             {tag && (
-              <h3 className="inline-block mb-2 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="inline-block mb-2 bg-lightblue text-dark  md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {tag}
               </h3>
             )}
@@ -97,7 +97,7 @@ export default function InfoSection({
             <br />
 
             {subTag && (
-              <h3 className="inline-block mb-4 bg-lightblue text-dark !text-3xl md:text-4xl px-3 py-1 uppercase tracking-wider">
+              <h3 className="inline-block mb-4 bg-lightblue text-dark  md:text-5xl px-3 py-1 uppercase tracking-wider">
                 {subTag}
               </h3>
             )}

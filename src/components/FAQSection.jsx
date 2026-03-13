@@ -46,7 +46,7 @@ export default function FAQSection({ faqData }) {
           {/* Left Heading */}
           <div className="flex justify-center md:justify-start">
             <div className="bg-lightblue px-5 py-2">
-              <h2 className="!text-[38px] md:text-[48px] leading-[1] text-dark">
+              <h2 className="md:text-5xl leading-[1] text-dark">
                 FAQ’s
               </h2>
             </div>

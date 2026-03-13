@@ -121,10 +121,10 @@ export default function Academics() {
       {/* FOOTER ABOVE / IMAGE CONTENT SECTION */}
       <ImageContentSection
         imageSrc="/assets/footer-above1.png"
-        mobileImageSrc="/assets/footer-above1.png"
+        mobileImageSrc="/assets/academic-mob-f.png"
         title="We’d love to hear from you!"
         description="Feel free to get in touch, or apply now"
-        bgColor="#EDEBE8"
+        bgColor="#ffffff"
         breakText
         primaryBtnText="CONTACT US"
         secondaryBtnText="APPLY NOW"

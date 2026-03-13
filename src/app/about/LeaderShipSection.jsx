@@ -78,7 +78,7 @@ function LeaderModal({ leader, onClose }) {
                {/* Right Content */}
                <div className="w-full md:w-[62%]">
  
-                 <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+                 <h2 className="text-white text-2xl sm:text-3xl md:text-5xl lg:text-5xl
                                 font-playfair font-semibold
                                 mb-3 md:mb-4">
                    {leader.title}
@@ -119,7 +119,7 @@ export default function LeadershipSection({ data }) {
         {/* Heading */}
         <div className="text-center mb-12">
           <div className="inline-block bg-lightblue px-5 py-1.5">
-            <h2 className="font-playfair font-bold text-2xl min-[361px]:!text-3xl ">LEADERSHIP TEAM</h2>
+            <h2 className="font-playfair font-bold text-2xl md:text-5xl ">LEADERSHIP TEAM</h2>
           </div>
         </div>
 

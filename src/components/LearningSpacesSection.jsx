@@ -76,7 +76,7 @@ export default function LearningSpacesSection() {
         <div className="text-center mb-10 lg:mb-12">
           <div className=" inline-block bg-lightblue px-5 py-1.5 mb-4">
             <h2 className="font-playfair !font-bold 
-                           !text-[28px] md:!text-[34px] lg:!text-[40px] 
+                           md:text-5xl
                            !leading-[100%]">
               LEARNING SPACES
             </h2>

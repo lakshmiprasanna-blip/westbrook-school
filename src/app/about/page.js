@@ -113,7 +113,8 @@ const leadershipData = [
       />
         
         <ImageContentSection
-        imageSrc="/assets/minds-new.webp"
+        imageSrc="/assets/minds-foot.png"
+         mobileImageSrc="/assets/minds-foot-mob.png"
           title="We’d love to hear from you!"
           description="Feel free to get in touch, or apply now"
           bgColor="#ffffff"

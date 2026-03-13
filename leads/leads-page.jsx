@@ -108,8 +108,7 @@ export default function LeadsPage() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .dash-body { padding: 36px 40px; max-width: 1300px; margin: 0 auto; }
-        .page-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #0f2744; margin-bottom: 4px; }
+.dash-body { padding: 120px 40px 36px; max-width: 1300px; margin: 0 auto; }        .page-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #0f2744; margin-bottom: 4px; }
         .page-sub { font-size: 13px; color: #999; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 32px; }
 
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
@@ -237,6 +236,8 @@ export default function LeadsPage() {
                     <th>Grade</th>
                     <th>Email</th>
                     <th>Mobile</th>
+                    <th>Pref Date</th>
+                    <th>Pref Time</th>
                     <th>Date</th>
                     <th></th>
                   </tr>
@@ -255,6 +256,8 @@ export default function LeadsPage() {
                       <td className="muted">{fd(lead, "grade") || "—"}</td>
                       <td className="muted">{fd(lead, "email") || "—"}</td>
                       <td className="muted">{fd(lead, "phone") || "—"}</td>
+                      <td className="muted">{fd(lead, "date") || "—"}</td>
+<td className="muted">{fd(lead, "time") || "—"}</td>
                       <td className="date-cell">
                         {lead.submittedAt ? new Date(lead.submittedAt).toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "—"}
                       </td>

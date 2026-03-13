@@ -41,10 +41,10 @@ export default function CurriculumSection() {
       <div className="container-custom">
 
         {/* ================= DESKTOP ================= */}
-        <div
-          className="hidden md:flex h-[600px] overflow-hidden"
-          onMouseLeave={() => setActive(null)}
-        >
+<div
+  className="hidden lg:flex h-[600px] overflow-hidden"
+  onMouseLeave={() => setActive(null)}
+>
           {sections.map((item, index) => {
             const isActive = active === index;
 
@@ -82,7 +82,7 @@ export default function CurriculumSection() {
                   <motion.div
                     animate={{
   backgroundColor: isActive ? "#9B1B2F" : "#0F4D81",
-  x: isActive ? "-100%" : "0%",
+  x: isActive ? "-95%" : "0%",
 }}
                     transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
                     className="w-[200px] h-[64px] flex items-center justify-center text-white uppercase text-[15px] font-semibold"
@@ -147,84 +147,89 @@ export default function CurriculumSection() {
         </div>
 
         {/* ================= MOBILE ================= */}
-        <div className="md:hidden flex flex-col">
-          {sections.map((item, index) => {
-            const isActive = active === index;
+<div className="lg:hidden flex flex-col">  
+  {sections.map((item, index) => {
+    const isActive = active === index;
 
-            return (
-              <div
-                key={index}
-                onClick={() => setActive(isActive ? null : index)}
-                className="relative w-full h-[300px] sm:h-[320px] overflow-hidden cursor-pointer will-change-transform"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover object-[center_20%]"
-                />
+    return (
+      <div
+        key={index}
+        onClick={() => setActive(isActive ? null : index)}
+        className="relative w-full h-[300px] sm:h-[320px] overflow-hidden cursor-pointer will-change-transform"
+      >
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          className="object-cover object-[center_20%]"
+        />
 
-                <motion.div
-                  className="absolute inset-0 bg-[#00213D]"
-                  animate={{
-                    opacity: isActive ? 0.6 : 0.72,
-                  }}
-                  transition={{
-                    duration: 0.7,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                />
+        <motion.div
+          className="absolute inset-0 bg-[#00213D]"
+          animate={{ opacity: isActive ? 0.6 : 0.72 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        />
 
-                {/* TOP LABEL */}
-                <div className="absolute right-4 top-4 z-20">
-                  <div className="px-4 h-[32px] flex items-center justify-center bg-[#0F4D81] text-white text-sm font-medium uppercase">
-                    {item.topLabel}
-                  </div>
-                </div>
-
-                {/* TITLE */}
-                <motion.div
-                  animate={{
-                    opacity: isActive ? 0 : 1,
-                    y: isActive ? 18 : 0,
-                    scale: isActive ? 0.96 : 1,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute bottom-6 left-6 right-6 z-20 text-white"
-                >
-                  <h2 className="uppercase text-white">
-                    {item.title}
-                  </h2>
-                </motion.div>
-
-                {/* DESCRIPTION PANEL */}
-                <motion.div
-                  initial={false}
-                  animate={{
-                    y: isActive ? 0 : 220,
-                    opacity: isActive ? 1 : 0,
-                  }}
-                  transition={{
-                    duration: 0.75,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white"
-                >
-                  <h3 className="uppercase mb-3 text-white">
-                    {item.title}
-                  </h3>
-
-                  <p className="leading-relaxed text-white/90">
-                    {item.description}
-                  </p>
-                </motion.div>
-              </div>
-            );
-          })}
+        {/* TOP-LEFT ARROW INDICATOR */}
+        <div className="absolute left-4 top-4 z-20">
+          <motion.div
+            animate={{ rotate: isActive ? 180 : 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="w-8 h-8 flex items-center justify-center"
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="14" cy="14" r="13" stroke="white" strokeWidth="1.5" />
+              <path
+                d="M9 12L14 17L19 12"
+                stroke="white"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
         </div>
+
+        {/* TOP-RIGHT LABEL */}
+        <div className="absolute right-4 top-4 z-20">
+          <div className="px-4 h-[32px] flex items-center justify-center bg-[#0F4D81] text-white text-sm font-medium uppercase">
+            {item.topLabel}
+          </div>
+        </div>
+
+        {/* TITLE */}
+        <motion.div
+          animate={{
+            opacity: isActive ? 0 : 1,
+            y: isActive ? 18 : 0,
+            scale: isActive ? 0.96 : 1,
+          }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-6 left-6 right-6 z-20 text-white"
+        >
+          <h2 className="uppercase text-white">{item.title}</h2>
+        </motion.div>
+
+        {/* DESCRIPTION PANEL */}
+        <motion.div
+          initial={false}
+          animate={{ y: isActive ? 0 : 220, opacity: isActive ? 1 : 0 }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-6 pt-12 text-white"
+        >
+          <h3 className="uppercase mb-3 text-white">{item.title}</h3>
+          <p className="leading-relaxed text-white/90">{item.description}</p>
+        </motion.div>
+      </div>
+    );
+  })}
+</div>
       </div>
     </section>
   );

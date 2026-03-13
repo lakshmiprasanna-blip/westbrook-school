@@ -46,7 +46,7 @@ export default function Footer() {
                 </span>{" "}
                 <a
                   href="mailto:info@westbrookinternational.com"
-                  className="underline hover:opacity-80 text-white"
+                  className=" hover:opacity-80 text-white"
                 >
                   info@westbrookinternational.com
                 </a>
@@ -127,7 +127,7 @@ export default function Footer() {
                 </span>{" "}
                 <a
                   href="mailto:info@westbrookinternational.com"
-                  className="underline hover:opacity-80 text-white"
+                  className=" hover:opacity-80 text-white"
                 >
                   info@westbrookinternational.com
                 </a>

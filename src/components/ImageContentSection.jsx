@@ -17,117 +17,101 @@ export default function ImageContentSection({
   onSecondaryClick,
 }) {
   return (
-    <section className="w-full pt-10" style={{ backgroundColor: bgColor }}>
-      <div className="container-custom mx-auto px-6">
+    <section className="w-full pt-10 overflow-hidden" style={{ backgroundColor: bgColor }}>
+      <div className="container-custom mx-auto">
 
-       
-        {/* MOBILE LAYOUT: text on top, image below */}
+        <div className="flex flex-col md:hidden items-center text-center gap-0">
+  {/* CONTENT */}
+  <div className="w-full px-6">
+    <h2 className="text-2xl min-[375px]:text-2xl font-semibold text-gray-800 min-[375px]:whitespace-nowrap">
+      {title}
+    </h2>
+    <p className="mt-4 text-gray-600 max-w-lg mx-auto">{description}</p>
+
+    <div className="mt-6 flex flex-row gap-3 justify-center items-center">
+      {primaryBtnText && (
+        <Button
+          text={primaryBtnText}
+          onClick={onPrimaryClick}
+          className="!bg-maroon !text-white !border-none !text-sm hover:!opacity-90 !px-4 !py-2 whitespace-nowrap"
+        />
+      )}
+      {secondaryBtnText && (
+        <Button
+          text={secondaryBtnText}
+          onClick={onSecondaryClick}
+          className="!bg-primary !text-white !border-none !text-sm hover:!opacity-90 !px-4 !py-2 whitespace-nowrap"
+        />
+      )}
+    </div>
+  </div>
+
+  {/* MOBILE IMAGE */}
+  {/* MOBILE IMAGE */}
+{mobileImageSrc ? (
+  <div className="w-full relative aspect-[4/3]">
+    <Image
+      src={mobileImageSrc}
+      alt="section image"
+      fill
+      className="object-contain object-top"
+    />
+  </div>
+) : (
+  <div className="w-[110%] relative aspect-[4/3]">
+    <Image
+      src={imageSrc}
+      alt="section image"
+      fill
+      className="object-cover object-top"
+    />
+  </div>
+)}
+</div>
+
+        {/* ── DESKTOP LAYOUT (>= md) ── */}
         <div
-          className={`flex flex-col md:hidden items-center text-center ${
-            reverse ? "gap-1" : "gap-6"
-          }`}
-        >
-          {/* CONTENT — top on mobile */}
-          <div className="w-full">
-            <h2
-              className={`text-3xl font-semibold text-gray-800 ${
-                breakText ? "" : "whitespace-nowrap"
-              }`}
-            >
-              {title}
-            </h2>
-
-            <p className="mt-4 text-gray-600 max-w-lg mx-auto">
-              {description}
-            </p>
-
-            <div className="mt-6 flex flex-row gap-3 justify-center flex-wrap">
-              {primaryBtnText && (
-                <Button
-                text={primaryBtnText}
-                onClick={onPrimaryClick}
-                className=" !bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
-              />
-                            )}
-
-                                          {secondaryBtnText && (
-                <Button
-                text={secondaryBtnText}
-                onClick={onSecondaryClick}
-                className=" !bg-primary !text-white !border-none !text-sm hover:!opacity-90"
-              />
-              )}
-            </div>
-          </div>
-
-          {/* IMAGE — bottom on mobile */}
-          <div
-              className={`w-[110%] relative overflow-hidden
-                ${
-                  reverse
-                    ? "h-[360px] min-[425px]:h-[400px]"
-                    : "h-[300px] min-[425px]:h-[460px]"
-                }
-              `}
-            >
-              <Image
-                src={mobileImageSrc || imageSrc}
-                alt="section image"
-                fill
-                
-                // className="object-cover object-bottom"
-              />
-            </div>
-        </div>
-
-        {/* DESKTOP LAYOUT: side by side */}
-        <div
-          className={`hidden md:flex flex-row items-center justify-between pl-20 ${
+          className={`hidden md:flex flex-row items-center justify-between ${
             reverse ? "flex-row-reverse" : ""
           }`}
         >
-          {/* IMAGE */}
-          <div className="w-full md:w-4/5">
-            <div className="relative w-full h-[480px] overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt="section image"
-              fill
-              
-              // className={`
-              //   object-contain
-              //   lg:object-cover
-              //   ${reverse ? "object-[center_69%]" : ""}
-              // `}
-            />
+          {/* IMAGE — always uses imageSrc on desktop */}
+          <div className="w-[58%] shrink-0">
+            <div className="relative w-full h-[320px] md:h-[380px] lg:h-[450px] xl:h-[480px]">
+              <Image
+                src={imageSrc}
+                alt="section image"
+                fill
+                className="object-contain object-bottom"
+              />
             </div>
           </div>
 
           {/* CONTENT */}
-          <div className="w-full md:w-1/2 md:pl-10 text-left">
+          <div className="w-[42%] pl-4 pr-6 lg:pl-6 lg:pr-10 text-left">
             <h2
-              className={`text-5xl font-semibold text-gray-800 ${
-                breakText ? "" : "whitespace-nowrap"
+              className={`text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-800 leading-tight ${
+                breakText ? "" : "xl:whitespace-nowrap"
               }`}
             >
               {title}
             </h2>
-            <p className="mt-4 text-gray-600 max-w-lg">{description}</p>
+            <p className="mt-4 text-gray-600 max-w-sm">{description}</p>
             <div className="mt-6 flex flex-row gap-3 flex-wrap">
               {primaryBtnText && (
-                  <Button
+                <Button
                   text={primaryBtnText}
                   onClick={onPrimaryClick}
-                  className=" !bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
+                  className="!bg-maroon !text-white !border-none !text-sm hover:!opacity-90"
                 />
-                )}
-                              {secondaryBtnText && (
-                  <Button
+              )}
+              {secondaryBtnText && (
+                <Button
                   text={secondaryBtnText}
                   onClick={onSecondaryClick}
-                  className=" !bg-primary !text-white !border-none !text-sm hover:!opacity-90"
+                  className="!bg-primary !text-white !border-none !text-sm hover:!opacity-90"
                 />
-                )}
+              )}
             </div>
           </div>
         </div>

@@ -151,9 +151,9 @@
   align-items: flex-start !important;   /* LEFT align content inside block */
   justify-content: center !important;   /* vertical center */
   max-width: 600px;                     /* control content width */
-  margin-left: auto !important;         /* push block to right */
-  margin-right: 8% !important;          /* breathing space from edge */
-  text-align: left !important;          /* keep text left */
+  margin-left: auto !important;         
+  margin-right: 8% !important;          
+  text-align: left !important;         
 }
 
 /* Heading */
@@ -170,10 +170,10 @@
 }
 
 /* Buttons */
-.contact-cta-override .flex {
+/* .contact-cta-override .flex {
   justify-content: flex-start !important;
   
-}
+} */
 .contact-cta-override button{
   border-radius: 50px !important;
   padding: 12px 12px !important;

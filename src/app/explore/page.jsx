@@ -62,7 +62,7 @@ export default function Explore() {
               <div className="inline-block bg-lightblue px-3 sm:px-5 py-1 sm:py-2 mb-3 sm:mb-5">
                 <div
                   className="font-playfair !font-bold 
-                            !text-[26px] md:!text-[34px] lg:!text-[40px] 
+                            !text-[24px] md:!text-[34px] lg:!text-[48px] 
                             !leading-[100%]"
                   style={{
                     fontFamily: "Playfair Display, serif",
@@ -216,13 +216,13 @@ export default function Explore() {
 
                     <ImageContentSection
               imageSrc="/assets/footer-exploree.png"
-              mobileImageSrc="/assets/explore-mobile.png"
+              mobileImageSrc="/assets/explore-mob-footer.webp"
               title="We'd love to hear from you!"
               description="Feel free to get in touch, or apply now"
               bgColor="#ffffff"
               primaryBtnText="CONTACT US"
               secondaryBtnText="APPLY NOW"
-              // breakText={false}
+              breakText={false}
               onPrimaryClick={() => {
                       router.push("/contact"); // ✅ now it works
                     }}

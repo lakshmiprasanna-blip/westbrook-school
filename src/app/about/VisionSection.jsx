@@ -49,7 +49,7 @@ export default function VisionSection() {
     px-2 py-2
     font-semibold
     mb-6
-    !text-[38px] 
+    md:text-5xl
   "
 >
   OUR VISION
