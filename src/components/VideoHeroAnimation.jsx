@@ -96,6 +96,7 @@ export default function VideoHeroAnimation({
                 loop
                 muted
                 playsInline
+  webkit-playsinline="true"
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src={videoSrc} type="video/mp4" />
@@ -209,6 +210,7 @@ export default function VideoHeroAnimation({
                 loop
                 muted
                 playsInline
+  webkit-playsinline="true"
                 className="absolute inset-0 w-full h-full object-cover"
               >
                 <source src={videoSrc} type="video/mp4" />
