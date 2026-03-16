@@ -28,21 +28,14 @@ export default function VideoHeroAnimation({
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  // useEffect(() => {
-  //   if (!isDesktop) return;
-  //   const handleScroll = () => {
-  //     setScrollY(window.scrollY);
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [isDesktop]);
   useEffect(() => {
-  const videos = document.querySelectorAll("video");
-  videos.forEach((video) => {
-    video.muted = true;
-    video.play().catch(() => {});
-  });
-}, [isDesktop]);
+    if (!isDesktop) return;
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isDesktop]);
 
   const nextMobile = () =>
     setMobileIndex((prev) =>
@@ -98,7 +91,7 @@ export default function VideoHeroAnimation({
         >
           <div className="sticky top-[72px] h-screen z-10">
             <div className="w-full h-screen relative">
-             {/* <video
+             <video
   autoPlay
   loop
   muted
@@ -108,18 +101,7 @@ export default function VideoHeroAnimation({
   className="absolute inset-0 w-full h-full object-cover"
 >
   <source src={videoSrc} type="video/mp4" />
-</video> */}
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  webkit-playsinline="true"
-  preload="auto"
-  x-webkit-airplay="allow"
-  className="absolute inset-0 w-full h-full object-cover"
-  onCanPlay={(e) => e.target.play()}
-></video>
+</video>
 
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -228,10 +210,9 @@ export default function VideoHeroAnimation({
   autoPlay
   loop
   muted
-   playsInline
+  playsInline
   webkit-playsinline="true"
   preload="auto"
-  x-webkit-airplay="allow"
   className="absolute inset-0 w-full h-full object-cover"
 >
   <source src={videoSrc} type="video/mp4" />
