@@ -60,7 +60,7 @@ export default function Footer() {
                   href="tel:+919513190990"
                   className="hover:opacity-80 text-white"
                 >
-                  +91-95131-90990
+                  +91-9513190990
                 </a>
               </p>
             </div>
@@ -141,7 +141,7 @@ export default function Footer() {
                   href="tel:+919513190990"
                   className="hover:opacity-80 text-white"
                 >
-                  +91-95131-90990
+                  +91-9513190990
                 </a>
               </p>
             </div>

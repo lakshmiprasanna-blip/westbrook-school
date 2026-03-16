@@ -37,40 +37,45 @@ export default function ExperienceSlider({
           )}
         </div>
 
-        {/* Carousel */}
-        <div className="flex items-center justify-center gap-6">
-          <div className="relative w-full md:w-[940px] h-[360px] md:h-[520px] overflow-hidden">
-            <AnimatePresence mode="sync">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0"
-              >
-                {item?.type === "video" ? (
-                  <iframe
-                    src={item.embedUrl}
-                    title={item.title || "Video"}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
-                ) : (
-                  <Image
-                    src={item?.src}
-                    alt={item?.alt || title}
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
-                    style={{ objectPosition: "center 20%" }}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+       {/* Carousel */}
+<div className="flex items-center justify-center gap-6">
+  <div className="relative w-full md:w-[940px] overflow-hidden">
+    
+    {/* 👇 This wrapper enforces 16:9 ratio on all screen sizes */}
+    <div className="relative w-full aspect-video">
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          {item?.type === "video" ? (
+            <iframe
+              src={item.embedUrl}
+              title={item.title || "Video"}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"  // ✅ fills the aspect-ratio box perfectly
+            />
+          ) : (
+            <Image
+              src={item?.src}
+              alt={item?.alt || title}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: "center 20%" }}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+
+  </div>
+</div>
 
         {/* Buttons */}
         <div className="flex justify-center mt-12">
