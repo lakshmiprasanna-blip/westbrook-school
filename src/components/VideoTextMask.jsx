@@ -11,12 +11,20 @@ const VideoTextMask = () => {
   const [zoom, setZoom] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   if (!video) return;
+  //   video.play().catch(() => {});
+  // }, []);
+useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    video.muted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.load();
     video.play().catch(() => {});
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => setZoom(true), 800);
     return () => clearTimeout(timer);
@@ -41,12 +49,13 @@ const VideoTextMask = () => {
           muted
           loop
           playsInline
-          autoPlay
-          preload="auto"
+         autoPlay
+        preload="auto"
+        onCanPlay={(e) => e.target.play()}
           className="absolute inset-0 mt-22 w-full h-full object-cover"
-          priority="true"
+          // priority="true"
         >
-          <source playsInline src={VIDEO_SRC} type="video/webm" />
+          <source playsInline src={VIDEO_SRC} type="video/mp4" />
           {/* <source playsInline src="/assets/homeaivideo.mp4" type="video/mp4" /> */}
           
         </video>
