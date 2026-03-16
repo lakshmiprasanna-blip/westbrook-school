@@ -177,116 +177,102 @@ export default function EnquiryForm({
   return (
     <>
       <style>{`
-        /*
-          THE APPROACH:
-          - input is always type="date" / type="time" — no JS tricks
-          - When empty: hide the browser's mm/dd/yyyy text by making it transparent
-            and use a CSS ::before on the wrapper label to show "Date" / "Time"
-          - When filled: show the real value normally
-          - The -webkit-calendar-picker-indicator covers the full input area
-            so the ENTIRE field is a tap target — opens picker on first tap on mobile
-        */
+  /* === DATE === */
+  .date-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .date-wrapper::before {
+    content: "Date";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #9ca3af;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .date-wrapper.has-value::before {
+    display: none;
+  }
 
-        /* === DATE === */
-        .date-wrapper {
-          position: relative;
-        }
-        /* Fake placeholder via pseudo element on wrapper */
-        .date-wrapper::before {
-          content: "Date";
-          position: absolute;
-          left: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 14px;
-          color: #9ca3af;
-          pointer-events: none;
-          z-index: 1;
-        }
-        /* Hide pseudo placeholder once value exists */
-        .date-wrapper.has-value::before {
-          display: none;
-        }
+  input.enquiry-date {
+    position: relative;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none;
+  }
+  input.enquiry-date:not(.has-value)::-webkit-datetime-edit {
+    color: transparent;
+  }
+  input.enquiry-date:not(.has-value)::-webkit-datetime-edit-fields-wrapper {
+    color: transparent;
+  }
+  input.enquiry-date.has-value::-webkit-datetime-edit {
+    color: #374151;
+  }
+  input.enquiry-date::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
 
-        input.enquiry-date {
-          position: relative;
-          width: 100%;
-        }
-        /* Hide the browser's default date text when empty */
-        input.enquiry-date:not(.has-value)::-webkit-datetime-edit {
-          color: transparent;
-        }
-        input.enquiry-date:not(.has-value)::-webkit-datetime-edit-fields-wrapper {
-          color: transparent;
-        }
-        /* Show real value when filled */
-        input.enquiry-date.has-value::-webkit-datetime-edit {
-          color: #374151;
-        }
-        /* Stretch the calendar icon to cover the entire input → first tap opens picker */
-        input.enquiry-date::-webkit-calendar-picker-indicator {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          cursor: pointer;
-          z-index: 2;
-        }
+  /* === TIME === */
+  .time-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .time-wrapper::before {
+    content: "Time";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #9ca3af;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .time-wrapper.has-value::before {
+    display: none;
+  }
 
-        /* === TIME === */
-        .time-wrapper {
-          position: relative;
-        }
-        .time-wrapper::before {
-          content: "Time";
-          position: absolute;
-          left: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 14px;
-          color: #9ca3af;
-          pointer-events: none;
-          z-index: 1;
-        }
-        .time-wrapper.has-value::before {
-          display: none;
-        }
-/* Fix iOS Safari grid collapse */
-.date-wrapper,
-.time-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
-        input.enquiry-time {
-          position: relative;
-          width: 100%;
-        }
-        input.enquiry-time:not(.has-value)::-webkit-datetime-edit {
-          color: transparent;
-        }
-        input.enquiry-time:not(.has-value)::-webkit-datetime-edit-fields-wrapper {
-          color: transparent;
-        }
-        input.enquiry-time.has-value::-webkit-datetime-edit {
-          color: #374151;
-        }
-        input.enquiry-time::-webkit-calendar-picker-indicator {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          cursor: pointer;
-          z-index: 2;
-        }
-      `}</style>
+  input.enquiry-time {
+    position: relative;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none;
+  }
+  input.enquiry-time:not(.has-value)::-webkit-datetime-edit {
+    color: transparent;
+  }
+  input.enquiry-time:not(.has-value)::-webkit-datetime-edit-fields-wrapper {
+    color: transparent;
+  }
+  input.enquiry-time.has-value::-webkit-datetime-edit {
+    color: #374151;
+  }
+  input.enquiry-time::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+`}</style>
 
       <div className={wrapper}>
         <form onSubmit={handleSubmit} className={card}>
@@ -382,12 +368,11 @@ export default function EnquiryForm({
   )
 )}
           {/* ── detailed: Date + Time ── */}
-        {/* ── detailed: Date + Time ── */}
-{variant === "detailed" && (
-  <div className="flex flex-row gap-3 w-full">
+       {variant === "detailed" && (
+  <div className="grid grid-cols-2 gap-3 w-full">
 
     {/* DATE */}
-    <div className="flex-1 min-w-0">
+    <div className="w-full min-w-0">
       <div className={`date-wrapper ${formData.date ? "has-value" : ""}`}>
         <input
           type="date"
@@ -398,13 +383,14 @@ export default function EnquiryForm({
             setErrors({ ...errors, date: "" });
           }}
           className={`enquiry-date ${formData.date ? "has-value" : ""} ${inputStyle} ${errors.date ? "border-red-500" : ""}`}
+          style={{ width: "100%", boxSizing: "border-box" }}
         />
       </div>
       {errors.date && <p className={errorStyle}>{errors.date}</p>}
     </div>
 
     {/* TIME */}
-    <div className="flex-1 min-w-0">
+    <div className="w-full min-w-0">
       <div className={`time-wrapper ${formData.time ? "has-value" : ""}`}>
         <input
           type="time"
@@ -415,6 +401,7 @@ export default function EnquiryForm({
             setErrors({ ...errors, time: "" });
           }}
           className={`enquiry-time ${formData.time ? "has-value" : ""} ${inputStyle} ${errors.time ? "border-red-500" : ""}`}
+          style={{ width: "100%", boxSizing: "border-box" }}
         />
       </div>
       {errors.time && <p className={errorStyle}>{errors.time}</p>}
@@ -422,7 +409,6 @@ export default function EnquiryForm({
 
   </div>
 )}
-
           {/* ── contact: message ── */}
           {variant === "contact" && (
             <textarea
