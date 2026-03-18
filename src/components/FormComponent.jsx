@@ -4,6 +4,24 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+// ─── Reusable Field (MOVED OUTSIDE) ──────────────────────────────────────────
+function Field({ name, type = "text", placeholder, value, onChange, error, inputStyle, errorStyle }) {
+  return (
+    <div>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={`${inputStyle} ${error ? "border-red-500" : ""}`}
+      />
+      {error && <p className={errorStyle}>{error}</p>}
+    </div>
+  );
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
   const router = useRouter();
 
@@ -53,7 +71,7 @@ export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
       e.parentName = "Only letters allowed";
 
     if (variant !== "contact") {
-      if (!formData.childName.trim())             e.childName = "Required";
+      if (!formData.childName.trim()) e.childName = "Required";
       else if (!nameRe.test(formData.childName.trim())) e.childName = "Only letters allowed";
     }
 
@@ -93,21 +111,6 @@ export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
       setLoading(false);
     }
   };
-
-  // ─── Reusable field ────────────────────────────────────────────────────────
-  const Field = ({ name, type = "text", placeholder }) => (
-    <div>
-      <input
-        type={type}
-        name={name}
-        value={formData[name]}
-        placeholder={placeholder}
-        onChange={handleChange}
-        className={`${inputStyle} ${errors[name] ? "border-red-500" : ""}`}
-      />
-      {errors[name] && <p className={errorStyle}>{errors[name]}</p>}
-    </div>
-  );
 
   // ─── Grade Select ──────────────────────────────────────────────────────────
   const GradeSelect = () => (
@@ -198,14 +201,17 @@ export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
             </div>
           )}
 
-          <Field name="parentName" placeholder="Parent name" />
+          <Field name="parentName" placeholder="Parent name" value={formData.parentName} onChange={handleChange} error={errors.parentName} inputStyle={inputStyle} errorStyle={errorStyle} />
+
           {variant === "contact" && <GradeSelect />}
-          <Field name="mobile" type="tel" placeholder="Mobile number" />
-          <Field name="email" type="email" placeholder="Email address" />
+
+          <Field name="mobile" type="tel" placeholder="Mobile number" value={formData.mobile} onChange={handleChange} error={errors.mobile} inputStyle={inputStyle} errorStyle={errorStyle} />
+
+          <Field name="email" type="email" placeholder="Email address" value={formData.email} onChange={handleChange} error={errors.email} inputStyle={inputStyle} errorStyle={errorStyle} />
 
           {(variant === "simple" || variant === "detailed") && (
             <>
-              <Field name="childName" placeholder="Child name" />
+              <Field name="childName" placeholder="Child name" value={formData.childName} onChange={handleChange} error={errors.childName} inputStyle={inputStyle} errorStyle={errorStyle} />
               <GradeSelect />
             </>
           )}
