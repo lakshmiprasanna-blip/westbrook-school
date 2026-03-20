@@ -39,6 +39,41 @@ export default function Explore() {
     icon: "/assets/explore-icon4.svg",
   },
 ];
+const spaces = [
+  {
+    title: "Reading and Story Corner",
+    description:
+      "A quiet, welcoming space where children listen, look, imagine, and slowly build a love for stories and language.",
+    image: "/assets/learningspacessection1.webp",
+  },
+  {
+    title: "Circle Time Area",
+    description:
+      "An open space for conversations, songs, group activities, and shared learning that supports listening, confidence, and social interaction.",
+    image: "/assets/learningspacessection2.webp",
+  },
+  {
+    title: "Creative Expression Space",
+    description:"Used for drawing, colouring, simple crafts, and hands-on activities that allow children to express ideas freely.",
+    image: "/assets/learningspacessection3.webp",
+  },
+  {
+    title: "Activity and Play Zone",
+    description:"A structured play area that supports motor skills, coordination, and learning through guided play.",
+    image: "/assets/learningspacessection4.webp",
+  },
+  {
+    title: "Teacher Guidance Area",
+    description:"A focused space where teachers work closely with small groups or individual children, offering reassurance, support, and direction.",
+    image: "/assets/learningspacessection5.webp",
+  },
+  {
+    title: "Calm and Comfort Corner",
+    description:
+      "A soft, quiet area where children can pause, settle, and feel emotionally secure during the school day.",
+    image: "/assets/learningspacessection6.webp",
+  }
+];
 
   return (
     <>
@@ -48,7 +83,12 @@ export default function Explore() {
       </div>
       
       <FloatingCTAs />
-      <LearningSpacesSection />
+      <LearningSpacesSection
+      heading="LEARNING SPACES"
+      subText="At Westbrook, early learning spaces are designed to feel familiar, calm, and inviting, helping young children feel comfortable as they begin their school journey."
+      data={spaces}
+      
+    />
 
   
          {/* ================= SAFETY & WELL BEING SECTION ================= */}

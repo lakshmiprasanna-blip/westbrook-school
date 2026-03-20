@@ -3,36 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const faqData = [
-  {
-    question: "What curriculum does Westbrook International School follow?",
-    answer:
-      "Westbrook follows an international curriculum, designed to help students understand ideas deeply rather than rely on memorisation, while progressing at a steady and supported pace across grades.",
-  },
-  {
-    question: "What age groups and grades does the school offer?",
-    answer:
-      "Westbrook currently offers programmes from Early Years through Primary School, with a structured plan for progression as students move ahead. Grade offerings are designed to grow in alignment with the school’s academic framework and long-term vision.",
-  },
-  {
-    question: "How does Westbrook support students beyond academics?",
-    answer:
-      "Along with academics, Westbrook places strong emphasis on social, emotional, and value-based development. Through structured classroom practices and guided interactions, students develop empathy, self-awareness, discipline, and interpersonal skills.",
-  },
-  {
-    question: "What makes Westbrook different from other schools in the area?",
-    answer:
-      "Westbrook combines globally aligned academics with personalised attention, strong academic leadership, and a neighbourhood location. The school prioritises clarity in learning, values in practice, and close involvement from educators to support each child’s growth.",
-  },
-  {
-    question: "Is Westbrook a neighbourhood school?",
-    answer:
-      "Yes. Westbrook is located within nearby residential areas, offering families access to quality education close to home. This helps reduce long commutes and supports a balanced daily routine for children and parents.",
-  },
-];
 
-export default function FAQSection({ faqData }) {
+export default function FAQSection({ faqData = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!faqData.length) return null;
 
   return (
     <section
@@ -123,7 +98,7 @@ export default function FAQSection({ faqData }) {
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="bg-white px-6 md:px-8 py-6 text-[14px] leading-relaxed">
+                        <div className="bg-white px-6 md:px-8 py-6 text-[14px] md:text-[16px] leading-relaxed">
                           {item.answer}
                         </div>
                       </motion.div>

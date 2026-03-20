@@ -4,68 +4,39 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ScrollButton from "./ScrollButton";
+import { useRouter } from "next/navigation";
 
-
-const spaces = [
-  {
-    title: "Reading and Story Corner",
-    description:
-      "A quiet, welcoming space where children listen, look, imagine, and slowly build a love for stories and language.",
-    image: "/assets/learningspacessection1.webp",
-  },
-  {
-    title: "Circle Time Area",
-    description:
-      "An open space for conversations, songs, group activities, and shared learning that supports listening, confidence, and social interaction.",
-    image: "/assets/learningspacessection2.webp",
-  },
-  {
-    title: "Creative Expression Space",
-    description:"Used for drawing, colouring, simple crafts, and hands-on activities that allow children to express ideas freely.",
-    image: "/assets/learningspacessection3.webp",
-  },
-  {
-    title: "Activity and Play Zone",
-    description:"A structured play area that supports motor skills, coordination, and learning through guided play.",
-    image: "/assets/learningspacessection4.webp",
-  },
-  {
-    title: "Teacher Guidance Area",
-    description:"A focused space where teachers work closely with small groups or individual children, offering reassurance, support, and direction.",
-    image: "/assets/learningspacessection5.webp",
-  },
-  {
-    title: "Calm and Comfort Corner",
-    description:
-      "A soft, quiet area where children can pause, settle, and feel emotionally secure during the school day.",
-    image: "/assets/learningspacessection6.webp",
-  }
-];
-
-export default function LearningSpacesSection() {
+export default function LearningSpacesSection({
+  heading = "LEARNING SPACES",
+  subText = "",
+  data = [],
+  titleClass = "!font-bold !text-[22px] !leading-[100%] text-maroon",
+  hoverEffect = false,
+}) {
   const [index, setIndex] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
+  const router = useRouter();
 
   /* ===== Desktop + Tab Scroll ===== */
   const nextSlide = () =>
     setIndex((prev) =>
-      prev === spaces.length - 1 ? 0 : prev + 1
+      prev === data.length - 1 ? 0 : prev + 1
     );
 
   const prevSlide = () =>
     setIndex((prev) =>
-      prev === 0 ? spaces.length - 1 : prev - 1
+      prev === 0 ? data.length - 1 : prev - 1
     );
 
-  /* ===== Mobile Scroll (UNCHANGED) ===== */
+  /* ===== Mobile Scroll ===== */
   const nextMobile = () =>
     setMobileIndex((prev) =>
-      prev === spaces.length - 1 ? 0 : prev + 1
+      prev === data.length - 1 ? 0 : prev + 1
     );
 
   const prevMobile = () =>
     setMobileIndex((prev) =>
-      prev === 0 ? spaces.length - 1 : prev - 1
+      prev === 0 ? data.length - 1 : prev - 1
     );
 
   return (
@@ -74,28 +45,20 @@ export default function LearningSpacesSection() {
 
         {/* ===== Section Heading ===== */}
         <div className="text-center mb-10 lg:mb-12">
-          <div className=" inline-block bg-lightblue px-5 py-1.5 mb-4">
-            <h2 className="font-playfair !font-bold 
-                           md:text-5xl
-                           !leading-[100%]">
-              LEARNING SPACES
+          <div className="inline-block bg-lightblue px-5 py-1.5 mb-4">
+            <h2 className="font-playfair !font-bold md:text-5xl !leading-[100%]">
+              {heading}
             </h2>
           </div>
 
-          <p
-  className="paragraph max-w-4xl mx-auto 
-  font-montserrat  md:text-center
-  !text-[16px] md:!text-[17px] 
-  !leading-[24px] 
-  text-dark"
->
-  At Westbrook, early learning spaces are designed to feel familiar,
-  calm, and inviting, helping young children feel comfortable as they
-  begin their school journey.
-</p>
+          {subText && (
+            <p className="paragraph max-w-4xl mx-auto font-montserrat md:text-center !text-[16px] md:!text-[17px] !leading-[24px] text-dark">
+              {subText}
+            </p>
+          )}
         </div>
 
-        {/* ================= DESKTOP + TAB SLIDER ================= */}
+        {/* ================= DESKTOP + TAB ================= */}
         <div className="hidden md:block overflow-hidden relative">
 
           <div
@@ -104,21 +67,23 @@ export default function LearningSpacesSection() {
               transform: `translateX(-${index * (100 / 3)}%)`,
             }}
           >
-            {spaces.map((item, i) => (
+            {data.map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="
-                  px-3
-                  w-1/2
-                  lg:w-1/3
-                  flex-shrink-0
-                "
+                className="px-3 w-1/2 lg:w-1/3 flex-shrink-0"
               >
-                <div className="bg-offwhite h-full">
+               <div
+  onClick={() => item.slug && router.push(`/blogs/${item.slug}`)}
+  className={`h-full transition-all duration-700 ${
+    hoverEffect
+      ? "bg-offwhite group hover:bg-primary cursor-pointer transform hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl"
+      : "bg-offwhite"
+  }`}
+>
                   <div className="relative w-full h-[280px]">
                     <Image
                       src={item.image}
@@ -129,18 +94,25 @@ export default function LearningSpacesSection() {
                   </div>
 
                   <div className="p-5 space-y-2.5">
-                    <h3 className="font-playfair !font-bold 
-                                   !text-[22px] !leading-[100%] 
-                                   text-maroon">
-                      {item.title}
-                    </h3>
+                    <h3
+                    className={`${titleClass} ${
+                      hoverEffect ? "transition-colors duration-300 group-hover:text-white" : ""
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
 
-                    <p className="paragraph font-montserrat
-                                  !text-[16px] 
-                                  !leading-[24px] 
-                                  text-dark">
-                      {item.description}
-                    </p>
+                    {item.description && (
+                      <p
+                        className={`paragraph font-montserrat !text-[16px] !leading-[24px] ${
+                          hoverEffect
+                            ? "text-dark transition-colors duration-300 group-hover:text-white"
+                            : "text-dark"
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -161,7 +133,7 @@ export default function LearningSpacesSection() {
           </div>
         </div>
 
-        {/* ================= MOBILE (UNTOUCHED) ================= */}
+        {/* ================= MOBILE ================= */}
         <div className="md:hidden relative overflow-hidden">
 
           <div
@@ -170,10 +142,14 @@ export default function LearningSpacesSection() {
               transform: `translateX(-${mobileIndex * 100}%)`,
             }}
           >
-            {spaces.map((item, index) => (
-              <div key={index} className="min-w-full">
+            {data.map((item, i) => (
+              <div
+  key={i}
+  onClick={() => item.slug && router.push(`/blogs/${item.slug}`)}
+  className="min-w-full cursor-pointer"
+>
 
-                <div className="relative w-full h-[240px] ">
+                <div className="relative w-full h-[240px]">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -183,25 +159,26 @@ export default function LearningSpacesSection() {
                 </div>
 
                 <div className="bg-offwhite p-4 space-y-2">
-                  <h3 className="font-playfair !font-bold 
-                                 !text-[20px] !leading-[100%] 
-                                 text-maroon">
+                  <h3
+                    className={`${titleClass} ${
+                      hoverEffect ? "transition-colors duration-300 group-hover:text-white" : ""
+                    }`}
+                  >
                     {item.title}
                   </h3>
 
-                  <p className="paragraph font-montserrat
-                                 !text-[15px] 
-                                 !leading-[22px] 
-                                 text-dark">
+                  {item.description && (
+                  <p className="paragraph font-montserrat !text-[15px] !leading-[22px] text-dark">
                     {item.description}
                   </p>
+                )}
                 </div>
 
               </div>
             ))}
           </div>
 
-          <div className="flex mt-8  justify-center">
+          <div className="flex mt-8 justify-center">
             <ScrollButton
               direction="left"
               onClick={prevMobile}
