@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
-import FloatingCTAs from "../../components/FloatingCTAs";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
 import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
@@ -82,7 +81,7 @@ const spaces = [
         <PageBanner image="/assets/explorebanner.webp" />
       </div>
       
-      <FloatingCTAs />
+      
       <LearningSpacesSection
       heading="LEARNING SPACES"
       subText="At Westbrook, early learning spaces are designed to feel familiar, calm, and inviting, helping young children feel comfortable as they begin their school journey."

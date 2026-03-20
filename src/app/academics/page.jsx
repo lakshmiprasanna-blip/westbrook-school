@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
 import VideoHero from "../../components/VideoHero";
 import InfoSection from "../../components/InfoSection";
-import FloatingCTAs from "../../components/FloatingCTAs";
+
 import ScrollSlider from "../../components/AcademicsScrollSection";
 import ImageContentSection from "../../components/ImageContentSection";
 import EnquiryForm from "../../components/FormComponent";
@@ -22,7 +22,7 @@ export default function Academics() {
     <div className="pt-[70px] lg:pt-[80px]">
       <PageBanner image="/assets/academic-banner.webp" />
         </div>
-      <FloatingCTAs />
+      
 
       <ScrollSlider
         slides={[

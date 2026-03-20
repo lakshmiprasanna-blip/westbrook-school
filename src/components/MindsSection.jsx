@@ -42,7 +42,6 @@ export default function MindsSection({ onContactClick, onApplyClick }) {
             src="/assets/minds.webp"
             alt="Student"
             fill
-            prioriy
             className="object-contain object-bottom-right"
           />
         </div>

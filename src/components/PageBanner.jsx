@@ -7,10 +7,11 @@ export default function PageBanner({ image, alt = "Page Banner" }) {
         src={image}
         alt={alt}
         fill
+        priority
         fetchPriority="high"
-        decoding="sync"
         className="object-cover"
         sizes="100vw"
+        quality={85}
       />
     </section>
   );
