@@ -2,8 +2,6 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import PageBanner from "../../components/PageBanner";
-import FloatingCTAs from "../../components/FloatingCTAs";
-import Image from "next/image";
 import OurPhilosophySection from "./OurPhilosophySection";
 import VisionSection from "./VisionSection";
 import CoreValues from "./CoreValues";
@@ -44,7 +42,7 @@ const leadershipData = [
   return (
     <>-
       <PageBanner image="/assets/about-banner.webp" />
-      <FloatingCTAs />
+    
       <Internationalschool
         title="At Westbrook International School"
         image="/assets/emblem.png"

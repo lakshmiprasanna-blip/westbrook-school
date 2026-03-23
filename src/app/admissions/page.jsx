@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import PageBanner from "../../components/PageBanner";
-import FloatingCTAs from "../../components/FloatingCTAs";
 import FAQSection from "../../components/FAQSection";
 import ContactCTA from "../../components/ContactCTA";
 import VideoHeroAnimation from "../../components/VideoHeroAnimation";
@@ -22,7 +21,7 @@ export default function Admissions() {
         <PageBanner image="/assets/banner1.webp" />
       </div>
 
-      <FloatingCTAs />
+      
 
       {/* The Westbrook Way Section */}
       <section className="bg-offwhite py-14 sm:py-16 md:py-20 lg:py-22">

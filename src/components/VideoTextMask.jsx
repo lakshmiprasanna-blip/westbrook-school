@@ -1,23 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 const VIDEO_SRC = "/assets/homeaivideo.mp4";
 
-// Animation transition defined outside component — no re-creation on each render
-const ZOOM_TRANSITION = {
-  duration: 2.5,
-  ease: [0.7, 0, 0.3, 1],
+const GRADIENT_STYLE = {
+  background:
+    "linear-gradient(180deg, rgba(0,0,0,0.7) -15.82%, rgba(220,220,220,0.08) 43.38%, rgba(0,0,0,0.25) 66.47%, rgba(0,0,0,0.7) 104.13%, rgba(82,82,82,0.25) 104.13%)",
+};
+
+const OVERLAY_BASE_STYLE = {
+  mixBlendMode: "screen",
 };
 
 const VideoTextMask = () => {
-  const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const [zoom, setZoom] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
 
-  // Video setup — lazy play after mount, non-blocking
+  // ─── Video setup — deferred via requestIdleCallback so FCP fires first ───
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -26,7 +27,6 @@ const VideoTextMask = () => {
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
 
-    // Use requestIdleCallback so video load doesn't block first paint
     const startVideo = () => {
       video.load();
       video.play().catch(() => {});
@@ -35,74 +35,73 @@ const VideoTextMask = () => {
     if ("requestIdleCallback" in window) {
       const id = requestIdleCallback(startVideo, { timeout: 1000 });
       return () => cancelIdleCallback(id);
-    } else {
-      // Fallback: slight defer so FCP paint happens first
-      const t = setTimeout(startVideo, 0);
-      return () => clearTimeout(t);
     }
+
+    const t = setTimeout(startVideo, 0);
+    return () => clearTimeout(t);
   }, []);
 
-  // Zoom trigger at 800ms
+  // ─── Zoom trigger at 200ms ────────────────────────────────────────────────
   useEffect(() => {
-    const timer = setTimeout(() => setZoom(true), 800);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setZoom(true), 200);
+    return () => clearTimeout(t);
   }, []);
 
-  // Unmount overlay after animation completes (800 + 2500 + ~100ms buffer)
+  // ─── Remove overlay after animation completes ─────────────────────────────
+  // 200ms delay + 2500ms animation + 100ms buffer = 2800ms
   useEffect(() => {
     if (!zoom) return;
-    const timer = setTimeout(() => setOverlayVisible(false), 2600);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setOverlayVisible(false), 2800);
+    return () => clearTimeout(t);
   }, [zoom]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-[42vh] md:h-screen overflow-hidden bg-black"
-    >
-      {/* Background Video — fetchpriority low, loads after paint */}
-      <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        autoPlay
-        preload="none"          // ← was "auto"; prevents parser-blocking network fetch
-        className="absolute inset-0 mt-22 w-full h-full object-cover"
-      >
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
+    <>
+      <style>{`
+        @keyframes vtm-zoom-out {
+          from { transform: scale(1);  opacity: 1; }
+          to   { transform: scale(40); opacity: 0; }
+        }
+        .vtm-overlay-zoom {
+          animation: vtm-zoom-out 2.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .vtm-overlay-zoom { animation: none; opacity: 0; }
+        }
+      `}</style>
 
-      {/* Linear Gradient Overlay */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.7) -15.82%, rgba(220,220,220,0.08) 43.38%, rgba(0,0,0,0.25) 66.47%, rgba(0,0,0,0.7) 104.13%, rgba(82,82,82,0.25) 104.13%)",
-        }}
-      />
+      <section className="relative h-[42vh] md:h-screen overflow-hidden bg-black">
 
-      {/* Knockout Animation Overlay */}
-      {overlayVisible && (
-        <motion.div
-          className="absolute inset-0 z-50 flex items-center justify-center bg-white select-none pointer-events-none"
-          style={{ mixBlendMode: "screen" }}
-          animate={{
-            scale: zoom ? 40 : 1,
-            opacity: zoom ? 0 : 1,
-          }}
-          transition={ZOOM_TRANSITION}
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="none"
+          className="absolute inset-0 mt-22 w-full h-full object-cover"
         >
-          <h2 className="font-[Montserrat] !text-[11vw] md:text-[8vw] font-black leading-[0.85] tracking-tight text-center text-black">
-            WESTBROOK
-          </h2>
-        </motion.div>
-      )}
+          <source src={VIDEO_SRC} type="video/mp4" />
+        </video>
 
-      {/* Hero Content */}
-      <div className="relative z-20 h-full flex items-end justify-center !p-6 md:pb-24 lg:pb-15">
-        <div className="lg:max-w-3xl w-full flex flex-col items-center text-center gap-6">
-          <div>
+        <div
+          className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply"
+          style={GRADIENT_STYLE}
+        />
+
+        {overlayVisible && (
+          <div
+            className={`absolute inset-0 z-50 flex items-center justify-center bg-white select-none pointer-events-none${zoom ? " vtm-overlay-zoom" : ""}`}
+            style={OVERLAY_BASE_STYLE}
+          >
+            <h2 className="font-[Montserrat] !text-[11vw] md:text-[8vw] font-black leading-[0.85] tracking-tight text-center text-black">
+              WESTBROOK
+            </h2>
+          </div>
+        )}
+
+        <div className="relative z-20 h-full flex items-end justify-center !p-6 md:pb-24 lg:pb-15">
+          <div className="lg:max-w-3xl w-full flex flex-col items-center text-center gap-6">
             <h2
               className="text-white leading-[120%] !text-[20px] sm:text-[22px] md:text-[40px] lg:!text-[48px]"
               style={{ fontWeight: 600 }}
@@ -111,8 +110,9 @@ const VideoTextMask = () => {
             </h2>
           </div>
         </div>
-      </div>
-    </section>
+
+      </section>
+    </>
   );
 };
 

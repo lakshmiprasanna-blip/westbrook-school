@@ -4,8 +4,6 @@ import InfoSection from "../components/InfoSection";
 import ExperienceSlider from "../components/ExperienceSlider";
 import FAQSection from "../components/FAQSection";
 import VideoTextMask from "../components/VideoTextMask";
-import FloatingCTAs from "../components/FloatingCTAs";
-import VideoHeroAnimation from "../components/VideoHeroAnimation";
 import { homeFAQs } from "../data/faqsData";
 
 const experienceItems = [
@@ -69,7 +67,7 @@ export default function Page() {
       {/* <div className="pt-[80px] lg:pt-[93px]"> */}
       <VideoTextMask />
       {/* </div> */}
-      <FloatingCTAs />
+      
 
       <section className="relative w-full py-12 md:py-21 overflow-hidden bg-offwhite">
 
