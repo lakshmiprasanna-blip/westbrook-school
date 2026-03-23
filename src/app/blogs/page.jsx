@@ -7,7 +7,7 @@ export default function blogs (){
   {
     title: "What makes Westbrook a preferred school in Madhapur?",
     image: "/assets/learningspacessection1.webp",
-    slug: "westbrook-preferred-school",
+    slug: "what-makes-westbrook-preferredschool-in-madhapur",
   },
   {
     title: "How to identify the right school in Madhapur, Hyderabad",
@@ -17,7 +17,7 @@ export default function blogs (){
   {
     title: "Role of STEM programs in holistic student development",
     image: "/assets/learningspacessection3.webp",
-      slug: "choosing-right-school-madhapur",
+      slug: "choosing-right-school",
   },
 
 ];

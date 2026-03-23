@@ -50,10 +50,8 @@ highlightClass = "bg-lightblue px-3 py-1",
 
             <div className={`space-y-5 ${paragraphMaxWidth}`}>
   {paragraphs.map((text, i) => (
-    <p key={i} className={textClass}>
-      {text}
-    </p>
-  ))}
+    // FIXED — renders HTML correctly
+<p key={i} className={`blog-content ${textClass}`} dangerouslySetInnerHTML={{ __html: text }} />  ))}
 </div>
           </div>
 

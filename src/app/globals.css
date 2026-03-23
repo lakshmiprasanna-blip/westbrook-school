@@ -282,3 +282,6 @@ body.has-floating-cta .footer-spacing {
     padding-bottom: 10px;
   }
 }
+.blog-content a {
+  color: #0f4c81;
+}
