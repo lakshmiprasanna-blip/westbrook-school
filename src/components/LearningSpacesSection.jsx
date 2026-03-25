@@ -52,7 +52,7 @@ export default function LearningSpacesSection({
           </div>
 
           {subText && (
-            <p className="paragraph max-w-4xl mx-auto font-montserrat md:text-center !text-[16px] md:!text-[17px] !leading-[24px] text-dark">
+            <p className="paragraph max-w-5xl mx-auto font-montserrat md:text-center !text-[16px] md:!text-[17px] !leading-[24px] text-dark">
               {subText}
             </p>
           )}

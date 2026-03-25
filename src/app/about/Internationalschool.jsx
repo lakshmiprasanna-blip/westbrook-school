@@ -37,7 +37,16 @@ highlightClass = "bg-lightblue px-3 py-1",
                 />
               )}
 
-             <h2 className={`${titleClass} ${titleMaxWidth}  md:whitespace-nowrap`}>
+             <h2
+  className={`
+    ${titleClass} 
+    ${titleMaxWidth} 
+    whitespace-normal 
+    break-words 
+    w-full
+    xl:whitespace-nowrap
+  `}
+>
               {highlightTitle ? (
                 <span className={`inline-block ${highlightClass}`}>
                   {title}

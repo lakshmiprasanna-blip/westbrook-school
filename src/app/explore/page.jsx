@@ -84,7 +84,7 @@ const spaces = [
       
       <LearningSpacesSection
       heading="LEARNING SPACES"
-      subText="At Westbrook, early learning spaces are designed to feel familiar, calm, and inviting, helping young children feel comfortable as they begin their school journey."
+      subText="For families exploring the best school in Hyderabad, learning spaces that feel welcoming and purposeful often play an important role in helping children adapt comfortably to their early school years."
       data={spaces}
       
     />

@@ -70,14 +70,20 @@ export default function ContactCTA({
         <div className="absolute inset-0 hidden md:block" style={DESKTOP_OVERLAY} />
 
         {/* Content */}
-        <div className="max-w-xl relative z-10 w-full px-6 mx-auto flex flex-col justify-center items-center text-center">
-          <h2 className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] leading-[1.3]">
-            {title}
-          </h2>
+       <div className="w-full max-w-6xl relative z-10 px-2 mb-2 mt-2 mx-auto flex flex-col justify-center items-center text-center">
+  
+  {/* H2 stays normal */}
+  <h2 className="font-playfair font-bold text-white mb-4 text-[30px] md:text-[40px] leading-[1.3]">
+    {title}
+  </h2>
 
-          <p className="font-montserrat font-medium text-white/90 mb-8 text-[14px] md:text-[16px] lg:text-[18px]">
-            {subtitle}
-          </p>
+  {/* Subtitle gets more width */}
+  <div className="w-full">
+    <p className="whitespace-pre-line text-white leading-relaxed max-w-5xl mx-auto">
+      {subtitle}
+    </p>
+  </div>
+
 
           <div className="mt-6 flex flex-row gap-3 justify-center flex-wrap">
             <Button

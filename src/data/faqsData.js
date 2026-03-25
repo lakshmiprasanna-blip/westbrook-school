@@ -19,7 +19,7 @@ export const homeFAQs = [
     {
       question: "What makes Westbrook different from other schools in the area?",
       answer:
-        "Westbrook combines globally aligned academics with personalised attention, strong academic leadership, and a neighbourhood location. The school prioritises clarity in learning, values in practice, and close involvement from educators to support each child's growth.",
+        "Westbrook combines globally aligned academics with personalised attention and strong academic leadership. Among the Best Schools in Madhapur, Hyderabad, it is known for clarity in learning, values in practice, and close educator involvement.",
     },
     {
       question: "Is Westbrook a neighbourhood school?",

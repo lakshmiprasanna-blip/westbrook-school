@@ -14,7 +14,11 @@ const experienceItems = [
   { type: "image", src: "/assets/experience5.webp", alt: "Experience 5" },
   { type: "image", src: "/assets/experience6.webp", alt: "Experience 6" },
 ];
-
+export const metadata = {
+  title: "Westbrook International School | Best School in Madhapur, Hyderabad",
+  description:
+    "Westbrook International School in Madhapur, Hyderabad offers a balanced international curriculum with strong academics, co-curricular activities, and values-based learning for Early Years through Primary.",
+}
 const visionariesItems = [
   {
     type: "video",
@@ -106,13 +110,7 @@ export default function Page() {
           </h2>
 
           <p className="paragraph max-w-[850px] mx-auto text-base md:text-lg leading-relaxed text-dark">
-            At Westbrook, every child is recognised as a unique learner,
-            guided with care, respect, and belief in their potential.
-            We create a safe and joyful learning environment where children
-            are encouraged to question, explore, and grow with confidence.
-            By balancing modern teaching practices with strong values,
-            we support students in becoming thoughtful individuals,
-            prepared for life beyond the classroom, along with academic success.
+            A balanced approach to learning guided by values and academic clarity. Westbrook International School is recognised by many families as the Best international school in Madhapur, Hyderabad, offering a thoughtful environment where academic learning and character development grow together. Located within the neighbourhoods of Madhapur, the school provides accessible, balanced education close to home, making it one of the Best International schools in Hyderabad for families seeking strong academics supported by values, care, and consistent teacher guidance.
           </p>
 
         </div>
@@ -125,7 +123,7 @@ export default function Page() {
         introText="When values guide learning, students grow with clarity and an understanding of future choices."
         tag="Academic"
         subTag="Excellence"
-        description="Strong academics focus on clear teaching, steady progress, and close teacher support. Students are guided to understand concepts, apply ideas meaningfully, and build confidence within the classroom, reducing the need for excessive after-school coaching"
+        description="As families look for the Best international school in Madhapur, Hyderabad, strong academics remain central at Westbrook. Children are encouraged to understand ideas deeply, ask questions freely, and grow in confidence with steady guidance."
         image="/assets/info1.png"
         showButton
         buttonText="KNOW MORE"

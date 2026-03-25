@@ -21,8 +21,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Westbrook",
-  description: "Westbrook International School",
+  title: "",
+  description: "",
+  template: "%s",
   icons: {
     icon: "/assets/Favicon.svg",
   },

@@ -31,9 +31,7 @@ export default function Academics() {
             title: "What we follow",
             description: (
               <>
-                The <span className="font-bold">international</span> curriculum
-                forms the academic framework at Westbrook, supporting concept
-                clarity, application, and clear communication.
+               The academic framework at Westbrook is designed to support concept clarity, application, and clear communication. As the Best International Curriculum School in Madhapur, Westbrook follows a structured learning approach that helps students build strong academic foundations while developing confidence in expressing ideas and understanding concepts deeply.
               </>
             ),
             image: "/assets/academicsscroll.webp",
@@ -41,13 +39,13 @@ export default function Academics() {
           {
             title: "How learning progresses ?",
             description:
-              "Subjects are structured to build understanding gradually across grades, allowing students to connect ideas and strengthen foundations over time.",
+              "Subjects are structured to build understanding gradually across grades, allowing students to connect ideas and strengthen foundations over time. This steady progression supports learners as they grow through different stages of schooling, making Westbrook a trusted choice for families seeking the Best International Syllabus School in Madhapur.",
             image: "/assets/academicsscroll2.webp",
           },
           {
             title: "Why this matters ?",
             description:
-              "This approach helps students move beyond memorization and develop confidence in applying what they learn.",
+              "This approach helps students move beyond memorization and develop confidence in applying what they learn. By focusing on understanding rather than rote learning, students develop stronger thinking skills and a deeper connection to their education.",
             image: "/assets/academicsscroll3.webp",
           },
         ]}

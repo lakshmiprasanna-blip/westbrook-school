@@ -124,17 +124,32 @@ export default function IndividualBlogStructure({
                   <div key={index}>
                     <h3 className="text-primary mb-2">{section.heading}</h3>
 
-                    {/* Mobile: show image after every other heading */}
                     {index % 2 === 0 && sideImages[index / 2] && (
-                      <div className="relative w-full h-[300px] overflow-hidden rounded-md mb-4 lg:hidden">
-                        <Image
-                          src={sideImages[index / 2]}
-                          alt={`blog image ${index / 2 + 1}`}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
+  <div className="relative w-full rounded-md mb-4 lg:hidden">
+
+    {/* ✅ Tablet (no crop) */}
+    <div className="hidden md:block w-full">
+      <Image
+        src={sideImages[index / 2]}
+        alt={`blog image ${index / 2 + 1}`}
+        width={800}
+        height={500}
+        className="w-full h-[350px] rounded-md"
+      />
+    </div>
+
+    {/* ✅ Mobile (cropped UI) */}
+    <div className="block md:hidden relative w-full h-[300px] overflow-hidden">
+      <Image
+        src={sideImages[index / 2]}
+        alt={`blog image ${index / 2 + 1}`}
+        fill
+        className=" object-top"
+      />
+    </div>
+
+  </div>
+)}
 
                     <div className="space-y-4">
                       {section.paragraphs.map((para, i) => (
@@ -168,7 +183,7 @@ export default function IndividualBlogStructure({
                       src={img}
                       alt={`blog image ${i + 1}`}
                       fill
-                      className="object-cover rounded-md"
+                      className=" rounded-md"
                     />
                   </div>
                 ))}

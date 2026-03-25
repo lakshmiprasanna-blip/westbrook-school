@@ -10,16 +10,20 @@ const NAV_ITEMS = [
   { name: "About Us", href: "/about" },
   { name: "Academics", href: "/academics" },
   { name: "Admissions", href: "/admissions" },
-  { name: "Explore", href: "/explore" },
+  {
+    name: "Explore",
+    href: "/explore",
+    dropdown: [
+      { name: "Blogs", href: "/blogs" },
+    ],
+  },
   { name: "Contact Us", href: "/contact" },
 ];
 
 export default function NavBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  
 
-  /* Lock background scroll when menu is open */
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
     return () => {
@@ -27,40 +31,11 @@ export default function NavBar() {
     };
   }, [isOpen]);
 
-  /* Show shadow only when overlapping .navbar-white-trigger */
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const trigger = document.querySelector(".navbar-white-trigger");
-  //     if (!trigger) return;
-
-  //     const rect = trigger.getBoundingClientRect();
-
-  //     // Navbar height ~80px
-  //     if (rect.top <= 80 && rect.bottom >= 80) {
-  //       setShowShadow(true);
-  //     } else {
-  //       setShowShadow(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   handleScroll();
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-
   return (
     <>
-      <header
-      className="
-        fixed top-0 left-0 w-full 
-        bg-white lg:bg-[#0f4c81] z-40
-        shadow-[0_8px_20px_rgba(0,0,0,0.35)]
-      "
-
-      >
+      <header className="fixed top-0 left-0 w-full bg-white lg:bg-[#0f4c81] z-40 shadow-[0_8px_20px_rgba(0,0,0,0.35)]">
         <div className="container-custom mx-auto flex items-center justify-between px-6 py-4">
-          
+
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
@@ -69,16 +44,13 @@ export default function NavBar() {
               width={200}
               height={60}
               className="object-contain lg:hidden"
-              
             />
-
             <Image
               src="/assets/westbrook.svg"
               alt="Westbrook International School"
               width={220}
               height={60}
               className="object-contain hidden lg:block"
-              
             />
           </Link>
 
@@ -87,16 +59,48 @@ export default function NavBar() {
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
 
+              if (item.dropdown) {
+                return (
+                  <div key={item.name} className="relative group">
+
+                    <Link
+                      href={item.href}
+                      className={`inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-wide transition
+                        ${isActive ? "text-white border-b-2 border-white pb-1" : "text-white/90 hover:text-white"}
+                      `}
+                    >
+                      {item.name}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </Link>
+
+                    {/* Invisible bridge fills the gap so hover doesn't break */}
+                    <div className="absolute left-0 top-full w-full h-3" />
+
+                    {/* Dropdown panel */}
+                    <div className="absolute left-0 top-[calc(100%+12px)] w-36 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.name}
+                          href={sub.href}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={`text-sm font-semibold uppercase tracking-wide transition
-                    ${
-                      isActive
-                        ? "text-white border-b-2 border-white pb-1"
-                        : "text-white/90 hover:text-white"
-                    }
+                    ${isActive ? "text-white border-b-2 border-white pb-1" : "text-white/90 hover:text-white"}
                   `}
                 >
                   {item.name}
@@ -106,16 +110,13 @@ export default function NavBar() {
           </nav>
 
           {/* Hamburger */}
-          <button
-            className="lg:hidden text-[#1C1B1F]"
-            onClick={() => setIsOpen(true)}
-          >
+          <button className="lg:hidden text-[#1C1B1F]" onClick={() => setIsOpen(true)}>
             <HiOutlineMenu size={30} />
           </button>
         </div>
       </header>
 
-      {/* MOBILE MENU (unchanged) */}
+      {/* MOBILE MENU */}
       <div
         className={`
           lg:hidden fixed inset-0 bg-white z-40 flex flex-col
@@ -124,16 +125,8 @@ export default function NavBar() {
         `}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <Image
-            src="/assets/logo-m.png"
-            alt="Westbrook International School"
-            width={180}
-            height={50}
-          />
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-[#1C1B1F]"
-          >
+          <Image src="/assets/logo-m.png" alt="Westbrook International School" width={180} height={50} />
+          <button onClick={() => setIsOpen(false)} className="text-[#1C1B1F]">
             <HiOutlineX size={30} />
           </button>
         </div>
@@ -142,17 +135,39 @@ export default function NavBar() {
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
 
+            if (item.dropdown) {
+              return (
+                <div key={item.name} className="flex flex-col items-center space-y-4">
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-xl font-semibold uppercase tracking-wide transition
+                      ${isActive ? "text-[#1C1B1F] border-b border-[#1C1B1F] pb-1" : "text-gray-700 hover:text-[#1C1B1F]"}
+                    `}
+                  >
+                    {item.name}
+                  </Link>
+                  {item.dropdown.map((sub) => (
+                    <Link
+                      key={sub.name}
+                      href={sub.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-base text-gray-500 hover:text-[#0f4c81] transition"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={`text-xl font-semibold uppercase tracking-wide transition
-                  ${
-                    isActive
-                      ? "text-[#1C1B1F] border-b border-[#1C1B1F] pb-1"
-                      : "text-gray-700 hover:text-[#1C1B1F]"
-                  }
+                  ${isActive ? "text-[#1C1B1F] border-b border-[#1C1B1F] pb-1" : "text-gray-700 hover:text-[#1C1B1F]"}
                 `}
               >
                 {item.name}

@@ -283,5 +283,13 @@ body.has-floating-cta .footer-spacing {
   }
 }
 .blog-content a {
-  color: #0f4c81;
+  color: #156bb6;
+  text-decoration: underline;
+}
+/* Force NO cropping on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .no-crop-tablet img {
+    object-fit: contain !important;
+    position: relative !important;
+  }
 }

@@ -21,6 +21,19 @@ async function getBlog(slug) {
   }
 }
 
+// ─── Per-page SEO — overrides the static metadata in layout.js ───────────────
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const blog = await getBlog(slug);
+
+  if (!blog) return { title: "Blog | Westbrook International School" };
+
+  return {
+    title:       blog.metaTitle       || blog.title || "Blog | Westbrook International School",
+    description: blog.metaDescription || blog.intro || "",
+  };
+}
+
 export default async function BlogPage({ params }) {
   const { slug } = await params;
   const blog = await getBlog(slug);
@@ -29,7 +42,7 @@ export default async function BlogPage({ params }) {
 
   return (
     <IndividualBlogStructure
-      bannerImage={blog.bannerImage ?? ""}  // ← must be here
+      bannerImage={blog.bannerImage ?? ""}
       title={blog.title}
       intro={blog.intro}
       sections={blog.sections}

@@ -49,8 +49,8 @@ const leadershipData = [
         bgClass="bg-white"
         titleClass="text-[22px] sm:text-[26px] md:text-[34px] font-semibold text-[var(--color-primary)] mb-4 leading-tight"
         paragraphs={[
-          "Westbrook International School is built on the belief that education must do more than deliver academic results. It must shape thinking, character, and confidence in a way that supports children throughout their school years and beyond.",
-          "Westbrook is guided by experienced academicians from the Tapasya School group, whose long-standing work in education forms the academic backbone of the school. Their experience brings clarity, structure, and academic rigour to every aspect of teaching and learning, ensuring that systems, pedagogy, and classroom practices are built on proven educational understanding rather than short-term trends."
+          "Westbrook International School is built on the belief that education must do more than deliver academic results. For families exploring the international school in madhapur, the school focuses on shaping thinking, character, and confidence in a way that supports children throughout their school years and beyond. As parents search for the Best international school in madhapur, they often look for an environment where academic clarity, balanced learning, and strong values come together to support each child’s development.",
+          "At Westbrook, every child is recognised as a unique learner, and through close academic leadership, personalised attention, and classroom-focused teaching, the school works to build understanding and confidence within the school day itself. This approach helps reduce dependence on excessive external coaching while ensuring learning remains meaningful, balanced, and student-focused in an approach many parents consider when comparing the best international syllabus school in madhapur."
         ]}
       />
       

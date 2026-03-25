@@ -1,38 +1,40 @@
 import PageBanner from "../../components/PageBanner";
 import LearningSpacesSection from "../../components/LearningSpacesSection";
 
-export default function blogs (){
+async function getBlogs() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/blogs`,
+      { cache: "no-store" } // always fetch latest — no caching
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
 
-    const spacesData = [
-  {
-    title: "What makes Westbrook a preferred school in Madhapur?",
-    image: "/assets/learningspacessection1.webp",
-    slug: "what-makes-westbrook-preferredschool-in-madhapur",
-  },
-  {
-    title: "How to identify the right school in Madhapur, Hyderabad",
-    image: "/assets/learningspacessection2.webp",
-      slug: "choosing-right-school-madhapur",
-  },
-  {
-    title: "Role of STEM programs in holistic student development",
-    image: "/assets/learningspacessection3.webp",
-      slug: "choosing-right-school",
-  },
+    // Convert { slug: blogObject } → array for LearningSpacesSection
+    return Object.entries(data).map(([slug, blog]) => ({
+      title: blog.title || slug,
+      image: blog.bannerImage || blog.sideImages?.[0] || "/assets/learningspacessection1.webp",
+      slug,
+    }));
+  } catch {
+    return [];
+  }
+}
 
-];
-    return(
-        <>
-        <div className="pt-[70px] lg:pt-[80px]">
-                <PageBanner image="/assets/banner1.webp" />
-              </div>
-              <LearningSpacesSection
-            heading="BLOGS"
-            data={spacesData}
-            titleClass="!font-montserrat font-medium !text-[20px] !leading-1.2 text-primary"
-            hoverEffect={true}
-          />
-    
-        </>
-    )
+export default async function Blogs() {
+  const spacesData = await getBlogs();
+
+  return (
+    <>
+      <div className="pt-[70px] lg:pt-[80px]">
+        <PageBanner image="/assets/blogs/Banner.webp" />
+      </div>
+      <LearningSpacesSection
+        heading="BLOGS"
+        data={spacesData}
+        titleClass="!font-montserrat font-medium !text-[20px] !leading-1.2 text-primary"
+        hoverEffect={true}
+      />
+    </>
+  );
 }

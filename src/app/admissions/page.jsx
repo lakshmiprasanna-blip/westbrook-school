@@ -33,10 +33,9 @@ export default function Admissions() {
           <div className="paragraph mt-6 sm:mt-8 md:mt-10 max-w-4xl mx-auto space-y-4">
             <p>
               Westbrook doesn’t treat admissions as a selection process, but as the beginning of a partnership. We believe every child deserves the opportunity to learn in an environment that understands their pace, personality, and needs.
-            </p>
-
+</p>
             <p>
-              Our focus is on welcoming families, understanding the child, and ensuring alignment between home and school. The process is designed to feel calm, transparent, and supportive, just like the learning environment we aim to create.
+              Our focus is on welcoming families, understanding the child, and ensuring alignment between home and school. The process is designed to feel calm, transparent, and supportive, just like the learning environment we aim to create. This approach is especially helpful for parents navigating School Admissions in Madhapur and exploring options for International school admissions for their children.
             </p>
           </div>
         </div>
@@ -53,7 +52,7 @@ export default function Admissions() {
             headingBottom: "PROCESS",
             subTitle: "Simple. Personal. Child-first.",
             description:
-              `There are <b>no entrance exams or qualification tests</b> at Westbrook. Each admission is approached with care and individual attention.`,
+              `There are no entrance exams or qualification tests at Westbrook. Each admission is approached with care and individual attention, supporting families who are exploring School Admissions in Madhapur and beginning their journey with International school admissions.`,
             image: "/assets/our_admission_1x.webp",
             button: {
               text: "KNOW MORE",
@@ -102,7 +101,7 @@ export default function Admissions() {
             subTitle:
               "Every admission matters to us, and each family is guided through the process with clarity and care.",
             description:
-              "Once aligned, admissions are confirmed through a simple documentation process.",
+              "Every admission matters to us, and each family is guided through the process with clarity and care, especially for parents exploring School Admissions in Madhapur and seeking guidance through International school admissions.",
             image: "/assets/our_admission_5x.webp",
             button: {
               text: "APPLY NOW",
@@ -116,11 +115,17 @@ export default function Admissions() {
       <FAQSection faqData={admissionsfaqData} />
 
       <ContactCTA
-        imageSrc="/assets/admissions-footer-banner.png"
-        title="Begin Your Child’s Journey with Westbrook"
-        subtitle="Please share your details, and our admissions team will be in touch to guide you through the next steps."
-      />
+  imageSrc="/assets/admissions-footer-banner.png"
+  title={
+  <>
+    Begin Your Child’s Journey <br />
+    with Westbrook
+  </>
+}
+  subtitle={`Please share your details, and our admissions team will be in touch to guide you through the next steps.
 
+Visits can be scheduled at your convenience, particularly for families considering School Admissions in Madhapur or planning their child’s International school admissions journey.`}
+/>
       {/* POPUP MODAL */}
       <AnimatePresence>
         {formType && (

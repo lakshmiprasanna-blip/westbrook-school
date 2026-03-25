@@ -3,6 +3,9 @@ import { writeFile, readFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
 import mammoth from "mammoth";
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+
 
 const DATA_DIR     = path.join(process.cwd(), "persistent-data");
 const BLOGS_JSON   = path.join(DATA_DIR, "blogsData.json");
@@ -33,12 +36,22 @@ async function writeBlogsJson(data) {
   await writeFile(BLOGS_JSON, JSON.stringify(data, null, 2), "utf-8");
 }
 
+// ─── Decode HTML entities that mammoth escapes when you type tags in Word ────
+function decodeInlineTags(str) {
+  return str
+    .replace(/&lt;(\/?(strong|em|a|br|span|u|s|b|i)(\s[^&]*)?)&gt;/gi, "<$1>")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"');
+}
+
 // ─── Strip only block-level tags, KEEP <strong> <a> <em> ─────────────────────
 function stripBlockTags(html) {
-  return html
-    .replace(/<\/?p[^>]*>/gi, "")
-    .replace(/<br\s*\/?>/gi, " ")
-    .trim();
+  return decodeInlineTags(
+    html
+      .replace(/<\/?p[^>]*>/gi, "")
+      .replace(/<br\s*\/?>/gi, " ")
+      .trim()
+  );
 }
 
 // ─── Plain text only (used for headings / meta / FAQ lines) ──────────────────
@@ -46,44 +59,82 @@ function toPlainText(html) {
   return html.replace(/<[^>]+>/g, "").trim();
 }
 
-// ─── FAQ exact match: "faq" or "faqs" only ───────────────────────────────────
-function isFaqHeading(text) {
-  return /^faqs?$/i.test(text.trim());
+// ─── Strip the ( H2) / (H3) / ( H1) markers from text ───────────────────────
+// Your Word doc writes: "A Great School ( H2)" or "Question text (H3)"
+// We strip that suffix so stored text is clean: "A Great School"
+function stripHMarker(text) {
+  return text.replace(/\s*\(\s*H[1-6]\s*\)\s*$/i, "").trim();
 }
 
-// ─── Extract meta fields from plain text block ────────────────────────────────
-function extractMetaFromText(text, blog) {
-  if (!text) return;
-  const lines = toPlainText(text).split(/\n/).map(l => l.trim()).filter(Boolean);
+// ─── FAQ heading detector ─────────────────────────────────────────────────────
+// Matches: "FAQs", "FAQ", "FAQs ( H2)", "FAQ (H2)" etc.
+function isFaqHeading(text) {
+  const t = text.trim().toLowerCase().replace(/['''`]/g, "'");
+  return (
+    /^faqs?'?s?$/.test(t) ||                          // faq, faqs, faq's
+    /^frequently\s+asked\s+questions?$/.test(t) ||    // frequently asked questions
+    /^frequently\s+asked\s+q\s*(&|and)\s*a$/.test(t) // frequently asked q&a
+  );
+}
+// ─── Extract Meta Title / Meta Description from ALL blocks ───────────────────
+// FIX: Your doc puts Title & Meta Description at the BOTTOM, not the top.
+// We scan every block in the document instead of only the first one.
+function extractMetaFromAllBlocks(blocks, blog) {
+  for (const block of blocks) {
+    const text = block.text !== undefined ? block.text : toPlainText(block.innerHtml || "");
+    const lines = text.split(/\n/).map(l => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      // Matches "Title : ..." or "Meta Title : ..."
+      const mt = line.match(/^(?:Meta\s+)?Title\s*:\s*(.+)/i);
+      // Matches "Meta Description : ..." or "Meta Discription : ..." (typo-safe)
+      const md = line.match(/^Meta\s+D[ei]s[ck]?ription\s*:\s*(.+)/i);
+      if (mt && !blog.metaTitle)       { blog.metaTitle = mt[1].trim(); }
+      if (md && !blog.metaDescription) { blog.metaDescription = md[1].trim(); }
+    }
+  }
+  if (blog.metaTitle && !blog.title) blog.title = blog.metaTitle;
+}
 
-  for (const line of lines) {
-    const mt = line.match(/^Meta\s+Title\s*:\s*(.+)/i);
-    const md = line.match(/^Meta\s+D[ei]s[ck]?ription\s*:\s*(.+)/i);
-    if (mt) { blog.metaTitle = mt[1].trim(); continue; }
-    if (md) { blog.metaDescription = md[1].trim(); continue; }
+// ─── Push a FAQ Q+A pair safely ───────────────────────────────────────────────
+function pushFaq(blog, question, answerHtml) {
+  const q = stripHMarker(question).trim();
+  const a = stripBlockTags(answerHtml).trim();
+  if (q) blog.faqs.push({ question: q, answer: a });
+}
+
+// ─── Parse one block for FAQ content ─────────────────────────────────────────
+// Your doc format: question and answer are in ONE <p>, separated by <br/>
+//   e.g. <p><strong>What is X? (H3)<br/></strong>The answer text here.</p>
+// Returns updated pendingQ
+function parseFaqBlock(innerHtml, plainText, blog, pendingQ) {
+  // Split on <br> — mammoth puts Q<br/>A in one <p> in your doc
+  const brParts = innerHtml
+    .split(/<br\s*\/?>/i)
+    .map(p => toPlainText(p).trim())
+    .filter(Boolean);
+
+  if (brParts.length >= 2) {
+    // Both Q and A are in this single paragraph
+    if (pendingQ !== null) {
+      // Flush any previous dangling question
+      blog.faqs.push({ question: stripHMarker(pendingQ).trim(), answer: "" });
+    }
+    const q = stripHMarker(brParts[0]);  // remove (H3) from question
+    const a = brParts.slice(1).join(" ");
+    if (q) blog.faqs.push({ question: q, answer: a });
+    return null;
   }
 
-  // Title always comes from metaTitle
-  blog.title = blog.metaTitle;
-  blog.intro = blog.metaDescription;
+  // Single-line paragraph — alternating Q then A pattern
+  if (pendingQ === null) {
+    return plainText; // this is the question
+  } else {
+    pushFaq(blog, pendingQ, innerHtml);
+    return null;
+  }
 }
 
 // ─── MAIN PARSER ──────────────────────────────────────────────────────────────
-//
-// Works on raw mammoth HTML output directly.
-// Does NOT strip <strong> or <a href> — only strips block tags (<p>, <br>).
-//
-// Your doc format:
-//   Meta Title: ...
-//   Meta Description: ...
-//
-//   Heading text (h2)
-//   Paragraph with <strong>bold</strong> and <a href="...">links</a>
-//
-//   FAQs (h2)
-//   Question
-//   Answer
-
 function parseHtmlToBlog(html) {
   const blog = {
     title:           "",
@@ -96,62 +147,42 @@ function parseHtmlToBlog(html) {
     faqs:            [],
   };
 
-  // ── Case 1: Word doc has real Heading styles → mammoth outputs <h2> tags ──
+  // ── Case 1: Word doc uses real Heading styles → mammoth outputs <h3> etc. ──
+  // (Your current doc falls into this case)
   if (/<h[1-6][\s>]/i.test(html)) {
     return parseByHtmlTags(html, blog);
   }
 
-  // ── Case 2: Doc uses (h2) plain-text markers ──────────────────────────────
-  // Split the HTML on (hN) markers — BUT keep the HTML intact for paragraphs
-  // so <strong> and <a href> are preserved.
-  //
-  // mammoth outputs each paragraph as <p>...</p>
-  // So the HTML looks like:
-  //   <p>Meta Title: ...</p>
-  //   <p>Meta Description: ...</p>
-  //   <p>A Neighbourhood School (h2)</p>
-  //   <p>Being located... <strong>bold</strong> <a href="...">link</a></p>
-  //   <p>Depth Over Pace (h2)</p>
-  //   <p>One thing we noticed...</p>
-  //   <p>FAQs (h2)</p>
-  //   <p>Question text</p>
-  //   <p>Answer text</p>
-
-  // Extract all <p> blocks in order
+  // ── Case 2: Doc uses plain-text (h2) markers inside <p> tags ─────────────
   const paraRe = /<p[^>]*>([\s\S]*?)<\/p>/gi;
   const paras  = [];
   let m;
   while ((m = paraRe.exec(html)) !== null) {
     paras.push({
-      innerHtml: m[1],                      // raw HTML inside <p> — has <strong>, <a>
-      plainText: toPlainText(m[1]).trim(),  // plain text — for heading/meta detection
+      innerHtml: m[1],
+      plainText: toPlainText(m[1]).trim(),
     });
   }
 
   if (!paras.length) return blog;
 
-  // ── Find meta block: all paras before the first (hN) marker ──────────────
+  // Scan ALL paragraphs for meta (may be anywhere in the doc)
+  extractMetaFromAllBlocks(paras, blog);
+
   const firstHeadingIdx = paras.findIndex(p => /\(h[1-6]\)/i.test(p.plainText));
   const metaParas = firstHeadingIdx === -1 ? paras : paras.slice(0, firstHeadingIdx);
 
   const introLines = [];
   for (const p of metaParas) {
-    const mt = p.plainText.match(/^Meta\s+Title\s*:\s*(.+)/i);
-    const md = p.plainText.match(/^Meta\s+D[ei]s[ck]?ription\s*:\s*(.+)/i);
-    if (mt) { blog.metaTitle = mt[1].trim(); continue; }
-    if (md) { blog.metaDescription = md[1].trim(); continue; }
-    // Any non-meta para before first heading = intro
-    if (p.plainText) introLines.push(stripBlockTags(p.innerHtml));
+    const isMeta = /^(?:Meta\s+)?Title\s*:/i.test(p.plainText) ||
+                   /^Meta\s+D[ei]s[ck]?ription\s*:/i.test(p.plainText);
+    if (!isMeta && p.plainText) introLines.push(stripBlockTags(p.innerHtml));
   }
 
-  // Title always = metaTitle
-  blog.title = blog.metaTitle;
-  // Intro = explicit paras if any, else fall back to metaDescription
   blog.intro = introLines.length ? introLines.join(" ") : blog.metaDescription;
 
   if (firstHeadingIdx === -1) return blog;
 
-  // ── Walk remaining paras: headings and content ────────────────────────────
   let inFaq          = false;
   let pendingQ       = null;
   let currentSection = null;
@@ -159,37 +190,37 @@ function parseHtmlToBlog(html) {
   for (let i = firstHeadingIdx; i < paras.length; i++) {
     const { innerHtml, plainText } = paras[i];
 
-    // ── Is this para a heading? (contains (hN) marker) ──────────────────
+    // Skip meta lines and divider lines wherever they appear
+    if (/^(?:Meta\s+)?Title\s*:/i.test(plainText) ||
+        /^Meta\s+D[ei]s[ck]?ription\s*:/i.test(plainText) ||
+        /^—[-—]+$/.test(plainText)) continue;
+
     const headingMatch = plainText.match(/^(.*?)\s*\(h([1-6])\)\s*$/i);
 
     if (headingMatch) {
       const headingText = headingMatch[1].trim();
       const level       = parseInt(headingMatch[2]);
 
-      // H1 → blog title
       if (level === 1) {
-        blog.title = headingText || blog.metaTitle;
+        if (!blog.title) blog.title = headingText || blog.metaTitle;
         continue;
       }
 
-      // FAQ heading
-      if (isFaqHeading(headingText)) {
+      if (isFaqHeading(headingText) || isFaqHeading(plainText)) {
         inFaq = true;
         if (currentSection) { blog.sections.push(currentSection); currentSection = null; }
         continue;
       }
 
-      // Regular section heading
       if (currentSection) blog.sections.push(currentSection);
       currentSection = { heading: headingText, paragraphs: [] };
       inFaq = false;
+      pendingQ = null;
       continue;
     }
 
-    // ── Regular paragraph ────────────────────────────────────────────────
     if (!plainText) continue;
 
-    // Also detect "FAQs" as a standalone paragraph (no (h2) marker needed)
     if (isFaqHeading(plainText)) {
       inFaq = true;
       if (currentSection) { blog.sections.push(currentSection); currentSection = null; }
@@ -197,31 +228,19 @@ function parseHtmlToBlog(html) {
     }
 
     if (inFaq) {
-      // Each <p> is one Q or A — but sometimes Q+A are in same para separated by newline
-      // Split by newline and treat alternating lines as Q then A
-      const faqLines = plainText.split(/\n/).map(l => l.trim()).filter(Boolean);
-      for (const line of faqLines) {
-        if (pendingQ === null) pendingQ = line;
-        else {
-          blog.faqs.push({ question: pendingQ, answer: line });
-          pendingQ = null;
-        }
-      }
+      pendingQ = parseFaqBlock(innerHtml, plainText, blog, pendingQ);
       continue;
     }
 
-    // Normal paragraph — keep innerHtml so <strong> and <a href> are preserved
     const paraContent = stripBlockTags(innerHtml);
     if (!currentSection) {
-      // Before any section — append to intro
-      blog.intro = blog.intro
-        ? blog.intro + " " + paraContent
-        : paraContent;
+      blog.intro = blog.intro ? blog.intro + " " + paraContent : paraContent;
     } else {
       currentSection.paragraphs.push(paraContent);
     }
   }
 
+  if (pendingQ !== null) blog.faqs.push({ question: stripHMarker(pendingQ).trim(), answer: "" });
   if (currentSection) blog.sections.push(currentSection);
 
   return blog;
@@ -234,15 +253,15 @@ function parseByHtmlTags(html, blog) {
   let m;
   while ((m = blockRe.exec(html)) !== null) {
     blocks.push({
-      tag:      m[1].toLowerCase(),
+      tag:       m[1].toLowerCase(),
       innerHtml: m[3],
-      text:     toPlainText(m[3]),
+      text:      toPlainText(m[3]),
     });
   }
   if (!blocks.length) return blog;
 
-  // Block 0 = meta
-  extractMetaFromText(blocks[0].text, blog);
+  // FIX 1: Scan ALL blocks for meta — your doc has Title/Meta at the bottom
+  extractMetaFromAllBlocks(blocks, blog);
 
   let currentSection = null;
   const introLines   = [];
@@ -250,44 +269,67 @@ function parseByHtmlTags(html, blog) {
   let pendingQ       = null;
   let titleFound     = !!blog.title;
 
-  for (let i = 1; i < blocks.length; i++) {
+  for (let i = 0; i < blocks.length; i++) {
     const { tag, innerHtml, text } = blocks[i];
-    if (!text) continue;
     const isHeading = /^h[1-6]$/.test(tag);
 
+    // FIX 2: Skip meta lines and dividers wherever they appear
+    if (/^(?:Meta\s+)?Title\s*:/i.test(text) ||
+        /^Meta\s+D[ei]s[ck]?ription\s*:/i.test(text) ||
+        /^—[-—]+$/.test(text)) continue;
+
+    // FIX 3: Strip ( H2) / ( H3) etc. from all text before using it
+    const cleanText = stripHMarker(text);
+
+    // H1 heading element — blog display title
     if (tag === "h1" && !titleFound) {
-      blog.title = text; titleFound = true; continue;
+      blog.title = cleanText; titleFound = true; continue;
     }
 
-    if (isFaqHeading(text)) {
+    // FIX 4: FAQs heading can be a bold <p> like "FAQs ( H2)" not just <h2>
+    if (isFaqHeading(cleanText) || isFaqHeading(text)) {
       inFaq = true;
       if (currentSection) { blog.sections.push(currentSection); currentSection = null; }
       continue;
     }
 
+    // Inside FAQ section
     if (inFaq) {
-      if (pendingQ === null) pendingQ = text;
-      else { blog.faqs.push({ question: pendingQ, answer: text }); pendingQ = null; }
+      // FIX 5: Your FAQ Q+A are in one <p> with <br/> between them
+      pendingQ = parseFaqBlock(innerHtml, text, blog, pendingQ);
       continue;
     }
 
+    // Section heading (h2, h3, h4 etc.)
     if (isHeading) {
       if (currentSection) blog.sections.push(currentSection);
-      currentSection = { heading: text, paragraphs: [] };
+      // FIX 6: Store heading WITHOUT the ( H2) marker text
+      currentSection = { heading: cleanText, paragraphs: [] };
+      inFaq = false;
+      pendingQ = null;
       continue;
     }
 
-    // Paragraph — keep innerHtml so <strong> and <a href> are preserved
+    // Plain paragraph that has (H1) marker — treat as title
+    if (/\(\s*H1\s*\)/i.test(text)) {
+      if (!titleFound) { blog.title = cleanText; titleFound = true; }
+      continue;
+    }
+
+    // Regular paragraph
     if (!currentSection) introLines.push(innerHtml.trim());
     else currentSection.paragraphs.push(innerHtml.trim());
   }
 
+  if (pendingQ !== null) blog.faqs.push({ question: stripHMarker(pendingQ).trim(), answer: "" });
   if (currentSection) blog.sections.push(currentSection);
-  if (introLines.length) blog.intro = introLines.join(" ");
+  if (introLines.length && !blog.intro) blog.intro = introLines.join(" ");
+  if (!blog.intro && blog.metaDescription) blog.intro = blog.metaDescription;
+
   return blog;
 }
 
-// ─── GET /api/blogs — serves blogsData.json to client components ────────────────
+// ─── GET /api/blogs ───────────────────────────────────────────────────────────
 
 export async function GET() {
   try {
@@ -298,7 +340,7 @@ export async function GET() {
   }
 }
 
-// ─── POST /api/blogs — receives docx + images, writes to blogsData.json ─────────
+// ─── POST /api/blogs ──────────────────────────────────────────────────────────
 
 export async function POST(request) {
   try {
@@ -324,7 +366,6 @@ export async function POST(request) {
       );
     }
 
-    // Save images
     if (!existsSync(PUBLIC_BLOGS)) await mkdir(PUBLIC_BLOGS, { recursive: true });
 
     const ts = Date.now();
@@ -377,5 +418,69 @@ export async function POST(request) {
       { error: err.message || "Internal server error" },
       { status: 500 }
     );
+  }
+}
+
+// ─── PATCH /api/blogs?slug=xxx ────────────────────────────────────────────────
+
+export async function PATCH(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get("slug");
+
+    if (!slug) {
+      return NextResponse.json({ error: "slug is required" }, { status: 400 });
+    }
+
+    const body = await request.json();
+    const { title, intro, metaTitle, metaDescription, sections, faqs } = body;
+
+    const existing = await readBlogsJson();
+
+    if (!existing[slug]) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
+
+    existing[slug] = {
+      ...existing[slug],
+      ...(title           !== undefined && { title }),
+      ...(intro           !== undefined && { intro }),
+      ...(metaTitle       !== undefined && { metaTitle }),
+      ...(metaDescription !== undefined && { metaDescription }),
+      ...(sections        !== undefined && { sections }),
+      ...(faqs            !== undefined && { faqs }),
+      updatedAt: new Date().toISOString(),
+    };
+
+    await writeBlogsJson(existing);
+
+    return NextResponse.json(existing[slug]);
+
+  } catch (err) {
+    console.error("[edit-blog] ERROR:", err);
+    return NextResponse.json(
+      { error: err.message || "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+// ─── DELETE /api/blogs?slug=xxx ───────────────────────────────────────────────
+
+export async function DELETE(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get("slug");
+    if (!slug) return NextResponse.json({ error: "slug required" }, { status: 400 });
+
+    const existing = await readBlogsJson();
+    if (!existing[slug]) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+
+    delete existing[slug];
+    await writeBlogsJson(existing);
+
+    return NextResponse.json({ success: true, slug });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
