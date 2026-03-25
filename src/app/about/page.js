@@ -11,6 +11,12 @@ import ImageContentSection from "../../components/ImageContentSection";
 import EnquiryForm from "../../components/FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import Internationalschool from "./Internationalschool";
+export const metadata = {
+  title: "About Us | Westbrook International School",
+  description:
+    "Learn about Westbrook International School, our vision, mission, and focus on delivering excellence in international education in Madhapur, Hyderabad.",
+  canonical: "https://westbrookinternational.com/about",
+  }
 export default function About() {
     const [formType, setFormType] = useState(null);
       const [showPopup, setShowPopup] = useState(false);

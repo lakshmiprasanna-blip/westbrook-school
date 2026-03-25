@@ -10,6 +10,12 @@ import ScrollSlider from "../../components/AcademicsScrollSection";
 import ImageContentSection from "../../components/ImageContentSection";
 import EnquiryForm from "../../components/FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
+export const metadata = {
+  title: "Best Cambridge schools in Madhapur |  Westbrook International School",
+  description:
+    "Westbrook International School in Madhapur, Hyderabad offers pre-primary and primary level education with modern learning and a strong academic foundation.”",
+  canonical: "https://westbrookinternational.com/academics",
+  }
 
 export default function Academics() {
   

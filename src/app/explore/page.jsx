@@ -9,7 +9,12 @@ import ImageContentSection from "../../components/ImageContentSection";
 import ScrollButton from "../../components/ScrollButton";
 import GallerySection from "./gallery";
 import EnquiryForm from "../../components/FormComponent";
-
+export const metadata = {
+  title: "Explore Westbrook International School | Campus & Student Life",
+  description:
+    "Explore Westbrook International School’s campus and facilities, featuring modern classrooms, engaging activities, and a positive learning environment.",
+  canonical: "https://westbrookinternational.com/explore",
+  }
 export default function Explore() {
   const [formType, setFormType] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
