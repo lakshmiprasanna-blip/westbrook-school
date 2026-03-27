@@ -2,12 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    localPatterns: [
+    remotePatterns: [
       {
-        pathname: '/assets/blogs/**',
-      },
-      {
-        pathname: '/assets/**',  // covers logo and all other images
+        protocol: 'https',
+        hostname: 'westbrookinternational.com',
+        pathname: '/assets/**',
       },
     ],
   },
