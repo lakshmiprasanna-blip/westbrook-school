@@ -74,7 +74,6 @@ function EditModal({ blog, slug, onClose, onSaved }) {
     intro: blog.intro || "",
     metaTitle: blog.metaTitle || blog.title || "",
     metaDescription: blog.metaDescription || "",
-    // Normalise: join paragraphs[] into a single editable string; drop stray "content" field
     sections: (blog.sections || []).map(s => ({
       heading: s.heading || "",
       content: Array.isArray(s.paragraphs) && s.paragraphs.length
@@ -82,75 +81,103 @@ function EditModal({ blog, slug, onClose, onSaved }) {
         : (s.content || ""),
     })),
     faqs: (blog.faqs || []).map(f => ({ ...f })),
+    // Images: sideImages stored as { url, file } objects
+    bannerImage: blog.bannerImage || "",
+    sideImages: (blog.sideImages || []).map(url => ({ url, file: null })),
   }));
+
+  const [newBannerFile, setNewBannerFile] = useState(null);
+  const [removeBanner,  setRemoveBanner]  = useState(false);
+  const bannerInputRef = useRef(null);
+
   const [saving, setSaving] = useState(false);
   const [error, setError]   = useState(null);
-  const [activeSection, setActiveSection] = useState("meta"); // meta | sections | faqs
+  const [activeSection, setActiveSection] = useState("meta");
 
   const setField = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
   /* sections helpers */
   const updateSection = (idx, key, val) =>
-    setForm(f => {
-      const sections = f.sections.map((s, i) => i === idx ? { ...s, [key]: val } : s);
-      return { ...f, sections };
-    });
-  const addSection = () =>
-    setForm(f => ({ ...f, sections: [...f.sections, { heading: "", content: "" }] }));
-  const removeSection = (idx) =>
-    setForm(f => ({ ...f, sections: f.sections.filter((_, i) => i !== idx) }));
-  const moveSection = (idx, dir) =>
-    setForm(f => {
-      const s = [...f.sections];
-      const target = idx + dir;
-      if (target < 0 || target >= s.length) return f;
-      [s[idx], s[target]] = [s[target], s[idx]];
-      return { ...f, sections: s };
-    });
+    setForm(f => ({ ...f, sections: f.sections.map((s, i) => i === idx ? { ...s, [key]: val } : s) }));
+  const addSection    = () => setForm(f => ({ ...f, sections: [...f.sections, { heading: "", content: "" }] }));
+  const removeSection = (idx) => setForm(f => ({ ...f, sections: f.sections.filter((_, i) => i !== idx) }));
+  const moveSection   = (idx, dir) => setForm(f => {
+    const s = [...f.sections]; const t = idx + dir;
+    if (t < 0 || t >= s.length) return f;
+    [s[idx], s[t]] = [s[t], s[idx]];
+    return { ...f, sections: s };
+  });
 
   /* faqs helpers */
   const updateFaq = (idx, key, val) =>
-    setForm(f => {
-      const faqs = f.faqs.map((q, i) => i === idx ? { ...q, [key]: val } : q);
-      return { ...f, faqs };
-    });
+    setForm(f => ({ ...f, faqs: f.faqs.map((q, i) => i === idx ? { ...q, [key]: val } : q) }));
   const addFaq    = () => setForm(f => ({ ...f, faqs: [...f.faqs, { question: "", answer: "" }] }));
   const removeFaq = (idx) => setForm(f => ({ ...f, faqs: f.faqs.filter((_, i) => i !== idx) }));
 
+  /* image helpers */
+  const removeSideImage = (idx) =>
+    setForm(f => ({ ...f, sideImages: f.sideImages.filter((_, i) => i !== idx) }));
+  const addSideFiles = (files) =>
+    setForm(f => ({
+      ...f,
+      sideImages: [...f.sideImages, ...files.map(file => ({ url: "", file }))],
+    }));
+
   const handleSave = async () => {
-    setSaving(true);
-    setError(null);
+    setSaving(true); setError(null);
     try {
-      // Convert content string → paragraphs[] to match the JSON structure
       const sectionsForApi = form.sections.map(({ heading, content }) => ({
         heading,
-        paragraphs: content
-          .split(/\n\n+/)
-          .map(p => p.trim())
-          .filter(Boolean),
+        paragraphs: content.split(/\n\n+/).map(p => p.trim()).filter(Boolean),
       }));
 
-      const res  = await fetch(`/api/blogs?slug=${slug}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, sections: sectionsForApi }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Save failed");
-      onSaved(slug, data);
-      onClose();
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setSaving(false);
-    }
+      const hasImageChanges = newBannerFile || removeBanner || form.sideImages.some(s => s.file);
+
+      if (hasImageChanges) {
+        const fd = new FormData();
+        fd.append("json", JSON.stringify({
+          title: form.title,
+          intro: form.intro,
+          metaTitle: form.metaTitle,
+          metaDescription: form.metaDescription,
+          sections: sectionsForApi,
+          faqs: form.faqs,
+          // pass back existing (non-new) side image URLs so the server keeps them
+          sideImages: form.sideImages.filter(s => !s.file).map(s => s.url),
+        }));
+        if (newBannerFile)  fd.append("banner", newBannerFile);
+        if (removeBanner)   fd.append("removeBanner", "true");
+        form.sideImages.forEach(s => { if (s.file) fd.append("newSideImages", s.file); });
+
+        const res  = await fetch(`/api/blogs?slug=${slug}`, { method: "PATCH", body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Save failed");
+        onSaved(slug, data); onClose();
+      } else {
+        const res  = await fetch(`/api/blogs?slug=${slug}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title: form.title, intro: form.intro, metaTitle: form.metaTitle, metaDescription: form.metaDescription, sections: sectionsForApi, faqs: form.faqs }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Save failed");
+        onSaved(slug, data); onClose();
+      }
+    } catch (e) { setError(e.message); }
+    finally { setSaving(false); }
   };
 
   const tabs = [
-    { id: "meta",     label: "Meta & Title",  icon: "📝" },
-    { id: "sections", label: `Sections (${form.sections.length})`, icon: "📑" },
-    { id: "faqs",     label: `FAQs (${form.faqs.length})`,         icon: "❓" },
+    { id: "meta",     label: "Meta & Title",                      },
+    { id: "sections", label: `Sections (${form.sections.length})`,  },
+    { id: "faqs",     label: `FAQs (${form.faqs.length})`,          },
+    { id: "images",   label: "Images",                           },
   ];
+
+  /* Banner preview src */
+  const bannerSrc = newBannerFile
+    ? URL.createObjectURL(newBannerFile)
+    : (!removeBanner && form.bannerImage) ? form.bannerImage : null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -168,11 +195,9 @@ function EditModal({ blog, slug, onClose, onSaved }) {
         {/* Inner tabs */}
         <div className="em-tabs">
           {tabs.map(t => (
-            <button
-              key={t.id}
+            <button key={t.id}
               className={`em-tab${activeSection === t.id ? " em-tab--active" : ""}`}
-              onClick={() => setActiveSection(t.id)}
-            >
+              onClick={() => setActiveSection(t.id)}>
               {t.icon} {t.label}
             </button>
           ))}
@@ -217,17 +242,15 @@ function EditModal({ blog, slug, onClose, onSaved }) {
           {/* SECTIONS */}
           {activeSection === "sections" && (
             <div className="em-section">
-              {form.sections.length === 0 && (
-                <div className="em-empty">No sections yet. Add one below.</div>
-              )}
+              {form.sections.length === 0 && <div className="em-empty">No sections yet. Add one below.</div>}
               {form.sections.map((sec, i) => (
                 <div key={i} className="ec-card">
                   <div className="ec-card-head">
                     <span className="ec-num">§{i + 1}</span>
                     <div className="ec-card-actions">
-                      <button className="ec-icon-btn" title="Move up"    onClick={() => moveSection(i, -1)} disabled={i === 0}>↑</button>
-                      <button className="ec-icon-btn" title="Move down"  onClick={() => moveSection(i, 1)}  disabled={i === form.sections.length - 1}>↓</button>
-                      <button className="ec-icon-btn ec-icon-btn--del" title="Remove" onClick={() => removeSection(i)}>✕</button>
+                      <button className="ec-icon-btn" title="Move up"   onClick={() => moveSection(i, -1)} disabled={i === 0}>↑</button>
+                      <button className="ec-icon-btn" title="Move down" onClick={() => moveSection(i, 1)}  disabled={i === form.sections.length - 1}>↓</button>
+                      <button className="ec-icon-btn ec-icon-btn--del"  onClick={() => removeSection(i)}>✕</button>
                     </div>
                   </div>
                   <div className="ef-group">
@@ -251,9 +274,7 @@ function EditModal({ blog, slug, onClose, onSaved }) {
           {/* FAQS */}
           {activeSection === "faqs" && (
             <div className="em-section">
-              {form.faqs.length === 0 && (
-                <div className="em-empty">No FAQs yet. Add one below.</div>
-              )}
+              {form.faqs.length === 0 && <div className="em-empty">No FAQs yet. Add one below.</div>}
               {form.faqs.map((faq, i) => (
                 <div key={i} className="ec-card">
                   <div className="ec-card-head">
@@ -277,6 +298,83 @@ function EditModal({ blog, slug, onClose, onSaved }) {
               <button className="em-add-btn" onClick={addFaq}>+ Add FAQ</button>
             </div>
           )}
+
+          {/* IMAGES */}
+          {activeSection === "images" && (
+            <div className="em-section">
+
+              {/* Banner */}
+              <div className="ef-group">
+                <label className="ef-label">Banner / Hero Image</label>
+                {bannerSrc ? (
+                  <div className="img-preview-card">
+                    <img src={bannerSrc} alt="banner" className="img-preview-thumb" />
+                    <div className="img-preview-info">
+                      <span className="img-preview-name">
+                        {newBannerFile ? newBannerFile.name : form.bannerImage.split("/").pop()}
+                      </span>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                        <label className="btn btn-sm btn-outline" style={{ cursor: "pointer" }}>
+                          ↑ Replace
+                          <input type="file" accept="image/*" style={{ display: "none" }}
+                            onChange={e => { if (e.target.files[0]) { setNewBannerFile(e.target.files[0]); setRemoveBanner(false); } e.target.value = ""; }} />
+                        </label>
+                        <button className="btn btn-sm btn-danger" onClick={() => { setRemoveBanner(true); setNewBannerFile(null); }}>
+                          ✕ Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <label className="img-upload-zone">
+                    <div className="img-upload-zone-inner">
+                      <p className="dz-label">Drop banner image here</p>
+                      <p className="dz-hint">jpg, png, webp — click or drag & drop</p>
+                    </div>
+                    <input type="file" accept="image/*" style={{ display: "none" }}
+                      onChange={e => {
+                        if (e.target.files[0]) { setNewBannerFile(e.target.files[0]); setRemoveBanner(false); }
+                        e.target.value = "";
+                      }} />
+                  </label>
+                )}
+              </div>
+
+              {/* Side Images */}
+              <div className="ef-group">
+                <label className="ef-label">Side Images</label>
+                <div className="side-img-grid">
+                  {form.sideImages.map((item, i) => (
+                    <div key={i} className="side-img-card">
+                      <button className="side-img-remove ec-icon-btn ec-icon-btn--del"
+                        onClick={() => removeSideImage(i)} title="Remove">✕</button>
+                      <img
+                        src={item.file ? URL.createObjectURL(item.file) : item.url}
+                        alt={`side-${i + 1}`}
+                        className="side-img-thumb"
+                      />
+                      <span className="side-img-name">
+                        {item.file ? item.file.name : item.url.split("/").pop()}
+                      </span>
+                    </div>
+                  ))}
+                  {/* Add tile */}
+                  <label className="side-img-add">
+                    <span style={{ fontSize: "1.4rem", lineHeight: 1 }}>+</span>
+                    <span style={{ fontSize: ".78rem", fontWeight: 600 }}>Add image</span>
+                    <input type="file" accept="image/*" multiple style={{ display: "none" }}
+                      onChange={e => {
+                        const files = Array.from(e.target.files || []);
+                        if (files.length) addSideFiles(files);
+                        e.target.value = "";
+                      }} />
+                  </label>
+                </div>
+                <p className="ef-hint">Images are saved to /public/assets/blogs/ and referenced automatically.</p>
+              </div>
+
+            </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -284,7 +382,7 @@ function EditModal({ blog, slug, onClose, onSaved }) {
         <div className="em-footer">
           <button className="btn btn-sm btn-outline" onClick={onClose}>Cancel</button>
           <button className="btn btn-sm" onClick={handleSave} disabled={saving}>
-            {saving ? <><span className="spinner" /> Saving…</> : "💾 Save Changes"}
+            {saving ? <><span className="spinner" /> Saving…</> : "Save Changes"}
           </button>
         </div>
       </div>
@@ -304,7 +402,7 @@ export default function AdminBlogsPage() {
   const [listLoading,  setListLoading]  = useState(true);
   const [deletingSlug, setDeletingSlug] = useState(null);
   const [confirmSlug,  setConfirmSlug]  = useState(null);
-  const [editingSlug,  setEditingSlug]  = useState(null);   // ← NEW
+  const [editingSlug,  setEditingSlug]  = useState(null);
   const [tab,          setTab]          = useState("upload");
 
   const fetchBlogs = useCallback(async () => {
@@ -322,8 +420,7 @@ export default function AdminBlogsPage() {
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!docxFiles.length) return;
-    setUploadStatus("loading");
-    setUploadResult(null);
+    setUploadStatus("loading"); setUploadResult(null);
     const fd = new FormData();
     fd.append("docx", docxFiles[0]);
     if (bannerFiles[0]) fd.append("banner", bannerFiles[0]);
@@ -333,13 +430,11 @@ export default function AdminBlogsPage() {
       const res  = await fetch("/api/blogs", { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
-      setUploadResult(data);
-      setUploadStatus("success");
+      setUploadResult(data); setUploadStatus("success");
       setDocxFiles([]); setBannerFiles([]); setSideFiles([]); setSlug("");
       fetchBlogs();
     } catch (err) {
-      setUploadResult({ error: err.message });
-      setUploadStatus("error");
+      setUploadResult({ error: err.message }); setUploadStatus("error");
     }
   };
 
@@ -348,14 +443,11 @@ export default function AdminBlogsPage() {
     try {
       const res = await fetch(`/api/blogs?slug=${slugToDelete}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
-      setConfirmSlug(null);
-      fetchBlogs();
-    } catch (err) {
-      alert("Delete failed: " + err.message);
-    } finally { setDeletingSlug(null); }
+      setConfirmSlug(null); fetchBlogs();
+    } catch (err) { alert("Delete failed: " + err.message); }
+    finally { setDeletingSlug(null); }
   };
 
-  // Called by EditModal after a successful PATCH
   const handleEditSaved = (savedSlug, updatedBlog) => {
     setBlogs(prev => ({ ...prev, [savedSlug]: updatedBlog }));
   };
@@ -470,105 +562,62 @@ export default function AdminBlogsPage() {
         .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
         /* ── Edit Modal ── */
-        .edit-modal {
-          background: var(--surface);
-          border-radius: var(--r);
-          width: 100%;
-          max-width: 680px;
-          max-height: 90vh;
-          display: flex;
-          flex-direction: column;
-          box-shadow: 0 24px 72px rgba(0,0,0,.22);
-          animation: slideUp .2s ease;
-          overflow: hidden;
-        }
-        .em-header {
-          display: flex; align-items: flex-start; justify-content: space-between;
-          padding: 22px 26px 16px;
-          border-bottom: 1px solid var(--border);
-          flex-shrink: 0;
-        }
+        .edit-modal { background: var(--surface); border-radius: var(--r); width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 24px 72px rgba(0,0,0,.22); animation: slideUp .2s ease; overflow: hidden; }
+        .em-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 22px 26px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
         .em-title { font-family: var(--fd); font-size: 1.2rem; font-weight: 700; margin-bottom: 2px; }
         .em-slug  { font-size: .76rem; color: var(--muted); font-family: monospace; }
-        .em-close {
-          background: none; border: none; cursor: pointer;
-          font-size: 1rem; color: var(--muted); padding: 4px 6px; border-radius: 6px;
-          line-height: 1; transition: background .12s, color .12s; flex-shrink: 0;
-        }
+        .em-close { background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--muted); padding: 4px 6px; border-radius: 6px; line-height: 1; transition: background .12s, color .12s; flex-shrink: 0; }
         .em-close:hover { background: var(--cream); color: var(--ink); }
-        .em-tabs {
-          display: flex; gap: 2px; padding: 10px 18px;
-          border-bottom: 1px solid var(--border);
-          background: var(--bg);
-          flex-shrink: 0;
-        }
-        .em-tab {
-          padding: 7px 14px; font-size: .8rem; font-weight: 600; font-family: var(--fb);
-          background: none; border: 1.5px solid transparent; border-radius: 7px;
-          cursor: pointer; color: var(--muted); transition: all .13s;
-        }
+        .em-tabs { display: flex; gap: 2px; padding: 10px 18px; border-bottom: 1px solid var(--border); background: var(--bg); flex-shrink: 0; flex-wrap: wrap; }
+        .em-tab { padding: 7px 14px; font-size: .8rem; font-weight: 600; font-family: var(--fb); background: none; border: 1.5px solid transparent; border-radius: 7px; cursor: pointer; color: var(--muted); transition: all .13s; }
         .em-tab:hover { background: var(--cream); color: var(--ink); }
         .em-tab--active { background: var(--surface); border-color: var(--border); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.07); }
         .em-body { flex: 1; overflow-y: auto; padding: 20px 26px; }
         .em-section { display: flex; flex-direction: column; gap: 0; }
         .em-empty { text-align: center; padding: 32px; color: var(--muted); font-size: .85rem; background: var(--bg); border-radius: 8px; border: 1.5px dashed var(--border); margin-bottom: 14px; }
-        .em-add-btn {
-          width: 100%; padding: 10px; font-size: .82rem; font-weight: 600; font-family: var(--fb);
-          background: none; border: 1.5px dashed var(--border); border-radius: 8px;
-          color: var(--muted); cursor: pointer; transition: all .13s; margin-top: 4px;
-        }
+        .em-add-btn { width: 100%; padding: 10px; font-size: .82rem; font-weight: 600; font-family: var(--fb); background: none; border: 1.5px dashed var(--border); border-radius: 8px; color: var(--muted); cursor: pointer; transition: all .13s; margin-top: 4px; }
         .em-add-btn:hover { border-color: var(--accent); color: var(--accent); background: #fdf3ee; }
-        .em-footer {
-          display: flex; justify-content: flex-end; gap: 10px;
-          padding: 14px 26px;
-          border-top: 1px solid var(--border);
-          flex-shrink: 0;
-          background: var(--bg);
-        }
+        .em-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 26px; border-top: 1px solid var(--border); flex-shrink: 0; background: var(--bg); }
         .em-error { padding: 8px 26px; font-size: .8rem; color: var(--red); background: #fdf1f1; border-top: 1px solid #f0cece; }
 
         /* Edit form fields */
         .ef-group { margin-bottom: 16px; }
         .ef-label { display: flex; align-items: center; gap: 7px; font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
         .ef-badge { font-size: .66rem; background: #e8f0e0; color: #3a6020; border-radius: 4px; padding: 1px 6px; text-transform: uppercase; letter-spacing: .05em; }
-        .ef-input {
-          width: 100%; padding: 9px 12px;
-          border: 1.5px solid var(--border); border-radius: 7px;
-          font-size: .88rem; font-family: var(--fb);
-          background: var(--bg); color: var(--ink); outline: none;
-          transition: border-color .15s;
-        }
+        .ef-input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 7px; font-size: .88rem; font-family: var(--fb); background: var(--bg); color: var(--ink); outline: none; transition: border-color .15s; }
         .ef-input:focus { border-color: var(--accent); background: #fff; }
-        .ef-textarea {
-          width: 100%; padding: 9px 12px;
-          border: 1.5px solid var(--border); border-radius: 7px;
-          font-size: .85rem; font-family: var(--fb); line-height: 1.55;
-          background: var(--bg); color: var(--ink); outline: none; resize: vertical;
-          transition: border-color .15s;
-        }
+        .ef-textarea { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 7px; font-size: .85rem; font-family: var(--fb); line-height: 1.55; background: var(--bg); color: var(--ink); outline: none; resize: vertical; transition: border-color .15s; }
         .ef-textarea:focus { border-color: var(--accent); background: #fff; }
         .ef-hint { font-size: .72rem; color: var(--muted); margin-top: 4px; }
 
-        /* Section / FAQ cards inside edit modal */
-        .ec-card {
-          border: 1px solid var(--border); border-radius: 8px;
-          padding: 14px 16px; margin-bottom: 12px; background: var(--bg);
-        }
+        /* Section / FAQ cards */
+        .ec-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; background: var(--bg); }
         .ec-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
         .ec-num { font-size: .72rem; font-weight: 700; color: var(--muted); background: var(--cream); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; }
         .ec-card-actions { display: flex; gap: 4px; }
-        .ec-icon-btn {
-          background: none; border: 1px solid var(--border); border-radius: 5px;
-          padding: 3px 8px; font-size: .8rem; cursor: pointer; color: var(--muted);
-          transition: all .12s; font-family: var(--fb);
-        }
+        .ec-icon-btn { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px; font-size: .8rem; cursor: pointer; color: var(--muted); transition: all .12s; font-family: var(--fb); }
         .ec-icon-btn:hover:not(:disabled) { background: var(--cream); color: var(--ink); }
         .ec-icon-btn:disabled { opacity: .3; cursor: not-allowed; }
         .ec-icon-btn--del:hover:not(:disabled) { background: #fdf1f1; border-color: #e8c0c0; color: var(--red); }
+
+        /* Image editing */
+        .img-preview-card { display: flex; align-items: center; gap: 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+        .img-preview-thumb { width: 90px; height: 64px; object-fit: cover; border-radius: 6px; flex-shrink: 0; background: var(--cream); }
+        .img-preview-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .img-preview-name { font-size: .78rem; color: var(--muted); word-break: break-all; }
+        .img-upload-zone { display: block; border: 2px dashed var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; transition: border-color .15s, background .15s; }
+        .img-upload-zone:hover { border-color: var(--accent); background: #fdf3ee; }
+        .img-upload-zone-inner { padding: 28px 20px; text-align: center; pointer-events: none; }
+        .side-img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+        .side-img-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 10px 8px; }
+        .side-img-remove { position: absolute; top: 6px; right: 6px; padding: 2px 6px !important; font-size: .7rem !important; }
+        .side-img-thumb { width: 100%; height: 70px; object-fit: cover; border-radius: 5px; background: var(--cream); }
+        .side-img-name { font-size: .68rem; color: var(--muted); word-break: break-all; text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .side-img-add { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 108px; border: 1.5px dashed var(--border); border-radius: 8px; cursor: pointer; color: var(--muted); transition: all .13s; }
+        .side-img-add:hover { border-color: var(--accent); color: var(--accent); background: #fdf3ee; }
       `}</style>
 
       <div className="page">
-
         <header className="hd">
           <h1>Blog Manager</h1>
           <p>Upload, edit, view and delete blog posts — changes go live instantly</p>
@@ -591,7 +640,6 @@ export default function AdminBlogsPage() {
           <>
             <form onSubmit={handleUpload}>
               <div className="card">
-
                 <div className="cs">
                   <div className="cs-head"><span className="cs-num">1</span><span className="cs-title">Blog Document</span></div>
                   <p className="cs-sub">Required · .docx file with Meta Title, headings marked (h2), and content</p>
@@ -633,7 +681,6 @@ export default function AdminBlogsPage() {
                     {uploadStatus === "loading" ? <><span className="spinner" /> Publishing…</> : "Publish Blog"}
                   </button>
                 </div>
-
               </div>
             </form>
 
@@ -690,8 +737,7 @@ export default function AdminBlogsPage() {
                     <div className="blog-thumb">
                       {blog.sideImages?.[0] || blog.bannerImage
                         ? <img src={blog.sideImages?.[0] || blog.bannerImage} alt="" />
-                        : <div className="blog-thumb-ph">📄</div>
-                      }
+                        : <div className="blog-thumb-ph">📄</div>}
                     </div>
                     <div className="blog-info">
                       <div className="blog-title">{blog.title || s}</div>
@@ -699,18 +745,15 @@ export default function AdminBlogsPage() {
                         <span>/blogs/{s}</span>
                         <span>{blog.sections?.length || 0} sections</span>
                         <span>{blog.faqs?.length || 0} FAQs</span>
+                        {blog.bannerImage && <span>banner ✓</span>}
+                        {blog.sideImages?.length > 0 && <span>{blog.sideImages.length} side img{blog.sideImages.length !== 1 ? "s" : ""}</span>}
                       </div>
                     </div>
                     <div className="blog-actions">
                       <a href={`/blogs/${s}`} target="_blank" rel="noopener noreferrer"
                         className="btn btn-sm btn-outline">View</a>
-                      {/* ← NEW Edit button */}
-                      <button className="btn btn-sm btn-edit" onClick={() => setEditingSlug(s)}>
-                        Edit
-                      </button>
-                      {/* <button className="btn btn-sm btn-danger" onClick={() => setConfirmSlug(s)}>
-                        Delete
-                      </button> */}
+                      <button className="btn btn-sm btn-edit" onClick={() => setEditingSlug(s)}>Edit</button>
+                      {/* <button className="btn btn-sm btn-danger" onClick={() => setConfirmSlug(s)}>Delete</button> */}
                     </div>
                   </div>
                 ))}
@@ -718,7 +761,6 @@ export default function AdminBlogsPage() {
             )}
           </div>
         )}
-
       </div>
 
       {/* ── Edit Modal ── */}

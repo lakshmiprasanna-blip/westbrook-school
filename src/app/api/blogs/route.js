@@ -3,9 +3,9 @@ import { writeFile, readFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
 import mammoth from "mammoth";
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
 
+export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 const DATA_DIR     = path.join(process.cwd(), "persistent-data");
 const BLOGS_JSON   = path.join(DATA_DIR, "blogsData.json");
@@ -36,6 +36,18 @@ async function writeBlogsJson(data) {
   await writeFile(BLOGS_JSON, JSON.stringify(data, null, 2), "utf-8");
 }
 
+// ─── Save one image file and return its public URL ────────────────────────────
+async function saveImage(file, slug, label, ts) {
+  if (!file || file.size === 0) return null;
+  const ext  = (file.name || "jpg").split(".").pop();
+  const name = `${slug}-${label}-${ts}.${ext}`;
+  await writeFile(
+    path.join(PUBLIC_BLOGS, name),
+    Buffer.from(await file.arrayBuffer())
+  );
+  return `/assets/blogs/${name}`;
+}
+
 // ─── Decode HTML entities that mammoth escapes when you type tags in Word ────
 function decodeInlineTags(str) {
   return str
@@ -60,33 +72,27 @@ function toPlainText(html) {
 }
 
 // ─── Strip the ( H2) / (H3) / ( H1) markers from text ───────────────────────
-// Your Word doc writes: "A Great School ( H2)" or "Question text (H3)"
-// We strip that suffix so stored text is clean: "A Great School"
 function stripHMarker(text) {
   return text.replace(/\s*\(\s*H[1-6]\s*\)\s*$/i, "").trim();
 }
 
 // ─── FAQ heading detector ─────────────────────────────────────────────────────
-// Matches: "FAQs", "FAQ", "FAQs ( H2)", "FAQ (H2)" etc.
 function isFaqHeading(text) {
   const t = text.trim().toLowerCase().replace(/['''`]/g, "'");
   return (
-    /^faqs?'?s?$/.test(t) ||                          // faq, faqs, faq's
-    /^frequently\s+asked\s+questions?$/.test(t) ||    // frequently asked questions
-    /^frequently\s+asked\s+q\s*(&|and)\s*a$/.test(t) // frequently asked q&a
+    /^faqs?'?s?$/.test(t) ||
+    /^frequently\s+asked\s+questions?$/.test(t) ||
+    /^frequently\s+asked\s+q\s*(&|and)\s*a$/.test(t)
   );
 }
+
 // ─── Extract Meta Title / Meta Description from ALL blocks ───────────────────
-// FIX: Your doc puts Title & Meta Description at the BOTTOM, not the top.
-// We scan every block in the document instead of only the first one.
 function extractMetaFromAllBlocks(blocks, blog) {
   for (const block of blocks) {
     const text = block.text !== undefined ? block.text : toPlainText(block.innerHtml || "");
     const lines = text.split(/\n/).map(l => l.trim()).filter(Boolean);
     for (const line of lines) {
-      // Matches "Title : ..." or "Meta Title : ..."
       const mt = line.match(/^(?:Meta\s+)?Title\s*:\s*(.+)/i);
-      // Matches "Meta Description : ..." or "Meta Discription : ..." (typo-safe)
       const md = line.match(/^Meta\s+D[ei]s[ck]?ription\s*:\s*(.+)/i);
       if (mt && !blog.metaTitle)       { blog.metaTitle = mt[1].trim(); }
       if (md && !blog.metaDescription) { blog.metaDescription = md[1].trim(); }
@@ -103,31 +109,24 @@ function pushFaq(blog, question, answerHtml) {
 }
 
 // ─── Parse one block for FAQ content ─────────────────────────────────────────
-// Your doc format: question and answer are in ONE <p>, separated by <br/>
-//   e.g. <p><strong>What is X? (H3)<br/></strong>The answer text here.</p>
-// Returns updated pendingQ
 function parseFaqBlock(innerHtml, plainText, blog, pendingQ) {
-  // Split on <br> — mammoth puts Q<br/>A in one <p> in your doc
   const brParts = innerHtml
     .split(/<br\s*\/?>/i)
     .map(p => toPlainText(p).trim())
     .filter(Boolean);
 
   if (brParts.length >= 2) {
-    // Both Q and A are in this single paragraph
     if (pendingQ !== null) {
-      // Flush any previous dangling question
       blog.faqs.push({ question: stripHMarker(pendingQ).trim(), answer: "" });
     }
-    const q = stripHMarker(brParts[0]);  // remove (H3) from question
+    const q = stripHMarker(brParts[0]);
     const a = brParts.slice(1).join(" ");
     if (q) blog.faqs.push({ question: q, answer: a });
     return null;
   }
 
-  // Single-line paragraph — alternating Q then A pattern
   if (pendingQ === null) {
-    return plainText; // this is the question
+    return plainText;
   } else {
     pushFaq(blog, pendingQ, innerHtml);
     return null;
@@ -147,26 +146,19 @@ function parseHtmlToBlog(html) {
     faqs:            [],
   };
 
-  // ── Case 1: Word doc uses real Heading styles → mammoth outputs <h3> etc. ──
-  // (Your current doc falls into this case)
   if (/<h[1-6][\s>]/i.test(html)) {
     return parseByHtmlTags(html, blog);
   }
 
-  // ── Case 2: Doc uses plain-text (h2) markers inside <p> tags ─────────────
   const paraRe = /<p[^>]*>([\s\S]*?)<\/p>/gi;
   const paras  = [];
   let m;
   while ((m = paraRe.exec(html)) !== null) {
-    paras.push({
-      innerHtml: m[1],
-      plainText: toPlainText(m[1]).trim(),
-    });
+    paras.push({ innerHtml: m[1], plainText: toPlainText(m[1]).trim() });
   }
 
   if (!paras.length) return blog;
 
-  // Scan ALL paragraphs for meta (may be anywhere in the doc)
   extractMetaFromAllBlocks(paras, blog);
 
   const firstHeadingIdx = paras.findIndex(p => /\(h[1-6]\)/i.test(p.plainText));
@@ -190,7 +182,6 @@ function parseHtmlToBlog(html) {
   for (let i = firstHeadingIdx; i < paras.length; i++) {
     const { innerHtml, plainText } = paras[i];
 
-    // Skip meta lines and divider lines wherever they appear
     if (/^(?:Meta\s+)?Title\s*:/i.test(plainText) ||
         /^Meta\s+D[ei]s[ck]?ription\s*:/i.test(plainText) ||
         /^—[-—]+$/.test(plainText)) continue;
@@ -214,8 +205,7 @@ function parseHtmlToBlog(html) {
 
       if (currentSection) blog.sections.push(currentSection);
       currentSection = { heading: headingText, paragraphs: [] };
-      inFaq = false;
-      pendingQ = null;
+      inFaq = false; pendingQ = null;
       continue;
     }
 
@@ -252,15 +242,10 @@ function parseByHtmlTags(html, blog) {
   const blocks  = [];
   let m;
   while ((m = blockRe.exec(html)) !== null) {
-    blocks.push({
-      tag:       m[1].toLowerCase(),
-      innerHtml: m[3],
-      text:      toPlainText(m[3]),
-    });
+    blocks.push({ tag: m[1].toLowerCase(), innerHtml: m[3], text: toPlainText(m[3]) });
   }
   if (!blocks.length) return blog;
 
-  // FIX 1: Scan ALL blocks for meta — your doc has Title/Meta at the bottom
   extractMetaFromAllBlocks(blocks, blog);
 
   let currentSection = null;
@@ -273,50 +258,39 @@ function parseByHtmlTags(html, blog) {
     const { tag, innerHtml, text } = blocks[i];
     const isHeading = /^h[1-6]$/.test(tag);
 
-    // FIX 2: Skip meta lines and dividers wherever they appear
     if (/^(?:Meta\s+)?Title\s*:/i.test(text) ||
         /^Meta\s+D[ei]s[ck]?ription\s*:/i.test(text) ||
         /^—[-—]+$/.test(text)) continue;
 
-    // FIX 3: Strip ( H2) / ( H3) etc. from all text before using it
     const cleanText = stripHMarker(text);
 
-    // H1 heading element — blog display title
     if (tag === "h1" && !titleFound) {
       blog.title = cleanText; titleFound = true; continue;
     }
 
-    // FIX 4: FAQs heading can be a bold <p> like "FAQs ( H2)" not just <h2>
     if (isFaqHeading(cleanText) || isFaqHeading(text)) {
       inFaq = true;
       if (currentSection) { blog.sections.push(currentSection); currentSection = null; }
       continue;
     }
 
-    // Inside FAQ section
     if (inFaq) {
-      // FIX 5: Your FAQ Q+A are in one <p> with <br/> between them
       pendingQ = parseFaqBlock(innerHtml, text, blog, pendingQ);
       continue;
     }
 
-    // Section heading (h2, h3, h4 etc.)
     if (isHeading) {
       if (currentSection) blog.sections.push(currentSection);
-      // FIX 6: Store heading WITHOUT the ( H2) marker text
       currentSection = { heading: cleanText, paragraphs: [] };
-      inFaq = false;
-      pendingQ = null;
+      inFaq = false; pendingQ = null;
       continue;
     }
 
-    // Plain paragraph that has (H1) marker — treat as title
     if (/\(\s*H1\s*\)/i.test(text)) {
       if (!titleFound) { blog.title = cleanText; titleFound = true; }
       continue;
     }
 
-    // Regular paragraph
     if (!currentSection) introLines.push(innerHtml.trim());
     else currentSection.paragraphs.push(innerHtml.trim());
   }
@@ -335,7 +309,7 @@ export async function GET() {
   try {
     const data = await readBlogsJson();
     return NextResponse.json(data);
-  } catch (err) {
+  } catch {
     return NextResponse.json({}, { status: 500 });
   }
 }
@@ -371,26 +345,13 @@ export async function POST(request) {
     const ts = Date.now();
 
     if (bannerFile && bannerFile.size > 0) {
-      const ext  = bannerFile.name.split(".").pop();
-      const name = `${slug}-banner-${ts}.${ext}`;
-      await writeFile(
-        path.join(PUBLIC_BLOGS, name),
-        Buffer.from(await bannerFile.arrayBuffer())
-      );
-      blog.bannerImage = `/assets/blogs/${name}`;
+      blog.bannerImage = await saveImage(bannerFile, slug, "banner", ts);
     }
 
     const savedSide = [];
     for (let i = 0; i < sideImageFiles.length; i++) {
-      const img = sideImageFiles[i];
-      if (!img || img.size === 0) continue;
-      const ext  = img.name.split(".").pop();
-      const name = `${slug}-side-${i + 1}-${ts}.${ext}`;
-      await writeFile(
-        path.join(PUBLIC_BLOGS, name),
-        Buffer.from(await img.arrayBuffer())
-      );
-      savedSide.push(`/assets/blogs/${name}`);
+      const url = await saveImage(sideImageFiles[i], slug, `side-${i + 1}`, ts);
+      if (url) savedSide.push(url);
     }
     blog.sideImages = savedSide;
 
@@ -411,7 +372,6 @@ export async function POST(request) {
       sideImages:    blog.sideImages,
       bannerImage:   blog.bannerImage,
     });
-
   } catch (err) {
     console.error("[upload-blog] ERROR:", err);
     return NextResponse.json(
@@ -422,6 +382,11 @@ export async function POST(request) {
 }
 
 // ─── PATCH /api/blogs?slug=xxx ────────────────────────────────────────────────
+// Supports both:
+//   • application/json          → text-only edits (no image changes)
+//   • multipart/form-data       → text edits + image add/remove/replace
+//     Fields: json (stringified body), banner (File), removeBanner (string "true"),
+//             newSideImages (File[])
 
 export async function PATCH(request) {
   try {
@@ -432,15 +397,58 @@ export async function PATCH(request) {
       return NextResponse.json({ error: "slug is required" }, { status: 400 });
     }
 
-    const body = await request.json();
-    const { title, intro, metaTitle, metaDescription, sections, faqs } = body;
+    const contentType = request.headers.get("content-type") || "";
+    let body;
+    let newBannerFile     = null;
+    let removeBanner      = false;
+    let newSideImageFiles = [];
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData    = await request.formData();
+      body              = JSON.parse(formData.get("json") || "{}");
+      newBannerFile     = formData.get("banner");
+      removeBanner      = formData.get("removeBanner") === "true";
+      newSideImageFiles = formData.getAll("newSideImages");
+    } else {
+      body = await request.json();
+    }
+
+    const { title, intro, metaTitle, metaDescription, sections, faqs, sideImages } = body;
 
     const existing = await readBlogsJson();
-
     if (!existing[slug]) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
+    if (!existsSync(PUBLIC_BLOGS)) await mkdir(PUBLIC_BLOGS, { recursive: true });
+
+    const ts = Date.now();
+
+    // ── Banner logic ──────────────────────────────────────────────────────────
+    let bannerImage = existing[slug].bannerImage || "";
+
+    if (removeBanner) {
+      bannerImage = "";
+    }
+
+    if (newBannerFile && newBannerFile.size > 0) {
+      const url = await saveImage(newBannerFile, slug, "banner", ts);
+      if (url) bannerImage = url;
+    }
+
+    // ── Side images logic ─────────────────────────────────────────────────────
+    // Start with whatever URLs the client sent back (already-kept images).
+    // Then append any newly uploaded files.
+    let finalSideImages = Array.isArray(sideImages)
+      ? sideImages
+      : (existing[slug].sideImages || []);
+
+    for (let i = 0; i < newSideImageFiles.length; i++) {
+      const url = await saveImage(newSideImageFiles[i], slug, `side-${Date.now()}-${i}`, ts);
+      if (url) finalSideImages.push(url);
+    }
+
+    // ── Merge and save ────────────────────────────────────────────────────────
     existing[slug] = {
       ...existing[slug],
       ...(title           !== undefined && { title }),
@@ -449,13 +457,13 @@ export async function PATCH(request) {
       ...(metaDescription !== undefined && { metaDescription }),
       ...(sections        !== undefined && { sections }),
       ...(faqs            !== undefined && { faqs }),
+      bannerImage,
+      sideImages: finalSideImages,
       updatedAt: new Date().toISOString(),
     };
 
     await writeBlogsJson(existing);
-
     return NextResponse.json(existing[slug]);
-
   } catch (err) {
     console.error("[edit-blog] ERROR:", err);
     return NextResponse.json(
