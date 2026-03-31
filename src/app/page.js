@@ -14,12 +14,7 @@ const experienceItems = [
   { type: "image", src: "/assets/experience5.webp", alt: "Experience 5" },
   { type: "image", src: "/assets/experience6.webp", alt: "Experience 6" },
 ];
-export const metadata = {
-  title: "Best International School in Madhapur, Hyderabad | Westbrook International School",
-  description:
-    "Westbrook International School is one of the best international schools in Madhapur, Hyderabad, offering academic excellence, strong values, and holistic learning.",
-  canonical: "https://westbrookinternational.com/",
-};
+
 const visionariesItems = [
   {
     type: "video",

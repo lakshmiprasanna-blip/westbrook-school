@@ -9,12 +9,7 @@ import EnquiryForm from "../../components/FormComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { admissionsfaqData } from "../../data/faqsData";
-export const metadata = {
-  title: "Cambridge school admissions | Westbrook International School",
-  description:
-    "Cambridge school admissions are now open at Westbrook International School in Madhapur. Discover our global curriculum and student-focused learning approach.",
-  canonical: "https://westbrookinternational.com/admissions",
-  }
+
 export default function Admissions() {
   const [formType, setFormType] = useState(null);
 

@@ -21,9 +21,17 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "",
-  description: "",
-  template: "%s",
+  title: "Best International School in Madhapur, Hyderabad | Westbrook International School",
+  description: "Westbrook International School is one of the best international schools in Madhapur, Hyderabad, offering academic excellence, strong values, and holistic learning.",
+  alternates: {
+    canonical: "https://westbrookinternational.com/",
+  },
+  openGraph: {
+    title: "Best International School in Madhapur, Hyderabad | Westbrook International School",
+    description: "Westbrook International School is one of the best international schools in Madhapur, Hyderabad, offering academic excellence, strong values, and holistic learning.",
+    url: "https://westbrookinternational.com/",
+    type: "website",
+  },
   icons: {
     icon: "/assets/Favicon.svg",
   },
@@ -31,7 +39,6 @@ export const metadata = {
     google: "3MT_J047hXpTC8hNP6Cuu8IPDgzZ3pu9zCUBhDs7c9Q",
   },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html

@@ -264,7 +264,7 @@ export default function VideoHeroAnimation({
                         fill
                         sizes="100vw"
                         loading={index === 0 ? "eager" : "lazy"}
-                        className="object-cover"
+                        className="object-cover md:object-fill lg:object-cover"
                       />
                     </div>
 
