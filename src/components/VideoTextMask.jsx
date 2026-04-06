@@ -9,30 +9,17 @@ const GRADIENT_STYLE = {
     "linear-gradient(180deg, rgba(0,0,0,0.7) -15.82%, rgba(220,220,220,0.08) 43.38%, rgba(0,0,0,0.25) 66.47%, rgba(0,0,0,0.7) 104.13%, rgba(82,82,82,0.25) 104.13%)",
 };
 
+const OVERLAY_BASE_STYLE = {
+  mixBlendMode: "screen",
+};
+
 const VideoTextMask = () => {
   const videoRef = useRef(null);
   const [zoom, setZoom] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
-  const [videoReady, setVideoReady] = useState(false);
 
-  // ─── Zoom trigger at 200ms ────────────────────────────────────────────────
+  // ─── Video setup — deferred via requestIdleCallback so FCP fires first ───
   useEffect(() => {
-    const t = setTimeout(() => setZoom(true), 200);
-    return () => clearTimeout(t);
-  }, []);
-
-  // ─── Remove overlay after animation completes ─────────────────────────────
-  useEffect(() => {
-    if (!zoom) return;
-    const t = setTimeout(() => setOverlayVisible(false), 2800);
-    return () => clearTimeout(t);
-  }, [zoom]);
-
-  // ─── Defer video load until overlay animation ends ────────────────────────
-  // Load video only after overlay is gone to not compete with LCP
-  useEffect(() => {
-    if (overlayVisible) return; // wait until overlay is gone
-
     const video = videoRef.current;
     if (!video) return;
 
@@ -43,17 +30,30 @@ const VideoTextMask = () => {
     const startVideo = () => {
       video.load();
       video.play().catch(() => {});
-      setVideoReady(true);
     };
 
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(startVideo, { timeout: 500 });
+      const id = requestIdleCallback(startVideo, { timeout: 1000 });
       return () => cancelIdleCallback(id);
     }
 
     const t = setTimeout(startVideo, 0);
     return () => clearTimeout(t);
-  }, [overlayVisible]);
+  }, []);
+
+  // ─── Zoom trigger at 200ms ────────────────────────────────────────────────
+  useEffect(() => {
+    const t = setTimeout(() => setZoom(true), 200);
+    return () => clearTimeout(t);
+  }, []);
+
+  // ─── Remove overlay after animation completes ─────────────────────────────
+  // 200ms delay + 2500ms animation + 100ms buffer = 2800ms
+  useEffect(() => {
+    if (!zoom) return;
+    const t = setTimeout(() => setOverlayVisible(false), 2800);
+    return () => clearTimeout(t);
+  }, [zoom]);
 
   return (
     <>
@@ -72,15 +72,14 @@ const VideoTextMask = () => {
 
       <section className="relative h-[42vh] md:h-screen overflow-hidden bg-black">
 
-        {/* Video — rendered but src only set after overlay to unblock LCP */}
         <video
           ref={videoRef}
           muted
           loop
           playsInline
+          autoPlay
           preload="none"
           className="absolute inset-0 mt-22 w-full h-full object-cover"
-          style={{ opacity: videoReady ? 1 : 0, transition: "opacity 0.5s" }}
         >
           <source src={VIDEO_SRC} type="video/mp4" />
         </video>
@@ -93,7 +92,7 @@ const VideoTextMask = () => {
         {overlayVisible && (
           <div
             className={`absolute inset-0 z-50 flex items-center justify-center bg-white select-none pointer-events-none${zoom ? " vtm-overlay-zoom" : ""}`}
-            style={{ mixBlendMode: "screen" }}
+            style={OVERLAY_BASE_STYLE}
           >
             <h2 className="font-[Montserrat] !text-[11vw] md:text-[8vw] font-black leading-[0.85] tracking-tight text-center text-black">
               WESTBROOK
@@ -103,7 +102,6 @@ const VideoTextMask = () => {
 
         <div className="relative z-20 h-full flex items-end justify-center !p-6 md:pb-24 lg:pb-15">
           <div className="lg:max-w-3xl w-full flex flex-col items-center text-center gap-6">
-            {/* LCP element — inline critical text, no layout shift */}
             <h2
               className="text-white leading-[120%] !text-[20px] sm:text-[22px] md:text-[40px] lg:!text-[48px]"
               style={{ fontWeight: 600 }}
