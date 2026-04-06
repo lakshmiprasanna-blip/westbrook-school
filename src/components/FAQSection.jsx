@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
+import { useState, useRef } from "react";
 
 export default function FAQSection({ faqData = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const answerRefs = useRef([]);
 
   if (!faqData.length) return null;
 
@@ -22,27 +21,26 @@ export default function FAQSection({ faqData = [] }) {
           <div className="flex justify-center md:justify-start">
             <div className="bg-lightblue px-5 py-2">
               <h2 className="md:text-5xl leading-[1] text-dark">
-                FAQ’s
+                FAQ&apos;s
               </h2>
             </div>
           </div>
 
           {/* Accordion */}
           <div className="md:col-span-2 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-
             {faqData.map((item, index) => {
               const isActive = index === activeIndex;
+              const contentHeight = isActive
+                ? answerRefs.current[index]?.scrollHeight + "px"
+                : "0px";
 
               return (
                 <div
                   key={index}
                   className="border-b border-gray-200 last:border-b-0"
                 >
-
                   <button
-                    onClick={() =>
-                      setActiveIndex(isActive ? null : index)
-                    }
+                    onClick={() => setActiveIndex(isActive ? null : index)}
                     className={`w-full flex justify-between items-center gap-4 px-6 md:px-8 py-6 text-left transition-colors duration-300
                     ${
                       isActive
@@ -55,60 +53,41 @@ export default function FAQSection({ faqData = [] }) {
                     </span>
 
                     <span className="flex-shrink-0">
-                      {isActive ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m4.5 15.75 7.5-7.5 7.5 7.5"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                          />
-                        </svg>
-                      )}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6 transition-transform duration-300"
+                        style={{ transform: isActive ? "rotate(180deg)" : "rotate(0deg)" }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                        />
+                      </svg>
                     </span>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="bg-white px-6 md:px-8 py-6 text-[14px] md:text-[16px] leading-relaxed">
-                          {item.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
+                  {/* CSS-only accordion — no JS animation library needed */}
+                  <div
+                    ref={(el) => (answerRefs.current[index] = el)}
+                    style={{
+                      maxHeight: contentHeight,
+                      overflow: "hidden",
+                      transition: "max-height 0.35s ease-in-out, opacity 0.35s ease-in-out",
+                      opacity: isActive ? 1 : 0,
+                    }}
+                  >
+                    <div className="bg-white px-6 md:px-8 py-6 text-[14px] md:text-[16px] leading-relaxed">
+                      {item.answer}
+                    </div>
+                  </div>
                 </div>
               );
             })}
-
           </div>
 
         </div>
