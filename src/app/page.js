@@ -1,13 +1,10 @@
-import { lazy, Suspense } from "react";
 import Image from "next/image";
-import VideoTextMask from "../components/VideoTextMask";
 import CurriculumSection from "../components/CurriculumSection";
 import InfoSection from "../components/InfoSection";
+import ExperienceSlider from "../components/ExperienceSlider";
+import FAQSection from "../components/FAQSection";
+import VideoTextMask from "../components/VideoTextMask";
 import { homeFAQs } from "../data/faqsData";
-
-// ─── Lazy-load heavy below-fold components ────────────────────────────────────
-const ExperienceSlider = lazy(() => import("../components/ExperienceSlider"));
-const FAQSection = lazy(() => import("../components/FAQSection"));
 
 const experienceItems = [
   { type: "image", src: "/assets/experience1.webp", alt: "Experience 1" },
@@ -37,9 +34,13 @@ const visionariesItems = [
 ];
 
 export default function Page() {
+
   return (
     <>
+      {/* <div className="pt-[80px] lg:pt-[93px]"> */}
       <VideoTextMask />
+      {/* </div> */}
+      
 
       <section className="relative w-full py-12 md:py-21 overflow-hidden bg-offwhite">
 
@@ -50,7 +51,6 @@ export default function Page() {
           width={180}
           height={300}
           className="absolute left-0 top-1/2 -translate-y-1/2 hidden md:block"
-          loading="lazy"
         />
 
         {/* RIGHT LEAF */}
@@ -60,7 +60,6 @@ export default function Page() {
           width={180}
           height={300}
           className="absolute right-0 top-1/2 -translate-y-1/2 hidden md:block"
-          loading="lazy"
         />
 
         <div className="relative container-custom text-center">
@@ -71,8 +70,7 @@ export default function Page() {
               alt="Westbrook Logo"
               width={70}
               height={70}
-              priority={false}
-              loading="lazy"
+              priority
             />
           </div>
 
@@ -117,32 +115,28 @@ export default function Page() {
         description="A calm and supportive environment helps children learn better. Social and emotional learning is woven into daily school life through guided practices inspired by Roots of Empathy, supporting empathy, self-regulation, and positive classroom relationships."
         image="/assets/info3.png"
         className="lg:pb-20"
-        showButton
+         showButton
         buttonText="KNOW MORE"
         buttonLink="/admissions"
       />
 
-      {/* ─── Below-fold: lazy loaded ─────────────────────────────────────────── */}
-      <Suspense fallback={<div className="bg-primary py-16 md:py-20" style={{ minHeight: 400 }} />}>
-        <ExperienceSlider
-          items={experienceItems}
-          title="EXPERIENCE"
-          bgColor="bg-primary"
-        />
-      </Suspense>
+      {/* Experience Section — images on blue bg */}
+      <ExperienceSlider
+        items={experienceItems}
+        title="EXPERIENCE"
+        bgColor="bg-primary"
+      />
 
-      <Suspense fallback={<div className="bg-white py-16 md:py-20" style={{ minHeight: 400 }} />}>
-        <ExperienceSlider
-          items={visionariesItems}
-          title="THE VISIONARIES"
-          subtitle="Founded with the belief that the right balance of care, structure, and thoughtful teaching can shape a child's early learning journey."
-          bgColor="bg-white"
-        />
-      </Suspense>
+      {/* Visionaries Section — videos on white bg */}
+      <ExperienceSlider
+        items={visionariesItems}
+        title="THE VISIONARIES"
+        subtitle="Founded with the belief that the right balance of care, structure, and thoughtful teaching can shape a child's early learning journey."
+        bgColor="bg-white"
+      />
 
-      <Suspense fallback={<div className="bg-offwhite py-20" style={{ minHeight: 300 }} />}>
-        <FAQSection faqData={homeFAQs} />
-      </Suspense>
+      {/* <FAQSection faqData={homefaqData} /> */}
+      <FAQSection faqData={homeFAQs} />
     </>
   );
 }
