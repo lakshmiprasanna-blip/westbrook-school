@@ -22,17 +22,19 @@ function Field({ name, type = "text", placeholder, value, onChange, error, input
 }
 
 // ─── Main Component ──────────────────────────────────────────────────────────
-export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
+export default function EnquiryForm({ variant = "simple", theme, showLogo, onSuccess }) {
   const router = useRouter();
 
   const resolvedTheme    = theme    ?? (variant === "contact" ? "dark"  : "light");
   const resolvedShowLogo = showLogo ?? (variant === "contact" ? false   : true);
   const isLight          = resolvedTheme === "light";
 
-  const [formData, setFormData] = useState({
+  const emptyForm = {
     parentName: "", childName: "", grade: "",
     mobile: "", email: "", date: "", time: "", message: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(emptyForm);
   const [errors,  setErrors]  = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -104,7 +106,17 @@ export default function EnquiryForm({ variant = "simple", theme, showLogo }) {
         body: JSON.stringify({ ...formData, variant }),
       });
       const data = await res.json();
-      data.success ? router.push("/thank-you") : alert(data.message || "Something went wrong.");
+      if (data.success) {
+        setFormData(emptyForm);
+        setErrors({});
+        if (onSuccess) {
+          onSuccess();              // close modal first
+        } else {
+          router.push("/thank-you"); // fallback if used without modal
+        }
+      } else {
+        alert(data.message || "Something went wrong.");
+      }
     } catch {
       alert("Network error. Please try again.");
     } finally {
