@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 // ─── Lazy-load EnquiryForm — zero cost until a button is tapped ──────────────
 const EnquiryForm = dynamic(() => import("./FormComponent"), { ssr: false });
@@ -17,6 +18,7 @@ const MODAL_VARIANTS = {
 const MODAL_TRANSITION = { duration: 0.25 };
 
 export default function FloatingCTAs() {
+  const router = useRouter();
   const [formType, setFormType] = useState(null);
 
   // ─── Body class for layout offset ────────────────────────────────────────
@@ -30,6 +32,12 @@ export default function FloatingCTAs() {
   const openApply       = useCallback(() => setFormType("simple"), []);
   const closePopup      = useCallback(() => setFormType(null), []);
   const stopPropagation = useCallback((e) => e.stopPropagation(), []);
+
+  // ─── Close modal then navigate to thank-you ───────────────────────────────
+  const handleSuccess   = useCallback(() => {
+    setFormType(null);
+    router.push("/thank-you");
+  }, [router]);
 
   return (
     <>
@@ -86,7 +94,7 @@ export default function FloatingCTAs() {
                 ✕
               </button>
 
-              <EnquiryForm variant={formType} />
+              <EnquiryForm variant={formType} onSuccess={handleSuccess} />
             </motion.div>
           </motion.div>
         )}

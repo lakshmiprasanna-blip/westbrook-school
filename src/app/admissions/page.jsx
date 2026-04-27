@@ -115,17 +115,17 @@ export default function Admissions() {
       <FAQSection faqData={admissionsfaqData} />
 
       <ContactCTA
-  imageSrc="/assets/admissions-footer-banner.png"
-  title={
-  <>
-    Begin Your Child’s Journey <br />
-    with Westbrook
-  </>
-}
-  subtitle={`Please share your details, and our admissions team will be in touch to guide you through the next steps.
+      imageSrc="/assets/admissions-footer-banner.png"
+      title={
+      <>
+        Begin Your Child’s Journey <br />
+            with Westbrook
+      </>
+    }
+      subtitle={`Please share your details, and our admissions team will be in touch to guide you through the next steps.
 
-Visits can be scheduled at your convenience, particularly for families considering School Admissions in Madhapur or planning their child’s International school admissions journey.`}
-/>
+    Visits can be scheduled at your convenience, particularly for families considering School Admissions in Madhapur or planning their child’s International school admissions journey.`}
+    />
       {/* POPUP MODAL */}
       <AnimatePresence>
         {formType && (
