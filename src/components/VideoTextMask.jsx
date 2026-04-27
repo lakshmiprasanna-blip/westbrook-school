@@ -106,7 +106,7 @@ const VideoTextMask = () => {
               className="text-white leading-[120%] !text-[20px] sm:text-[22px] md:text-[40px] lg:!text-[48px]"
               style={{ fontWeight: 600 }}
             >
-              Education that Forms Minds. Learning that Shapes Character
+              Education that Forms Minds. Learning that Shapes Characte
             </h2>
           </div>
         </div>
