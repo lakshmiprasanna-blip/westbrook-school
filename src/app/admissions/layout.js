@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "International Curriculum school admissions | Westbrook International Schools",
+  title: "International Curriculum school admissions | Westbrook International School",
   description: "International Curriculum school admissions are now open at Westbrook International School in Madhapur. Discover our global curriculum and student-focused learning approach.",
   alternates: {
     canonical: "https://westbrookinternational.com/admissions",
